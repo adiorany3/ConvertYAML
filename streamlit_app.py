@@ -35,8 +35,11 @@ TARGET_SERVER = "104.17.3.81"
 ONLY_PORT = 443
 USER_AGENT = "Mozilla/5.0 SumberYAML-OpenClash-AntiDelay/2.0"
 URI_RE = re.compile(r"(?:vless|vmess|trojan|ss)://[^\s<'\"`]+", re.IGNORECASE)
-FAST_TEST_URL = "http://www.gstatic.com/generate_204"
-ALT_TEST_URL = "https://www.google.com/generate_204"
+FAST_TEST_URL = "http://cp.cloudflare.com/generate_204"
+ALT_TEST_URL = "http://www.gstatic.com/generate_204"
+THIRD_TEST_URL = "https://www.google.com/generate_204"
+DEFAULT_MAX_DELAY_MS = 1500
+HARD_MAX_DELAY_MS = 1700
 
 
 @dataclass
@@ -435,7 +438,7 @@ def stability_check(host: str, port: int, timeout: float, attempts: int) -> tupl
     }
 
 
-def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str) -> str:
+def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = 2000) -> str:
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
     config: dict[str, Any] = {
@@ -480,9 +483,15 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         "proxies": [node.clash for node in nodes],
         "proxy-groups": [
             {
+                "name": "GLOBAL",
+                "type": "select",
+                # AUTO-FAST is the first entry so OpenClash/Mihomo selects it by default on fresh import.
+                "proxies": ["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"] + names,
+            },
+            {
                 "name": "🚀 PROXY",
                 "type": "select",
-                "proxies": ["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"] + names,
+                "proxies": ["GLOBAL", "⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"] + names,
             },
             {
                 "name": "⚡ AUTO-FAST",
@@ -492,7 +501,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
                 "interval": interval,
                 "tolerance": tolerance,
                 "lazy": False,
-                "timeout": 3000,
+                "timeout": health_timeout,
             },
             {
                 "name": "🛟 FALLBACK",
@@ -501,7 +510,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
                 "url": test_url,
                 "interval": interval,
                 "lazy": False,
-                "timeout": 3000,
+                "timeout": health_timeout,
             },
             {
                 "name": "🔁 LOAD-BALANCE",
@@ -511,7 +520,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
                 "url": test_url,
                 "interval": max(interval, 120),
                 "lazy": False,
-                "timeout": 3000,
+                "timeout": health_timeout,
             },
         ],
         "rules": [
@@ -522,7 +531,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "IP-CIDR,172.16.0.0/12,DIRECT",
             "IP-CIDR,192.168.0.0/16,DIRECT",
             "GEOIP,LAN,DIRECT,no-resolve",
-            "MATCH,🚀 PROXY",
+            "MATCH,GLOBAL",
         ],
     }
     return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
@@ -578,6 +587,9 @@ def process_sources(
     attempts: int,
     require_successes: int,
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
+    # Hard cap keeps generated accounts below the previously observed website delay floor.
+    # The lowest provided reference was GitHub at 1757 ms, so this app never allows >1700 ms.
+    max_delay_ms = min(int(max_delay_ms), HARD_MAX_DELAY_MS)
     links = [line.strip().strip(",'\"") for line in links_text.splitlines() if line.strip()]
     fetch_logs: list[tuple[str, str]] = []
     raw_uris: list[tuple[str, str]] = []
@@ -646,10 +658,10 @@ def process_sources(
 
 
 st.set_page_config(page_title="OpenClash Anti Delay", page_icon="⚡", layout="wide")
-st.title("⚡ SumberYAML OpenClash Anti Delay")
+st.title("⚡ SumberYAML OpenClash Auto-Fast")
 st.caption(
-    "Ambil subscription publik, pakai hanya port 443, cek link hidup, tes node berulang, pilih node tercepat/stabil, "
-    "ubah server ke 104.17.3.81, lalu buat YAML OpenClash/Mihomo."
+    "Ambil subscription publik, hanya port 443, cek link hidup, tes node berulang, pilih delay rendah, "
+    "ubah server ke 104.17.3.81, dan set GLOBAL langsung ke ⚡ AUTO-FAST."
 )
 
 with st.expander("Pengaturan cepat anti delay", expanded=True):
@@ -661,7 +673,7 @@ with st.expander("Pengaturan cepat anti delay", expanded=True):
     with col3:
         max_nodes = st.number_input("Maksimal node tercepat", min_value=1, max_value=300, value=30, step=5)
     with col4:
-        max_delay_ms = st.number_input("Maks delay masuk YAML/ms", min_value=50, max_value=3000, value=900, step=50)
+        max_delay_ms = st.number_input("Maks delay masuk YAML/ms", min_value=50, max_value=HARD_MAX_DELAY_MS, value=DEFAULT_MAX_DELAY_MS, step=50, help="Dibatasi maksimal 1700 ms agar lebih rendah dari referensi GitHub 1757 ms, Baidu 1824 ms, dan NetEase 2011 ms.")
 
     col5, col6, col7, col8 = st.columns(4)
     with col5:
@@ -683,9 +695,11 @@ with st.expander("Pengaturan cepat anti delay", expanded=True):
 
     test_url = st.selectbox(
         "URL health check OpenClash",
-        [FAST_TEST_URL, ALT_TEST_URL, "http://cp.cloudflare.com/generate_204"],
+        [FAST_TEST_URL, ALT_TEST_URL, THIRD_TEST_URL],
         index=0,
+        help="Default memakai Cloudflare captive portal generate_204 sesuai permintaan.",
     )
+    st.caption("Target filter: hanya node port 443 dengan delay ≤ batas di atas. Batas maksimum dikunci 1700 ms agar lebih rendah dari GitHub 1757 ms, Baidu 1824 ms, dan NetEase 2011 ms.")
 
 links_text = st.text_area(
     "Link subscription bawaan",
@@ -767,26 +781,26 @@ if run:
                     hide_index=True,
                 )
     else:
-        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url)
+        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=min(2000, int(max_delay_ms) + 300))
         csv_text = build_csv(all_nodes)
 
         st.success(
-            f"Berhasil membuat YAML anti delay dari {len(alive_nodes)} node tercepat/stabil. "
-            "Grup ⚡ AUTO-FAST akan otomatis memilih node respons terbaik di OpenClash."
+            f"Berhasil membuat YAML dari {len(alive_nodes)} node delay rendah/stabil. "
+            "Grup GLOBAL berada langsung di ⚡ AUTO-FAST sebagai pilihan pertama."
         )
         c1, c2 = st.columns(2)
         with c1:
             st.download_button(
-                "Download openclash_anti_delay.yaml",
+                "Download openclash_auto_fast.yaml",
                 data=yaml_text.encode("utf-8"),
-                file_name="openclash_anti_delay.yaml",
+                file_name="openclash_auto_fast.yaml",
                 mime="application/x-yaml",
             )
         with c2:
             st.download_button(
                 "Download report CSV",
                 data=csv_text.encode("utf-8"),
-                file_name="openclash_anti_delay_report.csv",
+                file_name="openclash_auto_fast_report.csv",
                 mime="text/csv",
             )
 
