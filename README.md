@@ -1,31 +1,28 @@
-# SumberYAML OpenClash Anti Delay
+# SumberYAML OpenClash Auto-Fast
 
-Aplikasi Streamlit sederhana untuk membuat YAML OpenClash/Mihomo dari subscription publik dengan filter cepat dan stabil.
+Paket Streamlit sederhana untuk membuat YAML OpenClash/Mihomo dari subscription publik dengan filter anti-delay.
 
 ## Fitur
 
 - Tidak memakai GitHub Action.
-- Link subscription bawaan sudah dimasukkan.
-- Hanya mengambil node port `443`.
-- Output `server` dipaksa menjadi `104.17.3.81`.
-- Domain asli tetap dipakai sebagai `SNI`/`Host` agar kompatibilitas tetap lebih baik.
-- Link mati otomatis diabaikan.
-- Node dites berulang agar yang masuk bukan sekadar hidup, tetapi lebih stabil.
-- Node lambat dibuang berdasarkan batas delay.
-- YAML OpenClash memakai grup:
-  - `🚀 PROXY`
-  - `⚡ AUTO-FAST` (`url-test`)
-  - `🛟 FALLBACK`
-  - `🔁 LOAD-BALANCE`
-- Mengaktifkan opsi Mihomo/OpenClash yang membantu respons:
-  - `unified-delay: true`
-  - `tcp-concurrent: true`
-  - `global-client-fingerprint: chrome`
-  - DNS fake-ip
+- Tidak perlu GitHub Token.
+- 10 link subscription sudah otomatis tersedia.
+- Hanya mengambil node dengan port `443`.
+- Server output semua node dipaksa menjadi `104.17.3.81`.
+- SNI/Host asli tetap dipertahankan agar akun tetap bisa konek.
+- Link subscription dicek hidup terlebih dahulu.
+- Node dicek berulang, default 3 kali.
+- Hanya node delay rendah yang masuk YAML.
+- Batas delay default `1500 ms` dan dikunci maksimal `1700 ms`, agar lebih rendah dari referensi:
+  - Baidu Search: 1824 ms
+  - NetEase Music: 2011 ms
+  - GitHub: 1757 ms
+- URL health check default OpenClash: `http://cp.cloudflare.com/generate_204`.
+- Grup `GLOBAL` langsung memilih `⚡ AUTO-FAST` sebagai pilihan pertama.
 
 ## Cara pakai di Streamlit Cloud
 
-1. Upload isi folder ini ke repository GitHub baru.
+1. Upload semua file ini ke root repository GitHub.
 2. Buka Streamlit Cloud.
 3. Pilih file utama:
 
@@ -35,20 +32,15 @@ streamlit_app.py
 
 4. Deploy.
 5. Klik tombol **Proses & buat YAML anti delay**.
-6. Download `openclash_anti_delay.yaml`.
-7. Import YAML ke OpenClash.
-8. Jalankan **Health Check / Test Delay** di OpenClash.
+6. Download file:
 
-## Pengaturan yang disarankan
+```text
+openclash_auto_fast.yaml
+```
 
-- Maksimal node tercepat: `30`
-- Maks delay masuk YAML: `900 ms`
-- Tes ulang per node: `3`
-- Minimal sukses: `2`
-- Timeout node: `2.5 detik`
-- Interval url-test OpenClash: `60 detik`
-- Toleransi auto-switch: `25 ms`
+7. Import ke OpenClash/Mihomo.
+8. Jalankan Health Check/Test Delay di OpenClash.
 
-## Catatan
+## Catatan penting
 
-Aplikasi ini memilih node yang cepat berdasarkan koneksi TCP ke server asli port 443 dan mengurutkan berdasarkan skor stabilitas. Karena sumbernya subscription publik, kualitas akun bisa berubah sewaktu-waktu. Untuk hasil terbaik, jalankan ulang proses ketika koneksi mulai lambat.
+Aplikasi ini mengecek delay dari sisi server Streamlit, bukan dari router/lokasi internet kamu. Hasil terbaik tetap perlu dicek ulang di OpenClash setelah YAML diimport. Karena node berasal dari subscription publik, performa bisa berubah kapan saja.
