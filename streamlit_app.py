@@ -60,6 +60,7 @@ DEFAULT_LINKS = [
     "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/kind/vmess.txt",
     "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/kind/vless.txt",
     "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/kind/trojan.txt",
+    "https://raw.githubusercontent.com/adiorany3/SumberYAML/refs/heads/main/input/links.txt",
 ]
 
 TARGET_SERVER = "104.17.3.81"
