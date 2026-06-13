@@ -1,86 +1,130 @@
-# SumberYAML OpenClash Safe Names Rule Split
+# SumberYAML WS Strict 20 Alive + GitHub Action 6 Jam
 
-Versi sederhana untuk Streamlit Online tanpa GitHub Action.
+Versi ini menambahkan generator otomatis untuk membuat dan memperbarui YAML OpenClash/Mihomo dari GitHub Actions setiap 6 jam.
 
-## Fungsi utama
+## File penting
 
-Aplikasi ini mengambil akun publik dari subscription bawaan, hanya memakai port `443`, mengecek kompatibilitas bug server `104.17.3.81` dengan SNI/Host akun, lalu membuat YAML OpenClash/Mihomo.
+- `streamlit_app.py` — aplikasi Streamlit manual.
+- `generate_yaml.py` — generator headless untuk GitHub Actions.
+- `sumberyaml_core.py` — fungsi inti parsing, validasi, seleksi node, dan build YAML.
+- `.github/workflows/update-yaml-6jam.yml` — workflow update otomatis per 6 jam.
+- `openclash_auto.yaml` — output YAML otomatis setelah workflow berjalan.
+- `openclash_auto_report.csv` — report hasil validasi.
+- `akun.txt` — daftar link asli akun aktif yang masuk YAML (`vless://`, `vmess://`, atau `trojan://`).
+- `last_update.txt` — catatan waktu update terakhir.
 
-## Fitur baru versi ini
+## Cara pakai di GitHub
 
-1. `GLOBAL` tetap langsung memilih `AUTO-FAST`.
-2. Rule dipisah menjadi grup:
-   - `SOCIAL-MEDIA`
-   - `YOUTUBE`
-   - `EDUKASI`
-   - `STREAMING`
-   - `AUTO-FAST`
-   - `FALLBACK`
-   - `LOAD-BALANCE`
-3. Iklan, tracker, privacy leak, hijacking, dan malware ringan diblokir ke `REJECT`.
-4. Menggunakan `rule-providers` agar daftar rule bisa update otomatis dari sumber publik.
-5. Nama akun/proxy dari subscription publik otomatis diganti menjadi format aman ASCII seperti `AKUN-001-VLESS-120MS`.
-6. Semua nama proxy dibuat unik sehingga tidak bentrok di OpenClash.
-7. Nama grup dibuat tanpa emoji agar lebih kompatibel dengan OpenClash lama.
-8. YouTube dibuat grup sendiri, tidak digabung dengan streaming umum.
-9. Edukasi dibuat grup sendiri untuk domain seperti `.edu`, `.ac.id`, Scholar, GitHub, Coursera, edX, Khan Academy, Udemy, arXiv, dan sejenisnya.
+1. Upload semua file/folder ini ke repository GitHub.
+2. Pastikan file workflow berada di:
+   ```text
+   .github/workflows/update-yaml-6jam.yml
+   ```
+3. Buka tab **Actions** di repository.
+4. Jalankan manual pertama kali dengan tombol **Run workflow**.
+5. Setelah itu workflow akan berjalan otomatis setiap 6 jam.
 
-## Output
+## Jadwal
 
-- `openclash_safe_names_rule_split.yaml`
-- `openclash_safe_names_report.csv`
+Workflow memakai cron:
 
-## Catatan OpenClash
-
-Gunakan core OpenClash yang mendukung Clash Meta / Mihomo agar `rule-providers` format `mrs` berjalan normal.
-
-Kalau rule-provider gagal diunduh, buka log OpenClash lalu jalankan update rule provider / restart OpenClash.
-
-## Jalankan lokal
-
-```bash
-pip install -r requirements.txt
-streamlit run streamlit_app.py
+```yaml
+- cron: "0 */6 * * *"
 ```
 
-## Deploy ke Streamlit Cloud
+GitHub Actions memakai zona waktu UTC, sehingga jadwalnya adalah 00:00, 06:00, 12:00, dan 18:00 UTC.
 
-1. Upload semua file ke repository GitHub.
-2. Buka Streamlit Cloud.
-3. Pilih repository tersebut.
-4. Main file: `streamlit_app.py`.
-5. Deploy.
+## Jika commit gagal karena permission
 
-Tidak perlu GitHub Token dan tidak perlu GitHub Action.
-
-
-## Perbaikan nama akun error
-
-Jika nama akun dari subscription publik mengandung emoji, tanda kutip, slash, kurung, karakter tersembunyi, atau nama duplikat, aplikasi tidak memakai nama tersebut di YAML. Nama akan otomatis diganti menjadi format aman:
+Buka repository GitHub:
 
 ```text
-AKUN-001-VLESS-120MS
-AKUN-002-TROJAN-135MS
-AKUN-003-VMESS-180MS
+Settings > Actions > General > Workflow permissions
 ```
 
-Nama asli tetap dicatat di file report CSV pada kolom `original_name`, sehingga kamu masih bisa melacak sumber akun tanpa membuat OpenClash error saat import YAML.
+Pilih:
 
-## Perbaikan akun tidak lengkap
+```text
+Read and write permissions
+```
 
-Versi ini menolak akun/node yang field-nya tidak lengkap sebelum masuk proses delay dan sebelum ditulis ke YAML.
+Lalu simpan.
 
-Akun akan dibuang dari YAML jika kurang salah satu field penting berikut:
+Workflow ini juga sudah memakai:
 
-- `uuid` untuk VLESS/VMess.
-- `password` untuk Trojan/Shadowsocks.
-- `cipher` untuk VMess/Shadowsocks.
-- `servername`, `sni`, atau `Host` untuk akun TLS yang memakai bug server.
-- `ws-opts.path` dan `ws-opts.headers.Host` untuk WebSocket.
-- `grpc-opts.grpc-service-name` untuk gRPC.
-- `http-opts.path` dan `http-opts.headers.Host` untuk HTTP/H2.
-- `reality-opts.public-key` untuk Reality.
-- Port selain `443`.
-- Shadowsocks biasa yang tidak kompatibel dengan bug server `104.17.3.81` karena tidak punya SNI/Host.
+```yaml
+permissions:
+  contents: write
+```
 
-Akun yang ditolak tetap dicatat di report CSV dengan status `incomplete` dan alasan pada kolom `reason`, tetapi tidak akan muncul di bagian `proxies` YAML.
+## Tambah sumber subscription
+
+Masukkan link tambahan ke file:
+
+```text
+subscription_links.txt
+```
+
+Satu URL per baris. Baris yang diawali `#` akan diabaikan.
+
+## Tambah node manual
+
+Masukkan node manual ke file:
+
+```text
+manual_nodes.txt
+```
+
+Format yang didukung:
+
+```text
+vless://...
+vmess://...
+trojan://...
+ss://...
+```
+
+Untuk mode WS Strict, node `ws` akan lebih diprioritaskan.
+
+## Output untuk OpenClash
+
+Setelah workflow berhasil, gunakan file ini di OpenClash:
+
+```text
+openclash_auto.yaml
+```
+
+Report detail ada di:
+
+```text
+openclash_auto_report.csv
+```
+
+Link akun aktif yang masuk YAML tersimpan di:
+
+```text
+akun.txt
+```
+
+Isi `akun.txt` hanya akun aktif terpilih dalam format link asli, satu akun per baris. File ini cocok untuk backup, import manual, atau dibagikan sebagai subscription sederhana.
+
+## Default optimasi GitHub Action
+
+```text
+Output node              : 20
+Target minimal hidup     : 20
+WS only                  : aktif
+Wajib WS Upgrade 101     : aktif
+Candidate minimum        : 2500
+Cadangan internal strict : 120
+Health timeout OpenClash : 6000 ms
+Rule mode                : Lite
+Output akun aktif        : akun.txt
+```
+
+Catatan: 20/20 tetap tidak bisa dijamin setiap waktu karena sumber akun publik bisa berubah atau mati. Generator akan mencoba mencari lebih banyak kandidat lalu hanya menulis node terbaik yang lolos validasi strict.
+
+
+## Catatan akun.txt
+
+Setiap workflow berhasil berjalan, file `akun.txt` akan ikut diperbarui dan di-commit bersama `openclash_auto.yaml`. File ini berisi link asli dari node yang lolos validasi strict dan masuk ke YAML. Protocol yang ditulis hanya `vless://`, `vmess://`, dan `trojan://`; `ss://` tidak ditulis agar sesuai kebutuhan akun utama.

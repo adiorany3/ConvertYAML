@@ -70,10 +70,31 @@ def build_links_text() -> str:
     return "\n".join(unique)
 
 
+def build_akun_txt(nodes) -> str:
+    """Simpan link asli akun aktif yang masuk YAML.
+
+    Hanya protocol vless/vmess/trojan yang ditulis karena format ini mudah
+    diimport ke client lain. Shadowsocks tidak ditulis ke akun.txt sesuai
+    kebutuhan utama file ini.
+    """
+    lines: list[str] = []
+    seen: set[str] = set()
+    for node in nodes:
+        raw = str(getattr(node, "raw", "") or "").strip()
+        proto = raw.split("://", 1)[0].lower() if "://" in raw else ""
+        if proto not in {"vless", "vmess", "trojan"}:
+            continue
+        if raw and raw not in seen:
+            seen.add(raw)
+            lines.append(raw)
+    return "\n".join(lines) + ("\n" if lines else "")
+
+
 def main() -> int:
     output_yaml = os.getenv("OUTPUT_YAML", "openclash_auto.yaml")
     output_csv = os.getenv("OUTPUT_CSV", "openclash_auto_report.csv")
     output_stamp = os.getenv("OUTPUT_STAMP", "last_update.txt")
+    output_akun = os.getenv("OUTPUT_AKUN", "akun.txt")
     manual_file = os.getenv("MANUAL_NODES_FILE", "manual_nodes.txt")
 
     max_nodes = _env_int("MAX_NODES", 20)
@@ -122,13 +143,16 @@ def main() -> int:
         rule_mode=os.getenv("RULE_MODE", "Lite"),
     )
     csv_text = build_csv(all_nodes)
+    akun_text = build_akun_txt(alive_nodes)
 
     Path(output_yaml).write_text(yaml_text, encoding="utf-8")
     Path(output_csv).write_text(csv_text, encoding="utf-8")
+    Path(output_akun).write_text(akun_text, encoding="utf-8")
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     summary = (
         f"Last update: {now}\n"
         f"YAML nodes: {len(alive_nodes)}\n"
+        f"Akun txt: {len([line for line in akun_text.splitlines() if line.strip()])}\n"
         f"Parsed nodes: {len(all_nodes)}\n"
         f"Fetched links: {len(fetch_logs)}\n"
         f"Skipped raw URI: {len(skipped)}\n"
