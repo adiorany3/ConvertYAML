@@ -8,6 +8,7 @@ import io
 import json
 import re
 import socket
+import ssl
 import statistics
 import time
 from dataclasses import dataclass, field
@@ -63,13 +64,15 @@ DEFAULT_LINKS = [
 
 TARGET_SERVER = "104.17.3.81"
 ONLY_PORT = 443
-USER_AGENT = "Mozilla/5.0 SumberYAML-OpenClash-AntiDelay/2.0"
+USER_AGENT = "Mozilla/5.0 SumberYAML-OpenClash-BugCompat/3.0"
 URI_RE = re.compile(r"(?:vless|vmess|trojan|ss)://[^\s<'\"`]+", re.IGNORECASE)
 FAST_TEST_URL = "http://cp.cloudflare.com/generate_204"
 ALT_TEST_URL = "http://www.gstatic.com/generate_204"
 THIRD_TEST_URL = "https://www.google.com/generate_204"
-DEFAULT_MAX_DELAY_MS = 120
-HARD_MAX_DELAY_MS = 123
+FAST_TARGET_DELAY_MS = 123
+DEFAULT_FILL_DELAY_MS = 600
+HARD_MAX_DELAY_MS = 1500
+MIN_OUTPUT_NODES = 20
 
 
 @dataclass
@@ -89,6 +92,14 @@ class ProxyNode:
     attempts: int = 0
     score: int = 999999
     reason: str = ""
+    original_best_delay_ms: int | None = None
+    bug_best_delay_ms: int | None = None
+    bug_avg_delay_ms: int | None = None
+    bug_jitter_ms: int | None = None
+    bug_success_count: int = 0
+    original_success_count: int = 0
+    bug_sni: str = ""
+    tier: str = ""
     key: str = field(default="")
 
 
@@ -468,6 +479,118 @@ def stability_check(host: str, port: int, timeout: float, attempts: int) -> tupl
     }
 
 
+def looks_like_ip(host: str) -> bool:
+    try:
+        socket.inet_aton(host)
+        return True
+    except Exception:
+        return False
+
+
+def node_sni_host(node: ProxyNode) -> str:
+    clash = node.clash
+    # VLESS/VMess commonly use servername; Trojan commonly uses sni.
+    candidates: list[str] = []
+    for key in ("servername", "sni"):
+        value = str(clash.get(key) or "").strip()
+        if value:
+            candidates.append(value)
+    ws_host = clash.get("ws-opts", {}).get("headers", {}).get("Host", "") if isinstance(clash.get("ws-opts"), dict) else ""
+    if isinstance(ws_host, str) and ws_host.strip():
+        candidates.append(ws_host.strip())
+    http_host = clash.get("http-opts", {}).get("headers", {}).get("Host", []) if isinstance(clash.get("http-opts"), dict) else []
+    if isinstance(http_host, list) and http_host:
+        candidates.append(str(http_host[0]).strip())
+    candidates.append(node.original_server)
+    for candidate in candidates:
+        candidate = candidate.strip().strip("[]")
+        if candidate and not looks_like_ip(candidate):
+            return candidate
+    return node.original_server
+
+
+def tls_bug_delay(node: ProxyNode, timeout: float, attempts: int) -> tuple[bool, dict[str, Any]]:
+    """Measure whether TARGET_SERVER:443 can complete TLS with the node SNI/Host.
+
+    This is the important check when the YAML output forces server to 104.17.3.81.
+    It does not replace OpenClash url-test, but it prevents many accounts whose SNI/Host
+    cannot work through the selected bug IP from entering the generated YAML.
+    """
+    sni = node_sni_host(node)
+    node.bug_sni = sni
+    delays: list[int] = []
+    last_error = ""
+    context = ssl.create_default_context()
+    context.check_hostname = False
+    context.verify_mode = ssl.CERT_NONE
+    for _ in range(max(1, attempts)):
+        start = time.perf_counter()
+        try:
+            raw = socket.create_connection((TARGET_SERVER, ONLY_PORT), timeout=timeout)
+            raw.settimeout(timeout)
+            with raw:
+                with context.wrap_socket(raw, server_hostname=sni):
+                    delays.append(int((time.perf_counter() - start) * 1000))
+        except Exception as exc:
+            last_error = str(exc)
+        time.sleep(0.03)
+
+    if not delays:
+        return False, {
+            "best_delay_ms": None,
+            "avg_delay_ms": None,
+            "jitter_ms": None,
+            "success_count": 0,
+            "attempts": attempts,
+            "score": 999999,
+            "reason": last_error or "bug tls timeout",
+        }
+    best = min(delays)
+    avg = int(statistics.mean(delays))
+    jitter = int(max(delays) - min(delays)) if len(delays) > 1 else 0
+    score = best + int(jitter * 0.8) + int((attempts - len(delays)) * 160)
+    return True, {
+        "best_delay_ms": best,
+        "avg_delay_ms": avg,
+        "jitter_ms": jitter,
+        "success_count": len(delays),
+        "attempts": attempts,
+        "score": score,
+        "reason": "bug-tls-alive",
+    }
+
+
+def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, require_original: bool) -> ProxyNode:
+    bug_ok, bug_info = tls_bug_delay(node, timeout, attempts)
+    orig_ok, orig_info = stability_check(node.original_server, node.port, timeout, attempts)
+
+    node.bug_best_delay_ms = bug_info["best_delay_ms"]
+    node.bug_avg_delay_ms = bug_info["avg_delay_ms"]
+    node.bug_jitter_ms = bug_info["jitter_ms"]
+    node.bug_success_count = bug_info["success_count"]
+    node.original_best_delay_ms = orig_info["best_delay_ms"]
+    node.original_success_count = orig_info["success_count"]
+
+    # Selection uses bug delay because output server is the bug IP.
+    node.best_delay_ms = node.bug_best_delay_ms
+    node.avg_delay_ms = node.bug_avg_delay_ms
+    node.jitter_ms = node.bug_jitter_ms
+    node.success_count = node.bug_success_count
+    node.attempts = attempts
+    node.score = bug_info["score"] + int((attempts - node.bug_success_count) * 200)
+
+    if not bug_ok:
+        node.status = "dead"
+        node.reason = "bug server gagal: " + str(bug_info["reason"])[:120]
+    elif require_original and not orig_ok:
+        node.status = "dead"
+        node.reason = "original server gagal: " + str(orig_info["reason"])[:120]
+    else:
+        node.status = "alive"
+        node.reason = "bug server alive" + (" + original alive" if orig_ok else "")
+    return node
+
+
 def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = 2000) -> str:
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
@@ -574,13 +697,17 @@ def build_csv(nodes: list[ProxyNode]) -> str:
         "name",
         "type",
         "original_server",
+        "bug_sni",
         "output_server",
         "port",
         "status",
-        "best_delay_ms",
-        "avg_delay_ms",
-        "jitter_ms",
-        "success_count",
+        "tier",
+        "bug_best_delay_ms",
+        "bug_avg_delay_ms",
+        "bug_jitter_ms",
+        "bug_success_count",
+        "original_best_delay_ms",
+        "original_success_count",
         "attempts",
         "score",
         "source",
@@ -591,13 +718,17 @@ def build_csv(nodes: list[ProxyNode]) -> str:
             node.name,
             node.type,
             node.original_server,
+            node.bug_sni,
             TARGET_SERVER,
             node.port,
             node.status,
-            node.best_delay_ms if node.best_delay_ms is not None else "",
-            node.avg_delay_ms if node.avg_delay_ms is not None else "",
-            node.jitter_ms if node.jitter_ms is not None else "",
-            node.success_count,
+            node.tier,
+            node.bug_best_delay_ms if node.bug_best_delay_ms is not None else "",
+            node.bug_avg_delay_ms if node.bug_avg_delay_ms is not None else "",
+            node.bug_jitter_ms if node.bug_jitter_ms is not None else "",
+            node.bug_success_count,
+            node.original_best_delay_ms if node.original_best_delay_ms is not None else "",
+            node.original_success_count,
             node.attempts,
             node.score,
             node.source,
@@ -613,14 +744,15 @@ def process_sources(
     tcp_timeout: float,
     max_workers: int,
     max_nodes: int,
-    max_delay_ms: int,
+    fast_target_ms: int,
+    fill_delay_ms: int,
+    min_output_nodes: int,
     attempts: int,
     require_successes: int,
+    require_original: bool,
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
-    # Hard cap keeps generated accounts below the previously observed website delay floor.
-    # Batas paling ketat dibuat lebih rendah dari referensi terendah: Baidu 124 ms.
-    # Jadi nilai maksimum dikunci 123 ms, dengan default 120 ms.
-    max_delay_ms = min(int(max_delay_ms), HARD_MAX_DELAY_MS)
+    fast_target_ms = min(int(fast_target_ms), FAST_TARGET_DELAY_MS)
+    fill_delay_ms = min(max(int(fill_delay_ms), fast_target_ms), HARD_MAX_DELAY_MS)
     links = [line.strip().strip(",'\"") for line in links_text.splitlines() if line.strip()]
     fetch_logs: list[tuple[str, str]] = []
     raw_uris: list[tuple[str, str]] = []
@@ -651,78 +783,109 @@ def process_sources(
         seen_keys.add(node.key)
         parsed.append(node)
 
-    # Do not test millions of entries on free Streamlit; keep enough candidates for a useful fast set.
-    candidate_limit = max_nodes * 12 if max_nodes > 0 else 600
-    parsed = parsed[: max(candidate_limit, 100)]
+    # Test more candidates than output target so the app can still fill 20 alive accounts
+    # even when only a small percentage is compatible with the selected bug server.
+    target = max(int(max_nodes), int(min_output_nodes), 20)
+    candidate_limit = max(target * 30, 800)
+    parsed = parsed[:candidate_limit]
 
     if parsed:
         with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(parsed))) as executor:
             future_map = {
-                executor.submit(stability_check, node.original_server, node.port, tcp_timeout, attempts): node
+                executor.submit(check_node_bug_compat, node, tcp_timeout, attempts, require_original): node
                 for node in parsed
             }
             for future in concurrent.futures.as_completed(future_map):
                 node = future_map[future]
-                ok, info = future.result()
-                node.status = "alive" if ok else "dead"
-                node.best_delay_ms = info["best_delay_ms"]
-                node.avg_delay_ms = info["avg_delay_ms"]
-                node.jitter_ms = info["jitter_ms"]
-                node.success_count = info["success_count"]
-                node.attempts = info["attempts"]
-                node.score = info["score"]
-                node.reason = info["reason"]
+                try:
+                    future.result()
+                except Exception as exc:
+                    node.status = "dead"
+                    node.reason = "check error: " + str(exc)[:120]
 
-    alive = [
-        node
-        for node in parsed
+    candidates = [
+        node for node in parsed
         if node.status == "alive"
         and node.best_delay_ms is not None
-        and node.best_delay_ms <= max_delay_ms
         and node.success_count >= require_successes
     ]
-    alive.sort(key=lambda n: (n.score, n.best_delay_ms or 999999, n.jitter_ms or 999999))
-    if max_nodes > 0:
-        alive = alive[:max_nodes]
-    unique_names(alive)
-    return alive, parsed, fetch_logs, skipped
+
+    # Tier 1: very fast target, lower than Baidu 124 ms / GitHub 157 ms / NetEase 211 ms.
+    fast = [node for node in candidates if (node.best_delay_ms or 999999) <= fast_target_ms]
+    for node in fast:
+        node.tier = f"FAST ≤{fast_target_ms}ms"
+
+    # Tier 2: still alive and bug-compatible, used only to prevent the YAML from containing
+    # too few accounts when the public sources do not have 20 nodes under 123 ms.
+    backup = [
+        node for node in candidates
+        if (node.best_delay_ms or 999999) > fast_target_ms
+        and (node.best_delay_ms or 999999) <= fill_delay_ms
+    ]
+    for node in backup:
+        node.tier = f"BACKUP ≤{fill_delay_ms}ms"
+
+    fast.sort(key=lambda n: (n.score, n.best_delay_ms or 999999, n.jitter_ms or 999999))
+    backup.sort(key=lambda n: (n.score, n.best_delay_ms or 999999, n.jitter_ms or 999999))
+
+    selected: list[ProxyNode] = fast[:max_nodes]
+    if len(selected) < min_output_nodes:
+        need = min(max_nodes, min_output_nodes) - len(selected)
+        selected.extend(backup[:max(0, need)])
+    if len(selected) < max_nodes:
+        selected_ids = {id(n) for n in selected}
+        remain = [n for n in backup if id(n) not in selected_ids]
+        selected.extend(remain[: max_nodes - len(selected)])
+
+    selected.sort(key=lambda n: (n.score, n.best_delay_ms or 999999, n.jitter_ms or 999999))
+    selected = selected[:max_nodes]
+    unique_names(selected)
+    return selected, parsed, fetch_logs, skipped
 
 
-st.set_page_config(page_title="OpenClash Anti Delay", page_icon="⚡", layout="wide")
-st.title("⚡ SumberYAML OpenClash Auto-Fast")
+st.set_page_config(page_title="OpenClash Bug-Compat Auto-Fast", page_icon="⚡", layout="wide")
+st.title("⚡ SumberYAML OpenClash Bug-Compat Auto-Fast")
 st.caption(
-    "Ambil subscription publik, hanya port 443, cek link hidup, tes node berulang, pilih delay rendah, "
-    "ubah server ke 104.17.3.81, dan set GLOBAL langsung ke ⚡ AUTO-FAST."
+    "Ambil subscription publik, hanya port 443, cek link hidup, cek kompatibilitas bug server 104.17.3.81 + SNI/Host, "
+    "prioritaskan delay ≤123 ms, lalu isi cadangan hidup agar YAML tidak cuma berisi sedikit akun."
 )
 
-with st.expander("Pengaturan cepat anti delay", expanded=True):
+with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.text_input("Server output", value=TARGET_SERVER, disabled=True)
+        st.text_input("Server output / bug", value=TARGET_SERVER, disabled=True)
     with col2:
         st.text_input("Port wajib", value=str(ONLY_PORT), disabled=True)
     with col3:
-        max_nodes = st.number_input("Maksimal node tercepat", min_value=1, max_value=300, value=20, step=5)
+        max_nodes = st.number_input("Maksimal node output", min_value=1, max_value=300, value=20, step=5)
     with col4:
-        max_delay_ms = st.number_input("Maks delay masuk YAML/ms", min_value=20, max_value=HARD_MAX_DELAY_MS, value=DEFAULT_MAX_DELAY_MS, step=1, help="Dikunci maksimal 123 ms agar lebih rendah dari Baidu 124 ms, GitHub 157 ms, dan NetEase 211 ms.")
+        min_output_nodes = st.number_input("Target minimal hidup", min_value=1, max_value=300, value=MIN_OUTPUT_NODES, step=1, help="Aplikasi akan berusaha mengisi sampai jumlah ini dari akun yang kompatibel bug server. Kalau sumber publik memang kurang, hasil bisa tetap kurang.")
 
     col5, col6, col7, col8 = st.columns(4)
     with col5:
-        attempts = st.number_input("Tes ulang per node", min_value=1, max_value=5, value=3, step=1)
+        fast_target_ms = st.number_input("Prioritas super cepat/ms", min_value=50, max_value=FAST_TARGET_DELAY_MS, value=120, step=1, help="Target ini lebih rendah dari Baidu 124 ms, GitHub 157 ms, dan NetEase 211 ms.")
     with col6:
-        require_successes = st.number_input("Minimal sukses", min_value=1, max_value=5, value=3, step=1)
+        fill_delay_ms = st.number_input("Batas cadangan hidup/ms", min_value=FAST_TARGET_DELAY_MS, max_value=HARD_MAX_DELAY_MS, value=DEFAULT_FILL_DELAY_MS, step=50, help="Dipakai hanya kalau node ≤120/123 ms kurang dari target minimal. Tujuannya agar output tidak cuma 5 akun.")
     with col7:
-        tcp_timeout = st.number_input("Timeout node/detik", min_value=0.3, max_value=5.0, value=1.0, step=0.1)
+        attempts = st.number_input("Tes ulang per node", min_value=1, max_value=5, value=3, step=1)
     with col8:
-        max_workers = st.number_input("Concurrency", min_value=1, max_value=100, value=36, step=1)
+        require_successes = st.number_input("Minimal sukses bug", min_value=1, max_value=5, value=2, step=1)
 
-    col9, col10, col11 = st.columns(3)
+    col9, col10, col11, col12 = st.columns(4)
     with col9:
-        fetch_timeout = st.number_input("Timeout fetch link/detik", min_value=5, max_value=60, value=20, step=5)
+        tcp_timeout = st.number_input("Timeout cek/detik", min_value=0.5, max_value=10.0, value=2.0, step=0.5)
     with col10:
-        urltest_interval = st.number_input("Interval url-test OpenClash/detik", min_value=30, max_value=900, value=30, step=30)
+        max_workers = st.number_input("Concurrency", min_value=1, max_value=100, value=48, step=1)
     with col11:
-        tolerance = st.number_input("Toleransi auto-switch/ms", min_value=1, max_value=100, value=10, step=1)
+        fetch_timeout = st.number_input("Timeout fetch link/detik", min_value=5, max_value=60, value=20, step=5)
+    with col12:
+        require_original = st.checkbox("Wajib original server juga hidup", value=False, help="Matikan agar lebih banyak akun lolos saat memakai bug server. Nyalakan jika ingin lebih ketat.")
+
+    col13, col14 = st.columns(2)
+    with col13:
+        urltest_interval = st.number_input("Interval url-test OpenClash/detik", min_value=15, max_value=900, value=30, step=15)
+    with col14:
+        tolerance = st.number_input("Toleransi auto-switch/ms", min_value=5, max_value=300, value=10, step=5)
 
     test_url = st.selectbox(
         "URL health check OpenClash",
@@ -730,7 +893,7 @@ with st.expander("Pengaturan cepat anti delay", expanded=True):
         index=0,
         help="Default memakai Cloudflare captive portal generate_204 sesuai permintaan.",
     )
-    st.caption("Target filter: hanya node port 443 dengan delay ≤ batas di atas. Batas maksimum dikunci 123 ms agar lebih rendah dari Baidu 124 ms, GitHub 157 ms, dan NetEase 211 ms.")
+    st.caption("Mode baru: cek delay ke bug server 104.17.3.81 dengan SNI/Host akun. Node ≤120/123 ms diprioritaskan; jika kurang dari 20, cadangan yang tetap hidup akan ditambahkan supaya YAML lebih usable.")
 
 links_text = st.text_area(
     "Link subscription bawaan",
@@ -750,7 +913,7 @@ run = st.button("Proses & buat YAML anti delay", type="primary")
 
 if run:
     require_successes = min(int(require_successes), int(attempts))
-    with st.spinner("Mengecek link, menyaring port 443, menguji delay/stabilitas, dan memilih node tercepat..."):
+    with st.spinner("Mengecek link, menyaring port 443, menguji bug server + SNI/Host, lalu memilih node tercepat..."):
         alive_nodes, all_nodes, fetch_logs, skipped = process_sources(
             links_text=links_text,
             manual_text=manual_text,
@@ -758,9 +921,12 @@ if run:
             tcp_timeout=float(tcp_timeout),
             max_workers=int(max_workers),
             max_nodes=int(max_nodes),
-            max_delay_ms=int(max_delay_ms),
+            fast_target_ms=int(fast_target_ms),
+            fill_delay_ms=int(fill_delay_ms),
+            min_output_nodes=int(min_output_nodes),
             attempts=int(attempts),
             require_successes=int(require_successes),
+            require_original=bool(require_original),
         )
 
     total_parsed = len(all_nodes)
@@ -774,7 +940,7 @@ if run:
     m1.metric("Link hidup", live_links)
     m2.metric("Parsed port 443", total_parsed)
     m3.metric("Node hidup", total_alive_any)
-    m4.metric("Lolos anti delay", total_fast)
+    m4.metric("Masuk YAML", total_fast)
     m5.metric("Dead dibuang", total_dead)
 
     if fetch_logs:
@@ -787,7 +953,7 @@ if run:
 
     if not alive_nodes:
         st.error(
-            "Belum ada node yang lolos filter anti delay. Coba naikkan 'Maks delay masuk YAML', turunkan 'Minimal sukses', atau jalankan ulang karena sumber publik sering berubah."
+            "Belum ada node yang lolos cek bug server. Coba naikkan batas cadangan, turunkan minimal sukses bug, atau matikan wajib original server."
         )
         if all_nodes:
             with st.expander("Detail node yang gagal/lambat"):
@@ -798,10 +964,11 @@ if run:
                             "type": n.type,
                             "original_server": n.original_server,
                             "status": n.status,
-                            "best_delay_ms": n.best_delay_ms,
-                            "avg_delay_ms": n.avg_delay_ms,
-                            "jitter_ms": n.jitter_ms,
-                            "success": f"{n.success_count}/{n.attempts}",
+                            "bug_sni": n.bug_sni,
+                            "bug_delay_ms": n.bug_best_delay_ms,
+                            "bug_success": f"{n.bug_success_count}/{n.attempts}",
+                            "original_delay_ms": n.original_best_delay_ms,
+                            "original_success": f"{n.original_success_count}/{n.attempts}",
                             "score": n.score,
                             "reason": n.reason,
                             "source": n.source,
@@ -812,26 +979,26 @@ if run:
                     hide_index=True,
                 )
     else:
-        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=min(800, max(300, int(max_delay_ms) + 250)))
+        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=min(2000, int(fill_delay_ms) + 300))
         csv_text = build_csv(all_nodes)
 
         st.success(
-            f"Berhasil membuat YAML dari {len(alive_nodes)} node delay rendah/stabil. "
-            "Grup GLOBAL berada langsung di ⚡ AUTO-FAST sebagai pilihan pertama."
+            f"Berhasil membuat YAML dari {len(alive_nodes)} node yang kompatibel bug server. "
+            "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke ⚡ AUTO-FAST."
         )
         c1, c2 = st.columns(2)
         with c1:
             st.download_button(
-                "Download openclash_auto_fast.yaml",
+                "Download openclash_bug_compat_auto_fast.yaml",
                 data=yaml_text.encode("utf-8"),
-                file_name="openclash_auto_fast.yaml",
+                file_name="openclash_bug_compat_auto_fast.yaml",
                 mime="application/x-yaml",
             )
         with c2:
             st.download_button(
                 "Download report CSV",
                 data=csv_text.encode("utf-8"),
-                file_name="openclash_auto_fast_report.csv",
+                file_name="openclash_bug_compat_report.csv",
                 mime="text/csv",
             )
 
@@ -844,10 +1011,13 @@ if run:
                     "type": n.type,
                     "original_server": n.original_server,
                     "server_output": TARGET_SERVER,
-                    "best_delay_ms": n.best_delay_ms,
-                    "avg_delay_ms": n.avg_delay_ms,
-                    "jitter_ms": n.jitter_ms,
-                    "success": f"{n.success_count}/{n.attempts}",
+                    "tier": n.tier,
+                    "bug_sni": n.bug_sni,
+                    "bug_delay_ms": n.bug_best_delay_ms,
+                    "bug_avg_ms": n.bug_avg_delay_ms,
+                    "bug_jitter_ms": n.bug_jitter_ms,
+                    "bug_success": f"{n.bug_success_count}/{n.attempts}",
+                    "original_delay_ms": n.original_best_delay_ms,
                     "score": n.score,
                     "source": n.source,
                 }
@@ -861,6 +1031,6 @@ if run:
             st.code(yaml_text, language="yaml")
 
 st.info(
-    "Catatan penting: aplikasi ini memilih node yang respons TCP-nya cepat dan stabil, lalu OpenClash melakukan url-test/fallback otomatis. "
-    "Karena akun berasal dari subscription publik, tidak ada cara menjamin 100% anti delay setiap waktu. Jalankan ulang proses dan Health Check OpenClash jika kualitas berubah."
+    "Catatan penting: aplikasi ini mengecek kompatibilitas bug server 104.17.3.81 menggunakan TLS + SNI/Host, lalu OpenClash melakukan url-test/fallback otomatis. "
+    "Tes ini jauh lebih sesuai dibanding hanya cek original server, tetapi validasi akun penuh tetap dilakukan oleh Health Check OpenClash. Sumber publik bisa berubah sewaktu-waktu."
 )

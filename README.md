@@ -1,46 +1,52 @@
-# SumberYAML OpenClash Auto-Fast
+# SumberYAML OpenClash Bug-Compat Auto-Fast
 
-Paket Streamlit sederhana untuk membuat YAML OpenClash/Mihomo dari subscription publik dengan filter anti-delay.
+Versi sederhana untuk Streamlit Online tanpa GitHub Action.
 
-## Fitur
+## Tujuan
 
-- Tidak memakai GitHub Action.
-- Tidak perlu GitHub Token.
-- 10 link subscription sudah otomatis tersedia.
-- Hanya mengambil node dengan port `443`.
-- Server output semua node dipaksa menjadi `104.17.3.81`.
-- SNI/Host asli tetap dipertahankan agar akun tetap bisa konek.
-- Link subscription dicek hidup terlebih dahulu.
-- Node dicek berulang, default 3 kali.
-- Hanya node delay rendah yang masuk YAML.
-- Batas delay default `1500 ms` dan dikunci maksimal `1700 ms`, agar lebih rendah dari referensi:
-  - Baidu Search: 1824 ms
-  - NetEase Music: 2011 ms
-  - GitHub: 1757 ms
-- URL health check default OpenClash: `http://cp.cloudflare.com/generate_204`.
-- Grup `GLOBAL` langsung memilih `⚡ AUTO-FAST` sebagai pilihan pertama.
+Aplikasi ini mengambil akun publik dari link subscription bawaan, menyaring hanya port `443`, lalu membuat YAML OpenClash/Mihomo dengan `server` dipaksa ke bug server:
 
-## Cara pakai di Streamlit Cloud
+```text
+104.17.3.81
+```
 
-1. Upload semua file ini ke root repository GitHub.
+## Perbaikan dari versi sebelumnya
+
+Versi sebelumnya bisa menghasilkan sedikit akun hidup karena filter `120 ms` terlalu keras dan pengecekan belum sesuai dengan kondisi output server yang sudah diganti ke bug IP.
+
+Versi ini memakai mode **bug compatibility check**:
+
+1. Ambil node `vless://`, `vmess://`, `trojan://`, dan `ss://`.
+2. Hanya node port `443` yang diproses.
+3. Server output diganti ke `104.17.3.81`.
+4. SNI/Host asli akun tetap dipertahankan.
+5. Aplikasi mengetes TLS ke `104.17.3.81:443` memakai SNI/Host akun.
+6. Node super cepat `≤120/123 ms` diprioritaskan.
+7. Jika jumlah node super cepat kurang dari 20, aplikasi mengisi cadangan dari node yang tetap hidup/kompatibel bug server.
+8. YAML memakai grup `GLOBAL` yang langsung mengarah ke `⚡ AUTO-FAST`.
+
+## Output
+
+- `openclash_bug_compat_auto_fast.yaml`
+- `openclash_bug_compat_report.csv`
+
+## Jalankan lokal
+
+```bash
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
+## Deploy ke Streamlit Cloud
+
+1. Upload semua file ke repository GitHub.
 2. Buka Streamlit Cloud.
-3. Pilih file utama:
+3. Pilih repository tersebut.
+4. Main file: `streamlit_app.py`.
+5. Deploy.
 
-```text
-streamlit_app.py
-```
-
-4. Deploy.
-5. Klik tombol **Proses & buat YAML anti delay**.
-6. Download file:
-
-```text
-openclash_auto_fast.yaml
-```
-
-7. Import ke OpenClash/Mihomo.
-8. Jalankan Health Check/Test Delay di OpenClash.
+Tidak perlu GitHub Token dan tidak perlu GitHub Action.
 
 ## Catatan penting
 
-Aplikasi ini mengecek delay dari sisi server Streamlit, bukan dari router/lokasi internet kamu. Hasil terbaik tetap perlu dicek ulang di OpenClash setelah YAML diimport. Karena node berasal dari subscription publik, performa bisa berubah kapan saja.
+Pengecekan aplikasi ini memastikan bug server `104.17.3.81` bisa melakukan TLS handshake dengan SNI/Host akun. Ini lebih sesuai untuk YAML yang server-nya dipaksa ke bug IP. Namun validasi proxy penuh tetap dilakukan oleh OpenClash melalui Health Check / Test Delay karena protokol VLESS/VMess/Trojan membutuhkan handshake lengkap di sisi client.
