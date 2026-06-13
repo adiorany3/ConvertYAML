@@ -603,6 +603,38 @@ def node_sni_host(node: ProxyNode) -> str:
     return node.original_server
 
 
+def node_network(node: ProxyNode) -> str:
+    """Return the normalized transport network used by the proxy node."""
+    if str(node.type or "").lower() == "ss":
+        return "ss"
+    network = str(node.clash.get("network") or "tcp").strip().lower()
+    if network in {"h2", "http"}:
+        return "http"
+    return network or "tcp"
+
+
+def protocol_priority_rank(node: ProxyNode) -> int:
+    """Prefer protocols that usually work better with bug server + SNI/Host."""
+    return {"vless": 0, "trojan": 1, "vmess": 2, "ss": 3}.get(str(node.type or "").lower(), 9)
+
+
+def network_priority_rank(node: ProxyNode, prefer_ws: bool = True) -> int:
+    """When prefer_ws is enabled, WebSocket nodes are tested and selected first."""
+    if not prefer_ws:
+        return 0
+    return {"ws": 0, "grpc": 1, "http": 2, "tcp": 3, "ss": 4}.get(node_network(node), 9)
+
+
+def node_sort_key(node: ProxyNode, prefer_ws: bool = True) -> tuple[int, int, int, int, int]:
+    return (
+        network_priority_rank(node, prefer_ws),
+        protocol_priority_rank(node),
+        int(node.score or 999999),
+        int(node.best_delay_ms or 999999),
+        int(node.jitter_ms or 999999),
+    )
+
+
 PLACEHOLDER_VALUES = {"", "-", "none", "null", "undefined", "nil", "nan"}
 
 
@@ -1234,6 +1266,7 @@ def build_csv(nodes: list[ProxyNode]) -> str:
         "name",
         "original_name",
         "type",
+        "network",
         "original_server",
         "bug_sni",
         "output_server",
@@ -1256,6 +1289,7 @@ def build_csv(nodes: list[ProxyNode]) -> str:
             node.name,
             node.original_name,
             node.type,
+            node_network(node),
             node.original_server,
             node.bug_sni,
             TARGET_SERVER,
@@ -1292,6 +1326,7 @@ def process_sources(
     candidate_multiplier: int = 20,
     candidate_min: int = 500,
     max_jitter_ms: int = 0,
+    prefer_ws: bool = True,
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
     fast_target_ms = min(int(fast_target_ms), FAST_TARGET_DELAY_MS)
     fill_delay_ms = min(max(int(fill_delay_ms), fast_target_ms), HARD_MAX_DELAY_MS)
@@ -1332,10 +1367,18 @@ def process_sources(
         seen_keys.add(node.key)
         parsed.append(node)
 
-    # Test more candidates than output target so the app can still fill 20 alive accounts
+    # Test more candidates than output target so the app can still fill alive accounts
     # even when only a small percentage is compatible with the selected bug server.
+    # If WS priority is enabled, WS nodes enter the test queue first, then grpc/http/tcp.
     target = max(int(max_nodes), int(min_output_nodes), 20)
     candidate_limit = max(target * int(candidate_multiplier), int(candidate_min))
+    parsed.sort(
+        key=lambda n: (
+            0 if n.status == "pending" else 1,
+            network_priority_rank(n, bool(prefer_ws)),
+            protocol_priority_rank(n),
+        )
+    )
     parsed = parsed[:candidate_limit]
 
     testable = [node for node in parsed if node.status == "pending"]
@@ -1376,8 +1419,8 @@ def process_sources(
     for node in backup:
         node.tier = f"BACKUP ≤{fill_delay_ms}ms"
 
-    fast.sort(key=lambda n: (n.score, n.best_delay_ms or 999999, n.jitter_ms or 999999))
-    backup.sort(key=lambda n: (n.score, n.best_delay_ms or 999999, n.jitter_ms or 999999))
+    fast.sort(key=lambda n: node_sort_key(n, bool(prefer_ws)))
+    backup.sort(key=lambda n: node_sort_key(n, bool(prefer_ws)))
 
     selected: list[ProxyNode] = fast[:max_nodes]
     if len(selected) < min_output_nodes:
@@ -1388,7 +1431,7 @@ def process_sources(
         remain = [n for n in backup if id(n) not in selected_ids]
         selected.extend(remain[: max_nodes - len(selected)])
 
-    selected.sort(key=lambda n: (n.score, n.best_delay_ms or 999999, n.jitter_ms or 999999))
+    selected.sort(key=lambda n: node_sort_key(n, bool(prefer_ws)))
     selected = selected[:max_nodes]
     unique_names(selected)
     return selected, parsed, fetch_logs, skipped
@@ -1450,13 +1493,19 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
     with col16:
         rule_mode = st.selectbox("Mode rule", ["Lite", "Lengkap"], index=0 if preset["rule_mode"] == "Lite" else 1, help="Lite lebih ringan untuk router kecil. Lengkap punya kategori dan provider lebih banyak.")
 
+    prefer_ws = st.checkbox(
+        "Prioritaskan network WS/WebSocket",
+        value=True,
+        help="Jika aktif, node WS akan dites dan dipilih lebih dulu. gRPC/HTTP/TCP tetap dipakai sebagai cadangan jika jumlah WS kurang.",
+    )
+
     test_url = st.selectbox(
         "URL health check OpenClash",
         [FAST_TEST_URL, ALT_TEST_URL, THIRD_TEST_URL],
         index=0,
         help="Default memakai Cloudflare captive portal generate_204 sesuai permintaan.",
     )
-    st.caption("Optimasi lanjutan: preset Cepat/Seimbang/Ketat, cache fetch subscription 10 menit, skip cek original saat tidak wajib, filter jitter, Rule Lite, GLOBAL langsung AUTO-FAST, url-test lebih stabil, dan toleransi auto-switch lebih aman.")
+    st.caption("Optimasi lanjutan: preset Cepat/Seimbang/Ketat, cache fetch subscription 10 menit, skip cek original saat tidak wajib, prioritas network WS, filter jitter, Rule Lite, GLOBAL langsung AUTO-FAST, url-test lebih stabil, dan toleransi auto-switch lebih aman.")
 
 links_text = st.text_area(
     "Link subscription bawaan",
@@ -1493,6 +1542,7 @@ if run:
             candidate_multiplier=int(preset["candidate_multiplier"]),
             candidate_min=int(preset["candidate_min"]),
             max_jitter_ms=int(max_jitter_ms),
+            prefer_ws=bool(prefer_ws),
         )
 
     total_parsed = len(all_nodes)
@@ -1530,6 +1580,7 @@ if run:
                         {
                             "name": n.name,
                             "type": n.type,
+                            "network": node_network(n),
                             "original_server": n.original_server,
                             "status": n.status,
                             "bug_sni": n.bug_sni,
@@ -1550,8 +1601,10 @@ if run:
         yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=min(2000, int(fill_delay_ms) + 300), rule_mode=str(rule_mode))
         csv_text = build_csv(all_nodes)
 
+        ws_count = len([n for n in alive_nodes if node_network(n) == "ws"])
         st.success(
             f"Berhasil membuat YAML dari {len(alive_nodes)} node lengkap yang kompatibel bug server. "
+            f"Prioritas WS aktif: {ws_count} node WS masuk YAML. "
             "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke AUTO-FAST; url-test lebih stabil; kategori rule sudah dipisah dan iklan/malware diblokir."
         )
         c1, c2 = st.columns(2)
@@ -1578,6 +1631,7 @@ if run:
                     "name": n.name,
                     "original_name": n.original_name,
                     "type": n.type,
+                    "network": node_network(n),
                     "original_server": n.original_server,
                     "server_output": TARGET_SERVER,
                     "tier": n.tier,
