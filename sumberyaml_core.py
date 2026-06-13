@@ -1803,7 +1803,92 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         "rule-providers": rule_providers,
         "rules": rules,
     }
+
     return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
+
+
+def build_openclash_android_yaml(
+    nodes: list[ProxyNode],
+    interval: int,
+    tolerance: int,
+    test_url: str,
+    health_timeout: int = DEFAULT_HEALTH_TIMEOUT_MS,
+) -> str:
+    """Build a lightweight Clash/OpenClash-for-Android config without rule providers.
+
+    This output is intended for Android clients that only need the active accounts.
+    It deliberately omits rule-providers, custom category rules, redir-port, and
+    tproxy-port. Traffic is handled in global mode and the user can select
+    AUTO-FAST, FALLBACK, or a specific node in the client UI.
+    """
+    names = [node.clash["name"] for node in nodes]
+    direct_or_names = names or ["DIRECT"]
+
+    proxy_groups: list[dict[str, Any]] = [
+        {
+            "name": "GLOBAL",
+            "type": "select",
+            "proxies": ["AUTO-FAST", "FALLBACK", "DIRECT"] + names,
+        },
+        {
+            "name": "AUTO-FAST",
+            "type": "url-test",
+            "proxies": direct_or_names,
+            "url": test_url,
+            "interval": interval,
+            "tolerance": tolerance,
+            "lazy": False,
+            "timeout": health_timeout,
+            "expected-status": 204,
+        },
+        {
+            "name": "FALLBACK",
+            "type": "fallback",
+            "proxies": direct_or_names,
+            "url": test_url,
+            "interval": interval,
+            "lazy": False,
+            "timeout": health_timeout,
+            "expected-status": 204,
+        },
+    ]
+
+    config: dict[str, Any] = {
+        "mixed-port": 7890,
+        "allow-lan": False,
+        "bind-address": "*",
+        "mode": "global",
+        "log-level": "warning",
+        "ipv6": False,
+        "unified-delay": True,
+        "tcp-concurrent": True,
+        "global-client-fingerprint": "chrome",
+        "profile": {
+            "store-selected": True,
+            "store-fake-ip": True,
+        },
+        "sniffer": {
+            "enable": True,
+            "sniff": {
+                "TLS": {"ports": [443, 8443]},
+                "HTTP": {"ports": [80, "8080-8880"], "override-destination": True},
+            },
+            "skip-domain": ["+.lan", "+.local"],
+        },
+        "dns": {
+            "enable": True,
+            "ipv6": False,
+            "enhanced-mode": "fake-ip",
+            "fake-ip-range": "198.18.0.1/16",
+            "fake-ip-filter": ["+.lan", "+.local", "time.*.com", "ntp.*.com"],
+            "default-nameserver": ["1.1.1.1", "8.8.8.8"],
+            "nameserver": ["https://1.1.1.1/dns-query", "https://dns.google/dns-query"],
+        },
+        "proxies": [node.clash for node in nodes],
+        "proxy-groups": proxy_groups,
+    }
+    return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
+
 
 def build_csv(nodes: list[ProxyNode]) -> str:
     buffer = io.StringIO()

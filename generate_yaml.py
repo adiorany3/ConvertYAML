@@ -10,6 +10,7 @@ from sumberyaml_core import (
     DEFAULT_LINKS,
     build_akun_txt,
     build_csv,
+    build_openclash_android_yaml,
     build_openclash_yaml,
     process_sources,
 )
@@ -75,6 +76,7 @@ def main() -> int:
     output_yaml = os.getenv("OUTPUT_YAML", "openclash_auto.yaml")
     output_csv = os.getenv("OUTPUT_CSV", "openclash_auto_report.csv")
     output_akun = os.getenv("OUTPUT_AKUN", "akun.txt")
+    output_android_yaml = os.getenv("OUTPUT_ANDROID_YAML", "openclash_android.yaml")
     output_stamp = os.getenv("OUTPUT_STAMP", "last_update.txt")
     manual_file = os.getenv("MANUAL_NODES_FILE", "manual_nodes.txt")
 
@@ -123,15 +125,25 @@ def main() -> int:
         health_timeout=_env_int("HEALTH_TIMEOUT_MS", 6000),
         rule_mode=os.getenv("RULE_MODE", "Lite"),
     )
+    android_yaml_text = build_openclash_android_yaml(
+        alive_nodes,
+        interval=_env_int("ANDROID_URLTEST_INTERVAL", _env_int("URLTEST_INTERVAL", 60)),
+        tolerance=_env_int("ANDROID_TOLERANCE", _env_int("TOLERANCE", 40)),
+        test_url=os.getenv("ANDROID_TEST_URL", os.getenv("TEST_URL", ALT_TEST_URL)),
+        health_timeout=_env_int("ANDROID_HEALTH_TIMEOUT_MS", _env_int("HEALTH_TIMEOUT_MS", 6000)),
+    )
     csv_text = build_csv(all_nodes)
     akun_text = build_akun_txt(alive_nodes)
 
     Path(output_yaml).write_text(yaml_text, encoding="utf-8")
+    Path(output_android_yaml).write_text(android_yaml_text, encoding="utf-8")
     Path(output_csv).write_text(csv_text, encoding="utf-8")
     Path(output_akun).write_text(akun_text, encoding="utf-8")
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     summary = (
         f"Last update: {now}\n"
+        f"OpenClash YAML: {output_yaml}\n"
+        f"Android YAML: {output_android_yaml}\n"
         f"YAML nodes: {len(alive_nodes)}\n"
         f"Akun txt: {len([x for x in akun_text.splitlines() if x.strip()])}\n"
         f"Parsed nodes: {len(all_nodes)}\n"
