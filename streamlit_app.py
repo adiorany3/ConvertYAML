@@ -594,6 +594,290 @@ def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, requir
 def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = 2000) -> str:
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
+
+    def selector(defaults: list[str] | None = None) -> list[str]:
+        defaults = defaults or ["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"]
+        return defaults + names
+
+    domain_provider = {
+        "type": "http",
+        "interval": 86400,
+        "behavior": "domain",
+        "format": "mrs",
+    }
+    ip_provider = {
+        "type": "http",
+        "interval": 86400,
+        "behavior": "ipcidr",
+        "format": "mrs",
+    }
+    classical_provider = {
+        "type": "http",
+        "interval": 86400,
+        "behavior": "classical",
+        "format": "yaml",
+    }
+
+    rule_providers: dict[str, Any] = {
+        # Block iklan, tracking, privacy-leak, dan hijacking/malware ringan.
+        "ads_domain": {
+            **domain_provider,
+            "path": "./rule_providers/ads_domain.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs",
+        },
+        "ads_classical": {
+            **classical_provider,
+            "path": "./rule_providers/Advertising.yaml",
+            "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.yaml",
+        },
+        "privacy_classical": {
+            **classical_provider,
+            "path": "./rule_providers/Privacy.yaml",
+            "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Privacy/Privacy.yaml",
+        },
+        "hijacking_classical": {
+            **classical_provider,
+            "path": "./rule_providers/Hijacking.yaml",
+            "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.yaml",
+        },
+
+        # YouTube dipisah agar bisa diberi jalur berbeda dari Google umum.
+        "youtube_domain": {
+            **domain_provider,
+            "path": "./rule_providers/youtube.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs",
+        },
+        "youtube_ip": {
+            **ip_provider,
+            "path": "./rule_providers/youtube_ip.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs",
+        },
+
+        # Sosial media.
+        "telegram_domain": {
+            **domain_provider,
+            "path": "./rule_providers/telegram.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs",
+        },
+        "twitter_domain": {
+            **domain_provider,
+            "path": "./rule_providers/twitter.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs",
+        },
+        "tiktok_domain": {
+            **domain_provider,
+            "path": "./rule_providers/tiktok.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs",
+        },
+        "facebook_domain": {
+            **domain_provider,
+            "path": "./rule_providers/facebook.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs",
+        },
+        "telegram_ip": {
+            **ip_provider,
+            "path": "./rule_providers/telegram_ip.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs",
+        },
+        "twitter_ip": {
+            **ip_provider,
+            "path": "./rule_providers/twitter_ip.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs",
+        },
+
+        # Edukasi / research / developer learning.
+        "scholar_domain": {
+            **domain_provider,
+            "path": "./rule_providers/scholar.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-scholar-!cn.mrs",
+        },
+        "github_domain": {
+            **domain_provider,
+            "path": "./rule_providers/github.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs",
+        },
+
+        # Streaming selain YouTube.
+        "netflix_domain": {
+            **domain_provider,
+            "path": "./rule_providers/netflix.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs",
+        },
+        "spotify_domain": {
+            **domain_provider,
+            "path": "./rule_providers/spotify.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs",
+        },
+        "biliintl_domain": {
+            **domain_provider,
+            "path": "./rule_providers/biliintl.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/biliintl.mrs",
+        },
+        "netflix_ip": {
+            **ip_provider,
+            "path": "./rule_providers/netflix_ip.mrs",
+            "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs",
+        },
+    }
+
+    proxy_groups: list[dict[str, Any]] = [
+        {
+            "name": "GLOBAL",
+            "type": "select",
+            # AUTO-FAST tetap di pilihan pertama agar fresh import langsung otomatis cepat.
+            "proxies": ["⚡ AUTO-FAST", "📱 SOCIAL-MEDIA", "▶️ YOUTUBE", "🎓 EDUKASI", "🎬 STREAMING", "🛡️ CLEAN", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"] + names,
+        },
+        {
+            "name": "🚀 PROXY",
+            "type": "select",
+            "proxies": ["GLOBAL", "⚡ AUTO-FAST", "📱 SOCIAL-MEDIA", "▶️ YOUTUBE", "🎓 EDUKASI", "🎬 STREAMING", "🛡️ CLEAN", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"] + names,
+        },
+        {
+            "name": "📱 SOCIAL-MEDIA",
+            "type": "select",
+            "proxies": selector(["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"]),
+        },
+        {
+            "name": "▶️ YOUTUBE",
+            "type": "select",
+            "proxies": selector(["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"]),
+        },
+        {
+            "name": "🎓 EDUKASI",
+            "type": "select",
+            "proxies": selector(["⚡ AUTO-FAST", "DIRECT", "🛟 FALLBACK", "🔁 LOAD-BALANCE"]),
+        },
+        {
+            "name": "🎬 STREAMING",
+            "type": "select",
+            "proxies": selector(["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"]),
+        },
+        {
+            "name": "🛡️ CLEAN",
+            "type": "select",
+            "proxies": ["⚡ AUTO-FAST", "DIRECT", "🛟 FALLBACK"],
+        },
+        {
+            "name": "⚡ AUTO-FAST",
+            "type": "url-test",
+            "proxies": direct_or_names,
+            "url": test_url,
+            "interval": interval,
+            "tolerance": tolerance,
+            "lazy": False,
+            "timeout": health_timeout,
+        },
+        {
+            "name": "🛟 FALLBACK",
+            "type": "fallback",
+            "proxies": direct_or_names,
+            "url": test_url,
+            "interval": interval,
+            "lazy": False,
+            "timeout": health_timeout,
+        },
+        {
+            "name": "🔁 LOAD-BALANCE",
+            "type": "load-balance",
+            "strategy": "consistent-hashing",
+            "proxies": direct_or_names,
+            "url": test_url,
+            "interval": max(interval, 120),
+            "lazy": False,
+            "timeout": health_timeout,
+        },
+    ]
+
+    rules = [
+        # LAN/private harus direct sebelum ruleset lain.
+        "DOMAIN-SUFFIX,local,DIRECT",
+        "DOMAIN-SUFFIX,lan,DIRECT",
+        "DOMAIN-SUFFIX,localhost,DIRECT",
+        "IP-CIDR,127.0.0.0/8,DIRECT",
+        "IP-CIDR,10.0.0.0/8,DIRECT",
+        "IP-CIDR,172.16.0.0/12,DIRECT",
+        "IP-CIDR,192.168.0.0/16,DIRECT",
+        "IP-CIDR,169.254.0.0/16,DIRECT",
+        "GEOIP,LAN,DIRECT,no-resolve",
+
+        # Block iklan, tracker, privacy leak, hijacking/malware sebelum kategori lain.
+        "RULE-SET,ads_domain,REJECT",
+        "RULE-SET,ads_classical,REJECT",
+        "RULE-SET,privacy_classical,REJECT",
+        "RULE-SET,hijacking_classical,REJECT",
+        "DOMAIN-SUFFIX,doubleclick.net,REJECT",
+        "DOMAIN-SUFFIX,googlesyndication.com,REJECT",
+        "DOMAIN-SUFFIX,googleadservices.com,REJECT",
+        "DOMAIN-SUFFIX,pagead2.googlesyndication.com,REJECT",
+        "DOMAIN-KEYWORD,adservice,REJECT",
+        "DOMAIN-KEYWORD,analytics,REJECT",
+        "DOMAIN-KEYWORD,tracker,REJECT",
+
+        # YouTube khusus, sebelum Google umum/edukasi.
+        "RULE-SET,youtube_domain,▶️ YOUTUBE",
+        "DOMAIN-SUFFIX,youtube.com,▶️ YOUTUBE",
+        "DOMAIN-SUFFIX,youtu.be,▶️ YOUTUBE",
+        "DOMAIN-SUFFIX,ytimg.com,▶️ YOUTUBE",
+        "DOMAIN-SUFFIX,googlevideo.com,▶️ YOUTUBE",
+        "DOMAIN-SUFFIX,youtubei.googleapis.com,▶️ YOUTUBE",
+
+        # Sosial media.
+        "RULE-SET,telegram_domain,📱 SOCIAL-MEDIA",
+        "RULE-SET,twitter_domain,📱 SOCIAL-MEDIA",
+        "RULE-SET,tiktok_domain,📱 SOCIAL-MEDIA",
+        "RULE-SET,facebook_domain,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,facebook.com,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,fbcdn.net,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,instagram.com,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,cdninstagram.com,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,threads.net,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,tiktok.com,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,tiktokcdn.com,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,twitter.com,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,x.com,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,t.me,📱 SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,telegram.org,📱 SOCIAL-MEDIA",
+        "GEOIP,telegram,📱 SOCIAL-MEDIA,no-resolve",
+        "GEOIP,twitter,📱 SOCIAL-MEDIA,no-resolve",
+
+        # Edukasi, riset, kuliah, dan developer learning.
+        "RULE-SET,scholar_domain,🎓 EDUKASI",
+        "RULE-SET,github_domain,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,edu,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,ac.id,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,scholar.google.com,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,coursera.org,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,edx.org,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,khanacademy.org,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,udemy.com,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,academia.edu,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,arxiv.org,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,github.com,🎓 EDUKASI",
+        "DOMAIN-SUFFIX,githubusercontent.com,🎓 EDUKASI",
+
+        # Streaming umum selain YouTube.
+        "RULE-SET,netflix_domain,🎬 STREAMING",
+        "RULE-SET,spotify_domain,🎬 STREAMING",
+        "RULE-SET,biliintl_domain,🎬 STREAMING",
+        "DOMAIN-SUFFIX,netflix.com,🎬 STREAMING",
+        "DOMAIN-SUFFIX,nflxvideo.net,🎬 STREAMING",
+        "DOMAIN-SUFFIX,disneyplus.com,🎬 STREAMING",
+        "DOMAIN-SUFFIX,hotstar.com,🎬 STREAMING",
+        "DOMAIN-SUFFIX,primevideo.com,🎬 STREAMING",
+        "DOMAIN-SUFFIX,amazonvideo.com,🎬 STREAMING",
+        "DOMAIN-SUFFIX,hulu.com,🎬 STREAMING",
+        "DOMAIN-SUFFIX,hbomax.com,🎬 STREAMING",
+        "DOMAIN-SUFFIX,max.com,🎬 STREAMING",
+        "DOMAIN-SUFFIX,spotify.com,🎬 STREAMING",
+        "DOMAIN-SUFFIX,twitch.tv,🎬 STREAMING",
+        "DOMAIN-SUFFIX,viu.com,🎬 STREAMING",
+        "DOMAIN-SUFFIX,wetv.vip,🎬 STREAMING",
+        "GEOIP,netflix,🎬 STREAMING,no-resolve",
+
+        # Sisanya ikut GLOBAL yang defaultnya langsung ⚡ AUTO-FAST.
+        "MATCH,GLOBAL",
+    ]
+
     config: dict[str, Any] = {
         "mixed-port": 7890,
         "redir-port": 7892,
@@ -634,61 +918,11 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "fallback-filter": {"geoip": True, "geoip-code": "ID", "ipcidr": ["240.0.0.0/4"]},
         },
         "proxies": [node.clash for node in nodes],
-        "proxy-groups": [
-            {
-                "name": "GLOBAL",
-                "type": "select",
-                # AUTO-FAST is the first entry so OpenClash/Mihomo selects it by default on fresh import.
-                "proxies": ["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"] + names,
-            },
-            {
-                "name": "🚀 PROXY",
-                "type": "select",
-                "proxies": ["GLOBAL", "⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"] + names,
-            },
-            {
-                "name": "⚡ AUTO-FAST",
-                "type": "url-test",
-                "proxies": direct_or_names,
-                "url": test_url,
-                "interval": interval,
-                "tolerance": tolerance,
-                "lazy": False,
-                "timeout": health_timeout,
-            },
-            {
-                "name": "🛟 FALLBACK",
-                "type": "fallback",
-                "proxies": direct_or_names,
-                "url": test_url,
-                "interval": interval,
-                "lazy": False,
-                "timeout": health_timeout,
-            },
-            {
-                "name": "🔁 LOAD-BALANCE",
-                "type": "load-balance",
-                "strategy": "consistent-hashing",
-                "proxies": direct_or_names,
-                "url": test_url,
-                "interval": max(interval, 120),
-                "lazy": False,
-                "timeout": health_timeout,
-            },
-        ],
-        "rules": [
-            "DOMAIN-SUFFIX,local,DIRECT",
-            "DOMAIN-SUFFIX,lan,DIRECT",
-            "IP-CIDR,127.0.0.0/8,DIRECT",
-            "IP-CIDR,10.0.0.0/8,DIRECT",
-            "IP-CIDR,172.16.0.0/12,DIRECT",
-            "IP-CIDR,192.168.0.0/16,DIRECT",
-            "GEOIP,LAN,DIRECT,no-resolve",
-            "MATCH,GLOBAL",
-        ],
+        "proxy-groups": proxy_groups,
+        "rule-providers": rule_providers,
+        "rules": rules,
     }
     return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
-
 
 def build_csv(nodes: list[ProxyNode]) -> str:
     buffer = io.StringIO()
@@ -843,11 +1077,11 @@ def process_sources(
     return selected, parsed, fetch_logs, skipped
 
 
-st.set_page_config(page_title="OpenClash Bug-Compat Auto-Fast", page_icon="⚡", layout="wide")
-st.title("⚡ SumberYAML OpenClash Bug-Compat Auto-Fast")
+st.set_page_config(page_title="OpenClash Rule Split Auto-Fast", page_icon="⚡", layout="wide")
+st.title("⚡ SumberYAML OpenClash Rule Split Auto-Fast")
 st.caption(
     "Ambil subscription publik, hanya port 443, cek link hidup, cek kompatibilitas bug server 104.17.3.81 + SNI/Host, "
-    "prioritaskan delay ≤123 ms, lalu isi cadangan hidup agar YAML tidak cuma berisi sedikit akun."
+    "prioritaskan delay ≤123 ms, isi cadangan hidup, pisahkan rule Social Media/YouTube/Edukasi/Streaming, dan block iklan/malware."
 )
 
 with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
@@ -984,14 +1218,14 @@ if run:
 
         st.success(
             f"Berhasil membuat YAML dari {len(alive_nodes)} node yang kompatibel bug server. "
-            "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke ⚡ AUTO-FAST."
+            "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke ⚡ AUTO-FAST; kategori rule sudah dipisah dan iklan/malware diblokir."
         )
         c1, c2 = st.columns(2)
         with c1:
             st.download_button(
-                "Download openclash_bug_compat_auto_fast.yaml",
+                "Download openclash_rule_split_auto_fast.yaml",
                 data=yaml_text.encode("utf-8"),
-                file_name="openclash_bug_compat_auto_fast.yaml",
+                file_name="openclash_rule_split_auto_fast.yaml",
                 mime="application/x-yaml",
             )
         with c2:
@@ -1032,5 +1266,5 @@ if run:
 
 st.info(
     "Catatan penting: aplikasi ini mengecek kompatibilitas bug server 104.17.3.81 menggunakan TLS + SNI/Host, lalu OpenClash melakukan url-test/fallback otomatis. "
-    "Tes ini jauh lebih sesuai dibanding hanya cek original server, tetapi validasi akun penuh tetap dilakukan oleh Health Check OpenClash. Sumber publik bisa berubah sewaktu-waktu."
+    "Tes ini jauh lebih sesuai dibanding hanya cek original server, tetapi validasi akun penuh tetap dilakukan oleh Health Check OpenClash. Rule-provider iklan/malware dan kategori akan diunduh oleh OpenClash/Mihomo saat config dijalankan. Sumber publik bisa berubah sewaktu-waktu."
 )
