@@ -78,59 +78,90 @@ DEFAULT_URLTEST_INTERVAL = 60
 DEFAULT_TOLERANCE_MS = 40
 DEFAULT_TCP_TIMEOUT = 1.5
 DEFAULT_FETCH_TIMEOUT = 15
-DEFAULT_HEALTH_TIMEOUT_MS = 3000
+DEFAULT_HEALTH_TIMEOUT_MS = 5000
+DEFAULT_RESERVE_POOL_NODES = 100
+DEFAULT_FORCE_WS_ONLY = True
 
 OPTIMIZATION_PRESETS: dict[str, dict[str, Any]] = {
     "Cepat": {
         "max_nodes": 20,
         "min_output_nodes": 15,
-        "fill_delay_ms": 300,
+        "fill_delay_ms": 400,
         "attempts": 2,
         "require_successes": 1,
-        "tcp_timeout": 1.2,
+        "tcp_timeout": 1.5,
         "max_workers": 64,
         "fetch_timeout": 10,
         "urltest_interval": 60,
         "tolerance": 50,
         "require_original": False,
-        "candidate_multiplier": 15,
-        "candidate_min": 300,
-        "max_jitter_ms": 150,
+        "candidate_multiplier": 40,
+        "candidate_min": 1000,
+        "reserve_pool_nodes": 60,
+        "max_jitter_ms": 200,
         "rule_mode": "Lite",
+        "force_ws_only": True,
+        "health_timeout_ms": 5000,
     },
     "Seimbang": {
-        "max_nodes": 25,
+        "max_nodes": 20,
         "min_output_nodes": 20,
-        "fill_delay_ms": 400,
+        "fill_delay_ms": 800,
         "attempts": 3,
         "require_successes": 2,
-        "tcp_timeout": 1.5,
-        "max_workers": 48,
+        "tcp_timeout": 2.0,
+        "max_workers": 64,
         "fetch_timeout": 15,
         "urltest_interval": 60,
-        "tolerance": 40,
+        "tolerance": 50,
         "require_original": False,
-        "candidate_multiplier": 20,
-        "candidate_min": 500,
-        "max_jitter_ms": 250,
+        "candidate_multiplier": 80,
+        "candidate_min": 2000,
+        "reserve_pool_nodes": 100,
+        "max_jitter_ms": 300,
         "rule_mode": "Lite",
+        "force_ws_only": True,
+        "health_timeout_ms": 5000,
     },
-    "Ketat": {
-        "max_nodes": 30,
+    "Kejar 20 Hidup": {
+        "max_nodes": 20,
         "min_output_nodes": 20,
-        "fill_delay_ms": 600,
+        "fill_delay_ms": 1200,
         "attempts": 4,
         "require_successes": 3,
-        "tcp_timeout": 2.0,
-        "max_workers": 40,
+        "tcp_timeout": 3.0,
+        "max_workers": 80,
         "fetch_timeout": 20,
+        "urltest_interval": 60,
+        "tolerance": 80,
+        "require_original": False,
+        "candidate_multiplier": 120,
+        "candidate_min": 3000,
+        "reserve_pool_nodes": 160,
+        "max_jitter_ms": 500,
+        "rule_mode": "Lite",
+        "force_ws_only": True,
+        "health_timeout_ms": 6000,
+    },
+    "Ketat": {
+        "max_nodes": 20,
+        "min_output_nodes": 20,
+        "fill_delay_ms": 1500,
+        "attempts": 5,
+        "require_successes": 4,
+        "tcp_timeout": 3.0,
+        "max_workers": 60,
+        "fetch_timeout": 25,
         "urltest_interval": 90,
-        "tolerance": 30,
+        "tolerance": 60,
         "require_original": True,
-        "candidate_multiplier": 30,
-        "candidate_min": 800,
-        "max_jitter_ms": 350,
+        "candidate_multiplier": 120,
+        "candidate_min": 3000,
+        "reserve_pool_nodes": 160,
+        "max_jitter_ms": 500,
         "rule_mode": "Lengkap",
+        "force_ws_only": True,
+        "health_timeout_ms": 6000,
     },
 }
 
@@ -638,6 +669,76 @@ def node_sort_key(node: ProxyNode, prefer_ws: bool = True) -> tuple[int, int, in
         int(node.best_delay_ms or 999999),
         int(node.jitter_ms or 999999),
     )
+
+
+def domain_root(host: str) -> str:
+    """Return a simple root domain used only for soft diversity scoring."""
+    text = str(host or "").strip().lower().strip(".")
+    if not text or looks_like_ip(text):
+        return text
+    parts = [p for p in text.split(".") if p]
+    if len(parts) <= 2:
+        return text
+    # Keep common 2-level public suffixes together enough for our duplicate filter.
+    if parts[-2] in {"co", "com", "net", "org", "ac", "sch", "web", "or"} and len(parts[-1]) == 2 and len(parts) >= 3:
+        return ".".join(parts[-3:])
+    return ".".join(parts[-2:])
+
+
+def node_identity_key(node: ProxyNode) -> tuple[str, str, str, str, str]:
+    """Hard duplicate key: same protocol/account/host/path should appear only once."""
+    clash = node.clash or {}
+    credential = str(clash.get("uuid") or clash.get("password") or "").strip().lower()
+    return (
+        str(node.type or "").lower(),
+        credential,
+        node_network(node),
+        ws_host_header(node).lower() if node_network(node) == "ws" else node_sni_host(node).lower(),
+        ws_path(node) if node_network(node) == "ws" else str(node.original_server).lower(),
+    )
+
+
+def select_diverse_nodes(nodes: list[ProxyNode], limit: int, prefer_ws: bool = True) -> list[ProxyNode]:
+    """Pick stable nodes while avoiding many copies of the same host/root domain.
+
+    This is intentionally soft: it first takes one per exact identity, then limits
+    root-domain concentration. If that makes the result too small, it fills from
+    the remaining alive nodes so the app can still pursue the requested 20 output.
+    """
+    sorted_nodes = sorted(nodes, key=lambda n: node_sort_key(n, prefer_ws))
+    selected: list[ProxyNode] = []
+    seen_identity: set[tuple[str, str, str, str, str]] = set()
+    root_counts: dict[str, int] = {}
+
+    for node in sorted_nodes:
+        ident = node_identity_key(node)
+        if ident in seen_identity:
+            continue
+        root = domain_root(ws_host_header(node) if node_network(node) == "ws" else node_sni_host(node))
+        # Keep some diversity, but allow up to 4 nodes per root because public CF
+        # pools can legitimately host several working accounts on one root domain.
+        if root and root_counts.get(root, 0) >= 4:
+            continue
+        selected.append(node)
+        seen_identity.add(ident)
+        if root:
+            root_counts[root] = root_counts.get(root, 0) + 1
+        if len(selected) >= limit:
+            return selected
+
+    # Fill if strict diversity was too limiting.
+    selected_ids = {id(n) for n in selected}
+    for node in sorted_nodes:
+        if id(node) in selected_ids:
+            continue
+        ident = node_identity_key(node)
+        if ident in seen_identity:
+            continue
+        selected.append(node)
+        seen_identity.add(ident)
+        if len(selected) >= limit:
+            break
+    return selected
 
 
 def ws_path(node: ProxyNode) -> str:
@@ -1487,6 +1588,8 @@ def process_sources(
     max_jitter_ms: int = 0,
     prefer_ws: bool = True,
     require_ws_upgrade: bool = True,
+    force_ws_only: bool = DEFAULT_FORCE_WS_ONLY,
+    reserve_pool_nodes: int = DEFAULT_RESERVE_POOL_NODES,
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
     fast_target_ms = min(int(fast_target_ms), FAST_TARGET_DELAY_MS)
     fill_delay_ms = min(max(int(fill_delay_ms), fast_target_ms), HARD_MAX_DELAY_MS)
@@ -1528,11 +1631,21 @@ def process_sources(
         seen_keys.add(node.key)
         parsed.append(node)
 
-    # Test more candidates than output target so the app can still fill alive accounts
-    # even when only a small percentage is compatible with the selected bug server.
-    # If WS priority is enabled, WS nodes enter the test queue first, then grpc/http/tcp.
+    # In 20-alive mode, non-WS nodes are usually the source of false confidence
+    # because the practical target is CF bug-server + TLS + WebSocket. Mark them as
+    # skipped before testing when WS-only is enabled.
+    if force_ws_only:
+        for node in parsed:
+            if node.status == "pending" and node_network(node) != "ws":
+                node.status = "skipped"
+                node.reason = "skipped: mode WS only"
+                node.score = 999999
+
+    # Test far more candidates than the final YAML output so the app can keep only
+    # the best strict-alive nodes. Example: target 20, candidate_min 2000-3000.
+    # If WS priority is enabled, WS nodes enter the test queue first.
     target = max(int(max_nodes), int(min_output_nodes), 20)
-    candidate_limit = max(target * int(candidate_multiplier), int(candidate_min))
+    candidate_limit = max(target * int(candidate_multiplier), int(candidate_min), int(reserve_pool_nodes) * 20)
     parsed.sort(
         key=lambda n: (
             0 if n.status == "pending" else 1,
@@ -1583,15 +1696,23 @@ def process_sources(
     fast.sort(key=lambda n: node_sort_key(n, bool(prefer_ws)))
     backup.sort(key=lambda n: node_sort_key(n, bool(prefer_ws)))
 
-    selected: list[ProxyNode] = fast[:max_nodes]
-    if len(selected) < min_output_nodes:
-        need = min(max_nodes, min_output_nodes) - len(selected)
-        selected.extend(backup[:max(0, need)])
-    if len(selected) < max_nodes:
-        selected_ids = {id(n) for n in selected}
-        remain = [n for n in backup if id(n) not in selected_ids]
-        selected.extend(remain[: max_nodes - len(selected)])
+    # Keep an internal reserve pool first, then write only max_nodes to YAML.
+    # This makes the output less fragile because the final 20 are selected from a
+    # larger strict-alive pool, not directly from the first 20 that happened to pass.
+    strict_pool_limit = max(int(reserve_pool_nodes), int(max_nodes), int(min_output_nodes))
+    strict_pool = select_diverse_nodes(fast + backup, strict_pool_limit, bool(prefer_ws))
 
+    # If the fast/backup delay thresholds still do not produce enough nodes, fill
+    # from all strict candidates regardless of fill_delay. These nodes already
+    # passed WS Upgrade 101 / TLS validation; they are just slower.
+    if len(strict_pool) < int(min_output_nodes):
+        existing = {id(n) for n in strict_pool}
+        slow_fill = [n for n in sorted(candidates, key=lambda n: node_sort_key(n, bool(prefer_ws))) if id(n) not in existing]
+        for node in slow_fill:
+            node.tier = node.tier or "STRICT-SLOW"
+        strict_pool = select_diverse_nodes(strict_pool + slow_fill, strict_pool_limit, bool(prefer_ws))
+
+    selected = select_diverse_nodes(strict_pool, int(max_nodes), bool(prefer_ws))
     selected.sort(key=lambda n: node_sort_key(n, bool(prefer_ws)))
     selected = selected[:max_nodes]
     unique_names(selected)
@@ -1599,7 +1720,7 @@ def process_sources(
 
 
 st.set_page_config(page_title="OpenClash Safe Names Rule Split", page_icon="⚡", layout="wide")
-st.title("⚡ SumberYAML OpenClash Safe Names Rule Split")
+st.title("⚡ SumberYAML OpenClash WS Strict 20 Alive")
 st.caption(
     "Ambil subscription publik, hanya port 443, cek link hidup, cek kompatibilitas bug server 104.17.3.81 + SNI/Host, "
     "tolak akun yang tidak lengkap, prioritaskan delay ≤123 ms, isi cadangan hidup, pisahkan rule Social Media/YouTube/Edukasi/Streaming, block iklan/malware, dan ganti otomatis nama akun yang berpotensi error."
@@ -1609,8 +1730,8 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
     mode_profile = st.selectbox(
         "Preset optimasi",
         list(OPTIMIZATION_PRESETS.keys()),
-        index=1,
-        help="Cepat untuk proses ringan, Seimbang untuk harian, Ketat untuk hasil lebih stabil tetapi proses lebih lama.",
+        index=2,
+        help="Cepat untuk proses ringan, Seimbang untuk harian, Kejar 20 Hidup untuk mengejar output 20 WS strict, Ketat untuk hasil lebih stabil tetapi proses lebih lama.",
     )
     preset = OPTIMIZATION_PRESETS[mode_profile]
 
@@ -1638,7 +1759,7 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
     with col9:
         tcp_timeout = st.number_input("Timeout cek/detik", min_value=0.5, max_value=10.0, value=float(preset["tcp_timeout"]), step=0.5)
     with col10:
-        max_workers = st.number_input("Concurrency", min_value=1, max_value=100, value=int(preset["max_workers"]), step=1)
+        max_workers = st.number_input("Concurrency", min_value=1, max_value=200, value=int(preset["max_workers"]), step=1)
     with col11:
         fetch_timeout = st.number_input("Timeout fetch link/detik", min_value=5, max_value=60, value=int(preset["fetch_timeout"]), step=5)
     with col12:
@@ -1659,11 +1780,27 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
         value=True,
         help="Jika aktif, node WS akan dites dan dipilih lebih dulu. gRPC/HTTP/TCP tetap dipakai sebagai cadangan jika jumlah WS kurang.",
     )
+    force_ws_only = st.checkbox(
+        "WS only untuk output 20 hidup",
+        value=bool(preset.get("force_ws_only", True)),
+        help="Aktifkan agar hanya node WebSocket yang dites dan ditulis. Ini paling cocok untuk bug server Cloudflare + OpenClash.",
+    )
     require_ws_upgrade = st.checkbox(
         "Wajib WS Upgrade 101",
         value=True,
         help="Sangat disarankan aktif. Node WS hanya lolos jika path + Host benar-benar membalas 101 Switching Protocols di bug server.",
     )
+
+    with st.expander("Pengaturan over-collect untuk mengejar 20 hidup", expanded=False):
+        oc1, oc2, oc3, oc4 = st.columns(4)
+        with oc1:
+            candidate_multiplier = st.number_input("Multiplier kandidat", min_value=10, max_value=200, value=int(preset.get("candidate_multiplier", 80)), step=10, help="Target 20 x multiplier. Makin besar makin banyak kandidat dites.")
+        with oc2:
+            candidate_min = st.number_input("Minimal kandidat dites", min_value=300, max_value=6000, value=int(preset.get("candidate_min", 2000)), step=100, help="Untuk mengejar 20 hidup, gunakan 2000-3000.")
+        with oc3:
+            reserve_pool_nodes = st.number_input("Cadangan internal strict", min_value=20, max_value=300, value=int(preset.get("reserve_pool_nodes", 100)), step=10, help="Aplikasi menyeleksi 20 output dari pool node strict yang lebih besar.")
+        with oc4:
+            health_timeout_ms = st.number_input("Timeout health OpenClash/ms", min_value=1000, max_value=10000, value=int(preset.get("health_timeout_ms", DEFAULT_HEALTH_TIMEOUT_MS)), step=500, help="Naikkan ke 5000-6000 agar ping OpenClash tidak terlalu cepat timeout.")
 
     test_url = st.selectbox(
         "URL health check OpenClash",
@@ -1671,7 +1808,7 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
         index=1,
         help="Default memakai Gstatic generate_204 agar health check OpenClash tidak bias ke domain Cloudflare yang sama dengan bug server.",
     )
-    st.caption("Optimasi lanjutan: preset Cepat/Seimbang/Ketat, cache fetch subscription 10 menit, skip cek original saat tidak wajib, prioritas network WS, validasi WS Upgrade 101, filter jitter, Rule Lite, GLOBAL langsung AUTO-FAST, url-test lebih stabil, dan toleransi auto-switch lebih aman.")
+    st.caption("Optimasi 20 hidup: over-collect kandidat, WS only, validasi WS Upgrade 101 berulang, pool cadangan internal, filter jitter, skip original saat tidak wajib, Rule Lite, GLOBAL langsung AUTO-FAST, dan timeout health OpenClash lebih longgar.")
 
 links_text = st.text_area(
     "Link subscription bawaan",
@@ -1705,17 +1842,20 @@ if run:
             attempts=int(attempts),
             require_successes=int(require_successes),
             require_original=bool(require_original),
-            candidate_multiplier=int(preset["candidate_multiplier"]),
-            candidate_min=int(preset["candidate_min"]),
+            candidate_multiplier=int(candidate_multiplier),
+            candidate_min=int(candidate_min),
             max_jitter_ms=int(max_jitter_ms),
             prefer_ws=bool(prefer_ws),
             require_ws_upgrade=bool(require_ws_upgrade),
+            force_ws_only=bool(force_ws_only),
+            reserve_pool_nodes=int(reserve_pool_nodes),
         )
 
     total_parsed = len(all_nodes)
     total_alive_any = len([n for n in all_nodes if n.status == "alive"])
     total_fast = len(alive_nodes)
     total_dead = len([n for n in all_nodes if n.status == "dead"])
+    total_skipped = len([n for n in all_nodes if n.status == "skipped"])
     total_incomplete = len([n for n in all_nodes if n.status == "incomplete"])
     live_links = len([1 for _, status in fetch_logs if status.startswith("alive")])
     dead_links = len([1 for _, status in fetch_logs if status.startswith("dead")])
@@ -1726,7 +1866,7 @@ if run:
     m3.metric("Tidak lengkap", total_incomplete)
     m4.metric("Node hidup", total_alive_any)
     m5.metric("Masuk YAML", total_fast)
-    m6.metric("Dead dibuang", total_dead)
+    m6.metric("Dead/skip dibuang", total_dead + total_skipped)
 
     if fetch_logs:
         with st.expander("Status link subscription", expanded=False):
@@ -1768,14 +1908,15 @@ if run:
                     hide_index=True,
                 )
     else:
-        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=DEFAULT_HEALTH_TIMEOUT_MS, rule_mode=str(rule_mode))
+        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=int(health_timeout_ms), rule_mode=str(rule_mode))
         csv_text = build_csv(all_nodes)
 
         ws_count = len([n for n in alive_nodes if node_network(n) == "ws"])
         st.success(
-            f"Berhasil membuat YAML dari {len(alive_nodes)} node lengkap yang kompatibel bug server. "
-            f"Prioritas WS aktif: {ws_count} node WS masuk YAML. "
-            "Node WS wajib lolos Upgrade 101; GLOBAL langsung ke AUTO-FAST; timeout health check 3000 ms; kategori rule sudah dipisah dan iklan/malware diblokir."
+            f"Berhasil membuat YAML dari {len(alive_nodes)} node strict-alive yang kompatibel bug server. "
+            f"WS masuk YAML: {ws_count}/{len(alive_nodes)}. "
+            f"Output dipilih dari over-collect kandidat dengan cadangan internal; timeout health check {int(health_timeout_ms)} ms. "
+            "Node WS wajib lolos Upgrade 101 berulang; GLOBAL langsung ke AUTO-FAST."
         )
         c1, c2 = st.columns(2)
         with c1:
@@ -1827,6 +1968,6 @@ if run:
             st.code(yaml_text, language="yaml")
 
 st.info(
-    "Catatan penting: aplikasi ini mengecek kompatibilitas bug server 104.17.3.81 menggunakan WS Upgrade 101 untuk node WebSocket dan TLS + SNI/Host untuk node non-WS, lalu OpenClash melakukan url-test/fallback otomatis. "
-    "Akun tanpa field wajib tidak dimasukkan ke YAML. Tes ini jauh lebih sesuai dibanding hanya cek original server, tetapi validasi akun penuh tetap dilakukan oleh Health Check OpenClash. Rule-provider iklan/malware dan kategori akan diunduh oleh OpenClash/Mihomo saat config dijalankan. Sumber publik bisa berubah sewaktu-waktu."
+    "Catatan penting: mode ini mengejar 20 node hidup dengan over-collect kandidat dan validasi WS Upgrade 101 berulang. "
+    "Hasil 20/20 tetap tidak bisa dijamin karena akun publik bisa mati sewaktu-waktu dan OpenClash melakukan validasi penuh, tetapi output sekarang hanya mengambil node dari pool strict-alive yang jauh lebih besar. Rule-provider akan diunduh oleh OpenClash/Mihomo saat config dijalankan."
 )
