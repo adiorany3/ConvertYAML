@@ -1,0 +1,67 @@
+name: Update OpenClash YAML setiap 6 jam
+
+on:
+  schedule:
+    # GitHub Actions memakai UTC. Jadwal ini berjalan tiap 6 jam: 00:00, 06:00, 12:00, 18:00 UTC.
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-openclash-yaml
+  cancel-in-progress: false
+
+jobs:
+  update-yaml:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate YAML
+        env:
+          MAX_NODES: "20"
+          MIN_OUTPUT_NODES: "20"
+          FORCE_WS_ONLY: "true"
+          REQUIRE_WS_UPGRADE: "true"
+          PREFER_WS: "true"
+          CANDIDATE_MULTIPLIER: "100"
+          CANDIDATE_MIN: "2500"
+          RESERVE_POOL_NODES: "120"
+          ATTEMPTS: "2"
+          REQUIRE_SUCCESSES: "1"
+          TCP_TIMEOUT: "3.0"
+          HEALTH_TIMEOUT_MS: "6000"
+          RULE_MODE: "Lite"
+          TEST_URL: "http://www.gstatic.com/generate_204"
+          OUTPUT_YAML: "openclash_auto.yaml"
+          OUTPUT_CSV: "openclash_auto_report.csv"
+          OUTPUT_STAMP: "last_update.txt"
+        run: python generate_yaml.py
+
+      - name: Commit updated YAML
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add openclash_auto.yaml openclash_auto_report.csv last_update.txt
+          if git diff --cached --quiet; then
+            echo "Tidak ada perubahan YAML/report."
+          else
+            git commit -m "chore: update OpenClash YAML otomatis"
+            git push
+          fi
