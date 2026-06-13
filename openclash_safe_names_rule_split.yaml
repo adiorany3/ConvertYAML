@@ -57,19 +57,147 @@ dns:
     ipcidr:
     - 240.0.0.0/4
 proxies:
-- name: AKUN-001-VLESS-15MS
+- name: AKUN-001-TROJAN-24MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: c7f9b8f0-bfdb-11ee-a15c-1239d0255272
+  udp: true
+  sni: chatbuzzteambhm.chatbuzzt7150.workers.dev
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-002-VLESS-24MS
   type: vless
   server: 104.17.3.81
   port: 443
-  uuid: 3ea2d8f2-12c1-4189-8cc5-91d0ee9f5ca0
+  uuid: aaaaaabb-4ddd-4eee-9fff-ffffffffffff
   udp: true
   tls: true
-  servername: cloudflare.com
+  servername: cdn.zoom.us
   network: tcp
-  client-fingerprint: firefox
+  client-fingerprint: chrome
   skip-cert-verify: true
-  flow: xtls-rprx-vision-udp443
-- name: AKUN-002-VLESS-18MS
+- name: AKUN-003-VLESS-26MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d
+  udp: true
+  tls: true
+  servername: srv1.khatibirepair.ir
+  network: tcp
+  client-fingerprint: chrome
+  skip-cert-verify: true
+- name: AKUN-004-VLESS-24MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: 7e1fb37b-de8b-4ba8-ab85-6ddd7251736a
+  udp: true
+  tls: true
+  servername: cd3.postshup.ir
+  network: tcp
+  client-fingerprint: chrome
+  skip-cert-verify: true
+- name: AKUN-005-VLESS-31MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: 1d57f77e-e42c-4dab-923f-81925e3b00ae
+  udp: true
+  tls: true
+  servername: www.speedtest.net
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /
+    headers:
+      Host: www.speedtest.net
+- name: AKUN-006-VMESS-25MS
+  type: vmess
+  server: 104.17.3.81
+  port: 443
+  uuid: 84cff269-a423-4e6e-8179-7e197c6cddbf
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: cf.accuratenetworkchecker.ir
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /api/v2/ws/2r3xSszHva?ed=2048
+    headers:
+      Host: cf.accuratenetworkchecker.ir
+- name: AKUN-007-VMESS-28MS
+  type: vmess
+  server: 104.17.3.81
+  port: 443
+  uuid: db69d5bc-d36c-4903-f471-74b98c5cefe5
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: hk2.lrzdx.uk
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /register
+    headers:
+      Host: hk2.lrzdx.uk
+- name: AKUN-008-VMESS-29MS
+  type: vmess
+  server: 104.17.3.81
+  port: 443
+  uuid: df9c9355-b02c-4c12-909d-0dbeb725d52b
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: renderer-stream-1-411.mirra.now
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /api/v1/gpu-stream/socket
+    headers:
+      Host: renderer-stream-1-411.mirra.now
+- name: AKUN-009-VMESS-32MS
+  type: vmess
+  server: 104.17.3.81
+  port: 443
+  uuid: 4ac06183-feca-48f8-9f7d-3355bd950e2a
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: yzjd01-ublubeu.koyeb.app
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /
+    headers:
+      Host: yzjd01-ublubeu.koyeb.app
+- name: AKUN-010-VLESS-24MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: 157cb924-2adc-4f4e-9d54-ba105b6dff30
+  udp: true
+  tls: true
+  servername: www.speedtest.net
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /
+    headers:
+      Host: www.speedtest.net
+- name: AKUN-011-VLESS-32MS
   type: vless
   server: 104.17.3.81
   port: 443
@@ -80,244 +208,153 @@ proxies:
   network: tcp
   client-fingerprint: chrome
   skip-cert-verify: true
-- name: AKUN-003-TROJAN-18MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.gossipglove.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.gossipglove.com
-- name: AKUN-004-VLESS-16MS
+- name: AKUN-012-VLESS-35MS
   type: vless
   server: 104.17.3.81
   port: 443
-  uuid: 9e13716d-c43d-48b3-8cab-65e02d938ab5
-  udp: true
-  tls: true
-  servername: chatgpt.com
-  network: tcp
-  client-fingerprint: chrome
-  skip-cert-verify: true
-- name: AKUN-005-VLESS-17MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 6e7e6a4e-a01e-4614-a765-2960c64a56fa
-  udp: true
-  tls: true
-  servername: www.speedtest.net
-  network: tcp
-  client-fingerprint: chrome
-  skip-cert-verify: true
-- name: AKUN-006-TROJAN-18MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.creationlong.org
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.creationlong.org
-- name: AKUN-007-TROJAN-18MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.calmloud.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.calmloud.com
-- name: AKUN-008-TROJAN-19MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.ignitelimit.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.ignitelimit.com
-- name: AKUN-009-VLESS-16MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: f7e08961-ba18-4ac8-aac0-e925107417af
+  uuid: a75cb418-c1d6-476a-9464-ad1bd5181e3c
   udp: true
   tls: true
   servername: discord.gg
   network: tcp
   client-fingerprint: chrome
   skip-cert-verify: true
-- name: AKUN-010-TROJAN-17MS
-  type: trojan
+- name: AKUN-013-VMESS-24MS
+  type: vmess
   server: 104.17.3.81
   port: 443
-  password: 22f86840-bcac-11ee-abea-1239d0255272
-  udp: true
-  sni: chatbuzzteambhm.chatbuzzt7150.workers.dev
-  skip-cert-verify: true
-  network: tcp
-- name: AKUN-011-VLESS-17MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: dfc0cb9d-f005-41b0-848c-7703bd39d0de
+  uuid: 7fd8d1db-96ec-4e46-80a8-74ad9472384e
+  alterId: 0
+  cipher: auto
   udp: true
   tls: true
-  servername: jp.s3-cloud.org
-  network: tcp
-  client-fingerprint: edge
-  skip-cert-verify: true
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: QVkd5uoSbUA7rHVLtIoJB4iRp4l0zuw0H9qzQBh3lHs
-    short-id: 7a3f9e2b1c8d4f6a
-- name: AKUN-012-TROJAN-18MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.creationlong.org
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.creationlong.org
-- name: AKUN-013-TROJAN-19MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: 13c169be-8592-4eaa-94cb-69c859e7d987
-  udp: true
-  sni: ubu.okaoclax.me
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /trojan-ws
-    headers:
-      Host: ubu.okaoclax.me
-- name: AKUN-014-VLESS-19MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 948fac3c-42bf-41a6-a5f9-704d36ff0d8d
-  udp: true
-  tls: true
-  servername: snippet.fgfw.ndjp.net
-  network: ws
-  client-fingerprint: random
-  skip-cert-verify: true
-  alpn:
-  - http/1.1
-  ws-opts:
-    path: /danfeng
-    headers:
-      Host: snippet.fgfw.ndjp.net
-- name: AKUN-015-VLESS-19MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: c35050ce-01ab-45a9-91b8-54cec637d0a8
-  udp: true
-  tls: true
-  servername: octopusss5.info
+  servername: graph-keep-beds-catalog.trycloudflare.com
   network: ws
   client-fingerprint: chrome
   skip-cert-verify: true
   ws-opts:
-    path: /udfyfws
+    path: /7fd8d1db-96ec-4e46-80a8-74ad9472384e-vm
     headers:
-      Host: octopusss5.info
-- name: AKUN-016-TROJAN-19MS
-  type: trojan
+      Host: graph-keep-beds-catalog.trycloudflare.com
+- name: AKUN-014-VMESS-34MS
+  type: vmess
   server: 104.17.3.81
   port: 443
-  password: humanity
-  udp: true
-  sni: www.ignitelimit.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.ignitelimit.com
-- name: AKUN-017-VLESS-20MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 75e3f61c-9ade-41b8-840f-39d41d8208c6
+  uuid: 95d2c461-61f5-4dae-bc74-4d10ce1f6236
+  alterId: 0
+  cipher: auto
   udp: true
   tls: true
-  servername: listwhite.cc
-  network: tcp
-  client-fingerprint: firefox
-  skip-cert-verify: true
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: 9F7JxyyP-TNLt0dY2xOB0_34I8W0xXIpFY7rZ7-L0Gg
-    short-id: 19aa22f681923dc8
-- name: AKUN-018-TROJAN-15MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.gossipglove.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.gossipglove.com
-- name: AKUN-019-VLESS-16MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: a6430e91-38ad-4254-b7db-d1fba6efd9e3
-  udp: true
-  tls: true
-  servername: afrcloud22.mmv.kr
+  servername: gongyilm.dpdns.org
   network: ws
   client-fingerprint: chrome
   skip-cert-verify: true
   ws-opts:
-    path: /129.146.254.25:443
+    path: /ws-gongyi
     headers:
-      Host: afrcloud22.mmv.kr
-- name: AKUN-020-VLESS-17MS
-  type: vless
+      Host: gongyilm.dpdns.org
+- name: AKUN-015-VMESS-27MS
+  type: vmess
   server: 104.17.3.81
   port: 443
-  uuid: fc965ad9-bdd7-4815-ad71-b39ec5972dc1
+  uuid: be8e3136-b874-4085-bd23-ec3699300490
+  alterId: 0
+  cipher: auto
   udp: true
   tls: true
-  servername: octopusss4.com
+  servername: cg1c07.waimaojd.com
   network: ws
   client-fingerprint: chrome
   skip-cert-verify: true
   ws-opts:
-    path: /tsghdws
+    path: /api/v1/graphql
     headers:
-      Host: octopusss4.com
+      Host: cg1c07.waimaojd.com
+- name: AKUN-016-VMESS-31MS
+  type: vmess
+  server: 104.17.3.81
+  port: 443
+  uuid: df9c9355-b02c-4c12-909d-0dbeb725d52b
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: renderer-stream-1-411.mirra.now
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /api/v1/gpu-stream/socket
+    headers:
+      Host: renderer-stream-1-411.mirra.now
+- name: AKUN-017-VMESS-40MS
+  type: vmess
+  server: 104.17.3.81
+  port: 443
+  uuid: 67f79907-6163-475c-b5ba-2a3faa0c02c5
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: cdn.arisping-ir.store
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /
+    headers:
+      Host: cdn.arisping-ir.store
+- name: AKUN-018-VMESS-34MS
+  type: vmess
+  server: 104.17.3.81
+  port: 443
+  uuid: be8e3136-b874-4085-bd23-ec3699300490
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: cg1c04.waimaojd.com
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /api/v1/graphql
+    headers:
+      Host: cg1c04.waimaojd.com
+- name: AKUN-019-VMESS-38MS
+  type: vmess
+  server: 104.17.3.81
+  port: 443
+  uuid: 93ea486a-bada-42a4-ac38-d088b320fa1e
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: xmivideo.cfd
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /
+    headers:
+      Host: xmivideo.cfd
+- name: AKUN-020-VMESS-33MS
+  type: vmess
+  server: 104.17.3.81
+  port: 443
+  uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+  alterId: 1
+  cipher: auto
+  udp: true
+  tls: true
+  servername: ophelia.mom
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: linkvws
+    headers:
+      Host: ophelia.mom
 proxy-groups:
 - name: GLOBAL
   type: select
@@ -331,26 +368,26 @@ proxy-groups:
   - EDUKASI
   - STREAMING
   - CLEAN
-  - AKUN-001-VLESS-15MS
-  - AKUN-002-VLESS-18MS
-  - AKUN-003-TROJAN-18MS
-  - AKUN-004-VLESS-16MS
-  - AKUN-005-VLESS-17MS
-  - AKUN-006-TROJAN-18MS
-  - AKUN-007-TROJAN-18MS
-  - AKUN-008-TROJAN-19MS
-  - AKUN-009-VLESS-16MS
-  - AKUN-010-TROJAN-17MS
-  - AKUN-011-VLESS-17MS
-  - AKUN-012-TROJAN-18MS
-  - AKUN-013-TROJAN-19MS
-  - AKUN-014-VLESS-19MS
-  - AKUN-015-VLESS-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-20MS
-  - AKUN-018-TROJAN-15MS
-  - AKUN-019-VLESS-16MS
-  - AKUN-020-VLESS-17MS
+  - AKUN-001-TROJAN-24MS
+  - AKUN-002-VLESS-24MS
+  - AKUN-003-VLESS-26MS
+  - AKUN-004-VLESS-24MS
+  - AKUN-005-VLESS-31MS
+  - AKUN-006-VMESS-25MS
+  - AKUN-007-VMESS-28MS
+  - AKUN-008-VMESS-29MS
+  - AKUN-009-VMESS-32MS
+  - AKUN-010-VLESS-24MS
+  - AKUN-011-VLESS-32MS
+  - AKUN-012-VLESS-35MS
+  - AKUN-013-VMESS-24MS
+  - AKUN-014-VMESS-34MS
+  - AKUN-015-VMESS-27MS
+  - AKUN-016-VMESS-31MS
+  - AKUN-017-VMESS-40MS
+  - AKUN-018-VMESS-34MS
+  - AKUN-019-VMESS-38MS
+  - AKUN-020-VMESS-33MS
 - name: PROXY
   type: select
   proxies:
@@ -364,26 +401,26 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-VLESS-15MS
-  - AKUN-002-VLESS-18MS
-  - AKUN-003-TROJAN-18MS
-  - AKUN-004-VLESS-16MS
-  - AKUN-005-VLESS-17MS
-  - AKUN-006-TROJAN-18MS
-  - AKUN-007-TROJAN-18MS
-  - AKUN-008-TROJAN-19MS
-  - AKUN-009-VLESS-16MS
-  - AKUN-010-TROJAN-17MS
-  - AKUN-011-VLESS-17MS
-  - AKUN-012-TROJAN-18MS
-  - AKUN-013-TROJAN-19MS
-  - AKUN-014-VLESS-19MS
-  - AKUN-015-VLESS-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-20MS
-  - AKUN-018-TROJAN-15MS
-  - AKUN-019-VLESS-16MS
-  - AKUN-020-VLESS-17MS
+  - AKUN-001-TROJAN-24MS
+  - AKUN-002-VLESS-24MS
+  - AKUN-003-VLESS-26MS
+  - AKUN-004-VLESS-24MS
+  - AKUN-005-VLESS-31MS
+  - AKUN-006-VMESS-25MS
+  - AKUN-007-VMESS-28MS
+  - AKUN-008-VMESS-29MS
+  - AKUN-009-VMESS-32MS
+  - AKUN-010-VLESS-24MS
+  - AKUN-011-VLESS-32MS
+  - AKUN-012-VLESS-35MS
+  - AKUN-013-VMESS-24MS
+  - AKUN-014-VMESS-34MS
+  - AKUN-015-VMESS-27MS
+  - AKUN-016-VMESS-31MS
+  - AKUN-017-VMESS-40MS
+  - AKUN-018-VMESS-34MS
+  - AKUN-019-VMESS-38MS
+  - AKUN-020-VMESS-33MS
 - name: SOCIAL-MEDIA
   type: select
   proxies:
@@ -391,26 +428,26 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-VLESS-15MS
-  - AKUN-002-VLESS-18MS
-  - AKUN-003-TROJAN-18MS
-  - AKUN-004-VLESS-16MS
-  - AKUN-005-VLESS-17MS
-  - AKUN-006-TROJAN-18MS
-  - AKUN-007-TROJAN-18MS
-  - AKUN-008-TROJAN-19MS
-  - AKUN-009-VLESS-16MS
-  - AKUN-010-TROJAN-17MS
-  - AKUN-011-VLESS-17MS
-  - AKUN-012-TROJAN-18MS
-  - AKUN-013-TROJAN-19MS
-  - AKUN-014-VLESS-19MS
-  - AKUN-015-VLESS-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-20MS
-  - AKUN-018-TROJAN-15MS
-  - AKUN-019-VLESS-16MS
-  - AKUN-020-VLESS-17MS
+  - AKUN-001-TROJAN-24MS
+  - AKUN-002-VLESS-24MS
+  - AKUN-003-VLESS-26MS
+  - AKUN-004-VLESS-24MS
+  - AKUN-005-VLESS-31MS
+  - AKUN-006-VMESS-25MS
+  - AKUN-007-VMESS-28MS
+  - AKUN-008-VMESS-29MS
+  - AKUN-009-VMESS-32MS
+  - AKUN-010-VLESS-24MS
+  - AKUN-011-VLESS-32MS
+  - AKUN-012-VLESS-35MS
+  - AKUN-013-VMESS-24MS
+  - AKUN-014-VMESS-34MS
+  - AKUN-015-VMESS-27MS
+  - AKUN-016-VMESS-31MS
+  - AKUN-017-VMESS-40MS
+  - AKUN-018-VMESS-34MS
+  - AKUN-019-VMESS-38MS
+  - AKUN-020-VMESS-33MS
 - name: YOUTUBE
   type: select
   proxies:
@@ -418,26 +455,26 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-VLESS-15MS
-  - AKUN-002-VLESS-18MS
-  - AKUN-003-TROJAN-18MS
-  - AKUN-004-VLESS-16MS
-  - AKUN-005-VLESS-17MS
-  - AKUN-006-TROJAN-18MS
-  - AKUN-007-TROJAN-18MS
-  - AKUN-008-TROJAN-19MS
-  - AKUN-009-VLESS-16MS
-  - AKUN-010-TROJAN-17MS
-  - AKUN-011-VLESS-17MS
-  - AKUN-012-TROJAN-18MS
-  - AKUN-013-TROJAN-19MS
-  - AKUN-014-VLESS-19MS
-  - AKUN-015-VLESS-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-20MS
-  - AKUN-018-TROJAN-15MS
-  - AKUN-019-VLESS-16MS
-  - AKUN-020-VLESS-17MS
+  - AKUN-001-TROJAN-24MS
+  - AKUN-002-VLESS-24MS
+  - AKUN-003-VLESS-26MS
+  - AKUN-004-VLESS-24MS
+  - AKUN-005-VLESS-31MS
+  - AKUN-006-VMESS-25MS
+  - AKUN-007-VMESS-28MS
+  - AKUN-008-VMESS-29MS
+  - AKUN-009-VMESS-32MS
+  - AKUN-010-VLESS-24MS
+  - AKUN-011-VLESS-32MS
+  - AKUN-012-VLESS-35MS
+  - AKUN-013-VMESS-24MS
+  - AKUN-014-VMESS-34MS
+  - AKUN-015-VMESS-27MS
+  - AKUN-016-VMESS-31MS
+  - AKUN-017-VMESS-40MS
+  - AKUN-018-VMESS-34MS
+  - AKUN-019-VMESS-38MS
+  - AKUN-020-VMESS-33MS
 - name: EDUKASI
   type: select
   proxies:
@@ -445,26 +482,26 @@ proxy-groups:
   - DIRECT
   - FALLBACK
   - LOAD-BALANCE
-  - AKUN-001-VLESS-15MS
-  - AKUN-002-VLESS-18MS
-  - AKUN-003-TROJAN-18MS
-  - AKUN-004-VLESS-16MS
-  - AKUN-005-VLESS-17MS
-  - AKUN-006-TROJAN-18MS
-  - AKUN-007-TROJAN-18MS
-  - AKUN-008-TROJAN-19MS
-  - AKUN-009-VLESS-16MS
-  - AKUN-010-TROJAN-17MS
-  - AKUN-011-VLESS-17MS
-  - AKUN-012-TROJAN-18MS
-  - AKUN-013-TROJAN-19MS
-  - AKUN-014-VLESS-19MS
-  - AKUN-015-VLESS-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-20MS
-  - AKUN-018-TROJAN-15MS
-  - AKUN-019-VLESS-16MS
-  - AKUN-020-VLESS-17MS
+  - AKUN-001-TROJAN-24MS
+  - AKUN-002-VLESS-24MS
+  - AKUN-003-VLESS-26MS
+  - AKUN-004-VLESS-24MS
+  - AKUN-005-VLESS-31MS
+  - AKUN-006-VMESS-25MS
+  - AKUN-007-VMESS-28MS
+  - AKUN-008-VMESS-29MS
+  - AKUN-009-VMESS-32MS
+  - AKUN-010-VLESS-24MS
+  - AKUN-011-VLESS-32MS
+  - AKUN-012-VLESS-35MS
+  - AKUN-013-VMESS-24MS
+  - AKUN-014-VMESS-34MS
+  - AKUN-015-VMESS-27MS
+  - AKUN-016-VMESS-31MS
+  - AKUN-017-VMESS-40MS
+  - AKUN-018-VMESS-34MS
+  - AKUN-019-VMESS-38MS
+  - AKUN-020-VMESS-33MS
 - name: STREAMING
   type: select
   proxies:
@@ -472,26 +509,26 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-VLESS-15MS
-  - AKUN-002-VLESS-18MS
-  - AKUN-003-TROJAN-18MS
-  - AKUN-004-VLESS-16MS
-  - AKUN-005-VLESS-17MS
-  - AKUN-006-TROJAN-18MS
-  - AKUN-007-TROJAN-18MS
-  - AKUN-008-TROJAN-19MS
-  - AKUN-009-VLESS-16MS
-  - AKUN-010-TROJAN-17MS
-  - AKUN-011-VLESS-17MS
-  - AKUN-012-TROJAN-18MS
-  - AKUN-013-TROJAN-19MS
-  - AKUN-014-VLESS-19MS
-  - AKUN-015-VLESS-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-20MS
-  - AKUN-018-TROJAN-15MS
-  - AKUN-019-VLESS-16MS
-  - AKUN-020-VLESS-17MS
+  - AKUN-001-TROJAN-24MS
+  - AKUN-002-VLESS-24MS
+  - AKUN-003-VLESS-26MS
+  - AKUN-004-VLESS-24MS
+  - AKUN-005-VLESS-31MS
+  - AKUN-006-VMESS-25MS
+  - AKUN-007-VMESS-28MS
+  - AKUN-008-VMESS-29MS
+  - AKUN-009-VMESS-32MS
+  - AKUN-010-VLESS-24MS
+  - AKUN-011-VLESS-32MS
+  - AKUN-012-VLESS-35MS
+  - AKUN-013-VMESS-24MS
+  - AKUN-014-VMESS-34MS
+  - AKUN-015-VMESS-27MS
+  - AKUN-016-VMESS-31MS
+  - AKUN-017-VMESS-40MS
+  - AKUN-018-VMESS-34MS
+  - AKUN-019-VMESS-38MS
+  - AKUN-020-VMESS-33MS
 - name: CLEAN
   type: select
   proxies:
@@ -501,38 +538,38 @@ proxy-groups:
 - name: AUTO-FAST
   type: url-test
   proxies: &id001
-  - AKUN-001-VLESS-15MS
-  - AKUN-002-VLESS-18MS
-  - AKUN-003-TROJAN-18MS
-  - AKUN-004-VLESS-16MS
-  - AKUN-005-VLESS-17MS
-  - AKUN-006-TROJAN-18MS
-  - AKUN-007-TROJAN-18MS
-  - AKUN-008-TROJAN-19MS
-  - AKUN-009-VLESS-16MS
-  - AKUN-010-TROJAN-17MS
-  - AKUN-011-VLESS-17MS
-  - AKUN-012-TROJAN-18MS
-  - AKUN-013-TROJAN-19MS
-  - AKUN-014-VLESS-19MS
-  - AKUN-015-VLESS-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-20MS
-  - AKUN-018-TROJAN-15MS
-  - AKUN-019-VLESS-16MS
-  - AKUN-020-VLESS-17MS
+  - AKUN-001-TROJAN-24MS
+  - AKUN-002-VLESS-24MS
+  - AKUN-003-VLESS-26MS
+  - AKUN-004-VLESS-24MS
+  - AKUN-005-VLESS-31MS
+  - AKUN-006-VMESS-25MS
+  - AKUN-007-VMESS-28MS
+  - AKUN-008-VMESS-29MS
+  - AKUN-009-VMESS-32MS
+  - AKUN-010-VLESS-24MS
+  - AKUN-011-VLESS-32MS
+  - AKUN-012-VLESS-35MS
+  - AKUN-013-VMESS-24MS
+  - AKUN-014-VMESS-34MS
+  - AKUN-015-VMESS-27MS
+  - AKUN-016-VMESS-31MS
+  - AKUN-017-VMESS-40MS
+  - AKUN-018-VMESS-34MS
+  - AKUN-019-VMESS-38MS
+  - AKUN-020-VMESS-33MS
   url: http://cp.cloudflare.com/generate_204
   interval: 60
-  tolerance: 40
+  tolerance: 50
   lazy: false
-  timeout: 700
+  timeout: 600
 - name: FALLBACK
   type: fallback
   proxies: *id001
   url: http://cp.cloudflare.com/generate_204
   interval: 60
   lazy: false
-  timeout: 700
+  timeout: 600
 - name: LOAD-BALANCE
   type: load-balance
   strategy: consistent-hashing
@@ -540,7 +577,7 @@ proxy-groups:
   url: http://cp.cloudflare.com/generate_204
   interval: 120
   lazy: false
-  timeout: 700
+  timeout: 600
 rule-providers:
   ads_domain:
     type: http
@@ -549,27 +586,6 @@ rule-providers:
     format: mrs
     path: ./rule_providers/ads_domain.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs
-  ads_classical:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: yaml
-    path: ./rule_providers/Advertising.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.yaml
-  privacy_classical:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: yaml
-    path: ./rule_providers/Privacy.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Privacy/Privacy.yaml
-  hijacking_classical:
-    type: http
-    interval: 86400
-    behavior: classical
-    format: yaml
-    path: ./rule_providers/Hijacking.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.yaml
   youtube_domain:
     type: http
     interval: 86400
@@ -577,97 +593,6 @@ rule-providers:
     format: mrs
     path: ./rule_providers/youtube.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
-  youtube_ip:
-    type: http
-    interval: 86400
-    behavior: ipcidr
-    format: mrs
-    path: ./rule_providers/youtube_ip.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs
-  telegram_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    path: ./rule_providers/telegram.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs
-  twitter_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    path: ./rule_providers/twitter.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs
-  tiktok_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    path: ./rule_providers/tiktok.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs
-  facebook_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    path: ./rule_providers/facebook.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs
-  telegram_ip:
-    type: http
-    interval: 86400
-    behavior: ipcidr
-    format: mrs
-    path: ./rule_providers/telegram_ip.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs
-  twitter_ip:
-    type: http
-    interval: 86400
-    behavior: ipcidr
-    format: mrs
-    path: ./rule_providers/twitter_ip.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs
-  scholar_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    path: ./rule_providers/scholar.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-scholar-!cn.mrs
-  github_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    path: ./rule_providers/github.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs
-  netflix_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    path: ./rule_providers/netflix.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs
-  spotify_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    path: ./rule_providers/spotify.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs
-  biliintl_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    path: ./rule_providers/biliintl.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/biliintl.mrs
-  netflix_ip:
-    type: http
-    interval: 86400
-    behavior: ipcidr
-    format: mrs
-    path: ./rule_providers/netflix_ip.mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs
 rules:
 - DOMAIN-SUFFIX,local,DIRECT
 - DOMAIN-SUFFIX,lan,DIRECT
@@ -679,13 +604,9 @@ rules:
 - IP-CIDR,169.254.0.0/16,DIRECT
 - GEOIP,LAN,DIRECT,no-resolve
 - RULE-SET,ads_domain,REJECT
-- RULE-SET,ads_classical,REJECT
-- RULE-SET,privacy_classical,REJECT
-- RULE-SET,hijacking_classical,REJECT
 - DOMAIN-SUFFIX,doubleclick.net,REJECT
 - DOMAIN-SUFFIX,googlesyndication.com,REJECT
 - DOMAIN-SUFFIX,googleadservices.com,REJECT
-- DOMAIN-SUFFIX,pagead2.googlesyndication.com,REJECT
 - DOMAIN-KEYWORD,adservice,REJECT
 - DOMAIN-KEYWORD,analytics,REJECT
 - DOMAIN-KEYWORD,tracker,REJECT
@@ -694,52 +615,14 @@ rules:
 - DOMAIN-SUFFIX,youtu.be,YOUTUBE
 - DOMAIN-SUFFIX,ytimg.com,YOUTUBE
 - DOMAIN-SUFFIX,googlevideo.com,YOUTUBE
-- DOMAIN-SUFFIX,youtubei.googleapis.com,YOUTUBE
-- RULE-SET,telegram_domain,SOCIAL-MEDIA
-- RULE-SET,twitter_domain,SOCIAL-MEDIA
-- RULE-SET,tiktok_domain,SOCIAL-MEDIA
-- RULE-SET,facebook_domain,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,facebook.com,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,fbcdn.net,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,instagram.com,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,cdninstagram.com,SOCIAL-MEDIA
-- DOMAIN-SUFFIX,threads.net,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,tiktok.com,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,tiktokcdn.com,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,twitter.com,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,x.com,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,t.me,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,telegram.org,SOCIAL-MEDIA
-- GEOIP,telegram,SOCIAL-MEDIA,no-resolve
-- GEOIP,twitter,SOCIAL-MEDIA,no-resolve
-- RULE-SET,scholar_domain,EDUKASI
-- RULE-SET,github_domain,EDUKASI
-- DOMAIN-SUFFIX,edu,EDUKASI
-- DOMAIN-SUFFIX,ac.id,EDUKASI
-- DOMAIN-SUFFIX,scholar.google.com,EDUKASI
-- DOMAIN-SUFFIX,coursera.org,EDUKASI
-- DOMAIN-SUFFIX,edx.org,EDUKASI
-- DOMAIN-SUFFIX,khanacademy.org,EDUKASI
-- DOMAIN-SUFFIX,udemy.com,EDUKASI
-- DOMAIN-SUFFIX,academia.edu,EDUKASI
-- DOMAIN-SUFFIX,arxiv.org,EDUKASI
-- DOMAIN-SUFFIX,github.com,EDUKASI
-- DOMAIN-SUFFIX,githubusercontent.com,EDUKASI
-- RULE-SET,netflix_domain,STREAMING
-- RULE-SET,spotify_domain,STREAMING
-- RULE-SET,biliintl_domain,STREAMING
-- DOMAIN-SUFFIX,netflix.com,STREAMING
-- DOMAIN-SUFFIX,nflxvideo.net,STREAMING
-- DOMAIN-SUFFIX,disneyplus.com,STREAMING
-- DOMAIN-SUFFIX,hotstar.com,STREAMING
-- DOMAIN-SUFFIX,primevideo.com,STREAMING
-- DOMAIN-SUFFIX,amazonvideo.com,STREAMING
-- DOMAIN-SUFFIX,hulu.com,STREAMING
-- DOMAIN-SUFFIX,hbomax.com,STREAMING
-- DOMAIN-SUFFIX,max.com,STREAMING
-- DOMAIN-SUFFIX,spotify.com,STREAMING
-- DOMAIN-SUFFIX,twitch.tv,STREAMING
-- DOMAIN-SUFFIX,viu.com,STREAMING
-- DOMAIN-SUFFIX,wetv.vip,STREAMING
-- GEOIP,netflix,STREAMING,no-resolve
 - MATCH,GLOBAL
