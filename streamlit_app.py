@@ -100,6 +100,7 @@ class ProxyNode:
     original_success_count: int = 0
     bug_sni: str = ""
     tier: str = ""
+    original_name: str = ""
     key: str = field(default="")
 
 
@@ -123,23 +124,52 @@ def b64decode_text(value: str) -> str | None:
 
 
 def normalize_name(name: str | None, fallback: str) -> str:
-    text = unquote(name or "").strip()
-    text = re.sub(r"[\r\n\t]+", " ", text)
+    text = html.unescape(unquote(name or "")).strip()
+    text = re.sub(r"[\x00-\x1f\x7f\r\n\t]+", " ", text)
     text = re.sub(r"\s+", " ", text)
     text = text[:70].strip(" -_|/")
     return text or fallback
 
 
+def safe_proxy_name(value: str | None, fallback: str) -> str:
+    """Return an OpenClash-safe proxy name.
+
+    Public subscription names often contain emoji, quotes, slashes, hidden newline,
+    YAML-reserved characters, or duplicate text. Some OpenClash builds reject those
+    names. This function converts every proxy name to a short ASCII-only alias.
+    """
+    text = html.unescape(unquote(value or "")).strip()
+    text = re.sub(r"[\x00-\x1f\x7f]+", "", text)
+    text = re.sub(r"[^A-Za-z0-9_.-]+", "-", text)
+    text = re.sub(r"-+", "-", text).strip("-._")
+    if not text:
+        text = fallback
+    text = text[:64].strip("-._") or fallback
+    if not re.fullmatch(r"[A-Za-z0-9_.-]{1,64}", text):
+        text = fallback
+    return text
+
+
 def unique_names(nodes: list[ProxyNode]) -> None:
-    seen: dict[str, int] = {}
+    """Replace all proxy names with safe unique aliases.
+
+    The generated names intentionally do not reuse the public subscription name,
+    because those names are the common source of OpenClash import errors.
+    Original names are kept only in the CSV report.
+    """
+    seen: set[str] = set()
     for i, node in enumerate(nodes, start=1):
-        delay_part = f" {node.best_delay_ms}ms" if node.best_delay_ms is not None else ""
-        base = normalize_name(node.name, f"FAST-{i:03d}")
-        # Add a small readable prefix so OpenClash list is easy to scan.
-        base = f"{i:02d}-{base}{delay_part}"
-        count = seen.get(base, 0)
-        seen[base] = count + 1
-        name = base if count == 0 else f"{base}-{count + 1}"
+        node.original_name = node.original_name or normalize_name(node.name, f"ORIGINAL-{i:03d}")
+        delay = f"{int(node.best_delay_ms)}MS" if node.best_delay_ms is not None else "NA"
+        proto = safe_proxy_name(node.type.upper(), "NODE")
+        base = safe_proxy_name(f"AKUN-{i:03d}-{proto}-{delay}", f"AKUN-{i:03d}")
+        name = base
+        counter = 2
+        while name in seen:
+            suffix = f"-{counter}"
+            name = (base[: 64 - len(suffix)] + suffix).strip("-._")
+            counter += 1
+        seen.add(name)
         node.name = name
         node.clash["name"] = name
 
@@ -596,7 +626,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
     direct_or_names = names or ["DIRECT"]
 
     def selector(defaults: list[str] | None = None) -> list[str]:
-        defaults = defaults or ["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"]
+        defaults = defaults or ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]
         return defaults + names
 
     domain_provider = {
@@ -725,40 +755,40 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "name": "GLOBAL",
             "type": "select",
             # AUTO-FAST tetap di pilihan pertama agar fresh import langsung otomatis cepat.
-            "proxies": ["⚡ AUTO-FAST", "📱 SOCIAL-MEDIA", "▶️ YOUTUBE", "🎓 EDUKASI", "🎬 STREAMING", "🛡️ CLEAN", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"] + names,
+            "proxies": ["AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
         },
         {
-            "name": "🚀 PROXY",
+            "name": "PROXY",
             "type": "select",
-            "proxies": ["GLOBAL", "⚡ AUTO-FAST", "📱 SOCIAL-MEDIA", "▶️ YOUTUBE", "🎓 EDUKASI", "🎬 STREAMING", "🛡️ CLEAN", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"] + names,
+            "proxies": ["GLOBAL", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
         },
         {
-            "name": "📱 SOCIAL-MEDIA",
+            "name": "SOCIAL-MEDIA",
             "type": "select",
-            "proxies": selector(["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"]),
+            "proxies": selector(["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]),
         },
         {
-            "name": "▶️ YOUTUBE",
+            "name": "YOUTUBE",
             "type": "select",
-            "proxies": selector(["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"]),
+            "proxies": selector(["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]),
         },
         {
-            "name": "🎓 EDUKASI",
+            "name": "EDUKASI",
             "type": "select",
-            "proxies": selector(["⚡ AUTO-FAST", "DIRECT", "🛟 FALLBACK", "🔁 LOAD-BALANCE"]),
+            "proxies": selector(["AUTO-FAST", "DIRECT", "FALLBACK", "LOAD-BALANCE"]),
         },
         {
-            "name": "🎬 STREAMING",
+            "name": "STREAMING",
             "type": "select",
-            "proxies": selector(["⚡ AUTO-FAST", "🛟 FALLBACK", "🔁 LOAD-BALANCE", "DIRECT"]),
+            "proxies": selector(["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]),
         },
         {
-            "name": "🛡️ CLEAN",
+            "name": "CLEAN",
             "type": "select",
-            "proxies": ["⚡ AUTO-FAST", "DIRECT", "🛟 FALLBACK"],
+            "proxies": ["AUTO-FAST", "DIRECT", "FALLBACK"],
         },
         {
-            "name": "⚡ AUTO-FAST",
+            "name": "AUTO-FAST",
             "type": "url-test",
             "proxies": direct_or_names,
             "url": test_url,
@@ -768,7 +798,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "timeout": health_timeout,
         },
         {
-            "name": "🛟 FALLBACK",
+            "name": "FALLBACK",
             "type": "fallback",
             "proxies": direct_or_names,
             "url": test_url,
@@ -777,7 +807,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "timeout": health_timeout,
         },
         {
-            "name": "🔁 LOAD-BALANCE",
+            "name": "LOAD-BALANCE",
             "type": "load-balance",
             "strategy": "consistent-hashing",
             "proxies": direct_or_names,
@@ -814,67 +844,67 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         "DOMAIN-KEYWORD,tracker,REJECT",
 
         # YouTube khusus, sebelum Google umum/edukasi.
-        "RULE-SET,youtube_domain,▶️ YOUTUBE",
-        "DOMAIN-SUFFIX,youtube.com,▶️ YOUTUBE",
-        "DOMAIN-SUFFIX,youtu.be,▶️ YOUTUBE",
-        "DOMAIN-SUFFIX,ytimg.com,▶️ YOUTUBE",
-        "DOMAIN-SUFFIX,googlevideo.com,▶️ YOUTUBE",
-        "DOMAIN-SUFFIX,youtubei.googleapis.com,▶️ YOUTUBE",
+        "RULE-SET,youtube_domain,YOUTUBE",
+        "DOMAIN-SUFFIX,youtube.com,YOUTUBE",
+        "DOMAIN-SUFFIX,youtu.be,YOUTUBE",
+        "DOMAIN-SUFFIX,ytimg.com,YOUTUBE",
+        "DOMAIN-SUFFIX,googlevideo.com,YOUTUBE",
+        "DOMAIN-SUFFIX,youtubei.googleapis.com,YOUTUBE",
 
         # Sosial media.
-        "RULE-SET,telegram_domain,📱 SOCIAL-MEDIA",
-        "RULE-SET,twitter_domain,📱 SOCIAL-MEDIA",
-        "RULE-SET,tiktok_domain,📱 SOCIAL-MEDIA",
-        "RULE-SET,facebook_domain,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,facebook.com,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,fbcdn.net,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,instagram.com,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,cdninstagram.com,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,threads.net,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,tiktok.com,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,tiktokcdn.com,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,twitter.com,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,x.com,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,t.me,📱 SOCIAL-MEDIA",
-        "DOMAIN-SUFFIX,telegram.org,📱 SOCIAL-MEDIA",
-        "GEOIP,telegram,📱 SOCIAL-MEDIA,no-resolve",
-        "GEOIP,twitter,📱 SOCIAL-MEDIA,no-resolve",
+        "RULE-SET,telegram_domain,SOCIAL-MEDIA",
+        "RULE-SET,twitter_domain,SOCIAL-MEDIA",
+        "RULE-SET,tiktok_domain,SOCIAL-MEDIA",
+        "RULE-SET,facebook_domain,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,facebook.com,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,fbcdn.net,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,instagram.com,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,cdninstagram.com,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,threads.net,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,tiktok.com,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,tiktokcdn.com,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,twitter.com,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,x.com,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,t.me,SOCIAL-MEDIA",
+        "DOMAIN-SUFFIX,telegram.org,SOCIAL-MEDIA",
+        "GEOIP,telegram,SOCIAL-MEDIA,no-resolve",
+        "GEOIP,twitter,SOCIAL-MEDIA,no-resolve",
 
         # Edukasi, riset, kuliah, dan developer learning.
-        "RULE-SET,scholar_domain,🎓 EDUKASI",
-        "RULE-SET,github_domain,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,edu,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,ac.id,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,scholar.google.com,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,coursera.org,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,edx.org,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,khanacademy.org,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,udemy.com,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,academia.edu,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,arxiv.org,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,github.com,🎓 EDUKASI",
-        "DOMAIN-SUFFIX,githubusercontent.com,🎓 EDUKASI",
+        "RULE-SET,scholar_domain,EDUKASI",
+        "RULE-SET,github_domain,EDUKASI",
+        "DOMAIN-SUFFIX,edu,EDUKASI",
+        "DOMAIN-SUFFIX,ac.id,EDUKASI",
+        "DOMAIN-SUFFIX,scholar.google.com,EDUKASI",
+        "DOMAIN-SUFFIX,coursera.org,EDUKASI",
+        "DOMAIN-SUFFIX,edx.org,EDUKASI",
+        "DOMAIN-SUFFIX,khanacademy.org,EDUKASI",
+        "DOMAIN-SUFFIX,udemy.com,EDUKASI",
+        "DOMAIN-SUFFIX,academia.edu,EDUKASI",
+        "DOMAIN-SUFFIX,arxiv.org,EDUKASI",
+        "DOMAIN-SUFFIX,github.com,EDUKASI",
+        "DOMAIN-SUFFIX,githubusercontent.com,EDUKASI",
 
         # Streaming umum selain YouTube.
-        "RULE-SET,netflix_domain,🎬 STREAMING",
-        "RULE-SET,spotify_domain,🎬 STREAMING",
-        "RULE-SET,biliintl_domain,🎬 STREAMING",
-        "DOMAIN-SUFFIX,netflix.com,🎬 STREAMING",
-        "DOMAIN-SUFFIX,nflxvideo.net,🎬 STREAMING",
-        "DOMAIN-SUFFIX,disneyplus.com,🎬 STREAMING",
-        "DOMAIN-SUFFIX,hotstar.com,🎬 STREAMING",
-        "DOMAIN-SUFFIX,primevideo.com,🎬 STREAMING",
-        "DOMAIN-SUFFIX,amazonvideo.com,🎬 STREAMING",
-        "DOMAIN-SUFFIX,hulu.com,🎬 STREAMING",
-        "DOMAIN-SUFFIX,hbomax.com,🎬 STREAMING",
-        "DOMAIN-SUFFIX,max.com,🎬 STREAMING",
-        "DOMAIN-SUFFIX,spotify.com,🎬 STREAMING",
-        "DOMAIN-SUFFIX,twitch.tv,🎬 STREAMING",
-        "DOMAIN-SUFFIX,viu.com,🎬 STREAMING",
-        "DOMAIN-SUFFIX,wetv.vip,🎬 STREAMING",
-        "GEOIP,netflix,🎬 STREAMING,no-resolve",
+        "RULE-SET,netflix_domain,STREAMING",
+        "RULE-SET,spotify_domain,STREAMING",
+        "RULE-SET,biliintl_domain,STREAMING",
+        "DOMAIN-SUFFIX,netflix.com,STREAMING",
+        "DOMAIN-SUFFIX,nflxvideo.net,STREAMING",
+        "DOMAIN-SUFFIX,disneyplus.com,STREAMING",
+        "DOMAIN-SUFFIX,hotstar.com,STREAMING",
+        "DOMAIN-SUFFIX,primevideo.com,STREAMING",
+        "DOMAIN-SUFFIX,amazonvideo.com,STREAMING",
+        "DOMAIN-SUFFIX,hulu.com,STREAMING",
+        "DOMAIN-SUFFIX,hbomax.com,STREAMING",
+        "DOMAIN-SUFFIX,max.com,STREAMING",
+        "DOMAIN-SUFFIX,spotify.com,STREAMING",
+        "DOMAIN-SUFFIX,twitch.tv,STREAMING",
+        "DOMAIN-SUFFIX,viu.com,STREAMING",
+        "DOMAIN-SUFFIX,wetv.vip,STREAMING",
+        "GEOIP,netflix,STREAMING,no-resolve",
 
-        # Sisanya ikut GLOBAL yang defaultnya langsung ⚡ AUTO-FAST.
+        # Sisanya ikut GLOBAL yang defaultnya langsung AUTO-FAST.
         "MATCH,GLOBAL",
     ]
 
@@ -929,6 +959,7 @@ def build_csv(nodes: list[ProxyNode]) -> str:
     writer = csv.writer(buffer)
     writer.writerow([
         "name",
+        "original_name",
         "type",
         "original_server",
         "bug_sni",
@@ -950,6 +981,7 @@ def build_csv(nodes: list[ProxyNode]) -> str:
     for node in nodes:
         writer.writerow([
             node.name,
+            node.original_name,
             node.type,
             node.original_server,
             node.bug_sni,
@@ -1077,11 +1109,11 @@ def process_sources(
     return selected, parsed, fetch_logs, skipped
 
 
-st.set_page_config(page_title="OpenClash Rule Split Auto-Fast", page_icon="⚡", layout="wide")
-st.title("⚡ SumberYAML OpenClash Rule Split Auto-Fast")
+st.set_page_config(page_title="OpenClash Safe Names Rule Split", page_icon="⚡", layout="wide")
+st.title("⚡ SumberYAML OpenClash Safe Names Rule Split")
 st.caption(
     "Ambil subscription publik, hanya port 443, cek link hidup, cek kompatibilitas bug server 104.17.3.81 + SNI/Host, "
-    "prioritaskan delay ≤123 ms, isi cadangan hidup, pisahkan rule Social Media/YouTube/Edukasi/Streaming, dan block iklan/malware."
+    "prioritaskan delay ≤123 ms, isi cadangan hidup, pisahkan rule Social Media/YouTube/Edukasi/Streaming, block iklan/malware, dan ganti otomatis nama akun yang berpotensi error."
 )
 
 with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
@@ -1127,7 +1159,7 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
         index=0,
         help="Default memakai Cloudflare captive portal generate_204 sesuai permintaan.",
     )
-    st.caption("Mode baru: cek delay ke bug server 104.17.3.81 dengan SNI/Host akun. Node ≤120/123 ms diprioritaskan; jika kurang dari 20, cadangan yang tetap hidup akan ditambahkan supaya YAML lebih usable.")
+    st.caption("Mode baru: cek delay ke bug server 104.17.3.81 dengan SNI/Host akun. Nama akun dari subscription publik otomatis diganti menjadi format aman AKUN-001-VLESS-120MS agar tidak membuat OpenClash error. Node ≤120/123 ms diprioritaskan; jika kurang dari 20, cadangan yang tetap hidup akan ditambahkan supaya YAML lebih usable.")
 
 links_text = st.text_area(
     "Link subscription bawaan",
@@ -1218,21 +1250,21 @@ if run:
 
         st.success(
             f"Berhasil membuat YAML dari {len(alive_nodes)} node yang kompatibel bug server. "
-            "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke ⚡ AUTO-FAST; kategori rule sudah dipisah dan iklan/malware diblokir."
+            "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke AUTO-FAST; kategori rule sudah dipisah dan iklan/malware diblokir."
         )
         c1, c2 = st.columns(2)
         with c1:
             st.download_button(
-                "Download openclash_rule_split_auto_fast.yaml",
+                "Download openclash_safe_names_rule_split.yaml",
                 data=yaml_text.encode("utf-8"),
-                file_name="openclash_rule_split_auto_fast.yaml",
+                file_name="openclash_safe_names_rule_split.yaml",
                 mime="application/x-yaml",
             )
         with c2:
             st.download_button(
                 "Download report CSV",
                 data=csv_text.encode("utf-8"),
-                file_name="openclash_bug_compat_report.csv",
+                file_name="openclash_safe_names_report.csv",
                 mime="text/csv",
             )
 
@@ -1242,6 +1274,7 @@ if run:
                 {
                     "rank": i,
                     "name": n.name,
+                    "original_name": n.original_name,
                     "type": n.type,
                     "original_server": n.original_server,
                     "server_output": TARGET_SERVER,
