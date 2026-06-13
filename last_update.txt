@@ -1,8 +1,8 @@
-Last update: 2026-06-13 15:40:20 UTC
+Last update: 2026-06-13 15:58:58 UTC
 OpenClash YAML: openclash_auto.yaml
 Android YAML: openclash_android.yaml
 YAML nodes: 20
 Akun txt: 20
 Parsed nodes: 2500
 Fetched links: 40
-Skipped raw URI: 140621
+Skipped raw URI: 140619
