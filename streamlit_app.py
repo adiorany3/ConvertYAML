@@ -70,9 +70,13 @@ FAST_TEST_URL = "http://cp.cloudflare.com/generate_204"
 ALT_TEST_URL = "http://www.gstatic.com/generate_204"
 THIRD_TEST_URL = "https://www.google.com/generate_204"
 FAST_TARGET_DELAY_MS = 123
-DEFAULT_FILL_DELAY_MS = 600
+DEFAULT_FILL_DELAY_MS = 400
 HARD_MAX_DELAY_MS = 1500
 MIN_OUTPUT_NODES = 20
+DEFAULT_URLTEST_INTERVAL = 60
+DEFAULT_TOLERANCE_MS = 40
+DEFAULT_TCP_TIMEOUT = 1.5
+DEFAULT_FETCH_TIMEOUT = 15
 
 
 @dataclass
@@ -903,7 +907,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "name": "GLOBAL",
             "type": "select",
             # AUTO-FAST tetap di pilihan pertama agar fresh import langsung otomatis cepat.
-            "proxies": ["FALLBACK", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN", "AUTO-FAST", "LOAD-BALANCE", "DIRECT"] + names,
+            "proxies": ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN"] + names,
         },
         {
             "name": "PROXY",
@@ -1295,19 +1299,19 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
 
     col9, col10, col11, col12 = st.columns(4)
     with col9:
-        tcp_timeout = st.number_input("Timeout cek/detik", min_value=0.5, max_value=10.0, value=2.0, step=0.5)
+        tcp_timeout = st.number_input("Timeout cek/detik", min_value=0.5, max_value=10.0, value=DEFAULT_TCP_TIMEOUT, step=0.5)
     with col10:
         max_workers = st.number_input("Concurrency", min_value=1, max_value=100, value=48, step=1)
     with col11:
-        fetch_timeout = st.number_input("Timeout fetch link/detik", min_value=5, max_value=60, value=20, step=5)
+        fetch_timeout = st.number_input("Timeout fetch link/detik", min_value=5, max_value=60, value=DEFAULT_FETCH_TIMEOUT, step=5)
     with col12:
         require_original = st.checkbox("Wajib original server juga hidup", value=False, help="Matikan agar lebih banyak akun lolos saat memakai bug server. Nyalakan jika ingin lebih ketat.")
 
     col13, col14 = st.columns(2)
     with col13:
-        urltest_interval = st.number_input("Interval url-test OpenClash/detik", min_value=15, max_value=900, value=30, step=15)
+        urltest_interval = st.number_input("Interval url-test OpenClash/detik", min_value=15, max_value=900, value=DEFAULT_URLTEST_INTERVAL, step=15)
     with col14:
-        tolerance = st.number_input("Toleransi auto-switch/ms", min_value=5, max_value=300, value=10, step=5)
+        tolerance = st.number_input("Toleransi auto-switch/ms", min_value=5, max_value=300, value=DEFAULT_TOLERANCE_MS, step=5)
 
     test_url = st.selectbox(
         "URL health check OpenClash",
@@ -1315,7 +1319,7 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
         index=0,
         help="Default memakai Cloudflare captive portal generate_204 sesuai permintaan.",
     )
-    st.caption("Mode baru: akun yang tidak lengkap langsung ditolak sebelum test delay. Cek delay ke bug server 104.17.3.81 dengan SNI/Host akun. Nama akun dari subscription publik otomatis diganti menjadi format aman AKUN-001-VLESS-120MS agar tidak membuat OpenClash error. Node ≤120/123 ms diprioritaskan; jika kurang dari 20, cadangan yang tetap hidup akan ditambahkan supaya YAML lebih usable.")
+    st.caption("Mode baru: akun yang tidak lengkap langsung ditolak sebelum test delay. Cek delay ke bug server 104.17.3.81 dengan SNI/Host akun. Nama akun dari subscription publik otomatis diganti menjadi format aman AKUN-001-VLESS-120MS agar tidak membuat OpenClash error. Node ≤120/123 ms diprioritaskan; jika kurang dari 20, cadangan yang tetap hidup akan ditambahkan. Default responsif: GLOBAL langsung AUTO-FAST, url-test 60 detik, toleransi 40 ms, dan cadangan ≤400 ms.")
 
 links_text = st.text_area(
     "Link subscription bawaan",
@@ -1408,7 +1412,7 @@ if run:
 
         st.success(
             f"Berhasil membuat YAML dari {len(alive_nodes)} node lengkap yang kompatibel bug server. "
-            "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke AUTO-FAST; kategori rule sudah dipisah dan iklan/malware diblokir."
+            "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke AUTO-FAST; url-test lebih stabil; kategori rule sudah dipisah dan iklan/malware diblokir."
         )
         c1, c2 = st.columns(2)
         with c1:
