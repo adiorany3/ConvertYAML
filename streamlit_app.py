@@ -539,6 +539,154 @@ def node_sni_host(node: ProxyNode) -> str:
     return node.original_server
 
 
+PLACEHOLDER_VALUES = {"", "-", "none", "null", "undefined", "nil", "nan"}
+
+
+def complete_value(value: Any) -> bool:
+    """True if a config value is meaningful enough to be written to YAML."""
+    if value is None:
+        return False
+    if isinstance(value, str):
+        text = html.unescape(unquote(value)).strip()
+        return text.lower() not in PLACEHOLDER_VALUES
+    if isinstance(value, (list, tuple, set)):
+        return any(complete_value(item) for item in value)
+    if isinstance(value, dict):
+        return bool(value)
+    return True
+
+
+def get_nested(data: dict[str, Any], *keys: str) -> Any:
+    current: Any = data
+    for key in keys:
+        if not isinstance(current, dict):
+            return None
+        current = current.get(key)
+    return current
+
+
+def has_host_value(value: Any) -> bool:
+    if isinstance(value, list):
+        return any(complete_value(item) for item in value)
+    return complete_value(value)
+
+
+def validate_network_options(clash: dict[str, Any], missing: list[str]) -> None:
+    network = str(clash.get("network") or "tcp").lower()
+    if network == "ws":
+        ws_opts = clash.get("ws-opts")
+        if not isinstance(ws_opts, dict):
+            missing.append("ws-opts")
+            return
+        if not complete_value(ws_opts.get("path")):
+            missing.append("ws-opts.path")
+        if not has_host_value(get_nested(ws_opts, "headers", "Host")):
+            missing.append("ws-opts.headers.Host")
+    elif network == "grpc":
+        grpc_opts = clash.get("grpc-opts")
+        if not isinstance(grpc_opts, dict):
+            missing.append("grpc-opts")
+            return
+        if not complete_value(grpc_opts.get("grpc-service-name")):
+            missing.append("grpc-opts.grpc-service-name")
+    elif network == "http":
+        http_opts = clash.get("http-opts")
+        if not isinstance(http_opts, dict):
+            missing.append("http-opts")
+            return
+        if not complete_value(http_opts.get("path")):
+            missing.append("http-opts.path")
+        if not has_host_value(get_nested(http_opts, "headers", "Host")):
+            missing.append("http-opts.headers.Host")
+
+
+def validate_complete_node(node: ProxyNode) -> tuple[bool, str]:
+    """Reject incomplete public accounts before they are tested or written.
+
+    Because the output server is forced to the Cloudflare bug IP, a usable account
+    must have enough protocol information for OpenClash/Mihomo to build the real
+    connection: credentials, TLS SNI/Host where applicable, network-specific
+    options, and port 443.
+    """
+    clash = node.clash
+    missing: list[str] = []
+
+    if node.port != ONLY_PORT:
+        missing.append("port 443")
+    if not complete_value(node.original_server):
+        missing.append("original_server")
+    if not complete_value(clash.get("type")):
+        missing.append("type")
+    if not complete_value(clash.get("server")):
+        missing.append("server")
+    if not complete_value(clash.get("port")):
+        missing.append("port")
+
+    proto = str(clash.get("type") or node.type or "").lower()
+    network = str(clash.get("network") or "tcp").lower()
+
+    if proto in {"vless", "vmess", "trojan"}:
+        sni = node_sni_host(node)
+        node.bug_sni = sni
+        if not complete_value(sni) or looks_like_ip(str(sni)):
+            missing.append("SNI/Host domain")
+        if network not in {"tcp", "ws", "grpc", "http"}:
+            missing.append("network")
+        validate_network_options(clash, missing)
+
+    if proto == "vless":
+        if not complete_value(clash.get("uuid")):
+            missing.append("uuid")
+        if not complete_value(clash.get("servername")):
+            missing.append("servername")
+        if str(clash.get("tls", "")).lower() in {"false", "0", "none"}:
+            missing.append("tls")
+        if isinstance(clash.get("reality-opts"), dict):
+            reality_opts = clash.get("reality-opts") or {}
+            if not complete_value(reality_opts.get("public-key")):
+                missing.append("reality-opts.public-key")
+    elif proto == "vmess":
+        if not complete_value(clash.get("uuid")):
+            missing.append("uuid")
+        if not complete_value(clash.get("cipher")):
+            missing.append("cipher")
+        if not complete_value(clash.get("servername")):
+            missing.append("servername")
+        if str(clash.get("tls", "")).lower() in {"false", "0", "none"}:
+            missing.append("tls")
+        try:
+            int(clash.get("alterId"))
+        except Exception:
+            missing.append("alterId")
+    elif proto == "trojan":
+        if not complete_value(clash.get("password")):
+            missing.append("password")
+        if not complete_value(clash.get("sni")):
+            missing.append("sni")
+    elif proto == "ss":
+        if not complete_value(clash.get("cipher")):
+            missing.append("cipher")
+        if not complete_value(clash.get("password")):
+            missing.append("password")
+        # Plain Shadowsocks cannot carry SNI/Host when the server is replaced by
+        # the bug IP. Keeping it would often create YAML that imports but cannot
+        # connect through 104.17.3.81.
+        if str(node.original_server).strip() != TARGET_SERVER:
+            missing.append("ss tidak kompatibel dengan bug server tanpa SNI/Host")
+    else:
+        missing.append("protocol unsupported")
+
+    if missing:
+        unique_missing = []
+        seen = set()
+        for item in missing:
+            if item not in seen:
+                seen.add(item)
+                unique_missing.append(item)
+        return False, "incomplete: " + ", ".join(unique_missing[:10])
+    return True, "complete"
+
+
 def tls_bug_delay(node: ProxyNode, timeout: float, attempts: int) -> tuple[bool, dict[str, Any]]:
     """Measure whether TARGET_SERVER:443 can complete TLS with the node SNI/Host.
 
@@ -1044,6 +1192,13 @@ def process_sources(
         if not node:
             skipped.append(uri[:140])
             continue
+        is_complete, complete_reason = validate_complete_node(node)
+        if not is_complete:
+            node.status = "incomplete"
+            node.reason = complete_reason
+            node.score = 999999
+            parsed.append(node)
+            continue
         if node.key in seen_keys:
             continue
         seen_keys.add(node.key)
@@ -1055,11 +1210,12 @@ def process_sources(
     candidate_limit = max(target * 30, 800)
     parsed = parsed[:candidate_limit]
 
-    if parsed:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(parsed))) as executor:
+    testable = [node for node in parsed if node.status == "pending"]
+    if testable:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(testable))) as executor:
             future_map = {
                 executor.submit(check_node_bug_compat, node, tcp_timeout, attempts, require_original): node
-                for node in parsed
+                for node in testable
             }
             for future in concurrent.futures.as_completed(future_map):
                 node = future_map[future]
@@ -1113,7 +1269,7 @@ st.set_page_config(page_title="OpenClash Safe Names Rule Split", page_icon="⚡"
 st.title("⚡ SumberYAML OpenClash Safe Names Rule Split")
 st.caption(
     "Ambil subscription publik, hanya port 443, cek link hidup, cek kompatibilitas bug server 104.17.3.81 + SNI/Host, "
-    "prioritaskan delay ≤123 ms, isi cadangan hidup, pisahkan rule Social Media/YouTube/Edukasi/Streaming, block iklan/malware, dan ganti otomatis nama akun yang berpotensi error."
+    "tolak akun yang tidak lengkap, prioritaskan delay ≤123 ms, isi cadangan hidup, pisahkan rule Social Media/YouTube/Edukasi/Streaming, block iklan/malware, dan ganti otomatis nama akun yang berpotensi error."
 )
 
 with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
@@ -1159,7 +1315,7 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
         index=0,
         help="Default memakai Cloudflare captive portal generate_204 sesuai permintaan.",
     )
-    st.caption("Mode baru: cek delay ke bug server 104.17.3.81 dengan SNI/Host akun. Nama akun dari subscription publik otomatis diganti menjadi format aman AKUN-001-VLESS-120MS agar tidak membuat OpenClash error. Node ≤120/123 ms diprioritaskan; jika kurang dari 20, cadangan yang tetap hidup akan ditambahkan supaya YAML lebih usable.")
+    st.caption("Mode baru: akun yang tidak lengkap langsung ditolak sebelum test delay. Cek delay ke bug server 104.17.3.81 dengan SNI/Host akun. Nama akun dari subscription publik otomatis diganti menjadi format aman AKUN-001-VLESS-120MS agar tidak membuat OpenClash error. Node ≤120/123 ms diprioritaskan; jika kurang dari 20, cadangan yang tetap hidup akan ditambahkan supaya YAML lebih usable.")
 
 links_text = st.text_area(
     "Link subscription bawaan",
@@ -1179,7 +1335,7 @@ run = st.button("Proses & buat YAML anti delay", type="primary")
 
 if run:
     require_successes = min(int(require_successes), int(attempts))
-    with st.spinner("Mengecek link, menyaring port 443, menguji bug server + SNI/Host, lalu memilih node tercepat..."):
+    with st.spinner("Mengecek link, menolak akun tidak lengkap, menyaring port 443, menguji bug server + SNI/Host, lalu memilih node tercepat..."):
         alive_nodes, all_nodes, fetch_logs, skipped = process_sources(
             links_text=links_text,
             manual_text=manual_text,
@@ -1199,15 +1355,17 @@ if run:
     total_alive_any = len([n for n in all_nodes if n.status == "alive"])
     total_fast = len(alive_nodes)
     total_dead = len([n for n in all_nodes if n.status == "dead"])
+    total_incomplete = len([n for n in all_nodes if n.status == "incomplete"])
     live_links = len([1 for _, status in fetch_logs if status.startswith("alive")])
     dead_links = len([1 for _, status in fetch_logs if status.startswith("dead")])
 
-    m1, m2, m3, m4, m5 = st.columns(5)
+    m1, m2, m3, m4, m5, m6 = st.columns(6)
     m1.metric("Link hidup", live_links)
     m2.metric("Parsed port 443", total_parsed)
-    m3.metric("Node hidup", total_alive_any)
-    m4.metric("Masuk YAML", total_fast)
-    m5.metric("Dead dibuang", total_dead)
+    m3.metric("Tidak lengkap", total_incomplete)
+    m4.metric("Node hidup", total_alive_any)
+    m5.metric("Masuk YAML", total_fast)
+    m6.metric("Dead dibuang", total_dead)
 
     if fetch_logs:
         with st.expander("Status link subscription", expanded=False):
@@ -1249,7 +1407,7 @@ if run:
         csv_text = build_csv(all_nodes)
 
         st.success(
-            f"Berhasil membuat YAML dari {len(alive_nodes)} node yang kompatibel bug server. "
+            f"Berhasil membuat YAML dari {len(alive_nodes)} node lengkap yang kompatibel bug server. "
             "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke AUTO-FAST; kategori rule sudah dipisah dan iklan/malware diblokir."
         )
         c1, c2 = st.columns(2)
@@ -1299,5 +1457,5 @@ if run:
 
 st.info(
     "Catatan penting: aplikasi ini mengecek kompatibilitas bug server 104.17.3.81 menggunakan TLS + SNI/Host, lalu OpenClash melakukan url-test/fallback otomatis. "
-    "Tes ini jauh lebih sesuai dibanding hanya cek original server, tetapi validasi akun penuh tetap dilakukan oleh Health Check OpenClash. Rule-provider iklan/malware dan kategori akan diunduh oleh OpenClash/Mihomo saat config dijalankan. Sumber publik bisa berubah sewaktu-waktu."
+    "Akun tanpa field wajib tidak dimasukkan ke YAML. Tes ini jauh lebih sesuai dibanding hanya cek original server, tetapi validasi akun penuh tetap dilakukan oleh Health Check OpenClash. Rule-provider iklan/malware dan kategori akan diunduh oleh OpenClash/Mihomo saat config dijalankan. Sumber publik bisa berubah sewaktu-waktu."
 )

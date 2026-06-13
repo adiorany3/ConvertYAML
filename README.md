@@ -65,3 +65,22 @@ AKUN-003-VMESS-180MS
 ```
 
 Nama asli tetap dicatat di file report CSV pada kolom `original_name`, sehingga kamu masih bisa melacak sumber akun tanpa membuat OpenClash error saat import YAML.
+
+## Perbaikan akun tidak lengkap
+
+Versi ini menolak akun/node yang field-nya tidak lengkap sebelum masuk proses delay dan sebelum ditulis ke YAML.
+
+Akun akan dibuang dari YAML jika kurang salah satu field penting berikut:
+
+- `uuid` untuk VLESS/VMess.
+- `password` untuk Trojan/Shadowsocks.
+- `cipher` untuk VMess/Shadowsocks.
+- `servername`, `sni`, atau `Host` untuk akun TLS yang memakai bug server.
+- `ws-opts.path` dan `ws-opts.headers.Host` untuk WebSocket.
+- `grpc-opts.grpc-service-name` untuk gRPC.
+- `http-opts.path` dan `http-opts.headers.Host` untuk HTTP/H2.
+- `reality-opts.public-key` untuk Reality.
+- Port selain `443`.
+- Shadowsocks biasa yang tidak kompatibel dengan bug server `104.17.3.81` karena tidak punya SNI/Host.
+
+Akun yang ditolak tetap dicatat di report CSV dengan status `incomplete` dan alasan pada kolom `reason`, tetapi tidak akan muncul di bagian `proxies` YAML.
