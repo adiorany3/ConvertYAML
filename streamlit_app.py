@@ -6,6 +6,7 @@ import csv
 import html
 import io
 import json
+import os
 import re
 import socket
 import ssl
@@ -13,7 +14,7 @@ import statistics
 import time
 from dataclasses import dataclass, field
 from typing import Any
-from urllib.parse import parse_qs, unquote, urlparse
+from urllib.parse import parse_qs, quote, unquote, urlparse
 
 import requests
 import streamlit as st
@@ -77,6 +78,7 @@ DEFAULT_URLTEST_INTERVAL = 60
 DEFAULT_TOLERANCE_MS = 40
 DEFAULT_TCP_TIMEOUT = 1.5
 DEFAULT_FETCH_TIMEOUT = 15
+DEFAULT_HEALTH_TIMEOUT_MS = 3000
 
 OPTIMIZATION_PRESETS: dict[str, dict[str, Any]] = {
     "Cepat": {
@@ -157,6 +159,9 @@ class ProxyNode:
     bug_success_count: int = 0
     original_success_count: int = 0
     bug_sni: str = ""
+    ws_upgrade_ms: int | None = None
+    ws_success_count: int = 0
+    ws_status: str = ""
     tier: str = ""
     original_name: str = ""
     key: str = field(default="")
@@ -635,6 +640,63 @@ def node_sort_key(node: ProxyNode, prefer_ws: bool = True) -> tuple[int, int, in
     )
 
 
+def ws_path(node: ProxyNode) -> str:
+    ws_opts = node.clash.get("ws-opts") if isinstance(node.clash, dict) else None
+    path = ws_opts.get("path") if isinstance(ws_opts, dict) else "/"
+    path = str(path or "/").strip() or "/"
+    if not path.startswith("/"):
+        path = "/" + path
+    # Request-line must be ASCII. Keep existing percent escapes and common URL chars.
+    return quote(path, safe="/%?&=:+,;@._~!$'()*-[]")
+
+
+def ws_host_header(node: ProxyNode) -> str:
+    ws_opts = node.clash.get("ws-opts") if isinstance(node.clash, dict) else None
+    if isinstance(ws_opts, dict):
+        headers = ws_opts.get("headers")
+        if isinstance(headers, dict):
+            host = headers.get("Host") or headers.get("host")
+            if isinstance(host, str) and host.strip():
+                return host.strip()
+    return node_sni_host(node)
+
+
+def is_placeholder_uuid(value: str | None) -> bool:
+    uuid = str(value or "").strip().lower()
+    compact = uuid.replace("-", "")
+    placeholder_set = {
+        "00000000-0000-0000-0000-000000000000",
+        "ffffffff-ffff-ffff-ffff-ffffffffffff",
+        "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "aaaaaabb-4ddd-4eee-9fff-ffffffffffff",
+    }
+    if uuid in placeholder_set:
+        return True
+    if re.fullmatch(r"[0-9a-f]{32}", compact):
+        # Reject obvious public-list dummy UUIDs made mostly from a/f/0/1.
+        dominant = max(compact.count(ch) for ch in set(compact)) if compact else 0
+        if dominant >= 20 and len(set(compact)) <= 5:
+            return True
+    return False
+
+
+def harden_ws_node(node: ProxyNode) -> None:
+    """Make WS output closer to what OpenClash/Mihomo expects."""
+    if node_network(node) != "ws":
+        return
+    node.clash["alpn"] = ["http/1.1"]
+    ws_opts = node.clash.setdefault("ws-opts", {})
+    if not isinstance(ws_opts, dict):
+        ws_opts = {}
+        node.clash["ws-opts"] = ws_opts
+    ws_opts["path"] = ws_path(node)
+    headers = ws_opts.setdefault("headers", {})
+    if not isinstance(headers, dict):
+        headers = {}
+        ws_opts["headers"] = headers
+    headers["Host"] = str(headers.get("Host") or headers.get("host") or node_sni_host(node)).strip()
+
+
 PLACEHOLDER_VALUES = {"", "-", "none", "null", "undefined", "nil", "nan"}
 
 
@@ -733,6 +795,8 @@ def validate_complete_node(node: ProxyNode) -> tuple[bool, str]:
     if proto == "vless":
         if not complete_value(clash.get("uuid")):
             missing.append("uuid")
+        elif is_placeholder_uuid(str(clash.get("uuid"))):
+            missing.append("uuid placeholder")
         if not complete_value(clash.get("servername")):
             missing.append("servername")
         if str(clash.get("tls", "")).lower() in {"false", "0", "none"}:
@@ -744,6 +808,8 @@ def validate_complete_node(node: ProxyNode) -> tuple[bool, str]:
     elif proto == "vmess":
         if not complete_value(clash.get("uuid")):
             missing.append("uuid")
+        elif is_placeholder_uuid(str(clash.get("uuid"))):
+            missing.append("uuid placeholder")
         if not complete_value(clash.get("cipher")):
             missing.append("cipher")
         if not complete_value(clash.get("servername")):
@@ -834,8 +900,92 @@ def tls_bug_delay(node: ProxyNode, timeout: float, attempts: int) -> tuple[bool,
     }
 
 
-def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, require_original: bool) -> ProxyNode:
-    bug_ok, bug_info = tls_bug_delay(node, timeout, attempts)
+def ws_upgrade_delay(node: ProxyNode, timeout: float, attempts: int) -> tuple[bool, dict[str, Any]]:
+    """Check TLS + WebSocket Upgrade through the selected bug IP.
+
+    A node can complete TLS with Cloudflare but still fail OpenClash health check
+    if the WS path/Host is wrong. This check only accepts HTTP 101 Switching Protocols.
+    """
+    sni = node_sni_host(node)
+    host = ws_host_header(node)
+    path = ws_path(node)
+    node.bug_sni = sni
+    delays: list[int] = []
+    status_codes: list[int] = []
+    last_error = ""
+    context = ssl.create_default_context()
+    context.check_hostname = False
+    context.verify_mode = ssl.CERT_NONE
+    for _ in range(max(1, attempts)):
+        start = time.perf_counter()
+        try:
+            raw = socket.create_connection((TARGET_SERVER, ONLY_PORT), timeout=timeout)
+            raw.settimeout(timeout)
+            with raw:
+                with context.wrap_socket(raw, server_hostname=sni) as sock:
+                    key = base64.b64encode(os.urandom(16)).decode("ascii")
+                    request = (
+                        f"GET {path} HTTP/1.1\r\n"
+                        f"Host: {host}\r\n"
+                        f"User-Agent: {USER_AGENT}\r\n"
+                        "Connection: Upgrade\r\n"
+                        "Upgrade: websocket\r\n"
+                        "Sec-WebSocket-Version: 13\r\n"
+                        f"Sec-WebSocket-Key: {key}\r\n"
+                        "Pragma: no-cache\r\n"
+                        "Cache-Control: no-cache\r\n"
+                        "\r\n"
+                    )
+                    sock.sendall(request.encode("ascii", errors="ignore"))
+                    response = sock.recv(512)
+                    first_line = response.split(b"\r\n", 1)[0].decode("iso-8859-1", errors="ignore")
+                    match = re.search(r"\s(\d{3})\s", first_line)
+                    status = int(match.group(1)) if match else 0
+                    status_codes.append(status)
+                    if status == 101:
+                        delays.append(int((time.perf_counter() - start) * 1000))
+                    else:
+                        last_error = first_line or f"HTTP {status}"
+        except Exception as exc:
+            last_error = str(exc)
+        time.sleep(0.03)
+
+    node.ws_success_count = len(delays)
+    node.ws_upgrade_ms = min(delays) if delays else None
+    node.ws_status = "101" if delays else (str(status_codes[-1]) if status_codes else str(last_error)[:80])
+
+    if not delays:
+        return False, {
+            "best_delay_ms": None,
+            "avg_delay_ms": None,
+            "jitter_ms": None,
+            "success_count": 0,
+            "attempts": attempts,
+            "score": 999999,
+            "reason": f"ws upgrade gagal: {node.ws_status}",
+        }
+
+    best = min(delays)
+    avg = int(statistics.mean(delays))
+    jitter = int(max(delays) - min(delays)) if len(delays) > 1 else 0
+    score = best + int(jitter * 0.9) + int((attempts - len(delays)) * 220)
+    return True, {
+        "best_delay_ms": best,
+        "avg_delay_ms": avg,
+        "jitter_ms": jitter,
+        "success_count": len(delays),
+        "attempts": attempts,
+        "score": score,
+        "reason": "bug-ws-101-alive",
+    }
+
+
+def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, require_original: bool, require_ws_upgrade: bool = True) -> ProxyNode:
+    harden_ws_node(node)
+    if require_ws_upgrade and node_network(node) == "ws":
+        bug_ok, bug_info = ws_upgrade_delay(node, timeout, attempts)
+    else:
+        bug_ok, bug_info = tls_bug_delay(node, timeout, attempts)
 
     # Optimasi penting: kalau original server tidak diwajibkan, jangan dites.
     # Seleksi YAML memang memakai delay ke bug server, jadi cek original hanya menambah waktu proses.
@@ -876,7 +1026,7 @@ def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, requir
     return node
 
 
-def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = 2000, rule_mode: str = "Lengkap") -> str:
+def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = DEFAULT_HEALTH_TIMEOUT_MS, rule_mode: str = "Lengkap") -> str:
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
 
@@ -1051,6 +1201,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "tolerance": tolerance,
             "lazy": False,
             "timeout": health_timeout,
+            "expected-status": 204,
         },
         {
             "name": "FALLBACK",
@@ -1060,6 +1211,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "interval": interval,
             "lazy": False,
             "timeout": health_timeout,
+            "expected-status": 204,
         },
         {
             "name": "LOAD-BALANCE",
@@ -1070,6 +1222,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "interval": max(interval, 120),
             "lazy": False,
             "timeout": health_timeout,
+            "expected-status": 204,
         },
     ]
 
@@ -1277,6 +1430,9 @@ def build_csv(nodes: list[ProxyNode]) -> str:
         "bug_avg_delay_ms",
         "bug_jitter_ms",
         "bug_success_count",
+        "ws_upgrade_ms",
+        "ws_success_count",
+        "ws_status",
         "original_best_delay_ms",
         "original_success_count",
         "attempts",
@@ -1300,6 +1456,9 @@ def build_csv(nodes: list[ProxyNode]) -> str:
             node.bug_avg_delay_ms if node.bug_avg_delay_ms is not None else "",
             node.bug_jitter_ms if node.bug_jitter_ms is not None else "",
             node.bug_success_count,
+            node.ws_upgrade_ms if node.ws_upgrade_ms is not None else "",
+            node.ws_success_count,
+            node.ws_status,
             node.original_best_delay_ms if node.original_best_delay_ms is not None else "",
             node.original_success_count,
             node.attempts,
@@ -1327,6 +1486,7 @@ def process_sources(
     candidate_min: int = 500,
     max_jitter_ms: int = 0,
     prefer_ws: bool = True,
+    require_ws_upgrade: bool = True,
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
     fast_target_ms = min(int(fast_target_ms), FAST_TARGET_DELAY_MS)
     fill_delay_ms = min(max(int(fill_delay_ms), fast_target_ms), HARD_MAX_DELAY_MS)
@@ -1355,6 +1515,7 @@ def process_sources(
         if not node:
             skipped.append(uri[:140])
             continue
+        harden_ws_node(node)
         is_complete, complete_reason = validate_complete_node(node)
         if not is_complete:
             node.status = "incomplete"
@@ -1385,7 +1546,7 @@ def process_sources(
     if testable:
         with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(testable))) as executor:
             future_map = {
-                executor.submit(check_node_bug_compat, node, tcp_timeout, attempts, require_original): node
+                executor.submit(check_node_bug_compat, node, tcp_timeout, attempts, require_original, require_ws_upgrade): node
                 for node in testable
             }
             for future in concurrent.futures.as_completed(future_map):
@@ -1498,14 +1659,19 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
         value=True,
         help="Jika aktif, node WS akan dites dan dipilih lebih dulu. gRPC/HTTP/TCP tetap dipakai sebagai cadangan jika jumlah WS kurang.",
     )
+    require_ws_upgrade = st.checkbox(
+        "Wajib WS Upgrade 101",
+        value=True,
+        help="Sangat disarankan aktif. Node WS hanya lolos jika path + Host benar-benar membalas 101 Switching Protocols di bug server.",
+    )
 
     test_url = st.selectbox(
         "URL health check OpenClash",
         [FAST_TEST_URL, ALT_TEST_URL, THIRD_TEST_URL],
-        index=0,
-        help="Default memakai Cloudflare captive portal generate_204 sesuai permintaan.",
+        index=1,
+        help="Default memakai Gstatic generate_204 agar health check OpenClash tidak bias ke domain Cloudflare yang sama dengan bug server.",
     )
-    st.caption("Optimasi lanjutan: preset Cepat/Seimbang/Ketat, cache fetch subscription 10 menit, skip cek original saat tidak wajib, prioritas network WS, filter jitter, Rule Lite, GLOBAL langsung AUTO-FAST, url-test lebih stabil, dan toleransi auto-switch lebih aman.")
+    st.caption("Optimasi lanjutan: preset Cepat/Seimbang/Ketat, cache fetch subscription 10 menit, skip cek original saat tidak wajib, prioritas network WS, validasi WS Upgrade 101, filter jitter, Rule Lite, GLOBAL langsung AUTO-FAST, url-test lebih stabil, dan toleransi auto-switch lebih aman.")
 
 links_text = st.text_area(
     "Link subscription bawaan",
@@ -1525,7 +1691,7 @@ run = st.button("Proses & buat YAML anti delay", type="primary")
 
 if run:
     require_successes = min(int(require_successes), int(attempts))
-    with st.spinner("Mengecek link, menolak akun tidak lengkap, menyaring port 443, menguji bug server + SNI/Host, lalu memilih node tercepat..."):
+    with st.spinner("Mengecek link, menolak akun tidak lengkap, menyaring port 443, menguji WS Upgrade 101/TLS bug server, lalu memilih node tercepat..."):
         alive_nodes, all_nodes, fetch_logs, skipped = process_sources(
             links_text=links_text,
             manual_text=manual_text,
@@ -1543,6 +1709,7 @@ if run:
             candidate_min=int(preset["candidate_min"]),
             max_jitter_ms=int(max_jitter_ms),
             prefer_ws=bool(prefer_ws),
+            require_ws_upgrade=bool(require_ws_upgrade),
         )
 
     total_parsed = len(all_nodes)
@@ -1586,6 +1753,9 @@ if run:
                             "bug_sni": n.bug_sni,
                             "bug_delay_ms": n.bug_best_delay_ms,
                             "bug_success": f"{n.bug_success_count}/{n.attempts}",
+                            "ws_upgrade_ms": n.ws_upgrade_ms,
+                            "ws_success": f"{n.ws_success_count}/{n.attempts}",
+                            "ws_status": n.ws_status,
                             "original_delay_ms": n.original_best_delay_ms,
                             "original_success": f"{n.original_success_count}/{n.attempts}",
                             "score": n.score,
@@ -1598,14 +1768,14 @@ if run:
                     hide_index=True,
                 )
     else:
-        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=min(2000, int(fill_delay_ms) + 300), rule_mode=str(rule_mode))
+        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=DEFAULT_HEALTH_TIMEOUT_MS, rule_mode=str(rule_mode))
         csv_text = build_csv(all_nodes)
 
         ws_count = len([n for n in alive_nodes if node_network(n) == "ws"])
         st.success(
             f"Berhasil membuat YAML dari {len(alive_nodes)} node lengkap yang kompatibel bug server. "
             f"Prioritas WS aktif: {ws_count} node WS masuk YAML. "
-            "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke AUTO-FAST; url-test lebih stabil; kategori rule sudah dipisah dan iklan/malware diblokir."
+            "Node WS wajib lolos Upgrade 101; GLOBAL langsung ke AUTO-FAST; timeout health check 3000 ms; kategori rule sudah dipisah dan iklan/malware diblokir."
         )
         c1, c2 = st.columns(2)
         with c1:
@@ -1640,6 +1810,9 @@ if run:
                     "bug_avg_ms": n.bug_avg_delay_ms,
                     "bug_jitter_ms": n.bug_jitter_ms,
                     "bug_success": f"{n.bug_success_count}/{n.attempts}",
+                    "ws_upgrade_ms": n.ws_upgrade_ms,
+                    "ws_success": f"{n.ws_success_count}/{n.attempts}",
+                    "ws_status": n.ws_status,
                     "original_delay_ms": n.original_best_delay_ms,
                     "score": n.score,
                     "source": n.source,
@@ -1654,6 +1827,6 @@ if run:
             st.code(yaml_text, language="yaml")
 
 st.info(
-    "Catatan penting: aplikasi ini mengecek kompatibilitas bug server 104.17.3.81 menggunakan TLS + SNI/Host, lalu OpenClash melakukan url-test/fallback otomatis. "
+    "Catatan penting: aplikasi ini mengecek kompatibilitas bug server 104.17.3.81 menggunakan WS Upgrade 101 untuk node WebSocket dan TLS + SNI/Host untuk node non-WS, lalu OpenClash melakukan url-test/fallback otomatis. "
     "Akun tanpa field wajib tidak dimasukkan ke YAML. Tes ini jauh lebih sesuai dibanding hanya cek original server, tetapi validasi akun penuh tetap dilakukan oleh Health Check OpenClash. Rule-provider iklan/malware dan kategori akan diunduh oleh OpenClash/Mihomo saat config dijalankan. Sumber publik bisa berubah sewaktu-waktu."
 )
