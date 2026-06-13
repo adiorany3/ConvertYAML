@@ -68,8 +68,8 @@ URI_RE = re.compile(r"(?:vless|vmess|trojan|ss)://[^\s<'\"`]+", re.IGNORECASE)
 FAST_TEST_URL = "http://cp.cloudflare.com/generate_204"
 ALT_TEST_URL = "http://www.gstatic.com/generate_204"
 THIRD_TEST_URL = "https://www.google.com/generate_204"
-DEFAULT_MAX_DELAY_MS = 1500
-HARD_MAX_DELAY_MS = 1700
+DEFAULT_MAX_DELAY_MS = 120
+HARD_MAX_DELAY_MS = 123
 
 
 @dataclass
@@ -618,7 +618,8 @@ def process_sources(
     require_successes: int,
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
     # Hard cap keeps generated accounts below the previously observed website delay floor.
-    # The lowest provided reference was GitHub at 1757 ms, so this app never allows >1700 ms.
+    # Batas paling ketat dibuat lebih rendah dari referensi terendah: Baidu 124 ms.
+    # Jadi nilai maksimum dikunci 123 ms, dengan default 120 ms.
     max_delay_ms = min(int(max_delay_ms), HARD_MAX_DELAY_MS)
     links = [line.strip().strip(",'\"") for line in links_text.splitlines() if line.strip()]
     fetch_logs: list[tuple[str, str]] = []
@@ -701,17 +702,17 @@ with st.expander("Pengaturan cepat anti delay", expanded=True):
     with col2:
         st.text_input("Port wajib", value=str(ONLY_PORT), disabled=True)
     with col3:
-        max_nodes = st.number_input("Maksimal node tercepat", min_value=1, max_value=300, value=30, step=5)
+        max_nodes = st.number_input("Maksimal node tercepat", min_value=1, max_value=300, value=20, step=5)
     with col4:
-        max_delay_ms = st.number_input("Maks delay masuk YAML/ms", min_value=50, max_value=HARD_MAX_DELAY_MS, value=DEFAULT_MAX_DELAY_MS, step=50, help="Dibatasi maksimal 1700 ms agar lebih rendah dari referensi GitHub 1757 ms, Baidu 1824 ms, dan NetEase 2011 ms.")
+        max_delay_ms = st.number_input("Maks delay masuk YAML/ms", min_value=20, max_value=HARD_MAX_DELAY_MS, value=DEFAULT_MAX_DELAY_MS, step=1, help="Dikunci maksimal 123 ms agar lebih rendah dari Baidu 124 ms, GitHub 157 ms, dan NetEase 211 ms.")
 
     col5, col6, col7, col8 = st.columns(4)
     with col5:
         attempts = st.number_input("Tes ulang per node", min_value=1, max_value=5, value=3, step=1)
     with col6:
-        require_successes = st.number_input("Minimal sukses", min_value=1, max_value=5, value=2, step=1)
+        require_successes = st.number_input("Minimal sukses", min_value=1, max_value=5, value=3, step=1)
     with col7:
-        tcp_timeout = st.number_input("Timeout node/detik", min_value=0.5, max_value=10.0, value=2.5, step=0.5)
+        tcp_timeout = st.number_input("Timeout node/detik", min_value=0.3, max_value=5.0, value=1.0, step=0.1)
     with col8:
         max_workers = st.number_input("Concurrency", min_value=1, max_value=100, value=36, step=1)
 
@@ -719,9 +720,9 @@ with st.expander("Pengaturan cepat anti delay", expanded=True):
     with col9:
         fetch_timeout = st.number_input("Timeout fetch link/detik", min_value=5, max_value=60, value=20, step=5)
     with col10:
-        urltest_interval = st.number_input("Interval url-test OpenClash/detik", min_value=30, max_value=900, value=60, step=30)
+        urltest_interval = st.number_input("Interval url-test OpenClash/detik", min_value=30, max_value=900, value=30, step=30)
     with col11:
-        tolerance = st.number_input("Toleransi auto-switch/ms", min_value=5, max_value=300, value=25, step=5)
+        tolerance = st.number_input("Toleransi auto-switch/ms", min_value=1, max_value=100, value=10, step=1)
 
     test_url = st.selectbox(
         "URL health check OpenClash",
@@ -729,7 +730,7 @@ with st.expander("Pengaturan cepat anti delay", expanded=True):
         index=0,
         help="Default memakai Cloudflare captive portal generate_204 sesuai permintaan.",
     )
-    st.caption("Target filter: hanya node port 443 dengan delay ≤ batas di atas. Batas maksimum dikunci 1700 ms agar lebih rendah dari GitHub 1757 ms, Baidu 1824 ms, dan NetEase 2011 ms.")
+    st.caption("Target filter: hanya node port 443 dengan delay ≤ batas di atas. Batas maksimum dikunci 123 ms agar lebih rendah dari Baidu 124 ms, GitHub 157 ms, dan NetEase 211 ms.")
 
 links_text = st.text_area(
     "Link subscription bawaan",
@@ -811,7 +812,7 @@ if run:
                     hide_index=True,
                 )
     else:
-        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=min(2000, int(max_delay_ms) + 300))
+        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=min(800, max(300, int(max_delay_ms) + 250)))
         csv_text = build_csv(all_nodes)
 
         st.success(
