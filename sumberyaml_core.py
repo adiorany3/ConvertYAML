@@ -409,7 +409,7 @@ def parse_vmess(uri: str, source: str) -> ProxyNode | None:
     if not is_supported_network(network):
         return None
     tls_value = str(data.get("tls") or "tls").strip().lower()
-    sni = str(data.get("sni") or data.get("host") or server).strip()
+    sni = str(data.get("sni") or data.get("servername") or data.get("serverName") or data.get("host") or server).strip()
     host = str(data.get("host") or sni or server).strip()
     path = str(data.get("path") or "/").strip() or "/"
     cipher = str(data.get("scy") or data.get("cipher") or "auto").strip() or "auto"
@@ -643,6 +643,38 @@ def node_sni_host(node: ProxyNode) -> str:
             return candidate
     return node.original_server
 
+
+
+def explicit_tls_name_from_raw(node: ProxyNode) -> str:
+    """Return the explicit SNI/servername from the original URI, if present.
+
+    This is stricter than node_sni_host(): it does NOT fall back to Host or
+    original_server. For bug-server output, nodes without explicit SNI/servername
+    often pass a simple TLS check but later timeout in OpenClash.
+    """
+    raw = str(node.raw or "").strip()
+    scheme = raw.split("://", 1)[0].lower() if "://" in raw else str(node.type or "").lower()
+
+    try:
+        if scheme in {"vless", "trojan"}:
+            params = parse_qs(urlparse(raw).query)
+            for key in ("sni", "servername", "serverName", "peer"):
+                value = first_query(params, key, default="").strip()
+                if complete_value(value) and not looks_like_ip(value):
+                    return value
+        elif scheme == "vmess":
+            payload = raw.split("://", 1)[1].split("#", 1)[0]
+            decoded = b64decode_text(payload)
+            if not decoded:
+                return ""
+            data = json.loads(decoded)
+            for key in ("sni", "servername", "serverName"):
+                value = str(data.get(key) or "").strip()
+                if complete_value(value) and not looks_like_ip(value):
+                    return value
+    except Exception:
+        return ""
+    return ""
 
 def node_network(node: ProxyNode) -> str:
     """Return the normalized transport network used by the proxy node."""
@@ -1136,8 +1168,17 @@ def validate_complete_node(node: ProxyNode) -> tuple[bool, str]:
     network = str(clash.get("network") or "tcp").lower()
 
     if proto in {"vless", "vmess", "trojan"}:
+        explicit_sni = explicit_tls_name_from_raw(node)
+        if explicit_sni:
+            if proto in {"vless", "vmess"}:
+                clash["servername"] = explicit_sni
+            elif proto == "trojan":
+                clash["sni"] = explicit_sni
+            node.bug_sni = explicit_sni
+        else:
+            missing.append("explicit sni/servername")
         sni = node_sni_host(node)
-        node.bug_sni = sni
+        node.bug_sni = explicit_sni or sni
         if not complete_value(sni) or looks_like_ip(str(sni)):
             missing.append("SNI/Host domain")
         if network not in {"tcp", "ws", "grpc", "http"}:

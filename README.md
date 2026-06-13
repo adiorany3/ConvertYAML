@@ -133,3 +133,26 @@ vless://uuid@104.17.3.81:443?...&sni=domain-asli&type=ws&host=domain-asli&path=/
 ```
 
 Field SNI/Host/path tetap memakai data akun asli agar koneksi WebSocket tetap sesuai, sedangkan alamat server mengikuti YAML OpenClash.
+
+
+## Update: filter SNI/servername wajib
+
+Versi ini menolak akun VLESS, VMess, dan Trojan jika link asli tidak memiliki field SNI/servername eksplisit.
+
+Yang diterima sebagai SNI eksplisit:
+
+- `sni=`
+- `servername=`
+- `serverName=`
+- `peer=` sebagai alias SNI pada beberapa format VLESS/Trojan
+
+Akun yang hanya punya `Host` atau hanya original server tanpa SNI/servername tidak akan dipilih, karena sering terlihat hidup saat TLS awal tetapi timeout saat health check OpenClash.
+
+Output tetap:
+
+- `openclash_auto.yaml`
+- `openclash_auto_report.csv`
+- `akun.txt`
+- `last_update.txt`
+
+Pada `akun.txt`, server tetap memakai bug server `104.17.3.81:443`, sedangkan SNI/Host/path tetap mengikuti akun yang lolos.
