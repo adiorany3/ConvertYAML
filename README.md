@@ -1,44 +1,89 @@
-# SumberYAML WS Strict 20 Alive + GitHub Action 6 Jam
+# SumberYAML GitHub Action 6 Jam + akun.txt + Nama Provider Original Server
 
-Versi ini menambahkan generator otomatis untuk membuat dan memperbarui YAML OpenClash/Mihomo dari GitHub Actions setiap 6 jam.
+Versi ini membuat YAML OpenClash otomatis setiap 6 jam dan memberi nama node berdasarkan provider/ASN dari `original_server`, bukan dari bug IP `104.17.3.81`.
 
-## File penting
+## Output otomatis
 
-- `streamlit_app.py` — aplikasi Streamlit manual.
-- `generate_yaml.py` — generator headless untuk GitHub Actions.
-- `sumberyaml_core.py` — fungsi inti parsing, validasi, seleksi node, dan build YAML.
-- `.github/workflows/update-yaml-6jam.yml` — workflow update otomatis per 6 jam.
-- `openclash_auto.yaml` — output YAML otomatis setelah workflow berjalan.
-- `openclash_auto_report.csv` — report hasil validasi.
-- `last_update.txt` — catatan waktu update terakhir.
+Setiap workflow berjalan, file ini akan dibuat/update:
 
-## Cara pakai di GitHub
+- `openclash_auto.yaml`
+- `openclash_auto_report.csv`
+- `akun.txt`
+- `last_update.txt`
 
-1. Upload semua file/folder ini ke repository GitHub.
-2. Pastikan file workflow berada di:
-   ```text
-   .github/workflows/update-yaml-6jam.yml
-   ```
-3. Buka tab **Actions** di repository.
-4. Jalankan manual pertama kali dengan tombol **Run workflow**.
-5. Setelah itu workflow akan berjalan otomatis setiap 6 jam.
+## Format nama node
 
-## Jadwal
+Contoh nama node:
 
-Workflow memakai cron:
+```text
+AKUN-001-VULTR-VLESS-WS-18MS
+AKUN-002-MELBICOM-VLESS-WS-24MS
+AKUN-003-ORACLE-VLESS-WS-35MS
+AKUN-004-DIGITALOCEAN-TROJAN-WS-42MS
+```
+
+Nama provider diambil dari `original_server` dengan alur:
+
+1. Ambil `original_server` dari akun asli.
+2. Jika domain, resolve ke IP.
+3. Cek RDAP/ASN dari IP tersebut.
+4. Cocokkan provider seperti Vultr, Melbicom, DigitalOcean, OVH, Oracle, Akamai/Linode, Hetzner, AWS, Google, Azure, Cloudflare, dan lainnya.
+5. Jika provider tidak terdeteksi, fallback ke domain original server.
+
+> Catatan: karena `server` output di YAML tetap `104.17.3.81`, nama provider tidak diambil dari field `server`, tetapi dari `original_server` akun.
+
+## akun.txt
+
+File `akun.txt` berisi link akun final yang masuk YAML saja:
+
+```text
+vless://...
+vmess://...
+trojan://...
+```
+
+Nama fragment/link juga ikut disesuaikan dengan nama node final, misalnya:
+
+```text
+#AKUN-001-VULTR-VLESS-WS-18MS
+```
+
+## Jadwal update
+
+Workflow berjalan otomatis setiap 6 jam:
 
 ```yaml
 - cron: "0 */6 * * *"
 ```
 
-GitHub Actions memakai zona waktu UTC, sehingga jadwalnya adalah 00:00, 06:00, 12:00, dan 18:00 UTC.
+GitHub Actions memakai UTC, jadi jadwalnya 00:00, 06:00, 12:00, dan 18:00 UTC.
 
-## Jika commit gagal karena permission
+## Cara pakai
 
-Buka repository GitHub:
+1. Upload semua isi ZIP ke repository GitHub.
+2. Pastikan file workflow berada di:
 
 ```text
-Settings > Actions > General > Workflow permissions
+.github/workflows/update-yaml-6jam.yml
+```
+
+3. Buka tab **Actions**.
+4. Jalankan manual pertama kali lewat **Run workflow**.
+5. Setelah selesai, cek file:
+
+```text
+openclash_auto.yaml
+akun.txt
+openclash_auto_report.csv
+last_update.txt
+```
+
+## Jika commit gagal
+
+Buka:
+
+```text
+Repository > Settings > Actions > General > Workflow permissions
 ```
 
 Pilih:
@@ -47,74 +92,28 @@ Pilih:
 Read and write permissions
 ```
 
-Lalu simpan.
+## Tambahan sumber subscription
 
-Workflow ini juga sudah memakai:
-
-```yaml
-permissions:
-  contents: write
-```
-
-## Tambah sumber subscription
-
-Masukkan link tambahan ke file:
+Tambahkan URL subscription tambahan ke:
 
 ```text
 subscription_links.txt
 ```
 
-Satu URL per baris. Baris yang diawali `#` akan diabaikan.
+Satu URL per baris.
 
-## Tambah node manual
+## Tambahan node manual
 
-Masukkan node manual ke file:
+Tambahkan node manual ke:
 
 ```text
 manual_nodes.txt
 ```
 
-Format yang didukung:
+Bisa berisi:
 
 ```text
 vless://...
 vmess://...
 trojan://...
-ss://...
 ```
-
-Untuk mode WS Strict, node `ws` akan lebih diprioritaskan.
-
-## Output untuk OpenClash
-
-Setelah workflow berhasil, gunakan file ini di OpenClash:
-
-```text
-openclash_auto.yaml
-```
-
-Report detail ada di:
-
-```text
-openclash_auto_report.csv
-```
-
-## Default optimasi GitHub Action
-
-```text
-Output node              : 20
-Target minimal hidup     : 20
-WS only                  : aktif
-Wajib WS Upgrade 101     : aktif
-Candidate minimum        : 2500
-Cadangan internal strict : 120
-Health timeout OpenClash : 6000 ms
-Rule mode                : Lite
-```
-
-Catatan: 20/20 tetap tidak bisa dijamin setiap waktu karena sumber akun publik bisa berubah atau mati. Generator akan mencoba mencari lebih banyak kandidat lalu hanya menulis node terbaik yang lolos validasi strict.
-
-
-## akun.txt
-
-Setiap workflow selesai berjalan, akun aktif yang masuk YAML juga disimpan ke `akun.txt` dalam format link share `vless://`, `vmess://`, atau `trojan://`. File ini ikut di-commit otomatis bersama `openclash_auto.yaml`, `openclash_auto_report.csv`, dan `last_update.txt`.

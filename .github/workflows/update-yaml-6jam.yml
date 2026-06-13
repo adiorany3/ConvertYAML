@@ -51,8 +51,8 @@ jobs:
           TEST_URL: "http://www.gstatic.com/generate_204"
           OUTPUT_YAML: "openclash_auto.yaml"
           OUTPUT_CSV: "openclash_auto_report.csv"
-          OUTPUT_STAMP: "last_update.txt"
           OUTPUT_AKUN: "akun.txt"
+          OUTPUT_STAMP: "last_update.txt"
         run: python generate_yaml.py
 
       - name: Commit updated YAML
