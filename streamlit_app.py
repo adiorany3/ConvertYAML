@@ -78,6 +78,60 @@ DEFAULT_TOLERANCE_MS = 40
 DEFAULT_TCP_TIMEOUT = 1.5
 DEFAULT_FETCH_TIMEOUT = 15
 
+OPTIMIZATION_PRESETS: dict[str, dict[str, Any]] = {
+    "Cepat": {
+        "max_nodes": 20,
+        "min_output_nodes": 15,
+        "fill_delay_ms": 300,
+        "attempts": 2,
+        "require_successes": 1,
+        "tcp_timeout": 1.2,
+        "max_workers": 64,
+        "fetch_timeout": 10,
+        "urltest_interval": 60,
+        "tolerance": 50,
+        "require_original": False,
+        "candidate_multiplier": 15,
+        "candidate_min": 300,
+        "max_jitter_ms": 150,
+        "rule_mode": "Lite",
+    },
+    "Seimbang": {
+        "max_nodes": 25,
+        "min_output_nodes": 20,
+        "fill_delay_ms": 400,
+        "attempts": 3,
+        "require_successes": 2,
+        "tcp_timeout": 1.5,
+        "max_workers": 48,
+        "fetch_timeout": 15,
+        "urltest_interval": 60,
+        "tolerance": 40,
+        "require_original": False,
+        "candidate_multiplier": 20,
+        "candidate_min": 500,
+        "max_jitter_ms": 250,
+        "rule_mode": "Lite",
+    },
+    "Ketat": {
+        "max_nodes": 30,
+        "min_output_nodes": 20,
+        "fill_delay_ms": 600,
+        "attempts": 4,
+        "require_successes": 3,
+        "tcp_timeout": 2.0,
+        "max_workers": 40,
+        "fetch_timeout": 20,
+        "urltest_interval": 90,
+        "tolerance": 30,
+        "require_original": True,
+        "candidate_multiplier": 30,
+        "candidate_min": 800,
+        "max_jitter_ms": 350,
+        "rule_mode": "Lengkap",
+    },
+}
+
 
 @dataclass
 class ProxyNode:
@@ -464,6 +518,12 @@ def fetch_url(url: str, timeout: int) -> tuple[str, str, str]:
         return url, "", f"dead: {exc}"
 
 
+@st.cache_data(ttl=600, show_spinner=False)
+def fetch_url_cached(url: str, timeout: int) -> tuple[str, str, str]:
+    """Cache subscription fetch selama 10 menit agar klik proses ulang lebih cepat."""
+    return fetch_url(url, timeout)
+
+
 def one_tcp_delay(host: str, port: int, timeout: float) -> int | None:
     start = time.perf_counter()
     try:
@@ -744,7 +804,18 @@ def tls_bug_delay(node: ProxyNode, timeout: float, attempts: int) -> tuple[bool,
 
 def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, require_original: bool) -> ProxyNode:
     bug_ok, bug_info = tls_bug_delay(node, timeout, attempts)
-    orig_ok, orig_info = stability_check(node.original_server, node.port, timeout, attempts)
+
+    # Optimasi penting: kalau original server tidak diwajibkan, jangan dites.
+    # Seleksi YAML memang memakai delay ke bug server, jadi cek original hanya menambah waktu proses.
+    if require_original:
+        orig_ok, orig_info = stability_check(node.original_server, node.port, timeout, attempts)
+    else:
+        orig_ok = False
+        orig_info = {
+            "best_delay_ms": None,
+            "success_count": 0,
+            "reason": "original check skipped",
+        }
 
     node.bug_best_delay_ms = bug_info["best_delay_ms"]
     node.bug_avg_delay_ms = bug_info["avg_delay_ms"]
@@ -769,11 +840,11 @@ def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, requir
         node.reason = "original server gagal: " + str(orig_info["reason"])[:120]
     else:
         node.status = "alive"
-        node.reason = "bug server alive" + (" + original alive" if orig_ok else "")
+        node.reason = "bug server alive" + (" + original alive" if orig_ok else " + original skipped")
     return node
 
 
-def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = 2000) -> str:
+def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = 2000, rule_mode: str = "Lengkap") -> str:
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
 
@@ -1060,6 +1131,56 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         "MATCH,GLOBAL",
     ]
 
+    if rule_mode == "Lite":
+        # Rule Lite lebih ringan untuk router/OpenClash kecil: provider lebih sedikit, import lebih cepat,
+        # tetapi kategori utama tetap ada.
+        rule_providers = {
+            "ads_domain": {
+                **domain_provider,
+                "path": "./rule_providers/ads_domain.mrs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs",
+            },
+            "youtube_domain": {
+                **domain_provider,
+                "path": "./rule_providers/youtube.mrs",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs",
+            },
+        }
+        rules = [
+            "DOMAIN-SUFFIX,local,DIRECT",
+            "DOMAIN-SUFFIX,lan,DIRECT",
+            "DOMAIN-SUFFIX,localhost,DIRECT",
+            "IP-CIDR,127.0.0.0/8,DIRECT",
+            "IP-CIDR,10.0.0.0/8,DIRECT",
+            "IP-CIDR,172.16.0.0/12,DIRECT",
+            "IP-CIDR,192.168.0.0/16,DIRECT",
+            "IP-CIDR,169.254.0.0/16,DIRECT",
+            "GEOIP,LAN,DIRECT,no-resolve",
+            "RULE-SET,ads_domain,REJECT",
+            "DOMAIN-SUFFIX,doubleclick.net,REJECT",
+            "DOMAIN-SUFFIX,googlesyndication.com,REJECT",
+            "DOMAIN-SUFFIX,googleadservices.com,REJECT",
+            "DOMAIN-KEYWORD,adservice,REJECT",
+            "DOMAIN-KEYWORD,analytics,REJECT",
+            "DOMAIN-KEYWORD,tracker,REJECT",
+            "RULE-SET,youtube_domain,YOUTUBE",
+            "DOMAIN-SUFFIX,youtube.com,YOUTUBE",
+            "DOMAIN-SUFFIX,youtu.be,YOUTUBE",
+            "DOMAIN-SUFFIX,ytimg.com,YOUTUBE",
+            "DOMAIN-SUFFIX,googlevideo.com,YOUTUBE",
+            "DOMAIN-SUFFIX,facebook.com,SOCIAL-MEDIA",
+            "DOMAIN-SUFFIX,fbcdn.net,SOCIAL-MEDIA",
+            "DOMAIN-SUFFIX,instagram.com,SOCIAL-MEDIA",
+            "DOMAIN-SUFFIX,cdninstagram.com,SOCIAL-MEDIA",
+            "DOMAIN-SUFFIX,tiktok.com,SOCIAL-MEDIA",
+            "DOMAIN-SUFFIX,tiktokcdn.com,SOCIAL-MEDIA",
+            "DOMAIN-SUFFIX,twitter.com,SOCIAL-MEDIA",
+            "DOMAIN-SUFFIX,x.com,SOCIAL-MEDIA",
+            "DOMAIN-SUFFIX,t.me,SOCIAL-MEDIA",
+            "DOMAIN-SUFFIX,telegram.org,SOCIAL-MEDIA",
+            "MATCH,GLOBAL",
+        ]
+
     config: dict[str, Any] = {
         "mixed-port": 7890,
         "redir-port": 7892,
@@ -1168,6 +1289,9 @@ def process_sources(
     attempts: int,
     require_successes: int,
     require_original: bool,
+    candidate_multiplier: int = 20,
+    candidate_min: int = 500,
+    max_jitter_ms: int = 0,
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
     fast_target_ms = min(int(fast_target_ms), FAST_TARGET_DELAY_MS)
     fill_delay_ms = min(max(int(fill_delay_ms), fast_target_ms), HARD_MAX_DELAY_MS)
@@ -1177,7 +1301,7 @@ def process_sources(
 
     if links:
         with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(links))) as executor:
-            futures = [executor.submit(fetch_url, url, fetch_timeout) for url in links]
+            futures = [executor.submit(fetch_url_cached, url, fetch_timeout) for url in links]
             for future in concurrent.futures.as_completed(futures):
                 url, text, status = future.result()
                 fetch_logs.append((url, status))
@@ -1211,7 +1335,7 @@ def process_sources(
     # Test more candidates than output target so the app can still fill 20 alive accounts
     # even when only a small percentage is compatible with the selected bug server.
     target = max(int(max_nodes), int(min_output_nodes), 20)
-    candidate_limit = max(target * 30, 800)
+    candidate_limit = max(target * int(candidate_multiplier), int(candidate_min))
     parsed = parsed[:candidate_limit]
 
     testable = [node for node in parsed if node.status == "pending"]
@@ -1234,6 +1358,7 @@ def process_sources(
         if node.status == "alive"
         and node.best_delay_ms is not None
         and node.success_count >= require_successes
+        and (int(max_jitter_ms) <= 0 or (node.jitter_ms is not None and node.jitter_ms <= int(max_jitter_ms)))
     ]
 
     # Tier 1: very fast target, lower than Baidu 124 ms / GitHub 157 ms / NetEase 211 ms.
@@ -1277,41 +1402,53 @@ st.caption(
 )
 
 with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
+    mode_profile = st.selectbox(
+        "Preset optimasi",
+        list(OPTIMIZATION_PRESETS.keys()),
+        index=1,
+        help="Cepat untuk proses ringan, Seimbang untuk harian, Ketat untuk hasil lebih stabil tetapi proses lebih lama.",
+    )
+    preset = OPTIMIZATION_PRESETS[mode_profile]
+
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.text_input("Server output / bug", value=TARGET_SERVER, disabled=True)
     with col2:
         st.text_input("Port wajib", value=str(ONLY_PORT), disabled=True)
     with col3:
-        max_nodes = st.number_input("Maksimal node output", min_value=1, max_value=300, value=20, step=5)
+        max_nodes = st.number_input("Maksimal node output", min_value=1, max_value=300, value=int(preset["max_nodes"]), step=5)
     with col4:
-        min_output_nodes = st.number_input("Target minimal hidup", min_value=1, max_value=300, value=MIN_OUTPUT_NODES, step=1, help="Aplikasi akan berusaha mengisi sampai jumlah ini dari akun yang kompatibel bug server. Kalau sumber publik memang kurang, hasil bisa tetap kurang.")
+        min_output_nodes = st.number_input("Target minimal hidup", min_value=1, max_value=300, value=int(preset["min_output_nodes"]), step=1, help="Aplikasi akan berusaha mengisi sampai jumlah ini dari akun yang kompatibel bug server. Kalau sumber publik memang kurang, hasil bisa tetap kurang.")
 
     col5, col6, col7, col8 = st.columns(4)
     with col5:
         fast_target_ms = st.number_input("Prioritas super cepat/ms", min_value=50, max_value=FAST_TARGET_DELAY_MS, value=120, step=1, help="Target ini lebih rendah dari Baidu 124 ms, GitHub 157 ms, dan NetEase 211 ms.")
     with col6:
-        fill_delay_ms = st.number_input("Batas cadangan hidup/ms", min_value=FAST_TARGET_DELAY_MS, max_value=HARD_MAX_DELAY_MS, value=DEFAULT_FILL_DELAY_MS, step=50, help="Dipakai hanya kalau node ≤120/123 ms kurang dari target minimal. Tujuannya agar output tidak cuma 5 akun.")
+        fill_delay_ms = st.number_input("Batas cadangan hidup/ms", min_value=FAST_TARGET_DELAY_MS, max_value=HARD_MAX_DELAY_MS, value=int(preset["fill_delay_ms"]), step=50, help="Dipakai hanya kalau node ≤120/123 ms kurang dari target minimal. Tujuannya agar output tidak cuma 5 akun.")
     with col7:
-        attempts = st.number_input("Tes ulang per node", min_value=1, max_value=5, value=3, step=1)
+        attempts = st.number_input("Tes ulang per node", min_value=1, max_value=5, value=int(preset["attempts"]), step=1)
     with col8:
-        require_successes = st.number_input("Minimal sukses bug", min_value=1, max_value=5, value=2, step=1)
+        require_successes = st.number_input("Minimal sukses bug", min_value=1, max_value=5, value=int(preset["require_successes"]), step=1)
 
     col9, col10, col11, col12 = st.columns(4)
     with col9:
-        tcp_timeout = st.number_input("Timeout cek/detik", min_value=0.5, max_value=10.0, value=DEFAULT_TCP_TIMEOUT, step=0.5)
+        tcp_timeout = st.number_input("Timeout cek/detik", min_value=0.5, max_value=10.0, value=float(preset["tcp_timeout"]), step=0.5)
     with col10:
-        max_workers = st.number_input("Concurrency", min_value=1, max_value=100, value=48, step=1)
+        max_workers = st.number_input("Concurrency", min_value=1, max_value=100, value=int(preset["max_workers"]), step=1)
     with col11:
-        fetch_timeout = st.number_input("Timeout fetch link/detik", min_value=5, max_value=60, value=DEFAULT_FETCH_TIMEOUT, step=5)
+        fetch_timeout = st.number_input("Timeout fetch link/detik", min_value=5, max_value=60, value=int(preset["fetch_timeout"]), step=5)
     with col12:
-        require_original = st.checkbox("Wajib original server juga hidup", value=False, help="Matikan agar lebih banyak akun lolos saat memakai bug server. Nyalakan jika ingin lebih ketat.")
+        require_original = st.checkbox("Wajib original server juga hidup", value=bool(preset["require_original"]), help="Matikan agar lebih banyak akun lolos saat memakai bug server. Nyalakan jika ingin lebih ketat.")
 
-    col13, col14 = st.columns(2)
+    col13, col14, col15, col16 = st.columns(4)
     with col13:
-        urltest_interval = st.number_input("Interval url-test OpenClash/detik", min_value=15, max_value=900, value=DEFAULT_URLTEST_INTERVAL, step=15)
+        urltest_interval = st.number_input("Interval url-test OpenClash/detik", min_value=15, max_value=900, value=int(preset["urltest_interval"]), step=15)
     with col14:
-        tolerance = st.number_input("Toleransi auto-switch/ms", min_value=5, max_value=300, value=DEFAULT_TOLERANCE_MS, step=5)
+        tolerance = st.number_input("Toleransi auto-switch/ms", min_value=5, max_value=300, value=int(preset["tolerance"]), step=5)
+    with col15:
+        max_jitter_ms = st.number_input("Batas jitter/ms", min_value=0, max_value=1000, value=int(preset["max_jitter_ms"]), step=25, help="0 berarti filter jitter dimatikan. Makin kecil makin stabil, tapi node yang lolos bisa lebih sedikit.")
+    with col16:
+        rule_mode = st.selectbox("Mode rule", ["Lite", "Lengkap"], index=0 if preset["rule_mode"] == "Lite" else 1, help="Lite lebih ringan untuk router kecil. Lengkap punya kategori dan provider lebih banyak.")
 
     test_url = st.selectbox(
         "URL health check OpenClash",
@@ -1319,7 +1456,7 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
         index=0,
         help="Default memakai Cloudflare captive portal generate_204 sesuai permintaan.",
     )
-    st.caption("Mode baru: akun yang tidak lengkap langsung ditolak sebelum test delay. Cek delay ke bug server 104.17.3.81 dengan SNI/Host akun. Nama akun dari subscription publik otomatis diganti menjadi format aman AKUN-001-VLESS-120MS agar tidak membuat OpenClash error. Node ≤120/123 ms diprioritaskan; jika kurang dari 20, cadangan yang tetap hidup akan ditambahkan. Default responsif: GLOBAL langsung AUTO-FAST, url-test 60 detik, toleransi 40 ms, dan cadangan ≤400 ms.")
+    st.caption("Optimasi lanjutan: preset Cepat/Seimbang/Ketat, cache fetch subscription 10 menit, skip cek original saat tidak wajib, filter jitter, Rule Lite, GLOBAL langsung AUTO-FAST, url-test lebih stabil, dan toleransi auto-switch lebih aman.")
 
 links_text = st.text_area(
     "Link subscription bawaan",
@@ -1353,6 +1490,9 @@ if run:
             attempts=int(attempts),
             require_successes=int(require_successes),
             require_original=bool(require_original),
+            candidate_multiplier=int(preset["candidate_multiplier"]),
+            candidate_min=int(preset["candidate_min"]),
+            max_jitter_ms=int(max_jitter_ms),
         )
 
     total_parsed = len(all_nodes)
@@ -1407,7 +1547,7 @@ if run:
                     hide_index=True,
                 )
     else:
-        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=min(2000, int(fill_delay_ms) + 300))
+        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=min(2000, int(fill_delay_ms) + 300), rule_mode=str(rule_mode))
         csv_text = build_csv(all_nodes)
 
         st.success(
