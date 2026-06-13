@@ -57,7 +57,89 @@ dns:
     ipcidr:
     - 240.0.0.0/4
 proxies:
-- name: AKUN-001-TROJAN-16MS
+- name: AKUN-001-VLESS-17MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: ee122f13-9b54-49b6-abc5-aa47b464fdb3
+  udp: true
+  tls: true
+  servername: norman.ns.cloudflare.com
+  network: tcp
+  client-fingerprint: chrome
+  skip-cert-verify: true
+- name: AKUN-002-TROJAN-17MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: humanity
+  udp: true
+  sni: www.multiplydose.com
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: //assignment
+    headers:
+      Host: www.multiplydose.com
+- name: AKUN-003-VLESS-18MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: fc965ad9-bdd7-4815-ad71-b39ec5972dc1
+  udp: true
+  tls: true
+  servername: octopusss4.com
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /tsghdws
+    headers:
+      Host: octopusss4.com
+- name: AKUN-004-VLESS-18MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: fc965ad9-bdd7-4815-ad71-b39ec5972dc1
+  udp: true
+  tls: true
+  servername: octopusss4.com
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /tsghdws
+    headers:
+      Host: octopusss4.com
+- name: AKUN-005-VLESS-15MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: fc965ad9-bdd7-4815-ad71-b39ec5972dc1
+  udp: true
+  tls: true
+  servername: octopusss4.com
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /tsghdws
+    headers:
+      Host: octopusss4.com
+- name: AKUN-006-TROJAN-15MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: humanity
+  udp: true
+  sni: www.calmloud.com
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /assignment
+    headers:
+      Host: www.calmloud.com
+- name: AKUN-007-TROJAN-17MS
   type: trojan
   server: 104.17.3.81
   port: 443
@@ -72,81 +154,7 @@ proxies:
     path: /assignment
     headers:
       Host: www.calmloud.com
-- name: AKUN-002-TROJAN-17MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.creationlong.org
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.creationlong.org
-- name: AKUN-003-TROJAN-17MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.calmloud.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.calmloud.com
-- name: AKUN-004-TROJAN-18MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.gossipglove.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment#ShadowProxy66
-    headers:
-      Host: www.gossipglove.com
-- name: AKUN-005-TROJAN-19MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: c9352e86-2a03-497d-a686-ceb90806858c
-  udp: true
-  sni: sweet-heart-7bc8.netshopchannel.workers.dev
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /?ed=2048
-    headers:
-      Host: sweet-heart-7bc8.netshopchannel.workers.dev
-- name: AKUN-006-VLESS-16MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 9a84e4a2-731d-4dd5-a22d-796c7a345e39
-  udp: true
-  tls: true
-  servername: www.speedtest.net
-  network: tcp
-  client-fingerprint: chrome
-  skip-cert-verify: true
-- name: AKUN-007-VLESS-16MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 9e13716d-c43d-48b3-8cab-65e02d938ab5
-  udp: true
-  tls: true
-  servername: chatgpt.com
-  network: tcp
-  client-fingerprint: chrome
-  skip-cert-verify: true
-- name: AKUN-008-TROJAN-17MS
+- name: AKUN-008-TROJAN-18MS
   type: trojan
   server: 104.17.3.81
   port: 443
@@ -156,10 +164,109 @@ proxies:
   skip-cert-verify: true
   network: ws
   ws-opts:
-    path: /assignment
+    path: /%2Fassignment
     headers:
       Host: www.multiplydose.com
-- name: AKUN-009-VLESS-18MS
+- name: AKUN-009-TROJAN-18MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: humanity
+  udp: true
+  sni: www.calmloud.com
+  skip-cert-verify: true
+  network: ws
+  alpn:
+  - http/1.1
+  ws-opts:
+    path: /assignment
+    headers:
+      Host: www.calmloud.com
+- name: AKUN-010-VLESS-18MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
+  udp: true
+  tls: true
+  servername: nuclear.us.kg
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /free/1.226.227.169:50001
+    headers:
+      Host: nuclear.us.kg
+- name: AKUN-011-VLESS-18MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: 7b241232-208d-4d36-857e-913f91b044f4
+  udp: true
+  tls: true
+  servername: api-6a20f558.noooo.win
+  network: tcp
+  client-fingerprint: edge
+  skip-cert-verify: true
+  flow: xtls-rprx-vision
+  alpn:
+  - h2
+- name: AKUN-012-VLESS-18MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: 7b241232-208d-4d36-857e-913f91b044f4
+  udp: true
+  tls: true
+  servername: api-6a20f558.noooo.win
+  network: tcp
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  flow: xtls-rprx-vision
+  alpn:
+  - h2
+- name: AKUN-013-TROJAN-18MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: bpb-trojan
+  udp: true
+  sni: vless.herogoing.top
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /tr?ed=2560
+    headers:
+      Host: vless.herogoing.top
+- name: AKUN-014-TROJAN-19MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: hV66LcSGyxUdHq2aAeqxmLfpBDQmRYxo8Wte43oZr8L379SS
+  udp: true
+  sni: node2.bw8848.org
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /node2-node2-gu7bfd
+    headers:
+      Host: node2.bw8848.org
+- name: AKUN-015-VLESS-15MS
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: fc965ad9-bdd7-4815-ad71-b39ec5972dc1
+  udp: true
+  tls: true
+  servername: octopusss4.com
+  network: ws
+  client-fingerprint: chrome
+  skip-cert-verify: true
+  ws-opts:
+    path: /tsghdws
+    headers:
+      Host: octopusss4.com
+- name: AKUN-016-VLESS-16MS
   type: vless
   server: 104.17.3.81
   port: 443
@@ -174,153 +281,65 @@ proxies:
   reality-opts:
     public-key: C1hW1bTA9WOacIK-fHHg-HLkDZ3FY7FhEhAyldMSUEA
     short-id: a1b2c3d4e5f6
-- name: AKUN-010-VLESS-18MS
+- name: AKUN-017-VLESS-16MS
   type: vless
   server: 104.17.3.81
   port: 443
-  uuid: f328ce2e-7410-4202-b99f-5f56c6012df5
+  uuid: c4e81f7d-3750-486e-ab67-2ae0f43969c6
   udp: true
   tls: true
-  servername: join-masterserver.lehefe6790.workers.dev
+  servername: ru7.cdn-global.pro
   network: tcp
-  client-fingerprint: chrome
+  client-fingerprint: firefox
   skip-cert-verify: true
-- name: AKUN-011-TROJAN-18MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: hF7uSJfeBPtSNXKtuYvTRNaBdGkkXHpKJfLRfbpaDWovomSL
-  udp: true
-  sni: uk1.bw8848.org
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /uk1-uk1-gcjtze
-    headers:
-      Host: uk1.bw8848.org
-- name: AKUN-012-TROJAN-19MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.ignitelimit.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.ignitelimit.com
-- name: AKUN-013-TROJAN-19MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.calmloud.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.calmloud.com
-- name: AKUN-014-TROJAN-19MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.ignitelimit.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.ignitelimit.com
-- name: AKUN-015-TROJAN-19MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: humanity
-  udp: true
-  sni: www.multiplydose.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment# @ShadowProxy66
-    headers:
-      Host: www.multiplydose.com
-- name: AKUN-016-TROJAN-19MS
-  type: trojan
-  server: 104.17.3.81
-  port: 443
-  password: EM7HwoxdP8r5yQoxwDxEJU3VSBAXzAuFGBTUgVMjiuRCkNUN
-  udp: true
-  sni: usa1.bw8848.org
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /usa1-usa1-bktm3x
-    headers:
-      Host: usa1.bw8848.org
-- name: AKUN-017-VLESS-19MS
+  flow: xtls-rprx-vision
+  reality-opts:
+    public-key: h18Rbgv9RV558p-9Pl4g_--jJjXlTZL0-jHqNK5M_n4
+    short-id: 2b8c3e90e14740d2
+- name: AKUN-018-VLESS-16MS
   type: vless
   server: 104.17.3.81
   port: 443
-  uuid: 4285f327-20c6-483c-ab28-5ed6d28837bc
+  uuid: fc965ad9-bdd7-4815-ad71-b39ec5972dc1
   udp: true
   tls: true
-  servername: xe50-de40cdn1.unlimiteddev.co
+  servername: octopusss4.com
   network: ws
   client-fingerprint: chrome
   skip-cert-verify: true
   ws-opts:
-    path: /
+    path: /tsghdws
     headers:
-      Host: xe50-de40cdn1.unlimiteddev.co
-- name: AKUN-018-TROJAN-20MS
+      Host: octopusss4.com
+- name: AKUN-019-TROJAN-16MS
   type: trojan
   server: 104.17.3.81
   port: 443
-  password: KaQKzYh6dd
+  password: humanity
   udp: true
-  sni: dd.aananas.ir.
+  sni: www.calmlunch.com
   skip-cert-verify: true
   network: ws
+  alpn:
+  - h2
+  - http/1.1
   ws-opts:
-    path: /?ed=2048
+    path: /assignment
     headers:
-      Host: dd.aananas.ir.
-- name: AKUN-019-VLESS-20MS
-  type: vless
+      Host: www.calmlunch.com
+- name: AKUN-020-TROJAN-16MS
+  type: trojan
   server: 104.17.3.81
   port: 443
-  uuid: 948fac3c-42bf-41a6-a5f9-704d36ff0d8d
+  password: S8wG5SmFw5wVDeLG4K2N6Mqr2mSPjrpBd7QCHcK4F8fYRfiN
   udp: true
-  tls: true
-  servername: snippet.fgfw.ye.gs
-  network: ws
-  client-fingerprint: random
+  sni: usa2.bw8848.org
   skip-cert-verify: true
-  ws-opts:
-    path: /danfeng
-    headers:
-      Host: snippet.fgfw.ye.gs
-- name: AKUN-020-VLESS-20MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 157cb924-2adc-4f4e-9d54-ba105b6dff30
-  udp: true
-  tls: true
-  servername: www.speedtest.net
   network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
   ws-opts:
-    path: /
+    path: /usa2-usa2-yuyv2d
     headers:
-      Host: www.speedtest.net
+      Host: usa2.bw8848.org
 proxy-groups:
 - name: GLOBAL
   type: select
@@ -334,26 +353,26 @@ proxy-groups:
   - AUTO-FAST
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-TROJAN-16MS
+  - AKUN-001-VLESS-17MS
   - AKUN-002-TROJAN-17MS
-  - AKUN-003-TROJAN-17MS
-  - AKUN-004-TROJAN-18MS
-  - AKUN-005-TROJAN-19MS
-  - AKUN-006-VLESS-16MS
-  - AKUN-007-VLESS-16MS
-  - AKUN-008-TROJAN-17MS
-  - AKUN-009-VLESS-18MS
+  - AKUN-003-VLESS-18MS
+  - AKUN-004-VLESS-18MS
+  - AKUN-005-VLESS-15MS
+  - AKUN-006-TROJAN-15MS
+  - AKUN-007-TROJAN-17MS
+  - AKUN-008-TROJAN-18MS
+  - AKUN-009-TROJAN-18MS
   - AKUN-010-VLESS-18MS
-  - AKUN-011-TROJAN-18MS
-  - AKUN-012-TROJAN-19MS
-  - AKUN-013-TROJAN-19MS
+  - AKUN-011-VLESS-18MS
+  - AKUN-012-VLESS-18MS
+  - AKUN-013-TROJAN-18MS
   - AKUN-014-TROJAN-19MS
-  - AKUN-015-TROJAN-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-19MS
-  - AKUN-018-TROJAN-20MS
-  - AKUN-019-VLESS-20MS
-  - AKUN-020-VLESS-20MS
+  - AKUN-015-VLESS-15MS
+  - AKUN-016-VLESS-16MS
+  - AKUN-017-VLESS-16MS
+  - AKUN-018-VLESS-16MS
+  - AKUN-019-TROJAN-16MS
+  - AKUN-020-TROJAN-16MS
 - name: PROXY
   type: select
   proxies:
@@ -367,26 +386,26 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-TROJAN-16MS
+  - AKUN-001-VLESS-17MS
   - AKUN-002-TROJAN-17MS
-  - AKUN-003-TROJAN-17MS
-  - AKUN-004-TROJAN-18MS
-  - AKUN-005-TROJAN-19MS
-  - AKUN-006-VLESS-16MS
-  - AKUN-007-VLESS-16MS
-  - AKUN-008-TROJAN-17MS
-  - AKUN-009-VLESS-18MS
+  - AKUN-003-VLESS-18MS
+  - AKUN-004-VLESS-18MS
+  - AKUN-005-VLESS-15MS
+  - AKUN-006-TROJAN-15MS
+  - AKUN-007-TROJAN-17MS
+  - AKUN-008-TROJAN-18MS
+  - AKUN-009-TROJAN-18MS
   - AKUN-010-VLESS-18MS
-  - AKUN-011-TROJAN-18MS
-  - AKUN-012-TROJAN-19MS
-  - AKUN-013-TROJAN-19MS
+  - AKUN-011-VLESS-18MS
+  - AKUN-012-VLESS-18MS
+  - AKUN-013-TROJAN-18MS
   - AKUN-014-TROJAN-19MS
-  - AKUN-015-TROJAN-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-19MS
-  - AKUN-018-TROJAN-20MS
-  - AKUN-019-VLESS-20MS
-  - AKUN-020-VLESS-20MS
+  - AKUN-015-VLESS-15MS
+  - AKUN-016-VLESS-16MS
+  - AKUN-017-VLESS-16MS
+  - AKUN-018-VLESS-16MS
+  - AKUN-019-TROJAN-16MS
+  - AKUN-020-TROJAN-16MS
 - name: SOCIAL-MEDIA
   type: select
   proxies:
@@ -394,26 +413,26 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-TROJAN-16MS
+  - AKUN-001-VLESS-17MS
   - AKUN-002-TROJAN-17MS
-  - AKUN-003-TROJAN-17MS
-  - AKUN-004-TROJAN-18MS
-  - AKUN-005-TROJAN-19MS
-  - AKUN-006-VLESS-16MS
-  - AKUN-007-VLESS-16MS
-  - AKUN-008-TROJAN-17MS
-  - AKUN-009-VLESS-18MS
+  - AKUN-003-VLESS-18MS
+  - AKUN-004-VLESS-18MS
+  - AKUN-005-VLESS-15MS
+  - AKUN-006-TROJAN-15MS
+  - AKUN-007-TROJAN-17MS
+  - AKUN-008-TROJAN-18MS
+  - AKUN-009-TROJAN-18MS
   - AKUN-010-VLESS-18MS
-  - AKUN-011-TROJAN-18MS
-  - AKUN-012-TROJAN-19MS
-  - AKUN-013-TROJAN-19MS
+  - AKUN-011-VLESS-18MS
+  - AKUN-012-VLESS-18MS
+  - AKUN-013-TROJAN-18MS
   - AKUN-014-TROJAN-19MS
-  - AKUN-015-TROJAN-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-19MS
-  - AKUN-018-TROJAN-20MS
-  - AKUN-019-VLESS-20MS
-  - AKUN-020-VLESS-20MS
+  - AKUN-015-VLESS-15MS
+  - AKUN-016-VLESS-16MS
+  - AKUN-017-VLESS-16MS
+  - AKUN-018-VLESS-16MS
+  - AKUN-019-TROJAN-16MS
+  - AKUN-020-TROJAN-16MS
 - name: YOUTUBE
   type: select
   proxies:
@@ -421,26 +440,26 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-TROJAN-16MS
+  - AKUN-001-VLESS-17MS
   - AKUN-002-TROJAN-17MS
-  - AKUN-003-TROJAN-17MS
-  - AKUN-004-TROJAN-18MS
-  - AKUN-005-TROJAN-19MS
-  - AKUN-006-VLESS-16MS
-  - AKUN-007-VLESS-16MS
-  - AKUN-008-TROJAN-17MS
-  - AKUN-009-VLESS-18MS
+  - AKUN-003-VLESS-18MS
+  - AKUN-004-VLESS-18MS
+  - AKUN-005-VLESS-15MS
+  - AKUN-006-TROJAN-15MS
+  - AKUN-007-TROJAN-17MS
+  - AKUN-008-TROJAN-18MS
+  - AKUN-009-TROJAN-18MS
   - AKUN-010-VLESS-18MS
-  - AKUN-011-TROJAN-18MS
-  - AKUN-012-TROJAN-19MS
-  - AKUN-013-TROJAN-19MS
+  - AKUN-011-VLESS-18MS
+  - AKUN-012-VLESS-18MS
+  - AKUN-013-TROJAN-18MS
   - AKUN-014-TROJAN-19MS
-  - AKUN-015-TROJAN-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-19MS
-  - AKUN-018-TROJAN-20MS
-  - AKUN-019-VLESS-20MS
-  - AKUN-020-VLESS-20MS
+  - AKUN-015-VLESS-15MS
+  - AKUN-016-VLESS-16MS
+  - AKUN-017-VLESS-16MS
+  - AKUN-018-VLESS-16MS
+  - AKUN-019-TROJAN-16MS
+  - AKUN-020-TROJAN-16MS
 - name: EDUKASI
   type: select
   proxies:
@@ -448,26 +467,26 @@ proxy-groups:
   - DIRECT
   - FALLBACK
   - LOAD-BALANCE
-  - AKUN-001-TROJAN-16MS
+  - AKUN-001-VLESS-17MS
   - AKUN-002-TROJAN-17MS
-  - AKUN-003-TROJAN-17MS
-  - AKUN-004-TROJAN-18MS
-  - AKUN-005-TROJAN-19MS
-  - AKUN-006-VLESS-16MS
-  - AKUN-007-VLESS-16MS
-  - AKUN-008-TROJAN-17MS
-  - AKUN-009-VLESS-18MS
+  - AKUN-003-VLESS-18MS
+  - AKUN-004-VLESS-18MS
+  - AKUN-005-VLESS-15MS
+  - AKUN-006-TROJAN-15MS
+  - AKUN-007-TROJAN-17MS
+  - AKUN-008-TROJAN-18MS
+  - AKUN-009-TROJAN-18MS
   - AKUN-010-VLESS-18MS
-  - AKUN-011-TROJAN-18MS
-  - AKUN-012-TROJAN-19MS
-  - AKUN-013-TROJAN-19MS
+  - AKUN-011-VLESS-18MS
+  - AKUN-012-VLESS-18MS
+  - AKUN-013-TROJAN-18MS
   - AKUN-014-TROJAN-19MS
-  - AKUN-015-TROJAN-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-19MS
-  - AKUN-018-TROJAN-20MS
-  - AKUN-019-VLESS-20MS
-  - AKUN-020-VLESS-20MS
+  - AKUN-015-VLESS-15MS
+  - AKUN-016-VLESS-16MS
+  - AKUN-017-VLESS-16MS
+  - AKUN-018-VLESS-16MS
+  - AKUN-019-TROJAN-16MS
+  - AKUN-020-TROJAN-16MS
 - name: STREAMING
   type: select
   proxies:
@@ -475,26 +494,26 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-TROJAN-16MS
+  - AKUN-001-VLESS-17MS
   - AKUN-002-TROJAN-17MS
-  - AKUN-003-TROJAN-17MS
-  - AKUN-004-TROJAN-18MS
-  - AKUN-005-TROJAN-19MS
-  - AKUN-006-VLESS-16MS
-  - AKUN-007-VLESS-16MS
-  - AKUN-008-TROJAN-17MS
-  - AKUN-009-VLESS-18MS
+  - AKUN-003-VLESS-18MS
+  - AKUN-004-VLESS-18MS
+  - AKUN-005-VLESS-15MS
+  - AKUN-006-TROJAN-15MS
+  - AKUN-007-TROJAN-17MS
+  - AKUN-008-TROJAN-18MS
+  - AKUN-009-TROJAN-18MS
   - AKUN-010-VLESS-18MS
-  - AKUN-011-TROJAN-18MS
-  - AKUN-012-TROJAN-19MS
-  - AKUN-013-TROJAN-19MS
+  - AKUN-011-VLESS-18MS
+  - AKUN-012-VLESS-18MS
+  - AKUN-013-TROJAN-18MS
   - AKUN-014-TROJAN-19MS
-  - AKUN-015-TROJAN-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-19MS
-  - AKUN-018-TROJAN-20MS
-  - AKUN-019-VLESS-20MS
-  - AKUN-020-VLESS-20MS
+  - AKUN-015-VLESS-15MS
+  - AKUN-016-VLESS-16MS
+  - AKUN-017-VLESS-16MS
+  - AKUN-018-VLESS-16MS
+  - AKUN-019-TROJAN-16MS
+  - AKUN-020-TROJAN-16MS
 - name: CLEAN
   type: select
   proxies:
@@ -504,28 +523,28 @@ proxy-groups:
 - name: AUTO-FAST
   type: url-test
   proxies: &id001
-  - AKUN-001-TROJAN-16MS
+  - AKUN-001-VLESS-17MS
   - AKUN-002-TROJAN-17MS
-  - AKUN-003-TROJAN-17MS
-  - AKUN-004-TROJAN-18MS
-  - AKUN-005-TROJAN-19MS
-  - AKUN-006-VLESS-16MS
-  - AKUN-007-VLESS-16MS
-  - AKUN-008-TROJAN-17MS
-  - AKUN-009-VLESS-18MS
+  - AKUN-003-VLESS-18MS
+  - AKUN-004-VLESS-18MS
+  - AKUN-005-VLESS-15MS
+  - AKUN-006-TROJAN-15MS
+  - AKUN-007-TROJAN-17MS
+  - AKUN-008-TROJAN-18MS
+  - AKUN-009-TROJAN-18MS
   - AKUN-010-VLESS-18MS
-  - AKUN-011-TROJAN-18MS
-  - AKUN-012-TROJAN-19MS
-  - AKUN-013-TROJAN-19MS
+  - AKUN-011-VLESS-18MS
+  - AKUN-012-VLESS-18MS
+  - AKUN-013-TROJAN-18MS
   - AKUN-014-TROJAN-19MS
-  - AKUN-015-TROJAN-19MS
-  - AKUN-016-TROJAN-19MS
-  - AKUN-017-VLESS-19MS
-  - AKUN-018-TROJAN-20MS
-  - AKUN-019-VLESS-20MS
-  - AKUN-020-VLESS-20MS
+  - AKUN-015-VLESS-15MS
+  - AKUN-016-VLESS-16MS
+  - AKUN-017-VLESS-16MS
+  - AKUN-018-VLESS-16MS
+  - AKUN-019-TROJAN-16MS
+  - AKUN-020-TROJAN-16MS
   url: http://cp.cloudflare.com/generate_204
-  interval: 30
+  interval: 15
   tolerance: 10
   lazy: false
   timeout: 900
@@ -533,7 +552,7 @@ proxy-groups:
   type: fallback
   proxies: *id001
   url: http://cp.cloudflare.com/generate_204
-  interval: 30
+  interval: 15
   lazy: false
   timeout: 900
 - name: LOAD-BALANCE
