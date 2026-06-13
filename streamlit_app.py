@@ -20,12 +20,51 @@ import streamlit as st
 import yaml
 
 DEFAULT_LINKS = [
-    "https://github.com/adiorany3/SumberYAML/raw/refs/heads/main/input/links.txt",
+    "https://raw.githubusercontent.com/itsyebekhe/PSG/main/lite/subscriptions/xray/normal/mix",
+    "https://raw.githubusercontent.com/arshiacomplus/v2rayExtractor/refs/heads/main/mix/sub.html",
+    "https://raw.githubusercontent.com/Rayan-Config/C-Sub/refs/heads/main/configs/proxy.txt",
+    "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt",
+    "https://raw.githubusercontent.com/Everyday-VPN/Everyday-VPN/main/subscription/main.txt",
+    "https://raw.githubusercontent.com/MahsaNetConfigTopic/config/refs/heads/main/xray_final.txt",
+    "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/All_Configs_Sub.txt",
+    "https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt",
+    "https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/trojan.txt",
+    "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/main/vmess_configs.txt",
+    "https://raw.githubusercontent.com/Argh94/Proxy-List/refs/heads/main/Trojan.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/26.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/25.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/24.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/23.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/22.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/21.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/20.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/19.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/18.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/17.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/16.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/15.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/14.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/13.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/12.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/11.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/10.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/9.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/8.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/7.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/6.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/5.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/4.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/3.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/2.txt",
+    "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/1.txt",
+    "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/kind/vmess.txt",
+    "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/kind/vless.txt",
+    "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/kind/trojan.txt",
 ]
 
 TARGET_SERVER = "104.17.3.81"
 ONLY_PORT = 443
-USER_AGENT = "Mozilla/5.0 SumberYAML-OpenClash-NoCheck/4.0"
+USER_AGENT = "Mozilla/5.0 SumberYAML-OpenClash-BugCompat/3.0"
 URI_RE = re.compile(r"(?:vless|vmess|trojan|ss)://[^\s<'\"`]+", re.IGNORECASE)
 FAST_TEST_URL = "http://cp.cloudflare.com/generate_204"
 ALT_TEST_URL = "http://www.gstatic.com/generate_204"
@@ -112,17 +151,18 @@ def safe_proxy_name(value: str | None, fallback: str) -> str:
 
 
 def unique_names(nodes: list[ProxyNode]) -> None:
-    """Replace all public proxy names with safe unique aliases.
+    """Replace all proxy names with safe unique aliases.
 
-    Names from public accounts can contain emoji, quotes, hidden newline, YAML
-    reserved characters, or duplicates. This avoids OpenClash import errors by
-    always generating simple ASCII proxy names. Original names stay in the CSV.
+    The generated names intentionally do not reuse the public subscription name,
+    because those names are the common source of OpenClash import errors.
+    Original names are kept only in the CSV report.
     """
     seen: set[str] = set()
     for i, node in enumerate(nodes, start=1):
         node.original_name = node.original_name or normalize_name(node.name, f"ORIGINAL-{i:03d}")
+        delay = f"{int(node.best_delay_ms)}MS" if node.best_delay_ms is not None else "NA"
         proto = safe_proxy_name(node.type.upper(), "NODE")
-        base = safe_proxy_name(f"AKUN-{i:03d}-{proto}", f"AKUN-{i:03d}")
+        base = safe_proxy_name(f"AKUN-{i:03d}-{proto}-{delay}", f"AKUN-{i:03d}")
         name = base
         counter = 2
         while name in seen:
@@ -1074,6 +1114,15 @@ def build_csv(nodes: list[ProxyNode]) -> str:
         "output_server",
         "port",
         "status",
+        "tier",
+        "bug_best_delay_ms",
+        "bug_avg_delay_ms",
+        "bug_jitter_ms",
+        "bug_success_count",
+        "original_best_delay_ms",
+        "original_success_count",
+        "attempts",
+        "score",
         "source",
         "reason",
     ])
@@ -1087,6 +1136,15 @@ def build_csv(nodes: list[ProxyNode]) -> str:
             TARGET_SERVER,
             node.port,
             node.status,
+            node.tier,
+            node.bug_best_delay_ms if node.bug_best_delay_ms is not None else "",
+            node.bug_avg_delay_ms if node.bug_avg_delay_ms is not None else "",
+            node.bug_jitter_ms if node.bug_jitter_ms is not None else "",
+            node.bug_success_count,
+            node.original_best_delay_ms if node.original_best_delay_ms is not None else "",
+            node.original_success_count,
+            node.attempts,
+            node.score,
             node.source,
             node.reason,
         ])
@@ -1097,17 +1155,19 @@ def process_sources(
     links_text: str,
     manual_text: str,
     fetch_timeout: int,
+    tcp_timeout: float,
     max_workers: int,
     max_nodes: int,
+    fast_target_ms: int,
+    fill_delay_ms: int,
+    min_output_nodes: int,
+    attempts: int,
+    require_successes: int,
+    require_original: bool,
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
-    """Fetch and parse accounts without alive/delay checking.
-
-    The SumberYAML input/links.txt source is treated as already alive. This
-    function only fetches text, extracts supported proxy URIs, validates that the
-    required fields are complete, removes duplicates, applies safe names, and
-    writes OpenClash-compatible YAML.
-    """
-    links = [line.strip().strip(",'") for line in links_text.splitlines() if line.strip()]
+    fast_target_ms = min(int(fast_target_ms), FAST_TARGET_DELAY_MS)
+    fill_delay_ms = min(max(int(fill_delay_ms), fast_target_ms), HARD_MAX_DELAY_MS)
+    links = [line.strip().strip(",'\"") for line in links_text.splitlines() if line.strip()]
     fetch_logs: list[tuple[str, str]] = []
     raw_uris: list[tuple[str, str]] = []
 
@@ -1125,94 +1185,143 @@ def process_sources(
         raw_uris.append((uri, "manual"))
 
     parsed: list[ProxyNode] = []
-    accepted: list[ProxyNode] = []
     seen_keys: set[str] = set()
     skipped: list[str] = []
-
     for uri, source in raw_uris:
         node = parse_uri(uri, source)
         if not node:
             skipped.append(uri[:140])
             continue
-
-        node.bug_sni = node_sni_host(node)
-        node.original_name = normalize_name(node.name, "ORIGINAL")
-
         is_complete, complete_reason = validate_complete_node(node)
         if not is_complete:
             node.status = "incomplete"
             node.reason = complete_reason
+            node.score = 999999
             parsed.append(node)
             continue
-
         if node.key in seen_keys:
-            node.status = "duplicate"
-            node.reason = "duplicate account"
-            parsed.append(node)
             continue
-
         seen_keys.add(node.key)
-        node.status = "imported"
-        node.reason = "no alive/delay check - source dianggap hidup"
-        node.best_delay_ms = None
-        node.avg_delay_ms = None
-        node.jitter_ms = None
-        node.success_count = 0
-        node.attempts = 0
-        node.score = len(accepted)
-        node.tier = "NO-CHECK"
         parsed.append(node)
-        accepted.append(node)
 
-    if max_nodes > 0:
-        accepted = accepted[:max_nodes]
+    # Test more candidates than output target so the app can still fill 20 alive accounts
+    # even when only a small percentage is compatible with the selected bug server.
+    target = max(int(max_nodes), int(min_output_nodes), 20)
+    candidate_limit = max(target * 30, 800)
+    parsed = parsed[:candidate_limit]
 
-    unique_names(accepted)
-    return accepted, parsed, fetch_logs, skipped
+    testable = [node for node in parsed if node.status == "pending"]
+    if testable:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(testable))) as executor:
+            future_map = {
+                executor.submit(check_node_bug_compat, node, tcp_timeout, attempts, require_original): node
+                for node in testable
+            }
+            for future in concurrent.futures.as_completed(future_map):
+                node = future_map[future]
+                try:
+                    future.result()
+                except Exception as exc:
+                    node.status = "dead"
+                    node.reason = "check error: " + str(exc)[:120]
+
+    candidates = [
+        node for node in parsed
+        if node.status == "alive"
+        and node.best_delay_ms is not None
+        and node.success_count >= require_successes
+    ]
+
+    # Tier 1: very fast target, lower than Baidu 124 ms / GitHub 157 ms / NetEase 211 ms.
+    fast = [node for node in candidates if (node.best_delay_ms or 999999) <= fast_target_ms]
+    for node in fast:
+        node.tier = f"FAST ≤{fast_target_ms}ms"
+
+    # Tier 2: still alive and bug-compatible, used only to prevent the YAML from containing
+    # too few accounts when the public sources do not have 20 nodes under 123 ms.
+    backup = [
+        node for node in candidates
+        if (node.best_delay_ms or 999999) > fast_target_ms
+        and (node.best_delay_ms or 999999) <= fill_delay_ms
+    ]
+    for node in backup:
+        node.tier = f"BACKUP ≤{fill_delay_ms}ms"
+
+    fast.sort(key=lambda n: (n.score, n.best_delay_ms or 999999, n.jitter_ms or 999999))
+    backup.sort(key=lambda n: (n.score, n.best_delay_ms or 999999, n.jitter_ms or 999999))
+
+    selected: list[ProxyNode] = fast[:max_nodes]
+    if len(selected) < min_output_nodes:
+        need = min(max_nodes, min_output_nodes) - len(selected)
+        selected.extend(backup[:max(0, need)])
+    if len(selected) < max_nodes:
+        selected_ids = {id(n) for n in selected}
+        remain = [n for n in backup if id(n) not in selected_ids]
+        selected.extend(remain[: max_nodes - len(selected)])
+
+    selected.sort(key=lambda n: (n.score, n.best_delay_ms or 999999, n.jitter_ms or 999999))
+    selected = selected[:max_nodes]
+    unique_names(selected)
+    return selected, parsed, fetch_logs, skipped
 
 
-st.set_page_config(page_title="OpenClash SumberYAML No Check", page_icon="⚡", layout="wide")
-st.title("⚡ SumberYAML OpenClash No Check")
+st.set_page_config(page_title="OpenClash Safe Names Rule Split", page_icon="⚡", layout="wide")
+st.title("⚡ SumberYAML OpenClash Safe Names Rule Split")
 st.caption(
-    "Mengambil akun langsung dari input/links.txt SumberYAML, tanpa cek alive/delay akun, "
-    "lalu membuat YAML OpenClash compatible dengan server output 104.17.3.81, safe name, rule kategori, dan block iklan/malware."
+    "Ambil subscription publik, hanya port 443, cek link hidup, cek kompatibilitas bug server 104.17.3.81 + SNI/Host, "
+    "tolak akun yang tidak lengkap, prioritaskan delay ≤123 ms, isi cadangan hidup, pisahkan rule Social Media/YouTube/Edukasi/Streaming, block iklan/malware, dan ganti otomatis nama akun yang berpotensi error."
 )
 
-with st.expander("Pengaturan output", expanded=True):
+with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.text_input("Server output / bug", value=TARGET_SERVER, disabled=True)
     with col2:
         st.text_input("Port wajib", value=str(ONLY_PORT), disabled=True)
     with col3:
-        max_nodes = st.number_input("Maksimal akun masuk YAML", min_value=1, max_value=300, value=20, step=5)
+        max_nodes = st.number_input("Maksimal node output", min_value=1, max_value=300, value=20, step=5)
     with col4:
-        fetch_timeout = st.number_input("Timeout ambil link/detik", min_value=5, max_value=60, value=20, step=5)
+        min_output_nodes = st.number_input("Target minimal hidup", min_value=1, max_value=300, value=MIN_OUTPUT_NODES, step=1, help="Aplikasi akan berusaha mengisi sampai jumlah ini dari akun yang kompatibel bug server. Kalau sumber publik memang kurang, hasil bisa tetap kurang.")
 
-    col5, col6, col7 = st.columns(3)
+    col5, col6, col7, col8 = st.columns(4)
     with col5:
-        max_workers = st.number_input("Concurrency fetch", min_value=1, max_value=50, value=8, step=1)
+        fast_target_ms = st.number_input("Prioritas super cepat/ms", min_value=50, max_value=FAST_TARGET_DELAY_MS, value=120, step=1, help="Target ini lebih rendah dari Baidu 124 ms, GitHub 157 ms, dan NetEase 211 ms.")
     with col6:
-        urltest_interval = st.number_input("Interval url-test OpenClash/detik", min_value=15, max_value=900, value=30, step=15)
+        fill_delay_ms = st.number_input("Batas cadangan hidup/ms", min_value=FAST_TARGET_DELAY_MS, max_value=HARD_MAX_DELAY_MS, value=DEFAULT_FILL_DELAY_MS, step=50, help="Dipakai hanya kalau node ≤120/123 ms kurang dari target minimal. Tujuannya agar output tidak cuma 5 akun.")
     with col7:
+        attempts = st.number_input("Tes ulang per node", min_value=1, max_value=5, value=3, step=1)
+    with col8:
+        require_successes = st.number_input("Minimal sukses bug", min_value=1, max_value=5, value=2, step=1)
+
+    col9, col10, col11, col12 = st.columns(4)
+    with col9:
+        tcp_timeout = st.number_input("Timeout cek/detik", min_value=0.5, max_value=10.0, value=2.0, step=0.5)
+    with col10:
+        max_workers = st.number_input("Concurrency", min_value=1, max_value=100, value=48, step=1)
+    with col11:
+        fetch_timeout = st.number_input("Timeout fetch link/detik", min_value=5, max_value=60, value=20, step=5)
+    with col12:
+        require_original = st.checkbox("Wajib original server juga hidup", value=False, help="Matikan agar lebih banyak akun lolos saat memakai bug server. Nyalakan jika ingin lebih ketat.")
+
+    col13, col14 = st.columns(2)
+    with col13:
+        urltest_interval = st.number_input("Interval url-test OpenClash/detik", min_value=15, max_value=900, value=30, step=15)
+    with col14:
         tolerance = st.number_input("Toleransi auto-switch/ms", min_value=5, max_value=300, value=10, step=5)
 
     test_url = st.selectbox(
         "URL health check OpenClash",
         [FAST_TEST_URL, ALT_TEST_URL, THIRD_TEST_URL],
         index=0,
-        help="Aplikasi tidak mengecek akun. URL ini hanya dimasukkan ke grup AUTO-FAST/FALLBACK agar OpenClash yang melakukan health check saat dipakai.",
+        help="Default memakai Cloudflare captive portal generate_204 sesuai permintaan.",
     )
-    st.caption(
-        "Mode no-check: aplikasi hanya fetch, parse, validasi kelengkapan field, buang duplikat, dan buat YAML. "
-        "Tidak ada TCP/TLS/delay check akun di Streamlit."
-    )
+    st.caption("Mode baru: akun yang tidak lengkap langsung ditolak sebelum test delay. Cek delay ke bug server 104.17.3.81 dengan SNI/Host akun. Nama akun dari subscription publik otomatis diganti menjadi format aman AKUN-001-VLESS-120MS agar tidak membuat OpenClash error. Node ≤120/123 ms diprioritaskan; jika kurang dari 20, cadangan yang tetap hidup akan ditambahkan supaya YAML lebih usable.")
 
 links_text = st.text_area(
-    "Sumber akun bawaan",
+    "Link subscription bawaan",
     value="\n".join(DEFAULT_LINKS),
-    height=90,
-    help="Sumber default adalah input/links.txt dari repo SumberYAML. Satu URL per baris jika ingin menambah sumber lain.",
+    height=230,
+    help="Satu URL per baris. Link mati otomatis diabaikan saat proses berjalan.",
 )
 
 manual_text = st.text_area(
@@ -1222,84 +1331,102 @@ manual_text = st.text_area(
     placeholder="Tempel vless://, vmess://, trojan://, atau ss:// di sini jika ada tambahan.",
 )
 
-run = st.button("Proses & buat YAML tanpa cek akun", type="primary")
+run = st.button("Proses & buat YAML anti delay", type="primary")
 
 if run:
-    with st.spinner("Mengambil input/links.txt, parsing akun, membuang akun tidak lengkap/duplikat, dan membuat YAML..."):
-        selected_nodes, all_nodes, fetch_logs, skipped = process_sources(
+    require_successes = min(int(require_successes), int(attempts))
+    with st.spinner("Mengecek link, menolak akun tidak lengkap, menyaring port 443, menguji bug server + SNI/Host, lalu memilih node tercepat..."):
+        alive_nodes, all_nodes, fetch_logs, skipped = process_sources(
             links_text=links_text,
             manual_text=manual_text,
             fetch_timeout=int(fetch_timeout),
+            tcp_timeout=float(tcp_timeout),
             max_workers=int(max_workers),
             max_nodes=int(max_nodes),
+            fast_target_ms=int(fast_target_ms),
+            fill_delay_ms=int(fill_delay_ms),
+            min_output_nodes=int(min_output_nodes),
+            attempts=int(attempts),
+            require_successes=int(require_successes),
+            require_original=bool(require_original),
         )
 
     total_parsed = len(all_nodes)
-    total_imported = len([n for n in all_nodes if n.status == "imported"])
+    total_alive_any = len([n for n in all_nodes if n.status == "alive"])
+    total_fast = len(alive_nodes)
+    total_dead = len([n for n in all_nodes if n.status == "dead"])
     total_incomplete = len([n for n in all_nodes if n.status == "incomplete"])
-    total_duplicate = len([n for n in all_nodes if n.status == "duplicate"])
     live_links = len([1 for _, status in fetch_logs if status.startswith("alive")])
+    dead_links = len([1 for _, status in fetch_logs if status.startswith("dead")])
 
-    m1, m2, m3, m4, m5 = st.columns(5)
-    m1.metric("Link terbaca", live_links)
+    m1, m2, m3, m4, m5, m6 = st.columns(6)
+    m1.metric("Link hidup", live_links)
     m2.metric("Parsed port 443", total_parsed)
-    m3.metric("Import valid", total_imported)
-    m4.metric("Tidak lengkap", total_incomplete)
-    m5.metric("Duplikat", total_duplicate)
+    m3.metric("Tidak lengkap", total_incomplete)
+    m4.metric("Node hidup", total_alive_any)
+    m5.metric("Masuk YAML", total_fast)
+    m6.metric("Dead dibuang", total_dead)
 
     if fetch_logs:
-        with st.expander("Status fetch sumber", expanded=False):
+        with st.expander("Status link subscription", expanded=False):
             st.dataframe(
                 [{"url": url, "status": status, "dipakai": "ya" if status.startswith("alive") else "tidak"} for url, status in fetch_logs],
                 use_container_width=True,
                 hide_index=True,
             )
 
-    if not selected_nodes:
-        st.error("Tidak ada akun lengkap yang bisa dimasukkan ke YAML. Cek report detail untuk melihat penyebabnya.")
+    if not alive_nodes:
+        st.error(
+            "Belum ada node yang lolos cek bug server. Coba naikkan batas cadangan, turunkan minimal sukses bug, atau matikan wajib original server."
+        )
         if all_nodes:
-            with st.expander("Detail akun ditolak"):
+            with st.expander("Detail node yang gagal/lambat"):
                 st.dataframe(
                     [
                         {
-                            "original_name": n.original_name or n.name,
+                            "name": n.name,
                             "type": n.type,
                             "original_server": n.original_server,
-                            "bug_sni": n.bug_sni,
                             "status": n.status,
+                            "bug_sni": n.bug_sni,
+                            "bug_delay_ms": n.bug_best_delay_ms,
+                            "bug_success": f"{n.bug_success_count}/{n.attempts}",
+                            "original_delay_ms": n.original_best_delay_ms,
+                            "original_success": f"{n.original_success_count}/{n.attempts}",
+                            "score": n.score,
                             "reason": n.reason,
                             "source": n.source,
                         }
-                        for n in all_nodes[:300]
+                        for n in sorted(all_nodes, key=lambda x: x.score)[:300]
                     ],
                     use_container_width=True,
                     hide_index=True,
                 )
     else:
-        yaml_text = build_openclash_yaml(selected_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=2000)
+        yaml_text = build_openclash_yaml(alive_nodes, int(urltest_interval), int(tolerance), test_url, health_timeout=min(2000, int(fill_delay_ms) + 300))
         csv_text = build_csv(all_nodes)
 
         st.success(
-            f"Berhasil membuat YAML dari {len(selected_nodes)} akun tanpa cek alive/delay di Streamlit. "
-            "GLOBAL langsung ke AUTO-FAST; kategori rule dipisah; iklan/malware diblokir."
+            f"Berhasil membuat YAML dari {len(alive_nodes)} node lengkap yang kompatibel bug server. "
+            "Node ≤120/123 ms diprioritaskan; GLOBAL langsung ke AUTO-FAST; kategori rule sudah dipisah dan iklan/malware diblokir."
         )
         c1, c2 = st.columns(2)
         with c1:
             st.download_button(
-                "Download openclash_sumberyaml_no_check.yaml",
+                "Download openclash_safe_names_rule_split.yaml",
                 data=yaml_text.encode("utf-8"),
-                file_name="openclash_sumberyaml_no_check.yaml",
+                file_name="openclash_safe_names_rule_split.yaml",
                 mime="application/x-yaml",
             )
         with c2:
             st.download_button(
                 "Download report CSV",
                 data=csv_text.encode("utf-8"),
-                file_name="openclash_sumberyaml_no_check_report.csv",
+                file_name="openclash_safe_names_report.csv",
                 mime="text/csv",
             )
 
-        st.subheader("Akun yang masuk YAML")
+        st.subheader("Node tercepat yang masuk YAML")
         st.dataframe(
             [
                 {
@@ -1309,11 +1436,17 @@ if run:
                     "type": n.type,
                     "original_server": n.original_server,
                     "server_output": TARGET_SERVER,
+                    "tier": n.tier,
                     "bug_sni": n.bug_sni,
-                    "status": n.status,
+                    "bug_delay_ms": n.bug_best_delay_ms,
+                    "bug_avg_ms": n.bug_avg_delay_ms,
+                    "bug_jitter_ms": n.bug_jitter_ms,
+                    "bug_success": f"{n.bug_success_count}/{n.attempts}",
+                    "original_delay_ms": n.original_best_delay_ms,
+                    "score": n.score,
                     "source": n.source,
                 }
-                for i, n in enumerate(selected_nodes, start=1)
+                for i, n in enumerate(alive_nodes, start=1)
             ],
             use_container_width=True,
             hide_index=True,
@@ -1323,6 +1456,6 @@ if run:
             st.code(yaml_text, language="yaml")
 
 st.info(
-    "Mode ini sengaja tidak mengecek alive/delay akun di Streamlit karena akun dari input/links.txt dianggap sudah hidup. "
-    "Aplikasi tetap menolak akun yang tidak lengkap agar YAML tidak error saat diimpor ke OpenClash. Health Check berikutnya dilakukan oleh OpenClash/Mihomo melalui grup AUTO-FAST."
+    "Catatan penting: aplikasi ini mengecek kompatibilitas bug server 104.17.3.81 menggunakan TLS + SNI/Host, lalu OpenClash melakukan url-test/fallback otomatis. "
+    "Akun tanpa field wajib tidak dimasukkan ke YAML. Tes ini jauh lebih sesuai dibanding hanya cek original server, tetapi validasi akun penuh tetap dilakukan oleh Health Check OpenClash. Rule-provider iklan/malware dan kategori akan diunduh oleh OpenClash/Mihomo saat config dijalankan. Sumber publik bisa berubah sewaktu-waktu."
 )
