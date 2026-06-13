@@ -879,13 +879,58 @@ def update_raw_uri_name(raw: str, new_name: str) -> str:
         return body + "#" + name
 
 
+def update_raw_uri_name_and_server(raw: str, new_name: str, target_server: str = TARGET_SERVER) -> str:
+    """Return a shareable URI using the bug server plus updated display name.
+
+    YAML output already forces ``server`` to TARGET_SERVER. This function makes
+    ``akun.txt`` consistent with that YAML: vless/trojan/ss links use
+    ``@104.17.3.81:443`` while keeping SNI/Host/path query parameters intact.
+    VMess links update the JSON ``add``/``server`` and ``port`` fields, while
+    keeping transport fields such as ``host`` and ``sni`` unchanged.
+    """
+    raw = str(raw or "").strip()
+    name = quote(str(new_name or "").strip(), safe="")
+    if not raw or "://" not in raw:
+        return raw
+    scheme = raw.split("://", 1)[0].lower()
+    try:
+        if scheme == "vmess":
+            payload = raw.split("://", 1)[1].split("#", 1)[0]
+            decoded = b64decode_text(payload)
+            if not decoded:
+                return update_raw_uri_name(raw, new_name)
+            data = json.loads(decoded)
+            data["ps"] = new_name
+            data["add"] = str(target_server)
+            if "server" in data:
+                data["server"] = str(target_server)
+            data["port"] = str(ONLY_PORT)
+            encoded = base64.b64encode(json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")).decode("ascii")
+            return "vmess://" + encoded
+
+        body = raw.split("#", 1)[0]
+        rest = body.split("://", 1)[1]
+        main, sep, query = rest.partition("?")
+        if "@" not in main:
+            # Some ss:// links are fully base64 encoded. Keep the server untouched
+            # rather than corrupting the account, but still refresh the name.
+            return body + "#" + name
+        userinfo, _serverpart = main.rsplit("@", 1)
+        new_body = f"{scheme}://{userinfo}@{target_server}:{ONLY_PORT}"
+        if sep:
+            new_body += "?" + query
+        return new_body + "#" + name
+    except Exception:
+        return update_raw_uri_name(raw, new_name)
+
+
 def build_akun_txt(nodes: list[ProxyNode]) -> str:
-    """Build akun.txt from final selected nodes only, with updated node names."""
+    """Build akun.txt from final nodes using bug server 104.17.3.81."""
     lines: list[str] = []
     for node in nodes:
         if str(node.type or "").lower() not in {"vless", "vmess", "trojan", "ss"}:
             continue
-        uri = update_raw_uri_name(node.raw, node.clash.get("name") or node.name)
+        uri = update_raw_uri_name_and_server(node.raw, node.clash.get("name") or node.name, TARGET_SERVER)
         if uri:
             lines.append(uri)
     return "\n".join(lines) + ("\n" if lines else "")

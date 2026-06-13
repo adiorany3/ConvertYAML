@@ -117,3 +117,19 @@ vless://...
 vmess://...
 trojan://...
 ```
+
+## Update akun.txt memakai bug server
+
+Pada versi ini, `akun.txt` dibuat dari akun final yang masuk YAML, tetapi alamat server pada link sudah diganti menjadi bug server:
+
+```text
+104.17.3.81:443
+```
+
+Contoh hasil:
+
+```text
+vless://uuid@104.17.3.81:443?...&sni=domain-asli&type=ws&host=domain-asli&path=/path#AKUN-001-PROVIDER-VLESS-WS-18MS
+```
+
+Field SNI/Host/path tetap memakai data akun asli agar koneksi WebSocket tetap sesuai, sedangkan alamat server mengikuti YAML OpenClash.
