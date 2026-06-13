@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import base64
+import json
 import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import quote, urlencode
 
 from sumberyaml_core import (
     ALT_TEST_URL,
@@ -70,25 +73,144 @@ def build_links_text() -> str:
     return "\n".join(unique)
 
 
-def build_akun_txt(nodes) -> str:
-    """Simpan link asli akun aktif yang masuk YAML.
 
-    Hanya protocol vless/vmess/trojan yang ditulis karena format ini mudah
-    diimport ke client lain. Shadowsocks tidak ditulis ke akun.txt sesuai
-    kebutuhan utama file ini.
+def _get_ws_host(clash: dict) -> str:
+    ws_opts = clash.get("ws-opts") if isinstance(clash.get("ws-opts"), dict) else {}
+    headers = ws_opts.get("headers") if isinstance(ws_opts.get("headers"), dict) else {}
+    host = headers.get("Host") or headers.get("host") or ""
+    return str(host).strip()
+
+
+def _get_ws_path(clash: dict) -> str:
+    ws_opts = clash.get("ws-opts") if isinstance(clash.get("ws-opts"), dict) else {}
+    path = str(ws_opts.get("path") or "/").strip() or "/"
+    return path
+
+
+def _get_alpn(clash: dict) -> str:
+    alpn = clash.get("alpn")
+    if isinstance(alpn, list):
+        return ",".join(str(x).strip() for x in alpn if str(x).strip())
+    if isinstance(alpn, str):
+        return alpn.strip()
+    return ""
+
+
+def _node_to_account_link(node) -> str:
+    """Convert the selected Clash node back to a share URI.
+
+    akun.txt must follow the final YAML output, so the link uses the generated
+    bug server, SNI, Host, path, and safe account name instead of blindly copying
+    the raw public subscription URI.
     """
-    lines: list[str] = []
+    clash = node.clash
+    proto = str(clash.get("type") or node.type or "").lower()
+    if proto not in {"vless", "vmess", "trojan"}:
+        return ""
+
+    name = str(clash.get("name") or node.name or "AKUN").strip() or "AKUN"
+    server = str(clash.get("server") or "").strip()
+    port = str(clash.get("port") or "443").strip()
+    network = str(clash.get("network") or "tcp").strip().lower() or "tcp"
+    sni = str(clash.get("servername") or clash.get("sni") or "").strip()
+    fp = str(clash.get("client-fingerprint") or "").strip()
+    alpn = _get_alpn(clash)
+    host = _get_ws_host(clash)
+    path = _get_ws_path(clash)
+
+    if not server or not port:
+        return ""
+
+    if proto == "vless":
+        uuid = str(clash.get("uuid") or "").strip()
+        if not uuid:
+            return ""
+        params = {
+            "encryption": "none",
+            "security": "tls" if bool(clash.get("tls")) else "none",
+            "type": network,
+        }
+        if sni:
+            params["sni"] = sni
+        if fp:
+            params["fp"] = fp
+        if alpn:
+            params["alpn"] = alpn
+        if network == "ws":
+            params["path"] = path
+            if host:
+                params["host"] = host
+        elif network == "grpc":
+            grpc_opts = clash.get("grpc-opts") if isinstance(clash.get("grpc-opts"), dict) else {}
+            service = str(grpc_opts.get("grpc-service-name") or "grpc").strip() or "grpc"
+            params["serviceName"] = service
+        flow = str(clash.get("flow") or "").strip()
+        if flow:
+            params["flow"] = flow
+        return f"vless://{quote(uuid, safe='')}@{server}:{port}?{urlencode(params, safe='')}#{quote(name, safe='')}"
+
+    if proto == "trojan":
+        password = str(clash.get("password") or "").strip()
+        if not password:
+            return ""
+        params = {
+            "security": "tls",
+            "type": network,
+        }
+        if sni:
+            params["sni"] = sni
+        if fp:
+            params["fp"] = fp
+        if alpn:
+            params["alpn"] = alpn
+        if network == "ws":
+            params["path"] = path
+            if host:
+                params["host"] = host
+        elif network == "grpc":
+            grpc_opts = clash.get("grpc-opts") if isinstance(clash.get("grpc-opts"), dict) else {}
+            service = str(grpc_opts.get("grpc-service-name") or "grpc").strip() or "grpc"
+            params["serviceName"] = service
+        return f"trojan://{quote(password, safe='')}@{server}:{port}?{urlencode(params, safe='')}#{quote(name, safe='')}"
+
+    if proto == "vmess":
+        uuid = str(clash.get("uuid") or "").strip()
+        if not uuid:
+            return ""
+        vmess_data = {
+            "v": "2",
+            "ps": name,
+            "add": server,
+            "port": port,
+            "id": uuid,
+            "aid": str(clash.get("alterId") if clash.get("alterId") is not None else 0),
+            "scy": str(clash.get("cipher") or "auto"),
+            "net": network,
+            "type": "none",
+            "host": host if network == "ws" else "",
+            "path": path if network == "ws" else "",
+            "tls": "tls" if bool(clash.get("tls")) else "",
+            "sni": sni,
+        }
+        if fp:
+            vmess_data["fp"] = fp
+        if alpn:
+            vmess_data["alpn"] = alpn
+        encoded = base64.b64encode(json.dumps(vmess_data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")).decode("ascii")
+        return f"vmess://{encoded}"
+
+    return ""
+
+
+def build_akun_txt(nodes) -> str:
+    links: list[str] = []
     seen: set[str] = set()
     for node in nodes:
-        raw = str(getattr(node, "raw", "") or "").strip()
-        proto = raw.split("://", 1)[0].lower() if "://" in raw else ""
-        if proto not in {"vless", "vmess", "trojan"}:
-            continue
-        if raw and raw not in seen:
-            seen.add(raw)
-            lines.append(raw)
-    return "\n".join(lines) + ("\n" if lines else "")
-
+        link = _node_to_account_link(node).strip()
+        if link and link not in seen:
+            seen.add(link)
+            links.append(link)
+    return "\n".join(links) + ("\n" if links else "")
 
 def main() -> int:
     output_yaml = os.getenv("OUTPUT_YAML", "openclash_auto.yaml")
@@ -152,7 +274,7 @@ def main() -> int:
     summary = (
         f"Last update: {now}\n"
         f"YAML nodes: {len(alive_nodes)}\n"
-        f"Akun txt: {len([line for line in akun_text.splitlines() if line.strip()])}\n"
+        f"Akun links: {len([line for line in akun_text.splitlines() if line.strip()])}\n"
         f"Parsed nodes: {len(all_nodes)}\n"
         f"Fetched links: {len(fetch_logs)}\n"
         f"Skipped raw URI: {len(skipped)}\n"

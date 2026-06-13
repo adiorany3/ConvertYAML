@@ -10,7 +10,6 @@ Versi ini menambahkan generator otomatis untuk membuat dan memperbarui YAML Open
 - `.github/workflows/update-yaml-6jam.yml` — workflow update otomatis per 6 jam.
 - `openclash_auto.yaml` — output YAML otomatis setelah workflow berjalan.
 - `openclash_auto_report.csv` — report hasil validasi.
-- `akun.txt` — daftar link asli akun aktif yang masuk YAML (`vless://`, `vmess://`, atau `trojan://`).
 - `last_update.txt` — catatan waktu update terakhir.
 
 ## Cara pakai di GitHub
@@ -100,14 +99,6 @@ Report detail ada di:
 openclash_auto_report.csv
 ```
 
-Link akun aktif yang masuk YAML tersimpan di:
-
-```text
-akun.txt
-```
-
-Isi `akun.txt` hanya akun aktif terpilih dalam format link asli, satu akun per baris. File ini cocok untuk backup, import manual, atau dibagikan sebagai subscription sederhana.
-
 ## Default optimasi GitHub Action
 
 ```text
@@ -119,12 +110,11 @@ Candidate minimum        : 2500
 Cadangan internal strict : 120
 Health timeout OpenClash : 6000 ms
 Rule mode                : Lite
-Output akun aktif        : akun.txt
 ```
 
 Catatan: 20/20 tetap tidak bisa dijamin setiap waktu karena sumber akun publik bisa berubah atau mati. Generator akan mencoba mencari lebih banyak kandidat lalu hanya menulis node terbaik yang lolos validasi strict.
 
 
-## Catatan akun.txt
+## akun.txt
 
-Setiap workflow berhasil berjalan, file `akun.txt` akan ikut diperbarui dan di-commit bersama `openclash_auto.yaml`. File ini berisi link asli dari node yang lolos validasi strict dan masuk ke YAML. Protocol yang ditulis hanya `vless://`, `vmess://`, dan `trojan://`; `ss://` tidak ditulis agar sesuai kebutuhan akun utama.
+Setiap workflow selesai berjalan, akun aktif yang masuk YAML juga disimpan ke `akun.txt` dalam format link share `vless://`, `vmess://`, atau `trojan://`. File ini ikut di-commit otomatis bersama `openclash_auto.yaml`, `openclash_auto_report.csv`, dan `last_update.txt`.
