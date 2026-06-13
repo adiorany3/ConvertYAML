@@ -57,377 +57,276 @@ dns:
     ipcidr:
     - 240.0.0.0/4
 proxies:
-- name: AKUN-001-VLESS-19MS
-  type: vless
+- name: AKUN-001-TROJAN-20MS
+  type: trojan
   server: 104.17.3.81
   port: 443
-  uuid: 2187354d-0ffe-428a-9977-13c43e8620ec
+  password: 0ff2ecf0-4684-11f0-b33e-1239d0255272
   udp: true
-  tls: true
-  servername: nimhubnet4.nvclud.ir.
-  network: ws
-  client-fingerprint: chrome
+  sni: uk1.test3.net
   skip-cert-verify: true
-  ws-opts:
-    path: /?ed=2095
-    headers:
-      Host: nimhubnet4.nvclud.ir.
-- name: AKUN-002-VLESS-20MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: e65a5cbc-5663-4f7d-ad7d-800e86ba487d
-  udp: true
-  tls: true
-  servername: rAyAn-cOnFiG-fr-1.pAriSa.dPdNs.oRg
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /ws
-    headers:
-      Host: rAyAn-cOnFiG-fr-1.pAriSa.dPdNs.oRg
-- name: AKUN-003-VLESS-19MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 3ea2d8f2-12c1-4189-8cc5-91d0ee9f5ca0
-  udp: true
-  tls: true
-  servername: cloudflare.com
   network: tcp
-  client-fingerprint: firefox
-  skip-cert-verify: true
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: C1hW1bTA9WOacIK-fHHg-HLkDZ3FY7FhEhAyldMSUEA
-    short-id: a1b2c3d4e5f6
-- name: AKUN-004-VLESS-18MS
-  type: vless
+- name: AKUN-002-TROJAN-19MS
+  type: trojan
   server: 104.17.3.81
   port: 443
-  uuid: 55b0463c-e27f-455b-a25a-70123297b9f4
+  password: 10f81a15-c7c8-473b-a12a-a09f098b6236
   udp: true
-  tls: true
-  servername: rAyAn-cOnFiG-sg-1.pArSa.dPdNs.oRg
+  sni: kr1.api-aws.com
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-003-TROJAN-20MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: 0ac0df1b-cfce-47b1-a286-91a0ec2fc7ef
+  udp: true
+  sni: pardazeshvpn-tg7.pages.dev
+  skip-cert-verify: true
   network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
   ws-opts:
-    path: /ws
+    path: /Telegram@V2ray_Alpha/?ed=2048
     headers:
-      Host: rAyAn-cOnFiG-sg-1.pArSa.dPdNs.oRg
-- name: AKUN-005-VLESS-19MS
-  type: vless
+      Host: pardazeshvpn-tg7.pages.dev
+- name: AKUN-004-TROJAN-22MS
+  type: trojan
   server: 104.17.3.81
   port: 443
-  uuid: eeb6823c-b926-4ea2-866a-5542edd26e59
+  password: 0YQjdidwRZf8WDcxYVpp
+  udp: true
+  sni: BB2233.xfAn1986.dpDNs.ORg
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /tr0GhLINbyEVJEt8JJ/YnBiLnlvdXNlZi5pc2VnYXJvLmNvbQ==
+    headers:
+      Host: bb2233.xfan1986.dpdns.org
+- name: AKUN-005-TROJAN-23MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: '1111'
+  udp: true
+  sni: v2ngfast-v2ngfast-v2ngfast-v2ngfast.jayag42786.workers.dev
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-006-TROJAN-19MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: 0f218d19-cdfa-475d-bf65-8f0d7e5331a5
+  udp: true
+  sni: dl-hk6.steamdownload.top
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-007-TROJAN-20MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: 0YQjdidwRZf8WDcxYVpp
+  udp: true
+  sni: bb2233.xfan1986.DpDns.Org
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /trGxbl3YpkbjGx8LJe/YnBiLnlvdXNlZi5pc2VnYXJvLmNvbQ==
+    headers:
+      Host: bb2233.xfan1986.dpdns.org
+- name: AKUN-008-TROJAN-20MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: '1111'
+  udp: true
+  sni: v2ngfast-v2ngfast-v2ngfast-v2ngfast.pifirib369.workers.dev
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /?ed=2560
+    headers:
+      Host: v2ngfast-v2ngfast-v2ngfast-v2ngfast.pifirib369.workers.dev
+- name: AKUN-009-TROJAN-21MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: '1111'
+  udp: true
+  sni: v2ngfast-v2ngfast-v2ngfast-v2ngfast.pifirib369.workers.dev
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-010-TROJAN-22MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  sni: jobscareerfortoday.com
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /6b777a91
+    headers:
+      Host: jobscareerfortoday.com
+- name: AKUN-011-TROJAN-23MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: LYaEYwjN8LjWTRJdCCTzW7V6gK7atJVu
+  udp: true
+  sni: ch-2.bexum.fun
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-012-TROJAN-23MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: '1111'
+  udp: true
+  sni: v2ngfast-v2ngfast-v2ngfast-v2ngfast.jayag42786.workers.dev
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /?ed=2560
+    headers:
+      Host: v2ngfast-v2ngfast-v2ngfast-v2ngfast.jayag42786.workers.dev
+- name: AKUN-013-TROJAN-20MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: auto
+  udp: true
+  sni: nameless-term-9c25.vpnconnect202020.workers.dev
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-014-TROJAN-23MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: 0f218d19-cdfa-475d-bf65-8f0d7e5331a5
+  udp: true
+  sni: dl-hk3.steamdownload.top
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-015-TROJAN-17MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: 0KcEk4Biw0
+  udp: true
+  sni: mizan.onetwothree123.ir
+  skip-cert-verify: true
+  network: ws
+  alpn:
+  - h2
+  - http/1.1
+  ws-opts:
+    path: /33496/mehdi
+    headers:
+      Host: mizan.onetwothree123.ir
+- name: AKUN-016-TROJAN-20MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: 2cba4104747d49d18319e5ade1b93ab5
+  udp: true
+  sni: jobscareerforstudent.com
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-017-TROJAN-24MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: humanity
+  udp: true
+  sni: www.gossipglove.com
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-018-TROJAN-20MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: humanity
+  udp: true
+  sni: www.calmlunch.com
+  skip-cert-verify: true
+  network: tcp
+- name: AKUN-019-TROJAN-22MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: 0jvOqSPtoC
+  udp: true
+  sni: da.aananas.ir
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /?ed=2048
+    headers:
+      Host: da.aananas.ir
+- name: AKUN-020-TROJAN-24MS
+  type: trojan
+  server: 104.17.3.81
+  port: 443
+  password: 09520f00-9f39-11ef-91e0-1239d0255272
+  udp: true
+  sni: usa.test3.net
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /howdy
+    headers:
+      Host: usa.test3.net
+- name: AKUN-021-VMESS-21MS
+  type: vmess
+  server: 104.17.3.81
+  port: 443
+  uuid: 4ac06183-feca-48f8-9f7d-3355bd950e2a
+  alterId: 0
+  cipher: auto
   udp: true
   tls: true
-  servername: 64.186.248.160
+  servername: yzjd01-ublubeu.koyeb.app
   network: ws
   client-fingerprint: chrome
   skip-cert-verify: true
   ws-opts:
     path: /
     headers:
-      Host: t1s1.rittbo.kdns.fr
-- name: AKUN-006-VLESS-20MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 47ab09c5-b2cc-441f-b5e5-6782b722d3ee
-  udp: true
-  tls: true
-  servername: pl.aiage.work
-  network: tcp
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: 8KqR58G5z0RkDn4P979JfYzCOwTYIvOS8ordh8o8ZjA
-    short-id: 337d4ba396e01b3f
-- name: AKUN-007-VLESS-20MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: c2f0a8f0-36fe-4a94-824b-bca271ca642b
-  udp: true
-  tls: true
-  servername: alphacdn.alphashops.shop
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /ws
-    headers:
-      Host: alphacdn.alphashops.shop
-- name: AKUN-008-VLESS-21MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 9ccd06a2-5616-47e3-9763-f9696959d7ad
-  udp: true
-  tls: true
-  servername: rAyAn-cOnFiG-de-1.pAriSa.dPdNs.oRg
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /ws
-    headers:
-      Host: rAyAn-cOnFiG-de-1.pAriSa.dPdNs.oRg
-- name: AKUN-009-VMESS-16MS
-  type: vmess
-  server: 104.17.3.81
-  port: 443
-  uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: mute-math-d64e.0e503992ad7026.woRKERS.DeV
-  network: ws
-  client-fingerprint: edge
-  skip-cert-verify: true
-  ws-opts:
-    path: /aveiror.com:443/linkvws
-    headers:
-      Host: mute-math-d64e.0e503992ad7026.woRKERS.DeV
-- name: AKUN-010-VLESS-19MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: eeb6823c-b926-4ea2-866a-5542edd26e59
-  udp: true
-  tls: true
-  servername: t1s1.rittbo.kdns.fr
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /fp=chrome
-    headers:
-      Host: t1s1.rittbo.kdns.fr
-- name: AKUN-011-VMESS-19MS
-  type: vmess
-  server: 104.17.3.81
-  port: 443
-  uuid: df9c9355-b02c-4c12-909d-0dbeb725d52b
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: renderer-stream-1-411.mirra.now
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /api/v1/gpu-stream/socket
-    headers:
-      Host: renderer-stream-1-411.mirra.now
-- name: AKUN-012-TROJAN-20MS
+      Host: yzjd01-ublubeu.koyeb.app
+- name: AKUN-022-TROJAN-21MS
   type: trojan
   server: 104.17.3.81
   port: 443
-  password: mitivpn
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
   udp: true
-  sni: mitivpn.sdde.ssdl.globdal.fastdly.net.mitivpn.site
+  sni: jobscareerfortoday.com
   skip-cert-verify: true
-  network: ws
-  alpn:
-  - http/1.1
-  ws-opts:
-    path: https://chatgpt.com
-    headers:
-      Host: mitivpn.sdde.ssdl.globdal.fastdly.net.mitivpn.site
-- name: AKUN-013-VLESS-20MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 568db765-6970-40c8-8087-83ea9ba2429e
-  udp: true
-  tls: true
-  servername: rAyAn-007.pArAsToO.DpDnS.OrG
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /?ed=2560
-    headers:
-      Host: rAyAn-007.pArAsToO.DpDnS.OrG
-- name: AKUN-014-VMESS-21MS
-  type: vmess
-  server: 104.17.3.81
-  port: 443
-  uuid: df9c9355-b02c-4c12-909d-0dbeb725d52b
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: renderer-stream-1-411.mirra.now
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /api/v1/gpu-stream/socket
-    headers:
-      Host: renderer-stream-1-411.mirra.now
-- name: AKUN-015-VLESS-23MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 9ccd06a2-5616-47e3-9763-f9696959d7ad
-  udp: true
-  tls: true
-  servername: rAyAn-cOnFiG-de-1.pArSa.dPdNs.oRg
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /ws
-    headers:
-      Host: rAyAn-cOnFiG-de-1.pArSa.dPdNs.oRg
-- name: AKUN-016-VLESS-18MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 5e1306ff-3ffa-4166-89ab-1a06ff42eca6
-  udp: true
-  tls: true
-  servername: www.speedtest.net
   network: tcp
-  client-fingerprint: chrome
-  skip-cert-verify: true
-- name: AKUN-017-VLESS-18MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: c4e81f7d-3750-486e-ab67-2ae0f43969c6
-  udp: true
-  tls: true
-  servername: ru7.cdn-global.pro
-  network: tcp
-  client-fingerprint: firefox
-  skip-cert-verify: true
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: h18Rbgv9RV558p-9Pl4g_--jJjXlTZL0-jHqNK5M_n4
-    short-id: 2b8c3e90e14740d2
-- name: AKUN-018-VLESS-18MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: c4e81f7d-3750-486e-ab67-2ae0f43969c6
-  udp: true
-  tls: true
-  servername: ru9.cdn-global.pro
-  network: tcp
-  client-fingerprint: firefox
-  skip-cert-verify: true
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: VzcHDR57dKZ6aPF1VchAbeKfSHKt_a4pjt-eOpoAG0o
-    short-id: 893c5832052a1923
-- name: AKUN-019-TROJAN-20MS
+- name: AKUN-023-TROJAN-21MS
   type: trojan
   server: 104.17.3.81
   port: 443
-  password: mitivpn
+  password: Mitivpn
   udp: true
-  sni: mitivpn.sddde.ssddl.globddal.fassdtdly.cow.mitivpn.site
+  sni: www.hitgram.ir
   skip-cert-verify: true
-  network: ws
-  alpn:
-  - http/1.1
-  ws-opts:
-    path: https://chatgpt.com
-    headers:
-      Host: mitivpn.sddde.ssddl.globddal.fassdtdly.cow.mitivpn.site
-- name: AKUN-020-VLESS-20MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 55b0463c-e27f-455b-a25a-70123297b9f4
-  udp: true
-  tls: true
-  servername: rAyAn-cOnFiG-sg-1.pAriSa.dPdNs.oRg
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /ws
-    headers:
-      Host: rAyAn-cOnFiG-sg-1.pAriSa.dPdNs.oRg
-- name: AKUN-021-VMESS-20MS
-  type: vmess
-  server: 104.17.3.81
-  port: 443
-  uuid: df9c9355-b02c-4c12-909d-0dbeb725d52b
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: renderer-stream-1-411.mirra.now
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /api/v1/gpu-stream/socket
-    headers:
-      Host: renderer-stream-1-411.mirra.now
-- name: AKUN-022-VMESS-20MS
-  type: vmess
-  server: 104.17.3.81
-  port: 443
-  uuid: d9863037-0463-4615-e972-36ba9662d1e9
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: xcf037.facai2024.com
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /d9863037
-    headers:
-      Host: xcf037.facai2024.com
-- name: AKUN-023-VLESS-22MS
-  type: vless
-  server: 104.17.3.81
-  port: 443
-  uuid: 9ccd06a2-5616-47e3-9763-f9696959d7ad
-  udp: true
-  tls: true
-  servername: rAyAn-cOnFiG-de-1.pAriSa.dPdNs.oRg
-  network: ws
-  client-fingerprint: chrome
-  skip-cert-verify: true
-  ws-opts:
-    path: /ws
-    headers:
-      Host: rAyAn-cOnFiG-de-1.pAriSa.dPdNs.oRg
-- name: AKUN-024-TROJAN-22MS
+  network: tcp
+- name: AKUN-024-TROJAN-21MS
   type: trojan
   server: 104.17.3.81
   port: 443
-  password: humanity
+  password: 0e17b420-48a2-11f0-8c4d-1239d0255272
   udp: true
-  sni: www.multiplydose.com
+  sni: uk1.test3.net
   skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-    headers:
-      Host: www.multiplydose.com
-- name: AKUN-025-TROJAN-19MS
+  network: tcp
+- name: AKUN-025-TROJAN-24MS
   type: trojan
   server: 104.17.3.81
   port: 443
-  password: 22f86840-bcac-11ee-abea-1239d0255272
+  password: hF7uSJfeBPtSNXKtuYvTRNaBdGkkXHpKJfLRfbpaDWovomSL
   udp: true
-  sni: chatbuzzteambhm.chatbuzzt7150.workers.dev
+  sni: uk1.bw8848.org
   skip-cert-verify: true
   network: tcp
 proxy-groups:
@@ -443,31 +342,31 @@ proxy-groups:
   - EDUKASI
   - STREAMING
   - CLEAN
-  - AKUN-001-VLESS-19MS
-  - AKUN-002-VLESS-20MS
-  - AKUN-003-VLESS-19MS
-  - AKUN-004-VLESS-18MS
-  - AKUN-005-VLESS-19MS
-  - AKUN-006-VLESS-20MS
-  - AKUN-007-VLESS-20MS
-  - AKUN-008-VLESS-21MS
-  - AKUN-009-VMESS-16MS
-  - AKUN-010-VLESS-19MS
-  - AKUN-011-VMESS-19MS
-  - AKUN-012-TROJAN-20MS
-  - AKUN-013-VLESS-20MS
-  - AKUN-014-VMESS-21MS
-  - AKUN-015-VLESS-23MS
-  - AKUN-016-VLESS-18MS
-  - AKUN-017-VLESS-18MS
-  - AKUN-018-VLESS-18MS
-  - AKUN-019-TROJAN-20MS
-  - AKUN-020-VLESS-20MS
-  - AKUN-021-VMESS-20MS
-  - AKUN-022-VMESS-20MS
-  - AKUN-023-VLESS-22MS
-  - AKUN-024-TROJAN-22MS
-  - AKUN-025-TROJAN-19MS
+  - AKUN-001-TROJAN-20MS
+  - AKUN-002-TROJAN-19MS
+  - AKUN-003-TROJAN-20MS
+  - AKUN-004-TROJAN-22MS
+  - AKUN-005-TROJAN-23MS
+  - AKUN-006-TROJAN-19MS
+  - AKUN-007-TROJAN-20MS
+  - AKUN-008-TROJAN-20MS
+  - AKUN-009-TROJAN-21MS
+  - AKUN-010-TROJAN-22MS
+  - AKUN-011-TROJAN-23MS
+  - AKUN-012-TROJAN-23MS
+  - AKUN-013-TROJAN-20MS
+  - AKUN-014-TROJAN-23MS
+  - AKUN-015-TROJAN-17MS
+  - AKUN-016-TROJAN-20MS
+  - AKUN-017-TROJAN-24MS
+  - AKUN-018-TROJAN-20MS
+  - AKUN-019-TROJAN-22MS
+  - AKUN-020-TROJAN-24MS
+  - AKUN-021-VMESS-21MS
+  - AKUN-022-TROJAN-21MS
+  - AKUN-023-TROJAN-21MS
+  - AKUN-024-TROJAN-21MS
+  - AKUN-025-TROJAN-24MS
 - name: PROXY
   type: select
   proxies:
@@ -481,31 +380,31 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-VLESS-19MS
-  - AKUN-002-VLESS-20MS
-  - AKUN-003-VLESS-19MS
-  - AKUN-004-VLESS-18MS
-  - AKUN-005-VLESS-19MS
-  - AKUN-006-VLESS-20MS
-  - AKUN-007-VLESS-20MS
-  - AKUN-008-VLESS-21MS
-  - AKUN-009-VMESS-16MS
-  - AKUN-010-VLESS-19MS
-  - AKUN-011-VMESS-19MS
-  - AKUN-012-TROJAN-20MS
-  - AKUN-013-VLESS-20MS
-  - AKUN-014-VMESS-21MS
-  - AKUN-015-VLESS-23MS
-  - AKUN-016-VLESS-18MS
-  - AKUN-017-VLESS-18MS
-  - AKUN-018-VLESS-18MS
-  - AKUN-019-TROJAN-20MS
-  - AKUN-020-VLESS-20MS
-  - AKUN-021-VMESS-20MS
-  - AKUN-022-VMESS-20MS
-  - AKUN-023-VLESS-22MS
-  - AKUN-024-TROJAN-22MS
-  - AKUN-025-TROJAN-19MS
+  - AKUN-001-TROJAN-20MS
+  - AKUN-002-TROJAN-19MS
+  - AKUN-003-TROJAN-20MS
+  - AKUN-004-TROJAN-22MS
+  - AKUN-005-TROJAN-23MS
+  - AKUN-006-TROJAN-19MS
+  - AKUN-007-TROJAN-20MS
+  - AKUN-008-TROJAN-20MS
+  - AKUN-009-TROJAN-21MS
+  - AKUN-010-TROJAN-22MS
+  - AKUN-011-TROJAN-23MS
+  - AKUN-012-TROJAN-23MS
+  - AKUN-013-TROJAN-20MS
+  - AKUN-014-TROJAN-23MS
+  - AKUN-015-TROJAN-17MS
+  - AKUN-016-TROJAN-20MS
+  - AKUN-017-TROJAN-24MS
+  - AKUN-018-TROJAN-20MS
+  - AKUN-019-TROJAN-22MS
+  - AKUN-020-TROJAN-24MS
+  - AKUN-021-VMESS-21MS
+  - AKUN-022-TROJAN-21MS
+  - AKUN-023-TROJAN-21MS
+  - AKUN-024-TROJAN-21MS
+  - AKUN-025-TROJAN-24MS
 - name: SOCIAL-MEDIA
   type: select
   proxies:
@@ -513,31 +412,31 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-VLESS-19MS
-  - AKUN-002-VLESS-20MS
-  - AKUN-003-VLESS-19MS
-  - AKUN-004-VLESS-18MS
-  - AKUN-005-VLESS-19MS
-  - AKUN-006-VLESS-20MS
-  - AKUN-007-VLESS-20MS
-  - AKUN-008-VLESS-21MS
-  - AKUN-009-VMESS-16MS
-  - AKUN-010-VLESS-19MS
-  - AKUN-011-VMESS-19MS
-  - AKUN-012-TROJAN-20MS
-  - AKUN-013-VLESS-20MS
-  - AKUN-014-VMESS-21MS
-  - AKUN-015-VLESS-23MS
-  - AKUN-016-VLESS-18MS
-  - AKUN-017-VLESS-18MS
-  - AKUN-018-VLESS-18MS
-  - AKUN-019-TROJAN-20MS
-  - AKUN-020-VLESS-20MS
-  - AKUN-021-VMESS-20MS
-  - AKUN-022-VMESS-20MS
-  - AKUN-023-VLESS-22MS
-  - AKUN-024-TROJAN-22MS
-  - AKUN-025-TROJAN-19MS
+  - AKUN-001-TROJAN-20MS
+  - AKUN-002-TROJAN-19MS
+  - AKUN-003-TROJAN-20MS
+  - AKUN-004-TROJAN-22MS
+  - AKUN-005-TROJAN-23MS
+  - AKUN-006-TROJAN-19MS
+  - AKUN-007-TROJAN-20MS
+  - AKUN-008-TROJAN-20MS
+  - AKUN-009-TROJAN-21MS
+  - AKUN-010-TROJAN-22MS
+  - AKUN-011-TROJAN-23MS
+  - AKUN-012-TROJAN-23MS
+  - AKUN-013-TROJAN-20MS
+  - AKUN-014-TROJAN-23MS
+  - AKUN-015-TROJAN-17MS
+  - AKUN-016-TROJAN-20MS
+  - AKUN-017-TROJAN-24MS
+  - AKUN-018-TROJAN-20MS
+  - AKUN-019-TROJAN-22MS
+  - AKUN-020-TROJAN-24MS
+  - AKUN-021-VMESS-21MS
+  - AKUN-022-TROJAN-21MS
+  - AKUN-023-TROJAN-21MS
+  - AKUN-024-TROJAN-21MS
+  - AKUN-025-TROJAN-24MS
 - name: YOUTUBE
   type: select
   proxies:
@@ -545,31 +444,31 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-VLESS-19MS
-  - AKUN-002-VLESS-20MS
-  - AKUN-003-VLESS-19MS
-  - AKUN-004-VLESS-18MS
-  - AKUN-005-VLESS-19MS
-  - AKUN-006-VLESS-20MS
-  - AKUN-007-VLESS-20MS
-  - AKUN-008-VLESS-21MS
-  - AKUN-009-VMESS-16MS
-  - AKUN-010-VLESS-19MS
-  - AKUN-011-VMESS-19MS
-  - AKUN-012-TROJAN-20MS
-  - AKUN-013-VLESS-20MS
-  - AKUN-014-VMESS-21MS
-  - AKUN-015-VLESS-23MS
-  - AKUN-016-VLESS-18MS
-  - AKUN-017-VLESS-18MS
-  - AKUN-018-VLESS-18MS
-  - AKUN-019-TROJAN-20MS
-  - AKUN-020-VLESS-20MS
-  - AKUN-021-VMESS-20MS
-  - AKUN-022-VMESS-20MS
-  - AKUN-023-VLESS-22MS
-  - AKUN-024-TROJAN-22MS
-  - AKUN-025-TROJAN-19MS
+  - AKUN-001-TROJAN-20MS
+  - AKUN-002-TROJAN-19MS
+  - AKUN-003-TROJAN-20MS
+  - AKUN-004-TROJAN-22MS
+  - AKUN-005-TROJAN-23MS
+  - AKUN-006-TROJAN-19MS
+  - AKUN-007-TROJAN-20MS
+  - AKUN-008-TROJAN-20MS
+  - AKUN-009-TROJAN-21MS
+  - AKUN-010-TROJAN-22MS
+  - AKUN-011-TROJAN-23MS
+  - AKUN-012-TROJAN-23MS
+  - AKUN-013-TROJAN-20MS
+  - AKUN-014-TROJAN-23MS
+  - AKUN-015-TROJAN-17MS
+  - AKUN-016-TROJAN-20MS
+  - AKUN-017-TROJAN-24MS
+  - AKUN-018-TROJAN-20MS
+  - AKUN-019-TROJAN-22MS
+  - AKUN-020-TROJAN-24MS
+  - AKUN-021-VMESS-21MS
+  - AKUN-022-TROJAN-21MS
+  - AKUN-023-TROJAN-21MS
+  - AKUN-024-TROJAN-21MS
+  - AKUN-025-TROJAN-24MS
 - name: EDUKASI
   type: select
   proxies:
@@ -577,31 +476,31 @@ proxy-groups:
   - DIRECT
   - FALLBACK
   - LOAD-BALANCE
-  - AKUN-001-VLESS-19MS
-  - AKUN-002-VLESS-20MS
-  - AKUN-003-VLESS-19MS
-  - AKUN-004-VLESS-18MS
-  - AKUN-005-VLESS-19MS
-  - AKUN-006-VLESS-20MS
-  - AKUN-007-VLESS-20MS
-  - AKUN-008-VLESS-21MS
-  - AKUN-009-VMESS-16MS
-  - AKUN-010-VLESS-19MS
-  - AKUN-011-VMESS-19MS
-  - AKUN-012-TROJAN-20MS
-  - AKUN-013-VLESS-20MS
-  - AKUN-014-VMESS-21MS
-  - AKUN-015-VLESS-23MS
-  - AKUN-016-VLESS-18MS
-  - AKUN-017-VLESS-18MS
-  - AKUN-018-VLESS-18MS
-  - AKUN-019-TROJAN-20MS
-  - AKUN-020-VLESS-20MS
-  - AKUN-021-VMESS-20MS
-  - AKUN-022-VMESS-20MS
-  - AKUN-023-VLESS-22MS
-  - AKUN-024-TROJAN-22MS
-  - AKUN-025-TROJAN-19MS
+  - AKUN-001-TROJAN-20MS
+  - AKUN-002-TROJAN-19MS
+  - AKUN-003-TROJAN-20MS
+  - AKUN-004-TROJAN-22MS
+  - AKUN-005-TROJAN-23MS
+  - AKUN-006-TROJAN-19MS
+  - AKUN-007-TROJAN-20MS
+  - AKUN-008-TROJAN-20MS
+  - AKUN-009-TROJAN-21MS
+  - AKUN-010-TROJAN-22MS
+  - AKUN-011-TROJAN-23MS
+  - AKUN-012-TROJAN-23MS
+  - AKUN-013-TROJAN-20MS
+  - AKUN-014-TROJAN-23MS
+  - AKUN-015-TROJAN-17MS
+  - AKUN-016-TROJAN-20MS
+  - AKUN-017-TROJAN-24MS
+  - AKUN-018-TROJAN-20MS
+  - AKUN-019-TROJAN-22MS
+  - AKUN-020-TROJAN-24MS
+  - AKUN-021-VMESS-21MS
+  - AKUN-022-TROJAN-21MS
+  - AKUN-023-TROJAN-21MS
+  - AKUN-024-TROJAN-21MS
+  - AKUN-025-TROJAN-24MS
 - name: STREAMING
   type: select
   proxies:
@@ -609,31 +508,31 @@ proxy-groups:
   - FALLBACK
   - LOAD-BALANCE
   - DIRECT
-  - AKUN-001-VLESS-19MS
-  - AKUN-002-VLESS-20MS
-  - AKUN-003-VLESS-19MS
-  - AKUN-004-VLESS-18MS
-  - AKUN-005-VLESS-19MS
-  - AKUN-006-VLESS-20MS
-  - AKUN-007-VLESS-20MS
-  - AKUN-008-VLESS-21MS
-  - AKUN-009-VMESS-16MS
-  - AKUN-010-VLESS-19MS
-  - AKUN-011-VMESS-19MS
-  - AKUN-012-TROJAN-20MS
-  - AKUN-013-VLESS-20MS
-  - AKUN-014-VMESS-21MS
-  - AKUN-015-VLESS-23MS
-  - AKUN-016-VLESS-18MS
-  - AKUN-017-VLESS-18MS
-  - AKUN-018-VLESS-18MS
-  - AKUN-019-TROJAN-20MS
-  - AKUN-020-VLESS-20MS
-  - AKUN-021-VMESS-20MS
-  - AKUN-022-VMESS-20MS
-  - AKUN-023-VLESS-22MS
-  - AKUN-024-TROJAN-22MS
-  - AKUN-025-TROJAN-19MS
+  - AKUN-001-TROJAN-20MS
+  - AKUN-002-TROJAN-19MS
+  - AKUN-003-TROJAN-20MS
+  - AKUN-004-TROJAN-22MS
+  - AKUN-005-TROJAN-23MS
+  - AKUN-006-TROJAN-19MS
+  - AKUN-007-TROJAN-20MS
+  - AKUN-008-TROJAN-20MS
+  - AKUN-009-TROJAN-21MS
+  - AKUN-010-TROJAN-22MS
+  - AKUN-011-TROJAN-23MS
+  - AKUN-012-TROJAN-23MS
+  - AKUN-013-TROJAN-20MS
+  - AKUN-014-TROJAN-23MS
+  - AKUN-015-TROJAN-17MS
+  - AKUN-016-TROJAN-20MS
+  - AKUN-017-TROJAN-24MS
+  - AKUN-018-TROJAN-20MS
+  - AKUN-019-TROJAN-22MS
+  - AKUN-020-TROJAN-24MS
+  - AKUN-021-VMESS-21MS
+  - AKUN-022-TROJAN-21MS
+  - AKUN-023-TROJAN-21MS
+  - AKUN-024-TROJAN-21MS
+  - AKUN-025-TROJAN-24MS
 - name: CLEAN
   type: select
   proxies:
@@ -643,31 +542,31 @@ proxy-groups:
 - name: AUTO-FAST
   type: url-test
   proxies: &id001
-  - AKUN-001-VLESS-19MS
-  - AKUN-002-VLESS-20MS
-  - AKUN-003-VLESS-19MS
-  - AKUN-004-VLESS-18MS
-  - AKUN-005-VLESS-19MS
-  - AKUN-006-VLESS-20MS
-  - AKUN-007-VLESS-20MS
-  - AKUN-008-VLESS-21MS
-  - AKUN-009-VMESS-16MS
-  - AKUN-010-VLESS-19MS
-  - AKUN-011-VMESS-19MS
-  - AKUN-012-TROJAN-20MS
-  - AKUN-013-VLESS-20MS
-  - AKUN-014-VMESS-21MS
-  - AKUN-015-VLESS-23MS
-  - AKUN-016-VLESS-18MS
-  - AKUN-017-VLESS-18MS
-  - AKUN-018-VLESS-18MS
-  - AKUN-019-TROJAN-20MS
-  - AKUN-020-VLESS-20MS
-  - AKUN-021-VMESS-20MS
-  - AKUN-022-VMESS-20MS
-  - AKUN-023-VLESS-22MS
-  - AKUN-024-TROJAN-22MS
-  - AKUN-025-TROJAN-19MS
+  - AKUN-001-TROJAN-20MS
+  - AKUN-002-TROJAN-19MS
+  - AKUN-003-TROJAN-20MS
+  - AKUN-004-TROJAN-22MS
+  - AKUN-005-TROJAN-23MS
+  - AKUN-006-TROJAN-19MS
+  - AKUN-007-TROJAN-20MS
+  - AKUN-008-TROJAN-20MS
+  - AKUN-009-TROJAN-21MS
+  - AKUN-010-TROJAN-22MS
+  - AKUN-011-TROJAN-23MS
+  - AKUN-012-TROJAN-23MS
+  - AKUN-013-TROJAN-20MS
+  - AKUN-014-TROJAN-23MS
+  - AKUN-015-TROJAN-17MS
+  - AKUN-016-TROJAN-20MS
+  - AKUN-017-TROJAN-24MS
+  - AKUN-018-TROJAN-20MS
+  - AKUN-019-TROJAN-22MS
+  - AKUN-020-TROJAN-24MS
+  - AKUN-021-VMESS-21MS
+  - AKUN-022-TROJAN-21MS
+  - AKUN-023-TROJAN-21MS
+  - AKUN-024-TROJAN-21MS
+  - AKUN-025-TROJAN-24MS
   url: http://cp.cloudflare.com/generate_204
   interval: 60
   tolerance: 40
