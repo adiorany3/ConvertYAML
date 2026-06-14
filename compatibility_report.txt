@@ -1,0 +1,5 @@
+[openclash_auto.yaml]
+OK: compatible structure check passed
+
+[openclash_android.yaml]
+OK: compatible structure check passed
