@@ -1,10 +1,12 @@
-Last update: 2026-06-14 05:23:30 UTC
+Last update: 2026-06-14 05:46:11 UTC
 OpenClash YAML: openclash_auto.yaml
 Android YAML: openclash_android.yaml
 Automatic YAML nodes: 20
 Automatic strict pool before real check: 80
-Automatic real-check tested: 23
-Automatic real-check result: real check passed 20/23 tested
+Automatic real-check tested: 20
+Automatic real-check result: real check passed 20/20 tested
+Low handshake filter max best: 250ms
+Low handshake filter max avg: off
 Manual group nodes: 4
 Akun txt automatic: 20
 Akun txt manual: 4
