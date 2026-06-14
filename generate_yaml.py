@@ -160,37 +160,41 @@ def normalize_manual_nodes_text(manual_text: str) -> tuple[str, int]:
 
 
 def _unique_manual_names(nodes: list[Any]) -> None:
-    """Give manual nodes safe names with MANUAL prefix.
+    """Keep manual node names from source and only add MANUAL prefix.
 
-    Manual nodes are intentionally not strict-filtered or tested. The name uses
-    original-server provider when it can be detected, but falls back safely when
-    detection fails. The MANUAL prefix prevents collision with the 20 automatic
-    nodes that use AKUN-001, AKUN-002, and so on.
+    Example:
+      source fragment: Singapore-VIP
+      YAML name      : MANUAL-Singapore-VIP
+
+    Manual nodes are intentionally not strict-filtered or tested. This function
+    only ensures the final YAML proxy names stay unique, because OpenClash/Mihomo
+    requires every proxy name to be unique and proxy-groups must reference the
+    exact same names.
     """
     seen: set[str] = set()
     for i, node in enumerate(nodes, start=1):
-        node.original_name = node.original_name or normalize_name(node.name, f"MANUAL-ORIGINAL-{i:03d}")
-        try:
-            provider = provider_label_from_original_server(node)
-        except Exception:
-            provider = "UNKNOWN"
-        provider = safe_proxy_name(str(provider or "UNKNOWN").upper(), "UNKNOWN")
-        proto = safe_proxy_name(str(node.type or "NODE").upper(), "NODE")
-        net = safe_proxy_name(node_network(node).upper(), "NET")
-        base = safe_proxy_name(f"MANUAL-{i:03d}-{provider}-{proto}-{net}", f"MANUAL-{i:03d}")
+        source_name = normalize_name(node.name, f"NODE-{i:03d}")
+        node.original_name = node.original_name or source_name
+
+        # Keep the user's/source fragment as much as possible. Only add MANUAL-
+        # in front. Do not convert to provider/ASN naming for manual nodes.
+        base_raw = f"MANUAL-{source_name}"
+        base = normalize_name(base_raw, f"MANUAL-NODE-{i:03d}")
+        base = base[:96].strip(" -_|/") or f"MANUAL-NODE-{i:03d}"
+
         name = base
         counter = 2
         while name in seen:
             suffix = f"-{counter}"
-            name = (base[: 64 - len(suffix)] + suffix).strip("-._")
+            name = (base[: 96 - len(suffix)] + suffix).strip(" -_|/")
             counter += 1
+
         seen.add(name)
         node.name = name
         node.clash["name"] = name
         node.status = "manual-unfiltered"
         node.tier = "MANUAL"
-        node.reason = "manual_nodes.txt: added without strict filtering/testing"
-
+        node.reason = "manual_nodes.txt: added without strict filtering/testing; name kept from source with MANUAL prefix"
 
 def parse_manual_nodes_unscreened(manual_text: str) -> tuple[list[Any], list[str]]:
     """Parse manual_nodes.txt and do not run strict SNI/WS filtering on it.

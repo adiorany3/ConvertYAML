@@ -48,7 +48,9 @@ Node manual:
 - tidak dites delay,
 - tidak mengurangi kuota 20 node otomatis,
 - masuk ke group sendiri bernama `MANUAL`,
-- tidak masuk `AUTO-FAST`, `FALLBACK`, atau `LOAD-BALANCE`,
+- nama node manual mengikuti nama asli dari sumber/link, hanya ditambah prefix `MANUAL-`,
+- node manual individual tidak masuk `AUTO-FAST` atau `LOAD-BALANCE`,
+- group `FALLBACK` dimulai dari group `MANUAL`, lalu dilanjutkan node akun otomatis,
 - tetap bisa dipilih manual dari group `GLOBAL` / `PROXY`,
 - disimpan terpisah ke `akun_manual.txt` dengan server `104.17.3.81:443`.
 
@@ -56,6 +58,29 @@ Jika ada baris manual yang formatnya tidak bisa diparse, baris tersebut dicatat 
 
 ```text
 manual_nodes_skipped.txt
+```
+
+## Nama node manual
+
+Nama node dari `manual_nodes.txt` sekarang mengikuti nama asli dari sumber/link, hanya ditambah prefix `MANUAL-`.
+
+Contoh jika sumber manual berisi nama:
+
+```text
+#SG-VIP-01
+```
+
+maka nama node di YAML menjadi:
+
+```text
+MANUAL-SG-VIP-01
+```
+
+Jika ada nama yang sama, generator otomatis menambahkan suffix agar tidak bentrok, misalnya:
+
+```text
+MANUAL-SG-VIP-01
+MANUAL-SG-VIP-01-2
 ```
 
 ## Android no rule
