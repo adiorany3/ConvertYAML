@@ -1,13 +1,13 @@
-Last update: 2026-06-14 07:54:53 UTC
+Last update: 2026-06-14 07:57:52 UTC
 Mode: FAST10 + real URL test early-stop
 OpenClash YAML: openclash_auto.yaml
 Android YAML: openclash_android.yaml
-Automatic YAML nodes after URL test: 10
-Automatic strict pool before URL test: 28
-Automatic URL-test checked: 10
-Automatic URL-test result: URL test passed 10/10 tested
+Automatic YAML nodes after URL test: 20
+Automatic strict pool before URL test: 30
+Automatic URL-test checked: 30
+Automatic URL-test result: URL test passed 20/30 tested
 Manual group nodes: 4
-Akun txt automatic: 10
+Akun txt automatic: 20
 Akun txt manual: 4
 Parsed subscription nodes: 1050
 Fetched links: 40
