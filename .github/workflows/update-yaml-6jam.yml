@@ -71,8 +71,8 @@ jobs:
 
       - name: Generate YAML with real URL test
         env:
-          MAX_NODES: "30"
-          MIN_OUTPUT_NODES: "30"
+          MAX_NODES: "10"
+          MIN_OUTPUT_NODES: "10"
           URLTEST_POOL_NODES: "30"
           REQUIRE_URL_TEST: "true"
           MIHOMO_PATH: "./mihomo"
