@@ -35,7 +35,7 @@ jobs:
 
       - name: Generate YAML
         env:
-          MAX_NODES: "20"
+          MAX_NODES: "40"
           MIN_OUTPUT_NODES: "20"
           FORCE_WS_ONLY: "true"
           REQUIRE_WS_UPGRADE: "true"
