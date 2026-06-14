@@ -1,15 +1,16 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-91MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,228,261,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-96MS,vless,ws,o.server2peekconfig.workers.dev,O.sErvER2pEekCOnfIg.wORKeRs.dEV,HTTP 204,236,199,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-003-CLOUDFLARE-VLESS-WS-93MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,203,238,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-97MS,vless,ws,172.67.139.51,noiZvPn.aSAd13321.wORkers.dEv,HTTP 204,247,196,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-005-CLOUDFLARE-VLESS-WS-95MS,vless,ws,free.server10peekconfig.workers.dev,FREe.serVER10pEeKCoNfig.WOrKERs.DEv,HTTP 204,230,199,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-006-CLOUDFLARE-VLESS-WS-101MS,vless,ws,172.64.34.205,BItter-CreDIT-61b8.b76EbA0aBb.wORkerS.dEv,HTTP 204,200,211,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-007-CLOUDFLARE-VLESS-WS-120MS,vless,ws,104.17.20.214,refighehosein.salamdadash123.workers.dev,HTTP 204,428,240,HTTP 204,yes
-AKUN-008-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-106MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,199,254,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-122MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,217,251,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-109MS,vless,ws,104.18.95.26,hhlfy.twiladaphne.ndjp.net,HTTP 204,237,269,HTTP 204,yes
-AKUN-011-NEXUSMODS-VLESS-WS-81MS,vless,ws,nexusmods.com,t1s1.rittbo.kdns.fr,HTTP 204,230,239,HTTP 204,yes
-AKUN-012-UNKNOWN-VLESS-WS-139MS,vless,ws,172.64.53.74,fgnix832fx.fx6hsv0.ccwu.cc,HTTP 204,225,228,HTTP 204,yes
-AKUN-014-UNKNOWN-VLESS-WS-447MS,vless,ws,45.130.125.96,octopusss4.com,HTTP 204,945,973,HTTP 204,yes
-AKUN-016-UNKNOWN-VLESS-WS-525MS,vless,ws,188.114.97.6,picassooo.info,HTTP 204,1042,1163,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-70MS,vless,ws,o.server3peekconfig.workers.dev,o.SERVeR3PeEkConFIG.WOrKerS.dEv,HTTP 204,258,188,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-002-CLOUDFLARE-VLESS-WS-74MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,243,267,HTTP 204,yes
+AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-69MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,236,252,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-72MS,vless,ws,cf.877774.xyz,t1s1.rittbo.kdns.fr,HTTP 204,243,262,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-91MS,vless,ws,104.18.95.26,hhlfy.twiladaphne.ndjp.net,HTTP 204,244,263,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-76MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,253,179,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-007-CLOUDFLARE-VLESS-WS-93MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,235,286,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-77MS,vless,ws,172.67.139.51,noiZvPn.aSAd13321.wORkers.dEv,HTTP 204,258,180,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-009-CLOUDFLARE-VLESS-WS-89MS,vless,ws,o.server2peekconfig.workers.dev,O.sErvER2pEekCOnfIg.wORKeRs.dEV,HTTP 204,234,176,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-010-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-75MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,223,263,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-98MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,235,291,HTTP 204,yes
+AKUN-014-CLOUDFLARE-VLESS-WS-102MS,vless,ws,172.64.53.74,fgnix832fx.fx6hsv0.ccwu.cc,HTTP 204,245,309,HTTP 204,yes
+AKUN-015-UNKNOWN-VLESS-WS-309MS,vless,ws,185.18.250.252,octopusss4.com,HTTP 204,672,8173,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=8.0)",no
+AKUN-018-UNKNOWN-VLESS-WS-394MS,vless,ws,199.181.197.46,picassooo.info,HTTP 204,789,862,HTTP 204,yes
+AKUN-019-KAWAII520-VLESS-WS-445MS,vless,ws,another-cf.dnsyes.kawaii520.icu,4gf45fdg45fd542g2in.kawaii520.icu,HTTP 204,691,781,HTTP 204,yes
