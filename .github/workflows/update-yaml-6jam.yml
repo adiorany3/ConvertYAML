@@ -15,7 +15,7 @@ concurrency:
 jobs:
   update-yaml:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
@@ -42,7 +42,7 @@ jobs:
           git checkout "$BRANCH"
           git pull --rebase --autostash origin "$BRANCH"
 
-      - name: Download Mihomo core for URL test
+      - name: Download Mihomo core for OpenClash URL test
         shell: bash
         run: |
           MIHOMO_URL=$(python - <<'PY'
@@ -63,30 +63,68 @@ jobs:
           print(candidates[0][2])
           PY
           )
-          echo "Download: $MIHOMO_URL"
+          echo "Download Mihomo: $MIHOMO_URL"
           curl -L "$MIHOMO_URL" -o mihomo.gz
           gunzip -f mihomo.gz
           chmod +x mihomo
           ./mihomo -v || true
 
-      - name: Generate YAML with real URL test
+      - name: Download sing-box core for NekoBox compatibility test
+        shell: bash
+        run: |
+          SINGBOX_URL=$(python - <<'PY'
+          import json
+          import urllib.request
+
+          data = json.load(urllib.request.urlopen("https://api.github.com/repos/SagerNet/sing-box/releases/latest", timeout=30))
+          candidates = []
+          for asset in data.get("assets", []):
+              name = asset.get("name", "")
+              url = asset.get("browser_download_url", "")
+              low = name.lower()
+              if "linux-amd64" in low and low.endswith(".tar.gz") and all(x not in low for x in ["debug", ".deb", ".rpm"]):
+                  candidates.append((name, url))
+          if not candidates:
+              raise SystemExit("No linux-amd64 sing-box tar.gz asset found")
+          candidates.sort()
+          print(candidates[0][1])
+          PY
+          )
+          echo "Download sing-box: $SINGBOX_URL"
+          curl -L "$SINGBOX_URL" -o sing-box.tar.gz
+          tar -xzf sing-box.tar.gz
+          SINGBOX_BIN=$(find . -type f -name sing-box -perm -111 | head -n 1)
+          if [ -z "$SINGBOX_BIN" ]; then
+            echo "sing-box binary not found"
+            exit 1
+          fi
+          cp "$SINGBOX_BIN" ./sing-box
+          chmod +x ./sing-box
+          ./sing-box version || true
+
+      - name: Generate YAML with Mihomo and NekoBox tests
         env:
           MAX_NODES: "10"
           MIN_OUTPUT_NODES: "10"
-          URLTEST_POOL_NODES: "30"
+          URLTEST_POOL_NODES: "35"
+          NEKOBOX_POOL_NODES: "25"
           REQUIRE_URL_TEST: "true"
+          REQUIRE_NEKOBOX_TEST: "true"
           MIHOMO_PATH: "./mihomo"
+          SINGBOX_PATH: "./sing-box"
           URL_TEST_URL: "https://www.gstatic.com/generate_204"
+          NEKOBOX_TEST_URL: "https://www.gstatic.com/generate_204"
           URL_TEST_EXPECTED_STATUS: "204,200,301,302"
           URL_TEST_TIMEOUT_MS: "6000"
+          NEKOBOX_TEST_TIMEOUT_MS: "8000"
           FORCE_WS_ONLY: "true"
           REQUIRE_WS_UPGRADE: "true"
           PREFER_WS: "true"
           EARLY_STOP_GOOD_NODES: "true"
           TEST_BATCH_SIZE: "80"
           CANDIDATE_MULTIPLIER: "35"
-          CANDIDATE_MIN: "500"
-          RESERVE_POOL_NODES: "30"
+          CANDIDATE_MIN: "600"
+          RESERVE_POOL_NODES: "35"
           ATTEMPTS: "2"
           REQUIRE_SUCCESSES: "1"
           TCP_TIMEOUT: "2.0"
@@ -102,6 +140,7 @@ jobs:
           OUTPUT_YAML: "openclash_auto.yaml"
           OUTPUT_CSV: "openclash_auto_report.csv"
           OUTPUT_URLTEST_REPORT: "urltest_report.csv"
+          OUTPUT_NEKOBOX_REPORT: "nekobox_test_report.csv"
           OUTPUT_AKUN: "akun.txt"
           OUTPUT_MANUAL_AKUN: "akun_manual.txt"
           OUTPUT_MANUAL_SKIPPED: "manual_nodes_skipped.txt"
@@ -146,7 +185,7 @@ jobs:
           BRANCH="${GITHUB_REF_NAME}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv urltest_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
+          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv urltest_report.csv nekobox_test_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."
             exit 0
