@@ -1,6 +1,11 @@
 from __future__ import annotations
 
 import os
+import socket
+import subprocess
+import tempfile
+import time
+from contextlib import suppress
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -9,6 +14,7 @@ from urllib.parse import quote, urlparse, urlunparse
 import base64
 import json
 import yaml
+import requests
 
 from sumberyaml_core import (
     ALT_TEST_URL,
@@ -27,6 +33,7 @@ from sumberyaml_core import (
     process_sources,
     provider_label_from_original_server,
     safe_proxy_name,
+    unique_names,
 )
 
 
@@ -292,6 +299,177 @@ def add_manual_group_to_config(config: dict[str, Any], manual_nodes: list[Any], 
     return config
 
 
+
+def _free_tcp_port() -> int:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind(("127.0.0.1", 0))
+        return int(sock.getsockname()[1])
+
+
+def _expected_statuses() -> set[int]:
+    raw = os.getenv("REAL_CHECK_EXPECTED_STATUS", "204,200,301,302").strip()
+    statuses: set[int] = set()
+    for part in raw.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        try:
+            statuses.add(int(part))
+        except ValueError:
+            pass
+    return statuses or {204, 200, 301, 302}
+
+
+def _wait_controller(controller_url: str, timeout_s: float = 8.0) -> bool:
+    deadline = time.time() + max(1.0, timeout_s)
+    while time.time() < deadline:
+        try:
+            response = requests.get(controller_url + "/proxies", timeout=0.5)
+            if response.status_code < 500:
+                return True
+        except Exception:
+            time.sleep(0.2)
+    return False
+
+
+def _mihomo_real_check_nodes(nodes: list[Any], *, limit: int, test_url: str, timeout_ms: int) -> tuple[list[Any], int, str]:
+    """Run a real proxy health check through Mihomo for automatic nodes only.
+
+    WS Upgrade 101 proves the Cloudflare WS endpoint exists, but it still does
+    not prove VLESS/VMess/Trojan can forward traffic. This check starts Mihomo,
+    selects every automatic node one by one, then requests generate_204 through
+    the local mixed-port. Manual nodes are intentionally not passed here.
+    """
+    if not nodes:
+        return [], 0, "no auto nodes to test"
+
+    if not _env_bool("REAL_CHECK", True):
+        final_nodes = nodes[:limit]
+        for node in final_nodes:
+            node.real_check_status = "skipped-disabled"
+            node.real_check_success = True
+        return final_nodes, len(final_nodes), "real check disabled"
+
+    core_path = os.getenv("MIHOMO_PATH", "./mihomo").strip() or "./mihomo"
+    if not Path(core_path).exists():
+        final_nodes = nodes[:limit]
+        for node in final_nodes:
+            node.real_check_status = "skipped-mihomo-not-found"
+            node.real_check_success = True
+        return final_nodes, len(final_nodes), f"mihomo not found at {core_path}; fallback to strict WS list"
+
+    expected = _expected_statuses()
+    proxy_port = _free_tcp_port()
+    controller_port = _free_tcp_port()
+    names = [str(node.clash.get("name") or node.name) for node in nodes if node.clash.get("name")]
+    if not names:
+        return [], 0, "no usable proxy names"
+
+    tmpdir_obj = tempfile.TemporaryDirectory(prefix="mihomo-realcheck-")
+    tmpdir = Path(tmpdir_obj.name)
+    config_path = tmpdir / "config.yaml"
+    config = {
+        "mixed-port": proxy_port,
+        "allow-lan": False,
+        "bind-address": "127.0.0.1",
+        "mode": "global",
+        "log-level": os.getenv("MIHOMO_LOG_LEVEL", "error"),
+        "ipv6": False,
+        "unified-delay": True,
+        "tcp-concurrent": True,
+        "global-client-fingerprint": "chrome",
+        "external-controller": f"127.0.0.1:{controller_port}",
+        "dns": {
+            "enable": True,
+            "ipv6": False,
+            "listen": "127.0.0.1:0",
+            "enhanced-mode": "fake-ip",
+            "fake-ip-range": "198.18.0.1/16",
+            "default-nameserver": ["1.1.1.1", "8.8.8.8"],
+            "nameserver": ["https://1.1.1.1/dns-query", "https://dns.google/dns-query"],
+        },
+        "proxies": [node.clash for node in nodes],
+        "proxy-groups": [
+            {"name": "GLOBAL", "type": "select", "proxies": names},
+        ],
+        "rules": ["MATCH,GLOBAL"],
+    }
+    config_path.write_text(yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140), encoding="utf-8")
+
+    proc: subprocess.Popen[str] | None = None
+    passed: list[Any] = []
+    checked = 0
+    reason = "ok"
+    try:
+        proc = subprocess.Popen(
+            [core_path, "-d", str(tmpdir), "-f", str(config_path)],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            text=True,
+        )
+        controller_url = f"http://127.0.0.1:{controller_port}"
+        if not _wait_controller(controller_url, timeout_s=float(os.getenv("MIHOMO_START_TIMEOUT", "10"))):
+            reason = "mihomo controller did not start"
+            for node in nodes:
+                node.real_check_status = "mihomo-start-failed"
+            return nodes[:limit], 0, reason
+
+        proxy_url = f"http://127.0.0.1:{proxy_port}"
+        request_timeout = max(1.0, float(timeout_ms) / 1000.0)
+        settle_s = float(os.getenv("REAL_CHECK_SETTLE_SECONDS", "0.15"))
+        for node in nodes:
+            if len(passed) >= limit:
+                break
+            name = str(node.clash.get("name") or node.name)
+            checked += 1
+            start = time.perf_counter()
+            try:
+                switch = requests.put(controller_url + "/proxies/GLOBAL", json={"name": name}, timeout=1.5)
+                if switch.status_code >= 400:
+                    node.real_check_status = f"switch-{switch.status_code}"
+                    node.real_check_success = False
+                    node.status = "dead"
+                    node.reason = (node.reason + "; real check switch failed").strip("; ")
+                    continue
+                time.sleep(settle_s)
+                response = requests.get(
+                    test_url,
+                    proxies={"http": proxy_url, "https": proxy_url},
+                    timeout=request_timeout,
+                    allow_redirects=False,
+                    headers={"User-Agent": "Mozilla/5.0 SumberYAML-RealCheck/1.0"},
+                )
+                elapsed = int((time.perf_counter() - start) * 1000)
+                node.real_check_ms = elapsed
+                node.real_check_status = f"HTTP {response.status_code}"
+                if response.status_code in expected:
+                    node.real_check_success = True
+                    node.status = "alive"
+                    node.reason = (node.reason + "; real proxy check ok").strip("; ")
+                    passed.append(node)
+                else:
+                    node.real_check_success = False
+                    node.status = "dead"
+                    node.reason = (node.reason + f"; real proxy check bad status {response.status_code}").strip("; ")
+            except Exception as exc:
+                node.real_check_success = False
+                node.real_check_status = type(exc).__name__
+                node.status = "dead"
+                node.reason = (node.reason + "; real proxy check failed: " + str(exc)[:100]).strip("; ")
+
+        reason = f"real check passed {len(passed)}/{checked} tested"
+        return passed, checked, reason
+    finally:
+        if proc is not None:
+            with suppress(Exception):
+                proc.terminate()
+            with suppress(Exception):
+                proc.wait(timeout=3)
+            if proc.poll() is None:
+                with suppress(Exception):
+                    proc.kill()
+        tmpdir_obj.cleanup()
+
 def add_manual_group_to_yaml_text(yaml_text: str, manual_nodes: list[Any], *, android: bool = False) -> str:
     if not manual_nodes:
         return yaml_text
@@ -335,6 +513,9 @@ def main() -> int:
     print(f"[INFO] Manual nodes parsed: {len(manual_nodes)}; skipped: {len(manual_skipped)}")
     print(f"[INFO] Manual node server normalized to {TARGET_SERVER}:{ONLY_PORT}: {manual_server_changes} link")
 
+    validation_pool_nodes = max(max_nodes, _env_int("VALIDATION_POOL_NODES", max(80, max_nodes * 4)))
+    print(f"[INFO] Pool validasi otomatis sebelum real-check: {validation_pool_nodes} node")
+
     # Important: manual_text is intentionally NOT passed into process_sources.
     # Manual nodes must not be strict-filtered and must not reduce the 20 automatic nodes.
     alive_nodes, all_nodes, fetch_logs, skipped = process_sources(
@@ -343,7 +524,7 @@ def main() -> int:
         fetch_timeout=fetch_timeout,
         tcp_timeout=tcp_timeout,
         max_workers=max_workers,
-        max_nodes=max_nodes,
+        max_nodes=validation_pool_nodes,
         fast_target_ms=_env_int("FAST_TARGET_MS", 123),
         fill_delay_ms=_env_int("FILL_DELAY_MS", 1200),
         min_output_nodes=min_output_nodes,
@@ -358,6 +539,16 @@ def main() -> int:
         force_ws_only=_env_bool("FORCE_WS_ONLY", True),
         reserve_pool_nodes=_env_int("RESERVE_POOL_NODES", 120),
     )
+
+    auto_pool_nodes = alive_nodes
+    alive_nodes, real_checked_count, real_check_reason = _mihomo_real_check_nodes(
+        auto_pool_nodes,
+        limit=max_nodes,
+        test_url=os.getenv("REAL_CHECK_TEST_URL", os.getenv("TEST_URL", ALT_TEST_URL)),
+        timeout_ms=_env_int("REAL_CHECK_TIMEOUT_MS", _env_int("HEALTH_TIMEOUT_MS", 6000)),
+    )
+    unique_names(alive_nodes)
+    print(f"[INFO] Real proxy check otomatis: {real_check_reason}")
 
     yaml_text = build_openclash_yaml(
         alive_nodes,
@@ -396,6 +587,9 @@ def main() -> int:
         f"OpenClash YAML: {output_yaml}\n"
         f"Android YAML: {output_android_yaml}\n"
         f"Automatic YAML nodes: {len(alive_nodes)}\n"
+        f"Automatic strict pool before real check: {len(auto_pool_nodes)}\n"
+        f"Automatic real-check tested: {real_checked_count}\n"
+        f"Automatic real-check result: {real_check_reason}\n"
         f"Manual group nodes: {len(manual_nodes)}\n"
         f"Akun txt automatic: {len([x for x in akun_text.splitlines() if x.strip()])}\n"
         f"Akun txt manual: {len([x for x in manual_akun_text.splitlines() if x.strip()])}\n"

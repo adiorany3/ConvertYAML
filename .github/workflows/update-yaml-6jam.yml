@@ -33,10 +33,56 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Download Mihomo core for real proxy check
+        run: |
+          python - <<'PY'
+          import json
+          import urllib.request
+
+          api = "https://api.github.com/repos/MetaCubeX/mihomo/releases/latest"
+          data = json.load(urllib.request.urlopen(api, timeout=30))
+          assets = data.get("assets", [])
+          candidates = []
+          for asset in assets:
+              name = asset.get("name", "")
+              url = asset.get("browser_download_url", "")
+              low = name.lower()
+              if ("linux-amd64-compatible" in low or "linux-amd64" in low) and low.endswith(".gz") and "debug" not in low:
+                  candidates.append((0 if "compatible" in low else 1, name, url))
+          if not candidates:
+              raise SystemExit("No linux-amd64 mihomo asset found")
+          candidates.sort()
+          print(candidates[0][2])
+          PY
+          MIHOMO_URL=$(python - <<'PY'
+          import json
+          import urllib.request
+          data = json.load(urllib.request.urlopen("https://api.github.com/repos/MetaCubeX/mihomo/releases/latest", timeout=30))
+          candidates = []
+          for asset in data.get("assets", []):
+              name = asset.get("name", "")
+              url = asset.get("browser_download_url", "")
+              low = name.lower()
+              if ("linux-amd64-compatible" in low or "linux-amd64" in low) and low.endswith(".gz") and "debug" not in low:
+                  candidates.append((0 if "compatible" in low else 1, name, url))
+          candidates.sort()
+          print(candidates[0][2])
+          PY
+          )
+          curl -L "$MIHOMO_URL" -o mihomo.gz
+          gunzip -f mihomo.gz
+          chmod +x mihomo
+          ./mihomo -v || true
+
       - name: Generate YAML
         env:
           MAX_NODES: "20"
           MIN_OUTPUT_NODES: "20"
+          VALIDATION_POOL_NODES: "80"
+          REAL_CHECK: "true"
+          MIHOMO_PATH: "./mihomo"
+          REAL_CHECK_TIMEOUT_MS: "8000"
+          REAL_CHECK_EXPECTED_STATUS: "204,200,301,302"
           FORCE_WS_ONLY: "true"
           REQUIRE_WS_UPGRADE: "true"
           PREFER_WS: "true"

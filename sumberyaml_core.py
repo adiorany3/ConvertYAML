@@ -192,6 +192,9 @@ class ProxyNode:
     ws_upgrade_ms: int | None = None
     ws_success_count: int = 0
     ws_status: str = ""
+    real_check_ms: int | None = None
+    real_check_status: str = ""
+    real_check_success: bool = False
     original_provider: str = ""
     original_ip: str = ""
     tier: str = ""
@@ -1913,6 +1916,9 @@ def build_csv(nodes: list[ProxyNode]) -> str:
         "ws_upgrade_ms",
         "ws_success_count",
         "ws_status",
+        "real_check_ms",
+        "real_check_status",
+        "real_check_success",
         "original_best_delay_ms",
         "original_success_count",
         "attempts",
@@ -1941,6 +1947,9 @@ def build_csv(nodes: list[ProxyNode]) -> str:
             node.ws_upgrade_ms if node.ws_upgrade_ms is not None else "",
             node.ws_success_count,
             node.ws_status,
+            node.real_check_ms if node.real_check_ms is not None else "",
+            node.real_check_status,
+            "yes" if node.real_check_success else "no",
             node.original_best_delay_ms if node.original_best_delay_ms is not None else "",
             node.original_success_count,
             node.attempts,

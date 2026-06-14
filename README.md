@@ -1,129 +1,99 @@
-# SumberYAML GitHub Action 6 Jam + Android No Rule + Manual Group
+# SumberYAML - Real WS Check + Manual Group
 
-Versi ini membuat YAML otomatis setiap 6 jam dan menambahkan node dari `manual_nodes.txt` ke group khusus `MANUAL`.
+Versi ini memperbaiki validasi akun otomatis agar WebSocket benar-benar bekerja, bukan hanya lolos TLS atau WS Upgrade 101.
 
 ## Output
 
-Workflow akan membuat/update file berikut:
+GitHub Action menghasilkan:
+
+- `openclash_auto.yaml` untuk OpenClash/Mihomo normal.
+- `openclash_android.yaml` untuk OpenClash/Clash Android tanpa rule berat.
+- `akun.txt` berisi link akun otomatis yang sudah lolos real-check.
+- `akun_manual.txt` berisi link dari `manual_nodes.txt`.
+- `openclash_auto_report.csv` berisi laporan lengkap.
+- `manual_nodes.txt` akan otomatis dinormalisasi ke server `104.17.3.81:443`.
+- `last_update.txt` berisi ringkasan update.
+
+## Perubahan penting
+
+1. Akun otomatis dari subscription tetap disaring strict:
+   - wajib `network: ws`,
+   - wajib punya SNI/servername,
+   - wajib lolos WebSocket Upgrade `101`,
+   - wajib lolos real proxy check menggunakan Mihomo.
+
+2. Real proxy check menjalankan Mihomo di GitHub Actions, memilih node otomatis satu per satu, lalu melakukan request ke `generate_204` melalui proxy lokal Mihomo. Node yang gagal tidak masuk 20 akun otomatis.
+
+3. Node manual dari `manual_nodes.txt` tidak disaring dan tidak dites. Node manual tetap masuk group `MANUAL`, di luar kuota 20 akun otomatis.
+
+4. Group `FALLBACK` dimulai dari `MANUAL`, lalu dilanjutkan node akun otomatis.
+
+5. Nama node manual tetap memakai nama sumber/link, hanya diberi prefix `MANUAL-`.
+
+## File manual
+
+Isi node manual di:
 
 ```text
-openclash_auto.yaml
-openclash_android.yaml
-openclash_auto_report.csv
-akun.txt
-akun_manual.txt
 manual_nodes.txt
-manual_nodes_skipped.txt
-last_update.txt
 ```
 
-## Perilaku node otomatis
-
-Node dari subscription publik tetap diproses ketat:
-
-- target utama 20 node otomatis,
-- prioritas WS,
-- wajib SNI/servername,
-- wajib WebSocket Upgrade 101,
-- `akun.txt` memakai bug server `104.17.3.81:443`,
-- nama node memakai provider original server jika terdeteksi.
-
-## Perilaku node manual
-
-Isi `manual_nodes.txt`:
+Contoh:
 
 ```text
-vless://...
-vmess://...
-trojan://...
-ss://...
+vless://uuid@domain-asli.com:443?security=tls&sni=sni.domain.com&type=ws&host=sni.domain.com&path=%2Fws#SG-VIP-01
 ```
 
-Node manual:
-
-- server pada link manual otomatis dinormalisasi ke `104.17.3.81:443` sebelum diparse,
-- file `manual_nodes.txt` ikut di-update/commit jika masih berisi server original,
-- SNI/Host/path/UUID/password tetap dipertahankan,
-- tidak ikut proses strict SNI/WS,
-- tidak dites delay,
-- tidak mengurangi kuota 20 node otomatis,
-- masuk ke group sendiri bernama `MANUAL`,
-- nama node manual mengikuti nama asli dari sumber/link, hanya ditambah prefix `MANUAL-`,
-- node manual individual tidak masuk `AUTO-FAST` atau `LOAD-BALANCE`,
-- group `FALLBACK` dimulai dari group `MANUAL`, lalu dilanjutkan node akun otomatis,
-- tetap bisa dipilih manual dari group `GLOBAL` / `PROXY`,
-- disimpan terpisah ke `akun_manual.txt` dengan server `104.17.3.81:443`.
-
-Jika ada baris manual yang formatnya tidak bisa diparse, baris tersebut dicatat di:
+Saat workflow berjalan, server akan otomatis diubah menjadi:
 
 ```text
-manual_nodes_skipped.txt
+104.17.3.81:443
 ```
 
-## Nama node manual
+SNI, Host, path, uuid/password, dan fragment nama tetap dipertahankan.
 
-Nama node dari `manual_nodes.txt` sekarang mengikuti nama asli dari sumber/link, hanya ditambah prefix `MANUAL-`.
+## Pengaturan GitHub Action
 
-Contoh jika sumber manual berisi nama:
+Workflow berjalan otomatis setiap 6 jam:
+
+```yaml
+- cron: "0 */6 * * *"
+```
+
+Workflow juga bisa dijalankan manual dari tab **Actions > Run workflow**.
+
+## Variabel penting
 
 ```text
-#SG-VIP-01
+MAX_NODES=20
+VALIDATION_POOL_NODES=80
+REAL_CHECK=true
+MIHOMO_PATH=./mihomo
+FORCE_WS_ONLY=true
+REQUIRE_WS_UPGRADE=true
+REAL_CHECK_TIMEOUT_MS=8000
+HEALTH_TIMEOUT_MS=6000
 ```
 
-maka nama node di YAML menjadi:
-
-```text
-MANUAL-SG-VIP-01
-```
-
-Jika ada nama yang sama, generator otomatis menambahkan suffix agar tidak bentrok, misalnya:
-
-```text
-MANUAL-SG-VIP-01
-MANUAL-SG-VIP-01-2
-```
-
-## Android no rule
-
-`openclash_android.yaml` dibuat ringan untuk Clash/OpenClash Android:
-
-- tidak ada `rule-providers`,
-- tidak ada rule kategori,
-- tidak ada `redir-port`,
-- tidak ada `tproxy-port`,
-- mode `global`,
-- ada group `MANUAL` untuk node dari `manual_nodes.txt`.
+Jika hasil akun otomatis kurang dari 20, berarti sumber publik saat itu tidak menyediakan 20 node yang benar-benar lolos WS + real proxy check. Node manual tetap tidak dihitung dalam kuota 20 otomatis.
 
 ## Cara pakai
 
-1. Upload semua file ZIP ke repository GitHub.
-2. Pastikan workflow berada di:
+1. Upload semua isi ZIP ke root repository GitHub.
+2. Pastikan file workflow berada di:
 
 ```text
 .github/workflows/update-yaml-6jam.yml
 ```
 
-3. Isi `manual_nodes.txt` dengan akun tambahan yang ingin dimasukkan tanpa filter. Server boleh masih original; workflow akan mengubahnya ke `104.17.3.81:443`.
-4. Buka tab **Actions**.
-5. Jalankan **Run workflow** pertama kali.
-6. Setelah itu workflow berjalan otomatis setiap 6 jam.
+3. Buka **Actions > Run workflow**.
+4. Setelah selesai, cek file:
 
-## Catatan penting
-
-Manual node sengaja tidak difilter sesuai permintaan. Server manual otomatis diubah ke bug server `104.17.3.81:443`, tetapi akun tetap bisa timeout jika UUID/SNI/Host/path memang sudah mati. Jika manual node mati atau salah format, OpenClash/Clash Android bisa menampilkan timeout untuk node tersebut. Karena itu manual node dipisahkan di group `MANUAL` agar tidak mengganggu 20 node otomatis di `AUTO-FAST`.
-
-
-## Fallback dimulai dari MANUAL
-
-Versi ini mengatur group `FALLBACK` agar urutannya dimulai dari group `MANUAL`, lalu dilanjutkan node akun otomatis hasil strict. Contoh struktur:
-
-```yaml
-- name: FALLBACK
-  type: fallback
-  proxies:
-    - MANUAL
-    - AKUN-001-PROVIDER-VLESS-WS-18MS
-    - AKUN-002-PROVIDER-VLESS-WS-24MS
+```text
+openclash_auto.yaml
+openclash_android.yaml
+akun.txt
+akun_manual.txt
+openclash_auto_report.csv
+last_update.txt
 ```
-
-Node dari `manual_nodes.txt` tetap berada di group `MANUAL` sendiri, tidak disaring strict, tidak mengurangi kuota 20 akun otomatis, dan server link manual tetap dinormalisasi ke `104.17.3.81:443` bila belum memakai bug server.
