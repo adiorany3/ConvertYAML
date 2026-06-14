@@ -432,25 +432,46 @@ def _mihomo_real_check_nodes(nodes: list[Any], *, limit: int, test_url: str, tim
                     node.reason = (node.reason + "; real check switch failed").strip("; ")
                     continue
                 time.sleep(settle_s)
-                response = requests.get(
-                    test_url,
-                    proxies={"http": proxy_url, "https": proxy_url},
-                    timeout=request_timeout,
-                    allow_redirects=False,
-                    headers={"User-Agent": "Mozilla/5.0 SumberYAML-RealCheck/1.0"},
-                )
+                # Jangan percaya satu kali sukses saja. Banyak akun publik bisa
+                # lolos sesaat, tetapi gagal handshake saat dites di OpenClash.
+                real_attempts = max(1, int(os.getenv("REAL_CHECK_ATTEMPTS", "3")))
+                real_required = max(1, min(real_attempts, int(os.getenv("REAL_CHECK_REQUIRE_SUCCESSES", "2"))))
+                real_gap_s = max(0.0, float(os.getenv("REAL_CHECK_GAP_SECONDS", "0.25")))
+                ok_count = 0
+                last_status = ""
+                best_real_ms: int | None = None
+                for real_i in range(real_attempts):
+                    req_start = time.perf_counter()
+                    try:
+                        response = requests.get(
+                            test_url,
+                            proxies={"http": proxy_url, "https": proxy_url},
+                            timeout=request_timeout,
+                            allow_redirects=False,
+                            headers={"User-Agent": "Mozilla/5.0 SumberYAML-RealCheck/1.0"},
+                        )
+                        req_elapsed = int((time.perf_counter() - req_start) * 1000)
+                        best_real_ms = req_elapsed if best_real_ms is None else min(best_real_ms, req_elapsed)
+                        last_status = f"HTTP {response.status_code}"
+                        if response.status_code in expected:
+                            ok_count += 1
+                    except Exception as exc:
+                        last_status = type(exc).__name__
+                    if real_i + 1 < real_attempts and real_gap_s:
+                        time.sleep(real_gap_s)
+
                 elapsed = int((time.perf_counter() - start) * 1000)
-                node.real_check_ms = elapsed
-                node.real_check_status = f"HTTP {response.status_code}"
-                if response.status_code in expected:
+                node.real_check_ms = best_real_ms if best_real_ms is not None else elapsed
+                node.real_check_status = f"{last_status}; success {ok_count}/{real_attempts}"
+                if ok_count >= real_required:
                     node.real_check_success = True
                     node.status = "alive"
-                    node.reason = (node.reason + "; real proxy check ok").strip("; ")
+                    node.reason = (node.reason + f"; real proxy check ok {ok_count}/{real_attempts}").strip("; ")
                     passed.append(node)
                 else:
                     node.real_check_success = False
                     node.status = "dead"
-                    node.reason = (node.reason + f"; real proxy check bad status {response.status_code}").strip("; ")
+                    node.reason = (node.reason + f"; real proxy check gagal {ok_count}/{real_attempts}").strip("; ")
             except Exception as exc:
                 node.real_check_success = False
                 node.real_check_status = type(exc).__name__
@@ -706,10 +727,10 @@ def main() -> int:
     fetch_timeout = _env_int("FETCH_TIMEOUT", 15)
     tcp_timeout = _env_float("TCP_TIMEOUT", 3.0)
     max_workers = _env_int("MAX_WORKERS", 80)
-    attempts = _env_int("ATTEMPTS", 2)
-    require_successes = min(_env_int("REQUIRE_SUCCESSES", 1), attempts)
+    attempts = _env_int("ATTEMPTS", 5)
+    require_successes = min(_env_int("REQUIRE_SUCCESSES", 4), attempts)
     max_handshake_ms = _env_int("MAX_HANDSHAKE_MS", 250)
-    max_avg_handshake_ms = _env_int("MAX_AVG_HANDSHAKE_MS", 0)
+    max_avg_handshake_ms = _env_int("MAX_AVG_HANDSHAKE_MS", 350)
 
     links_text = build_links_text()
     manual_text = _read_text_file(manual_file)

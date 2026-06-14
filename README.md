@@ -1,85 +1,34 @@
-# SumberYAML OpenClash - Low Handshake Filter
+# SumberYAML - Handshake Strict
 
-Versi ini menambahkan filter **low handshake** untuk akun otomatis hasil subscription publik.
+Versi ini dibuat untuk mengurangi akun otomatis yang gagal handshaking saat dites di OpenClash.
 
-## Inti perubahan
+## Perubahan utama
 
-- Akun otomatis hanya dipilih jika handshake rendah.
-- Default filter:
+- Node otomatis wajib `network: ws`.
+- Node otomatis wajib punya `sni/servername`.
+- Node otomatis wajib lolos WS Upgrade 101 beberapa kali.
+- Default `ATTEMPTS=5` dan `REQUIRE_SUCCESSES=4`.
+- Filter handshake rendah:
   - `MAX_HANDSHAKE_MS=250`
-  - `MAX_AVG_HANDSHAKE_MS=0` atau off
-- Untuk node `ws`, handshake yang dipakai adalah hasil **WebSocket Upgrade 101** melalui bug server `104.17.3.81`.
-- Untuk non-WS, handshake yang dipakai adalah TLS handshake ke bug server.
-- Node dari `manual_nodes.txt` tetap **tidak disaring** dan tetap masuk group `MANUAL`.
-- `FALLBACK` tetap dimulai dari `MANUAL`, lalu dilanjutkan akun otomatis.
-- `akun.txt` berisi akun otomatis yang lolos; server pada link tetap memakai `104.17.3.81:443`.
-- `akun_manual.txt` berisi akun manual dari `manual_nodes.txt`.
-- `openclash_android.yaml` tetap versi ringan tanpa rule-provider/rule kategori.
+  - `MAX_AVG_HANDSHAKE_MS=350`
+  - `MAX_JITTER_MS=120`
+- Real-check Mihomo tidak hanya 1 kali:
+  - `REAL_CHECK_ATTEMPTS=3`
+  - `REAL_CHECK_REQUIRE_SUCCESSES=2`
+- Node manual dari `manual_nodes.txt` tetap tidak disaring dan tetap masuk group `MANUAL`.
+- Server manual tetap dinormalisasi menjadi `104.17.3.81:443`.
+- Group `FALLBACK` dimulai dari `MANUAL`, lalu node otomatis.
 
-## File output
+## Output
 
-Workflow akan membuat/update:
-
-```text
-openclash_auto.yaml
-openclash_android.yaml
-openclash_auto_report.csv
-akun.txt
-akun_manual.txt
-manual_nodes.txt
-manual_nodes_skipped.txt
-compatibility_report.txt
-last_update.txt
-```
-
-## Setting penting di workflow
-
-```yaml
-MAX_HANDSHAKE_MS: "250"
-MAX_AVG_HANDSHAKE_MS: "0"
-```
-
-Rekomendasi:
-
-```text
-MAX_HANDSHAKE_MS 150-250 = sangat ketat/cepat, hasil bisa sedikit
-MAX_HANDSHAKE_MS 300-500 = lebih longgar, peluang 20 akun lebih besar
-MAX_HANDSHAKE_MS 0       = filter handshake dimatikan
-```
-
-Jika ingin handshake benar-benar rendah, gunakan:
-
-```yaml
-MAX_HANDSHAKE_MS: "200"
-MAX_AVG_HANDSHAKE_MS: "350"
-```
-
-Jika ingin mengejar jumlah akun 20, gunakan:
-
-```yaml
-MAX_HANDSHAKE_MS: "500"
-MAX_AVG_HANDSHAKE_MS: "0"
-```
-
-## Cara pakai
-
-1. Upload semua isi ZIP ke repository GitHub.
-2. Pastikan file workflow ada di:
-
-```text
-.github/workflows/update-yaml-6jam.yml
-```
-
-3. Buka tab **Actions**.
-4. Jalankan **Run workflow**.
-5. Ambil hasil dari:
-
-```text
-openclash_auto.yaml
-openclash_android.yaml
-akun.txt
-```
+- `openclash_auto.yaml`
+- `openclash_android.yaml`
+- `akun.txt`
+- `akun_manual.txt`
+- `openclash_auto_report.csv`
+- `compatibility_report.txt`
+- `last_update.txt`
 
 ## Catatan
 
-Filter low handshake hanya berlaku untuk akun otomatis dari subscription publik. Akun manual tetap tidak disaring sesuai permintaan sebelumnya.
+Jika node otomatis yang lolos kurang dari 20, berarti sumber publik saat itu belum menyediakan 20 akun yang stabil menurut filter strict. Lebih baik hasil sedikit tetapi benar-benar bisa handshake daripada 20 akun tetapi banyak timeout.
