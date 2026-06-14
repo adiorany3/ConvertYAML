@@ -1,18 +1,14 @@
-Last update: 2026-06-14 06:23:34 UTC
+Last update: 2026-06-14 06:27:57 UTC
+Mode: FAST10 early-stop good candidates
 OpenClash YAML: openclash_auto.yaml
 Android YAML: openclash_android.yaml
-Automatic YAML nodes: 20
-Automatic strict pool before real check: 41
-Automatic real-check tested: 21
-Automatic real-check result: real check passed 20/21 tested
-Low handshake filter max best: 250ms
-Low handshake filter max avg: 350
+Automatic YAML nodes: 10
 Manual group nodes: 4
-Akun txt automatic: 20
+Akun txt automatic: 10
 Akun txt manual: 4
-Parsed subscription nodes: 12000
+Parsed subscription nodes: 350
 Fetched links: 40
-Skipped raw URI: 144387
+Skipped raw URI: 144481
 Skipped manual URI: 0
 Manual server normalized: 0 link
 Manual nodes source file: manual_nodes.txt
