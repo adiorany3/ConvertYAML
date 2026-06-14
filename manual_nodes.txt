@@ -1,1 +1,4 @@
-# Tambahkan node manual vless/vmess/trojan di sini
+# Tempel node manual di sini, satu link per baris.
+# Server boleh masih original; workflow akan otomatis mengubahnya ke 104.17.3.81:443.
+# Contoh:
+# vless://uuid@example.com:443?security=tls&sni=example.com&type=ws&host=example.com&path=%2F#Manual

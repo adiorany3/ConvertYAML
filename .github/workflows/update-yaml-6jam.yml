@@ -54,14 +54,17 @@ jobs:
           OUTPUT_YAML: "openclash_auto.yaml"
           OUTPUT_CSV: "openclash_auto_report.csv"
           OUTPUT_AKUN: "akun.txt"
+          OUTPUT_MANUAL_AKUN: "akun_manual.txt"
+          OUTPUT_MANUAL_SKIPPED: "manual_nodes_skipped.txt"
           OUTPUT_STAMP: "last_update.txt"
+          MANUAL_NODES_FILE: "manual_nodes.txt"
         run: python generate_yaml.py
 
       - name: Commit updated YAML
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv akun.txt last_update.txt
+          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."
           else
