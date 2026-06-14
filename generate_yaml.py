@@ -708,6 +708,8 @@ def main() -> int:
     max_workers = _env_int("MAX_WORKERS", 80)
     attempts = _env_int("ATTEMPTS", 2)
     require_successes = min(_env_int("REQUIRE_SUCCESSES", 1), attempts)
+    max_handshake_ms = _env_int("MAX_HANDSHAKE_MS", 250)
+    max_avg_handshake_ms = _env_int("MAX_AVG_HANDSHAKE_MS", 0)
 
     links_text = build_links_text()
     manual_text = _read_text_file(manual_file)
@@ -723,6 +725,7 @@ def main() -> int:
     print(f"[INFO] Links subscription: {len([x for x in links_text.splitlines() if x.strip()])}")
     print(f"[INFO] Manual nodes parsed: {len(manual_nodes)}; skipped: {len(manual_skipped)}")
     print(f"[INFO] Manual node server normalized to {TARGET_SERVER}:{ONLY_PORT}: {manual_server_changes} link")
+    print(f"[INFO] Filter low handshake otomatis: max best={max_handshake_ms}ms; max avg={max_avg_handshake_ms if max_avg_handshake_ms > 0 else 'off'}")
 
     validation_pool_nodes = max(max_nodes, _env_int("VALIDATION_POOL_NODES", max(80, max_nodes * 4)))
     print(f"[INFO] Pool validasi otomatis sebelum real-check: {validation_pool_nodes} node")
@@ -749,6 +752,8 @@ def main() -> int:
         require_ws_upgrade=_env_bool("REQUIRE_WS_UPGRADE", True),
         force_ws_only=_env_bool("FORCE_WS_ONLY", True),
         reserve_pool_nodes=_env_int("RESERVE_POOL_NODES", 120),
+        max_handshake_ms=max_handshake_ms,
+        max_avg_handshake_ms=max_avg_handshake_ms,
     )
 
     auto_pool_nodes = alive_nodes
@@ -810,6 +815,8 @@ def main() -> int:
         f"Automatic strict pool before real check: {len(auto_pool_nodes)}\n"
         f"Automatic real-check tested: {real_checked_count}\n"
         f"Automatic real-check result: {real_check_reason}\n"
+        f"Low handshake filter max best: {max_handshake_ms}ms\n"
+        f"Low handshake filter max avg: {max_avg_handshake_ms if max_avg_handshake_ms > 0 else 'off'}\n"
         f"Manual group nodes: {len(manual_nodes)}\n"
         f"Akun txt automatic: {len([x for x in akun_text.splitlines() if x.strip()])}\n"
         f"Akun txt manual: {len([x for x in manual_akun_text.splitlines() if x.strip()])}\n"

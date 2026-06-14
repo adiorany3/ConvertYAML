@@ -1,66 +1,85 @@
-# SumberYAML OpenClash Compatible
+# SumberYAML OpenClash - Low Handshake Filter
 
-Versi ini menambahkan validasi kompatibilitas sebelum hasil di-commit oleh GitHub Actions.
+Versi ini menambahkan filter **low handshake** untuk akun otomatis hasil subscription publik.
 
-## Output
+## Inti perubahan
 
-Workflow membuat file berikut:
+- Akun otomatis hanya dipilih jika handshake rendah.
+- Default filter:
+  - `MAX_HANDSHAKE_MS=250`
+  - `MAX_AVG_HANDSHAKE_MS=0` atau off
+- Untuk node `ws`, handshake yang dipakai adalah hasil **WebSocket Upgrade 101** melalui bug server `104.17.3.81`.
+- Untuk non-WS, handshake yang dipakai adalah TLS handshake ke bug server.
+- Node dari `manual_nodes.txt` tetap **tidak disaring** dan tetap masuk group `MANUAL`.
+- `FALLBACK` tetap dimulai dari `MANUAL`, lalu dilanjutkan akun otomatis.
+- `akun.txt` berisi akun otomatis yang lolos; server pada link tetap memakai `104.17.3.81:443`.
+- `akun_manual.txt` berisi akun manual dari `manual_nodes.txt`.
+- `openclash_android.yaml` tetap versi ringan tanpa rule-provider/rule kategori.
 
-- `openclash_auto.yaml` — config OpenClash/router dengan rule Lite.
-- `openclash_android.yaml` — config Android/global tanpa rule-provider dan tanpa redir/tproxy.
-- `akun.txt` — link akun otomatis yang lolos strict + real proxy check, server sudah `104.17.3.81:443`.
-- `akun_manual.txt` — link manual dari `manual_nodes.txt`, server dinormalisasi ke `104.17.3.81:443`.
-- `openclash_auto_report.csv` — laporan akun, status, WS check, dan real check.
-- `compatibility_report.txt` — laporan validasi struktur YAML untuk OpenClash/Mihomo.
-- `last_update.txt` — ringkasan update terakhir.
+## File output
 
-## Kompatibilitas yang dicek
-
-Sebelum commit, generator akan memastikan:
-
-1. YAML bisa diparse.
-2. Tidak ada YAML anchor/alias seperti `&id001` atau `*id001`.
-3. Nama proxy unik.
-4. Nama proxy-group unik.
-5. Semua isi `proxy-groups.proxies` merujuk ke proxy/group yang benar.
-6. Rule `RULE-SET` hanya memakai provider yang tersedia.
-7. Rule policy mengarah ke group yang tersedia.
-8. `openclash_android.yaml` tidak berisi `rule-providers`, `redir-port`, atau `tproxy-port`.
-9. Jika ada group `MANUAL`, group `FALLBACK` dimulai dari `MANUAL` lalu dilanjutkan node otomatis.
-10. Node WS punya field dasar `ws-opts.path` dan `ws-opts.headers.Host`.
-
-Workflow juga menjalankan:
-
-```bash
-./mihomo -t -d . -f openclash_auto.yaml
-./mihomo -t -d . -f openclash_android.yaml
-```
-
-Jika config tidak valid menurut core Mihomo/OpenClash, workflow akan gagal dan tidak akan push hasil yang rusak.
-
-## Manual nodes
-
-Isi akun manual di:
+Workflow akan membuat/update:
 
 ```text
+openclash_auto.yaml
+openclash_android.yaml
+openclash_auto_report.csv
+akun.txt
+akun_manual.txt
 manual_nodes.txt
+manual_nodes_skipped.txt
+compatibility_report.txt
+last_update.txt
 ```
 
-Node manual:
-
-- tidak disaring strict,
-- tidak mengurangi 20 akun otomatis,
-- otomatis masuk group `MANUAL`,
-- server otomatis diganti menjadi `104.17.3.81:443`,
-- nama tetap dari sumber/link dan hanya ditambah prefix `MANUAL-`,
-- group `FALLBACK` dimulai dari `MANUAL`, lalu node otomatis.
-
-## Jadwal update
-
-Workflow berjalan setiap 6 jam:
+## Setting penting di workflow
 
 ```yaml
-cron: "0 */6 * * *"
+MAX_HANDSHAKE_MS: "250"
+MAX_AVG_HANDSHAKE_MS: "0"
 ```
 
-Bisa juga dijalankan manual dari tab **Actions > Run workflow**.
+Rekomendasi:
+
+```text
+MAX_HANDSHAKE_MS 150-250 = sangat ketat/cepat, hasil bisa sedikit
+MAX_HANDSHAKE_MS 300-500 = lebih longgar, peluang 20 akun lebih besar
+MAX_HANDSHAKE_MS 0       = filter handshake dimatikan
+```
+
+Jika ingin handshake benar-benar rendah, gunakan:
+
+```yaml
+MAX_HANDSHAKE_MS: "200"
+MAX_AVG_HANDSHAKE_MS: "350"
+```
+
+Jika ingin mengejar jumlah akun 20, gunakan:
+
+```yaml
+MAX_HANDSHAKE_MS: "500"
+MAX_AVG_HANDSHAKE_MS: "0"
+```
+
+## Cara pakai
+
+1. Upload semua isi ZIP ke repository GitHub.
+2. Pastikan file workflow ada di:
+
+```text
+.github/workflows/update-yaml-6jam.yml
+```
+
+3. Buka tab **Actions**.
+4. Jalankan **Run workflow**.
+5. Ambil hasil dari:
+
+```text
+openclash_auto.yaml
+openclash_android.yaml
+akun.txt
+```
+
+## Catatan
+
+Filter low handshake hanya berlaku untuk akun otomatis dari subscription publik. Akun manual tetap tidak disaring sesuai permintaan sebelumnya.

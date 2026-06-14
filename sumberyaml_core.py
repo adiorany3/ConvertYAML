@@ -66,8 +66,8 @@ TARGET_SERVER = "104.17.3.81"
 ONLY_PORT = 443
 USER_AGENT = "Mozilla/5.0 SumberYAML-OpenClash-BugCompat/3.0"
 URI_RE = re.compile(r"(?:vless|vmess|trojan|ss)://[^\s<'\"`]+", re.IGNORECASE)
-FAST_TEST_URL = "http://cp.cloudflare.com/generate_204"
-ALT_TEST_URL = "http://www.gstatic.com/generate_204"
+FAST_TEST_URL = "https://www.gstatic.com/generate_204"
+ALT_TEST_URL = "https://www.gstatic.com/generate_204"
 THIRD_TEST_URL = "https://www.google.com/generate_204"
 FAST_TARGET_DELAY_MS = 123
 DEFAULT_FILL_DELAY_MS = 400
@@ -701,12 +701,43 @@ def network_priority_rank(node: ProxyNode, prefer_ws: bool = True) -> int:
     return {"ws": 0, "grpc": 1, "http": 2, "tcp": 3, "ss": 4}.get(node_network(node), 9)
 
 
+def node_handshake_ms(node: ProxyNode) -> int | None:
+    """Return the handshake metric used for low-handshake filtering.
+
+    For WS nodes this is the WebSocket Upgrade 101 time, which already includes
+    TCP + TLS + WS upgrade through the bug server. For non-WS fallback nodes it
+    falls back to the TLS bug-server handshake. Manual nodes are not filtered by
+    this function because manual_nodes.txt is handled outside process_sources().
+    """
+    if node_network(node) == "ws" and node.ws_upgrade_ms is not None:
+        return node.ws_upgrade_ms
+    if node.bug_best_delay_ms is not None:
+        return node.bug_best_delay_ms
+    return node.best_delay_ms
+
+
+def handshake_filter_ok(node: ProxyNode, max_handshake_ms: int = 0, max_avg_handshake_ms: int = 0) -> bool:
+    """True when the node's handshake delay is inside the configured low threshold."""
+    max_handshake_ms = int(max_handshake_ms or 0)
+    max_avg_handshake_ms = int(max_avg_handshake_ms or 0)
+    hs = node_handshake_ms(node)
+    if max_handshake_ms > 0 and (hs is None or int(hs) > max_handshake_ms):
+        node.status = "dead"
+        node.reason = (node.reason + f"; handshake tinggi {hs if hs is not None else 'NA'}ms > {max_handshake_ms}ms").strip("; ")
+        return False
+    if max_avg_handshake_ms > 0 and (node.avg_delay_ms is None or int(node.avg_delay_ms) > max_avg_handshake_ms):
+        node.status = "dead"
+        node.reason = (node.reason + f"; avg handshake tinggi {node.avg_delay_ms if node.avg_delay_ms is not None else 'NA'}ms > {max_avg_handshake_ms}ms").strip("; ")
+        return False
+    return True
+
+
 def node_sort_key(node: ProxyNode, prefer_ws: bool = True) -> tuple[int, int, int, int, int]:
     return (
         network_priority_rank(node, prefer_ws),
         protocol_priority_rank(node),
         int(node.score or 999999),
-        int(node.best_delay_ms or 999999),
+        int(node_handshake_ms(node) or 999999),
         int(node.jitter_ms or 999999),
     )
 
@@ -1597,7 +1628,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "tolerance": tolerance,
             "lazy": False,
             "timeout": health_timeout,
-            "expected-status": 204,
+            "expected-status": "200/204/301/302",
         },
         {
             "name": "FALLBACK",
@@ -1607,7 +1638,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "interval": interval,
             "lazy": False,
             "timeout": health_timeout,
-            "expected-status": 204,
+            "expected-status": "200/204/301/302",
         },
         {
             "name": "LOAD-BALANCE",
@@ -1618,7 +1649,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "interval": max(interval, 120),
             "lazy": False,
             "timeout": health_timeout,
-            "expected-status": 204,
+            "expected-status": "200/204/301/302",
         },
     ]
 
@@ -1842,7 +1873,7 @@ def build_openclash_android_yaml(
             "tolerance": tolerance,
             "lazy": False,
             "timeout": health_timeout,
-            "expected-status": 204,
+            "expected-status": "200/204/301/302",
         },
         {
             "name": "FALLBACK",
@@ -1852,7 +1883,7 @@ def build_openclash_android_yaml(
             "interval": interval,
             "lazy": False,
             "timeout": health_timeout,
-            "expected-status": 204,
+            "expected-status": "200/204/301/302",
         },
     ]
 
@@ -1901,6 +1932,7 @@ def build_csv(nodes: list[ProxyNode]) -> str:
         "original_name",
         "type",
         "network",
+        "handshake_ms",
         "original_server",
         "original_ip",
         "original_provider",
@@ -1932,6 +1964,7 @@ def build_csv(nodes: list[ProxyNode]) -> str:
             node.original_name,
             node.type,
             node_network(node),
+            node_handshake_ms(node) if node_handshake_ms(node) is not None else "",
             node.original_server,
             node.original_ip,
             node.original_provider,
@@ -1980,6 +2013,8 @@ def process_sources(
     require_ws_upgrade: bool = True,
     force_ws_only: bool = DEFAULT_FORCE_WS_ONLY,
     reserve_pool_nodes: int = DEFAULT_RESERVE_POOL_NODES,
+    max_handshake_ms: int = 0,
+    max_avg_handshake_ms: int = 0,
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
     fast_target_ms = min(int(fast_target_ms), FAST_TARGET_DELAY_MS)
     fill_delay_ms = min(max(int(fill_delay_ms), fast_target_ms), HARD_MAX_DELAY_MS)
@@ -2065,6 +2100,7 @@ def process_sources(
         if node.status == "alive"
         and node.best_delay_ms is not None
         and node.success_count >= require_successes
+        and handshake_filter_ok(node, int(max_handshake_ms), int(max_avg_handshake_ms))
         and (int(max_jitter_ms) <= 0 or (node.jitter_ms is not None and node.jitter_ms <= int(max_jitter_ms)))
     ]
 
@@ -2092,9 +2128,9 @@ def process_sources(
     strict_pool_limit = max(int(reserve_pool_nodes), int(max_nodes), int(min_output_nodes))
     strict_pool = select_diverse_nodes(fast + backup, strict_pool_limit, bool(prefer_ws))
 
-    # If the fast/backup delay thresholds still do not produce enough nodes, fill
-    # from all strict candidates regardless of fill_delay. These nodes already
-    # passed WS Upgrade 101 / TLS validation; they are just slower.
+    # If fast/backup thresholds still do not produce enough nodes, fill from
+    # remaining strict candidates. They still obey max_handshake_ms when that
+    # filter is enabled, so slow high-handshake nodes are not reintroduced.
     if len(strict_pool) < int(min_output_nodes):
         existing = {id(n) for n in strict_pool}
         slow_fill = [n for n in sorted(candidates, key=lambda n: node_sort_key(n, bool(prefer_ws))) if id(n) not in existing]
