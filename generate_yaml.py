@@ -255,8 +255,9 @@ def add_manual_group_to_config(config: dict[str, Any], manual_nodes: list[Any], 
         "proxies": manual_names + ["DIRECT"],
     }
 
-    # Keep manual group outside AUTO-FAST/FALLBACK/LOAD-BALANCE. It is selectable
-    # from GLOBAL/PROXY only and does not reduce the 20 auto nodes.
+    # Manual nodes remain outside the automatic 20-node quota. However, the
+    # FALLBACK group intentionally starts with MANUAL so manually curated nodes
+    # are tried first, then the strict automatic nodes continue after it.
     for group in groups:
         if not isinstance(group, dict):
             continue
@@ -264,8 +265,13 @@ def add_manual_group_to_config(config: dict[str, Any], manual_nodes: list[Any], 
         proxies_list = group.get("proxies")
         if not isinstance(proxies_list, list):
             continue
-        if name == "GLOBAL":
-            # Put MANUAL after DIRECT if present; otherwise after FALLBACK.
+        if name == "FALLBACK":
+            # Required layout: FALLBACK -> MANUAL -> auto account nodes.
+            # Do not append individual manual nodes here; the MANUAL select group
+            # keeps manual accounts separated and does not reduce the 20 auto nodes.
+            _insert_once(proxies_list, "MANUAL", 0)
+        elif name == "GLOBAL":
+            # Keep MANUAL visible in the main selector too.
             if "DIRECT" in proxies_list:
                 _insert_once(proxies_list, "MANUAL", proxies_list.index("DIRECT") + 1)
             elif "FALLBACK" in proxies_list:

@@ -86,3 +86,19 @@ manual_nodes_skipped.txt
 ## Catatan penting
 
 Manual node sengaja tidak difilter sesuai permintaan. Server manual otomatis diubah ke bug server `104.17.3.81:443`, tetapi akun tetap bisa timeout jika UUID/SNI/Host/path memang sudah mati. Jika manual node mati atau salah format, OpenClash/Clash Android bisa menampilkan timeout untuk node tersebut. Karena itu manual node dipisahkan di group `MANUAL` agar tidak mengganggu 20 node otomatis di `AUTO-FAST`.
+
+
+## Fallback dimulai dari MANUAL
+
+Versi ini mengatur group `FALLBACK` agar urutannya dimulai dari group `MANUAL`, lalu dilanjutkan node akun otomatis hasil strict. Contoh struktur:
+
+```yaml
+- name: FALLBACK
+  type: fallback
+  proxies:
+    - MANUAL
+    - AKUN-001-PROVIDER-VLESS-WS-18MS
+    - AKUN-002-PROVIDER-VLESS-WS-24MS
+```
+
+Node dari `manual_nodes.txt` tetap berada di group `MANUAL` sendiri, tidak disaring strict, tidak mengurangi kuota 20 akun otomatis, dan server link manual tetap dinormalisasi ke `104.17.3.81:443` bila belum memakai bug server.
