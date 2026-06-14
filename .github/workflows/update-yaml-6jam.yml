@@ -76,7 +76,7 @@ jobs:
 
       - name: Generate YAML
         env:
-          MAX_NODES: "20"
+          MAX_NODES: "40"
           MIN_OUTPUT_NODES: "20"
           VALIDATION_POOL_NODES: "80"
           REAL_CHECK: "true"
