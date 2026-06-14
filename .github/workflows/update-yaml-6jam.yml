@@ -9,9 +9,10 @@ on:
 permissions:
   contents: write
 
+# Mencegah dua workflow update berjalan bersamaan dan saling rebut push.
 concurrency:
-  group: update-openclash-yaml
-  cancel-in-progress: false
+  group: update-openclash-yaml-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   update-yaml:
@@ -21,6 +22,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync latest branch before generate
+        run: |
+          BRANCH="${GITHUB_REF_NAME:-main}"
+          git fetch origin "$BRANCH"
+          git checkout "$BRANCH"
+          git pull --rebase --autostash origin "$BRANCH"
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -76,7 +86,7 @@ jobs:
 
       - name: Generate YAML
         env:
-          MAX_NODES: "40"
+          MAX_NODES: "20"
           MIN_OUTPUT_NODES: "20"
           VALIDATION_POOL_NODES: "80"
           REAL_CHECK: "true"
@@ -106,14 +116,34 @@ jobs:
           MANUAL_NODES_FILE: "manual_nodes.txt"
         run: python generate_yaml.py
 
-      - name: Commit updated YAML
+      - name: Commit and push updated YAML safely
         run: |
+          set -e
+          BRANCH="${GITHUB_REF_NAME:-main}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
+
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."
-          else
-            git commit -m "chore: update OpenClash YAML otomatis"
-            git push
+            exit 0
           fi
+
+          git commit -m "chore: update OpenClash YAML otomatis"
+
+          # Ambil commit terbaru sebelum push agar tidak kena rejected/fetch first.
+          for attempt in 1 2 3; do
+            echo "Push attempt $attempt..."
+            git fetch origin "$BRANCH"
+            if git pull --rebase --autostash origin "$BRANCH" && git push origin "HEAD:$BRANCH"; then
+              echo "Push berhasil."
+              exit 0
+            fi
+            echo "Push gagal, coba ulang..."
+            git rebase --abort || true
+            sleep 5
+          done
+
+          echo "Push tetap gagal setelah 3 percobaan. Kemungkinan ada konflik file dari commit manual."
+          exit 1
