@@ -192,6 +192,8 @@ class ProxyNode:
     ws_upgrade_ms: int | None = None
     ws_success_count: int = 0
     ws_status: str = ""
+    original_provider: str = ""
+    original_ip: str = ""
     tier: str = ""
     original_name: str = ""
     key: str = field(default="")
@@ -243,19 +245,24 @@ def safe_proxy_name(value: str | None, fallback: str) -> str:
     return text
 
 
-def unique_names(nodes: list[ProxyNode]) -> None:
+def unique_names(nodes: list[ProxyNode], provider_names: bool = True) -> None:
     """Replace all proxy names with safe unique aliases.
 
-    The generated names intentionally do not reuse the public subscription name,
-    because those names are the common source of OpenClash import errors.
-    Original names are kept only in the CSV report.
+    If provider_names is enabled, the alias uses provider/ASN information from
+    the original server, not from the forced bug IP 104.17.3.81. This makes the
+    output easier to read, for example AKUN-001-VULTR-VLESS-WS-18MS.
     """
     seen: set[str] = set()
     for i, node in enumerate(nodes, start=1):
         node.original_name = node.original_name or normalize_name(node.name, f"ORIGINAL-{i:03d}")
         delay = f"{int(node.best_delay_ms)}MS" if node.best_delay_ms is not None else "NA"
         proto = safe_proxy_name(node.type.upper(), "NODE")
-        base = safe_proxy_name(f"AKUN-{i:03d}-{proto}-{delay}", f"AKUN-{i:03d}")
+        net = safe_proxy_name(node_network(node).upper(), "NET")
+        provider = provider_label_from_original_server(node) if provider_names else ""
+        if provider:
+            base = safe_proxy_name(f"AKUN-{i:03d}-{provider}-{proto}-{net}-{delay}", f"AKUN-{i:03d}")
+        else:
+            base = safe_proxy_name(f"AKUN-{i:03d}-{proto}-{net}-{delay}", f"AKUN-{i:03d}")
         name = base
         counter = 2
         while name in seen:
@@ -402,7 +409,7 @@ def parse_vmess(uri: str, source: str) -> ProxyNode | None:
     if not is_supported_network(network):
         return None
     tls_value = str(data.get("tls") or "tls").strip().lower()
-    sni = str(data.get("sni") or data.get("host") or server).strip()
+    sni = str(data.get("sni") or data.get("servername") or data.get("serverName") or data.get("host") or server).strip()
     host = str(data.get("host") or sni or server).strip()
     path = str(data.get("path") or "/").strip() or "/"
     cipher = str(data.get("scy") or data.get("cipher") or "auto").strip() or "auto"
@@ -637,6 +644,38 @@ def node_sni_host(node: ProxyNode) -> str:
     return node.original_server
 
 
+
+def explicit_tls_name_from_raw(node: ProxyNode) -> str:
+    """Return the explicit SNI/servername from the original URI, if present.
+
+    This is stricter than node_sni_host(): it does NOT fall back to Host or
+    original_server. For bug-server output, nodes without explicit SNI/servername
+    often pass a simple TLS check but later timeout in OpenClash.
+    """
+    raw = str(node.raw or "").strip()
+    scheme = raw.split("://", 1)[0].lower() if "://" in raw else str(node.type or "").lower()
+
+    try:
+        if scheme in {"vless", "trojan"}:
+            params = parse_qs(urlparse(raw).query)
+            for key in ("sni", "servername", "serverName", "peer"):
+                value = first_query(params, key, default="").strip()
+                if complete_value(value) and not looks_like_ip(value):
+                    return value
+        elif scheme == "vmess":
+            payload = raw.split("://", 1)[1].split("#", 1)[0]
+            decoded = b64decode_text(payload)
+            if not decoded:
+                return ""
+            data = json.loads(decoded)
+            for key in ("sni", "servername", "serverName"):
+                value = str(data.get(key) or "").strip()
+                if complete_value(value) and not looks_like_ip(value):
+                    return value
+    except Exception:
+        return ""
+    return ""
+
 def node_network(node: ProxyNode) -> str:
     """Return the normalized transport network used by the proxy node."""
     if str(node.type or "").lower() == "ss":
@@ -681,6 +720,252 @@ def domain_root(host: str) -> str:
     if parts[-2] in {"co", "com", "net", "org", "ac", "sch", "web", "or"} and len(parts[-1]) == 2 and len(parts) >= 3:
         return ".".join(parts[-3:])
     return ".".join(parts[-2:])
+
+
+_PROVIDER_CACHE: dict[str, tuple[str, str]] = {}
+_RDAP_CACHE: dict[str, str] = {}
+
+PROVIDER_PATTERNS: list[tuple[str, tuple[str, ...]]] = [
+    ("VULTR", ("VULTR", "CHOOPA", "CONSTANT COMPANY")),
+    ("MELBICOM", ("MELBICOM",)),
+    ("DIGITALOCEAN", ("DIGITALOCEAN", "DIGITAL OCEAN", "DO-")),
+    ("OVH", ("OVH",)),
+    ("ORACLE", ("ORACLE", "ORACLE-BMC")),
+    ("AKAMAI", ("AKAMAI", "LINODE")),
+    ("HETZNER", ("HETZNER",)),
+    ("AMAZON", ("AMAZON", "AWS", "AMAZON.COM")),
+    ("GOOGLE", ("GOOGLE",)),
+    ("MICROSOFT", ("MICROSOFT", "AZURE")),
+    ("ALIBABA", ("ALIBABA",)),
+    ("TENCENT", ("TENCENT",)),
+    ("CLOUDFLARE", ("CLOUDFLARE",)),
+    ("LEASEWEB", ("LEASEWEB",)),
+    ("CONTABO", ("CONTABO",)),
+    ("HOSTINGER", ("HOSTINGER",)),
+    ("IONOS", ("IONOS", "1&1")),
+    ("NETCUP", ("NETCUP",)),
+    ("SCALWAY", ("SCALWAY", "ONLINE S.A.S", "ONLINE SAS")),
+    ("GCORE", ("GCORE",)),
+    ("M247", ("M247",)),
+    ("CDN77", ("CDN77", "DATACAMP")),
+    ("NFORCE", ("NFORCE",)),
+    ("RETN", ("RETN",)),
+    ("COGENT", ("COGENT",)),
+]
+
+COMMON_DOMAIN_LABELS = {
+    "www", "cdn", "sni", "edge", "node", "server", "proxy", "vpn", "joinproxyvpn", "join", "cloud", "worker", "workers",
+    "ray", "rayan", "config", "telegram", "free", "mianfei", "cf", "vless", "vmess", "trojan", "ws", "sg", "us", "de",
+    "uk", "nl", "fr", "jp", "id", "hk", "fi", "ru", "ir", "tr", "au", "ca", "eu",
+}
+
+
+def _extract_text_values(value: Any, limit: int = 6000) -> str:
+    """Collect useful short strings from RDAP JSON without depending on schema details."""
+    out: list[str] = []
+
+    def walk(obj: Any) -> None:
+        if sum(len(x) for x in out) > limit:
+            return
+        if isinstance(obj, str):
+            text = obj.strip()
+            if text and len(text) <= 200:
+                out.append(text)
+        elif isinstance(obj, dict):
+            for key in ("name", "handle", "title", "description", "type", "country"):
+                if key in obj:
+                    walk(obj[key])
+            # vcardArray usually contains organization / full-name records.
+            if "vcardArray" in obj:
+                walk(obj["vcardArray"])
+            if "entities" in obj:
+                walk(obj["entities"])
+            if "remarks" in obj:
+                walk(obj["remarks"])
+            if "links" in obj:
+                walk(obj["links"])
+            if "notices" in obj:
+                walk(obj["notices"])
+        elif isinstance(obj, list):
+            for item in obj:
+                walk(item)
+
+    walk(value)
+    return " ".join(out)
+
+
+def _map_provider(text: str) -> str:
+    upper = str(text or "").upper()
+    for label, patterns in PROVIDER_PATTERNS:
+        if any(pattern in upper for pattern in patterns):
+            return label
+    return ""
+
+
+def _resolve_original_ip(host: str) -> str:
+    host = str(host or "").strip().strip("[]")
+    if not host:
+        return ""
+    if looks_like_ip(host):
+        return host
+    try:
+        return socket.gethostbyname(host)
+    except Exception:
+        return ""
+
+
+def _rdap_provider(ip: str) -> str:
+    ip = str(ip or "").strip()
+    if not ip:
+        return ""
+    if ip in _RDAP_CACHE:
+        return _RDAP_CACHE[ip]
+    provider = ""
+    try:
+        response = requests.get(
+            f"https://rdap.org/ip/{ip}",
+            timeout=5,
+            headers={"User-Agent": USER_AGENT},
+        )
+        if response.ok:
+            data = response.json()
+            provider = _map_provider(_extract_text_values(data))
+            if not provider:
+                # Fallback to a short RDAP name/handle when it is already readable.
+                candidate = str(data.get("name") or data.get("handle") or "").strip()
+                candidate = re.sub(r"[^A-Za-z0-9]+", "-", candidate).strip("-").upper()
+                if candidate and not re.fullmatch(r"NET-?\d+|IPV4|RIPE|APNIC|ARIN|LACNIC|AFRINIC", candidate):
+                    provider = candidate[:24]
+    except Exception:
+        provider = ""
+    _RDAP_CACHE[ip] = provider
+    return provider
+
+
+def _domain_provider_fallback(host: str) -> str:
+    """Use original domain text only when RDAP/ASN provider cannot be detected."""
+    root = domain_root(host)
+    if not root or looks_like_ip(root):
+        return "UNKNOWN"
+    labels = [x for x in root.split(".") if x]
+    if not labels:
+        return "UNKNOWN"
+    for label in labels:
+        clean = re.sub(r"[^A-Za-z0-9]+", "", label).upper()
+        if clean and clean.lower() not in COMMON_DOMAIN_LABELS and len(clean) >= 3:
+            return clean[:18]
+    clean = re.sub(r"[^A-Za-z0-9]+", "", labels[0]).upper()
+    return clean[:18] if clean else "UNKNOWN"
+
+
+def provider_label_from_original_server(node: ProxyNode) -> str:
+    """Return provider/ASN label detected from node.original_server.
+
+    The forced output server is always Cloudflare bug IP, so provider naming must
+    be based on original_server. If original_server is a domain, it is resolved to
+    an IP first, then RDAP is queried. If RDAP fails, the root domain is used as a
+    readable fallback.
+    """
+    host = str(node.original_server or "").strip().strip("[]")
+    if not host:
+        node.original_provider = "UNKNOWN"
+        return "UNKNOWN"
+    if host in _PROVIDER_CACHE:
+        provider, ip = _PROVIDER_CACHE[host]
+        node.original_provider = provider
+        node.original_ip = ip
+        return provider
+    ip = _resolve_original_ip(host)
+    provider = _rdap_provider(ip) if ip else ""
+    if not provider:
+        provider = _map_provider(host) or _domain_provider_fallback(host)
+    provider = safe_proxy_name(provider.upper(), "UNKNOWN")
+    _PROVIDER_CACHE[host] = (provider, ip)
+    node.original_provider = provider
+    node.original_ip = ip
+    return provider
+
+
+def update_raw_uri_name(raw: str, new_name: str) -> str:
+    """Return a shareable URI with its display name changed to new_name."""
+    raw = str(raw or "").strip()
+    name = quote(str(new_name or "").strip(), safe="")
+    if not raw or "://" not in raw:
+        return raw
+    scheme = raw.split("://", 1)[0].lower()
+    try:
+        if scheme == "vmess":
+            payload = raw.split("://", 1)[1].split("#", 1)[0]
+            decoded = b64decode_text(payload)
+            if not decoded:
+                return raw
+            data = json.loads(decoded)
+            data["ps"] = new_name
+            encoded = base64.b64encode(json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")).decode("ascii")
+            return "vmess://" + encoded
+        # vless/trojan/ss: replace fragment safely.
+        body = raw.split("#", 1)[0]
+        return body + "#" + name
+    except Exception:
+        body = raw.split("#", 1)[0]
+        return body + "#" + name
+
+
+def update_raw_uri_name_and_server(raw: str, new_name: str, target_server: str = TARGET_SERVER) -> str:
+    """Return a shareable URI using the bug server plus updated display name.
+
+    YAML output already forces ``server`` to TARGET_SERVER. This function makes
+    ``akun.txt`` consistent with that YAML: vless/trojan/ss links use
+    ``@104.17.3.81:443`` while keeping SNI/Host/path query parameters intact.
+    VMess links update the JSON ``add``/``server`` and ``port`` fields, while
+    keeping transport fields such as ``host`` and ``sni`` unchanged.
+    """
+    raw = str(raw or "").strip()
+    name = quote(str(new_name or "").strip(), safe="")
+    if not raw or "://" not in raw:
+        return raw
+    scheme = raw.split("://", 1)[0].lower()
+    try:
+        if scheme == "vmess":
+            payload = raw.split("://", 1)[1].split("#", 1)[0]
+            decoded = b64decode_text(payload)
+            if not decoded:
+                return update_raw_uri_name(raw, new_name)
+            data = json.loads(decoded)
+            data["ps"] = new_name
+            data["add"] = str(target_server)
+            if "server" in data:
+                data["server"] = str(target_server)
+            data["port"] = str(ONLY_PORT)
+            encoded = base64.b64encode(json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")).decode("ascii")
+            return "vmess://" + encoded
+
+        body = raw.split("#", 1)[0]
+        rest = body.split("://", 1)[1]
+        main, sep, query = rest.partition("?")
+        if "@" not in main:
+            # Some ss:// links are fully base64 encoded. Keep the server untouched
+            # rather than corrupting the account, but still refresh the name.
+            return body + "#" + name
+        userinfo, _serverpart = main.rsplit("@", 1)
+        new_body = f"{scheme}://{userinfo}@{target_server}:{ONLY_PORT}"
+        if sep:
+            new_body += "?" + query
+        return new_body + "#" + name
+    except Exception:
+        return update_raw_uri_name(raw, new_name)
+
+
+def build_akun_txt(nodes: list[ProxyNode]) -> str:
+    """Build akun.txt from final nodes using bug server 104.17.3.81."""
+    lines: list[str] = []
+    for node in nodes:
+        if str(node.type or "").lower() not in {"vless", "vmess", "trojan", "ss"}:
+            continue
+        uri = update_raw_uri_name_and_server(node.raw, node.clash.get("name") or node.name, TARGET_SERVER)
+        if uri:
+            lines.append(uri)
+    return "\n".join(lines) + ("\n" if lines else "")
 
 
 def node_identity_key(node: ProxyNode) -> tuple[str, str, str, str, str]:
@@ -883,8 +1168,17 @@ def validate_complete_node(node: ProxyNode) -> tuple[bool, str]:
     network = str(clash.get("network") or "tcp").lower()
 
     if proto in {"vless", "vmess", "trojan"}:
+        explicit_sni = explicit_tls_name_from_raw(node)
+        if explicit_sni:
+            if proto in {"vless", "vmess"}:
+                clash["servername"] = explicit_sni
+            elif proto == "trojan":
+                clash["sni"] = explicit_sni
+            node.bug_sni = explicit_sni
+        else:
+            missing.append("explicit sni/servername")
         sni = node_sni_host(node)
-        node.bug_sni = sni
+        node.bug_sni = explicit_sni or sni
         if not complete_value(sni) or looks_like_ip(str(sni)):
             missing.append("SNI/Host domain")
         if network not in {"tcp", "ws", "grpc", "http"}:
@@ -1509,7 +1803,92 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         "rule-providers": rule_providers,
         "rules": rules,
     }
+
     return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
+
+
+def build_openclash_android_yaml(
+    nodes: list[ProxyNode],
+    interval: int,
+    tolerance: int,
+    test_url: str,
+    health_timeout: int = DEFAULT_HEALTH_TIMEOUT_MS,
+) -> str:
+    """Build a lightweight Clash/OpenClash-for-Android config without rule providers.
+
+    This output is intended for Android clients that only need the active accounts.
+    It deliberately omits rule-providers, custom category rules, redir-port, and
+    tproxy-port. Traffic is handled in global mode and the user can select
+    AUTO-FAST, FALLBACK, or a specific node in the client UI.
+    """
+    names = [node.clash["name"] for node in nodes]
+    direct_or_names = names or ["DIRECT"]
+
+    proxy_groups: list[dict[str, Any]] = [
+        {
+            "name": "GLOBAL",
+            "type": "select",
+            "proxies": ["AUTO-FAST", "FALLBACK", "DIRECT"] + names,
+        },
+        {
+            "name": "AUTO-FAST",
+            "type": "url-test",
+            "proxies": direct_or_names,
+            "url": test_url,
+            "interval": interval,
+            "tolerance": tolerance,
+            "lazy": False,
+            "timeout": health_timeout,
+            "expected-status": 204,
+        },
+        {
+            "name": "FALLBACK",
+            "type": "fallback",
+            "proxies": direct_or_names,
+            "url": test_url,
+            "interval": interval,
+            "lazy": False,
+            "timeout": health_timeout,
+            "expected-status": 204,
+        },
+    ]
+
+    config: dict[str, Any] = {
+        "mixed-port": 7890,
+        "allow-lan": False,
+        "bind-address": "*",
+        "mode": "global",
+        "log-level": "warning",
+        "ipv6": False,
+        "unified-delay": True,
+        "tcp-concurrent": True,
+        "global-client-fingerprint": "chrome",
+        "profile": {
+            "store-selected": True,
+            "store-fake-ip": True,
+        },
+        "sniffer": {
+            "enable": True,
+            "sniff": {
+                "TLS": {"ports": [443, 8443]},
+                "HTTP": {"ports": [80, "8080-8880"], "override-destination": True},
+            },
+            "skip-domain": ["+.lan", "+.local"],
+        },
+        "dns": {
+            "enable": True,
+            "ipv6": False,
+            "enhanced-mode": "fake-ip",
+            "fake-ip-range": "198.18.0.1/16",
+            "fake-ip-filter": ["+.lan", "+.local", "time.*.com", "ntp.*.com"],
+            "default-nameserver": ["1.1.1.1", "8.8.8.8"],
+            "nameserver": ["https://1.1.1.1/dns-query", "https://dns.google/dns-query"],
+        },
+        "proxies": [node.clash for node in nodes],
+        "proxy-groups": proxy_groups,
+    }
+    return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
+
 
 def build_csv(nodes: list[ProxyNode]) -> str:
     buffer = io.StringIO()
@@ -1520,6 +1899,8 @@ def build_csv(nodes: list[ProxyNode]) -> str:
         "type",
         "network",
         "original_server",
+        "original_ip",
+        "original_provider",
         "bug_sni",
         "output_server",
         "port",
@@ -1546,6 +1927,8 @@ def build_csv(nodes: list[ProxyNode]) -> str:
             node.type,
             node_network(node),
             node.original_server,
+            node.original_ip,
+            node.original_provider,
             node.bug_sni,
             TARGET_SERVER,
             node.port,

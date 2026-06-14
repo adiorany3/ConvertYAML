@@ -1,1 +1,1 @@
-# Tambahkan link subscription tambahan di bawah ini, satu URL per baris.
+# Tambahkan link subscription ekstra di sini, satu URL per baris.
