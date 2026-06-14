@@ -113,8 +113,18 @@ jobs:
           OUTPUT_MANUAL_AKUN: "akun_manual.txt"
           OUTPUT_MANUAL_SKIPPED: "manual_nodes_skipped.txt"
           OUTPUT_STAMP: "last_update.txt"
+          OUTPUT_COMPAT_REPORT: "compatibility_report.txt"
           MANUAL_NODES_FILE: "manual_nodes.txt"
         run: python generate_yaml.py
+
+      - name: Validate generated YAML with Mihomo/OpenClash core
+        run: |
+          set -e
+          echo "Validate OpenClash router YAML"
+          ./mihomo -t -d . -f openclash_auto.yaml
+          echo "Validate Android/global YAML"
+          ./mihomo -t -d . -f openclash_android.yaml
+          echo "YAML validated by Mihomo."
 
       - name: Commit and push updated YAML safely
         run: |
@@ -123,7 +133,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
+          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt compatibility_report.txt last_update.txt
 
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."

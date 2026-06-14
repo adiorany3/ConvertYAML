@@ -1,99 +1,66 @@
-# SumberYAML - Real WS Check + Manual Group
+# SumberYAML OpenClash Compatible
 
-Versi ini memperbaiki validasi akun otomatis agar WebSocket benar-benar bekerja, bukan hanya lolos TLS atau WS Upgrade 101.
+Versi ini menambahkan validasi kompatibilitas sebelum hasil di-commit oleh GitHub Actions.
 
 ## Output
 
-GitHub Action menghasilkan:
+Workflow membuat file berikut:
 
-- `openclash_auto.yaml` untuk OpenClash/Mihomo normal.
-- `openclash_android.yaml` untuk OpenClash/Clash Android tanpa rule berat.
-- `akun.txt` berisi link akun otomatis yang sudah lolos real-check.
-- `akun_manual.txt` berisi link dari `manual_nodes.txt`.
-- `openclash_auto_report.csv` berisi laporan lengkap.
-- `manual_nodes.txt` akan otomatis dinormalisasi ke server `104.17.3.81:443`.
-- `last_update.txt` berisi ringkasan update.
+- `openclash_auto.yaml` — config OpenClash/router dengan rule Lite.
+- `openclash_android.yaml` — config Android/global tanpa rule-provider dan tanpa redir/tproxy.
+- `akun.txt` — link akun otomatis yang lolos strict + real proxy check, server sudah `104.17.3.81:443`.
+- `akun_manual.txt` — link manual dari `manual_nodes.txt`, server dinormalisasi ke `104.17.3.81:443`.
+- `openclash_auto_report.csv` — laporan akun, status, WS check, dan real check.
+- `compatibility_report.txt` — laporan validasi struktur YAML untuk OpenClash/Mihomo.
+- `last_update.txt` — ringkasan update terakhir.
 
-## Perubahan penting
+## Kompatibilitas yang dicek
 
-1. Akun otomatis dari subscription tetap disaring strict:
-   - wajib `network: ws`,
-   - wajib punya SNI/servername,
-   - wajib lolos WebSocket Upgrade `101`,
-   - wajib lolos real proxy check menggunakan Mihomo.
+Sebelum commit, generator akan memastikan:
 
-2. Real proxy check menjalankan Mihomo di GitHub Actions, memilih node otomatis satu per satu, lalu melakukan request ke `generate_204` melalui proxy lokal Mihomo. Node yang gagal tidak masuk 20 akun otomatis.
+1. YAML bisa diparse.
+2. Tidak ada YAML anchor/alias seperti `&id001` atau `*id001`.
+3. Nama proxy unik.
+4. Nama proxy-group unik.
+5. Semua isi `proxy-groups.proxies` merujuk ke proxy/group yang benar.
+6. Rule `RULE-SET` hanya memakai provider yang tersedia.
+7. Rule policy mengarah ke group yang tersedia.
+8. `openclash_android.yaml` tidak berisi `rule-providers`, `redir-port`, atau `tproxy-port`.
+9. Jika ada group `MANUAL`, group `FALLBACK` dimulai dari `MANUAL` lalu dilanjutkan node otomatis.
+10. Node WS punya field dasar `ws-opts.path` dan `ws-opts.headers.Host`.
 
-3. Node manual dari `manual_nodes.txt` tidak disaring dan tidak dites. Node manual tetap masuk group `MANUAL`, di luar kuota 20 akun otomatis.
+Workflow juga menjalankan:
 
-4. Group `FALLBACK` dimulai dari `MANUAL`, lalu dilanjutkan node akun otomatis.
+```bash
+./mihomo -t -d . -f openclash_auto.yaml
+./mihomo -t -d . -f openclash_android.yaml
+```
 
-5. Nama node manual tetap memakai nama sumber/link, hanya diberi prefix `MANUAL-`.
+Jika config tidak valid menurut core Mihomo/OpenClash, workflow akan gagal dan tidak akan push hasil yang rusak.
 
-## File manual
+## Manual nodes
 
-Isi node manual di:
+Isi akun manual di:
 
 ```text
 manual_nodes.txt
 ```
 
-Contoh:
+Node manual:
 
-```text
-vless://uuid@domain-asli.com:443?security=tls&sni=sni.domain.com&type=ws&host=sni.domain.com&path=%2Fws#SG-VIP-01
-```
+- tidak disaring strict,
+- tidak mengurangi 20 akun otomatis,
+- otomatis masuk group `MANUAL`,
+- server otomatis diganti menjadi `104.17.3.81:443`,
+- nama tetap dari sumber/link dan hanya ditambah prefix `MANUAL-`,
+- group `FALLBACK` dimulai dari `MANUAL`, lalu node otomatis.
 
-Saat workflow berjalan, server akan otomatis diubah menjadi:
+## Jadwal update
 
-```text
-104.17.3.81:443
-```
-
-SNI, Host, path, uuid/password, dan fragment nama tetap dipertahankan.
-
-## Pengaturan GitHub Action
-
-Workflow berjalan otomatis setiap 6 jam:
+Workflow berjalan setiap 6 jam:
 
 ```yaml
-- cron: "0 */6 * * *"
+cron: "0 */6 * * *"
 ```
 
-Workflow juga bisa dijalankan manual dari tab **Actions > Run workflow**.
-
-## Variabel penting
-
-```text
-MAX_NODES=20
-VALIDATION_POOL_NODES=80
-REAL_CHECK=true
-MIHOMO_PATH=./mihomo
-FORCE_WS_ONLY=true
-REQUIRE_WS_UPGRADE=true
-REAL_CHECK_TIMEOUT_MS=8000
-HEALTH_TIMEOUT_MS=6000
-```
-
-Jika hasil akun otomatis kurang dari 20, berarti sumber publik saat itu tidak menyediakan 20 node yang benar-benar lolos WS + real proxy check. Node manual tetap tidak dihitung dalam kuota 20 otomatis.
-
-## Cara pakai
-
-1. Upload semua isi ZIP ke root repository GitHub.
-2. Pastikan file workflow berada di:
-
-```text
-.github/workflows/update-yaml-6jam.yml
-```
-
-3. Buka **Actions > Run workflow**.
-4. Setelah selesai, cek file:
-
-```text
-openclash_auto.yaml
-openclash_android.yaml
-akun.txt
-akun_manual.txt
-openclash_auto_report.csv
-last_update.txt
-```
+Bisa juga dijalankan manual dari tab **Actions > Run workflow**.

@@ -470,6 +470,216 @@ def _mihomo_real_check_nodes(nodes: list[Any], *, limit: int, test_url: str, tim
                     proc.kill()
         tmpdir_obj.cleanup()
 
+
+
+class _NoAliasSafeDumper(yaml.SafeDumper):
+    """PyYAML dumper that avoids anchors (&id001 / *id001).
+
+    Some OpenClash/Android importers can parse YAML anchors, but removing anchors
+    makes the generated files more portable and easier to read.
+    """
+
+    def ignore_aliases(self, data: Any) -> bool:  # type: ignore[override]
+        return True
+
+
+def dump_yaml_no_alias(config: dict[str, Any]) -> str:
+    # JSON round-trip removes shared list references that PyYAML would otherwise
+    # serialize as anchors. The OpenClash config only contains JSON-compatible types.
+    clean = json.loads(json.dumps(config, ensure_ascii=False))
+    return yaml.dump(clean, Dumper=_NoAliasSafeDumper, allow_unicode=True, sort_keys=False, width=140)
+
+
+def finalize_yaml_for_openclash(yaml_text: str) -> str:
+    config = yaml.safe_load(yaml_text) or {}
+    if not isinstance(config, dict):
+        raise ValueError("YAML root must be a mapping/dictionary")
+    return dump_yaml_no_alias(config)
+
+
+def _as_list(value: Any) -> list[Any]:
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return value
+    return [value]
+
+
+def _rule_target(rule: str) -> str:
+    parts = [p.strip() for p in str(rule).split(",")]
+    if not parts:
+        return ""
+    if parts[-1].lower() == "no-resolve" and len(parts) >= 2:
+        return parts[-2]
+    return parts[-1]
+
+
+def validate_openclash_compatibility(yaml_text: str, label: str, *, android: bool = False) -> tuple[list[str], list[str]]:
+    """Validate generated YAML before commit.
+
+    This is a structural compatibility check for OpenClash/Mihomo import:
+    - YAML can be parsed.
+    - proxy names are unique.
+    - proxy-groups only reference existing proxies/groups or built-in policies.
+    - RULE-SET rules reference existing rule-providers.
+    - Android output stays lightweight and rule-free.
+    - WS proxy fields are syntactically complete enough for Mihomo/OpenClash.
+    """
+    errors: list[str] = []
+    warnings: list[str] = []
+    try:
+        config = yaml.safe_load(yaml_text) or {}
+    except Exception as exc:
+        return [f"{label}: YAML parse failed: {exc}"], []
+
+    if not isinstance(config, dict):
+        return [f"{label}: YAML root is not a mapping"], []
+
+    if "&id" in yaml_text or "*id" in yaml_text:
+        errors.append(f"{label}: YAML still contains anchors/aliases (&id/*id); regenerate with no-alias dumper")
+
+    proxies = config.get("proxies")
+    if not isinstance(proxies, list):
+        errors.append(f"{label}: missing or invalid proxies list")
+        proxies = []
+    groups = config.get("proxy-groups")
+    if not isinstance(groups, list):
+        errors.append(f"{label}: missing or invalid proxy-groups list")
+        groups = []
+
+    proxy_names: list[str] = []
+    seen_proxy: set[str] = set()
+    allowed_types = {"vless", "vmess", "trojan", "ss", "http", "socks5", "socks", "hysteria2", "tuic"}
+    for idx, proxy in enumerate(proxies):
+        if not isinstance(proxy, dict):
+            errors.append(f"{label}: proxy #{idx + 1} is not a mapping")
+            continue
+        name = str(proxy.get("name") or "").strip()
+        ptype = str(proxy.get("type") or "").strip().lower()
+        if not name:
+            errors.append(f"{label}: proxy #{idx + 1} has empty name")
+            continue
+        if name in seen_proxy:
+            errors.append(f"{label}: duplicate proxy name: {name}")
+        seen_proxy.add(name)
+        proxy_names.append(name)
+        if ptype not in allowed_types:
+            errors.append(f"{label}: proxy {name} has unsupported/empty type: {ptype!r}")
+        if not proxy.get("server"):
+            errors.append(f"{label}: proxy {name} missing server")
+        try:
+            port = int(proxy.get("port"))
+            if port <= 0 or port > 65535:
+                errors.append(f"{label}: proxy {name} invalid port: {proxy.get('port')!r}")
+        except Exception:
+            errors.append(f"{label}: proxy {name} invalid/missing port: {proxy.get('port')!r}")
+
+        network = str(proxy.get("network") or "tcp").lower()
+        if network == "ws" and ptype in {"vless", "vmess", "trojan"}:
+            ws_opts = proxy.get("ws-opts")
+            if not isinstance(ws_opts, dict):
+                errors.append(f"{label}: WS proxy {name} missing ws-opts")
+            else:
+                if not str(ws_opts.get("path") or "").strip():
+                    errors.append(f"{label}: WS proxy {name} missing ws-opts.path")
+                headers = ws_opts.get("headers")
+                host = ""
+                if isinstance(headers, dict):
+                    host = str(headers.get("Host") or headers.get("host") or "").strip()
+                if not host:
+                    warnings.append(f"{label}: WS proxy {name} has no ws-opts.headers.Host")
+            sni = str(proxy.get("servername") or proxy.get("sni") or "").strip()
+            # Manual nodes are allowed unfiltered, so missing SNI is a warning, not a hard error.
+            if not sni:
+                warnings.append(f"{label}: WS proxy {name} has no servername/sni; may import but can timeout")
+            alpn = [str(x).lower() for x in _as_list(proxy.get("alpn"))]
+            if alpn and "http/1.1" not in alpn:
+                warnings.append(f"{label}: WS proxy {name} alpn does not include http/1.1")
+
+    group_names: list[str] = []
+    seen_group: set[str] = set()
+    for idx, group in enumerate(groups):
+        if not isinstance(group, dict):
+            errors.append(f"{label}: proxy-group #{idx + 1} is not a mapping")
+            continue
+        name = str(group.get("name") or "").strip()
+        if not name:
+            errors.append(f"{label}: proxy-group #{idx + 1} has empty name")
+            continue
+        if name in seen_group:
+            errors.append(f"{label}: duplicate proxy-group name: {name}")
+        seen_group.add(name)
+        group_names.append(name)
+        refs = group.get("proxies")
+        if refs is not None and not isinstance(refs, list):
+            errors.append(f"{label}: group {name} proxies must be a list")
+
+    valid_refs = set(proxy_names) | set(group_names) | {"DIRECT", "REJECT", "REJECT-DROP", "PASS", "COMPATIBLE"}
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        name = str(group.get("name") or "")
+        refs = group.get("proxies")
+        if not isinstance(refs, list):
+            continue
+        if not refs:
+            errors.append(f"{label}: group {name} has empty proxies list")
+        for ref in refs:
+            ref_text = str(ref)
+            if ref_text not in valid_refs:
+                errors.append(f"{label}: group {name} references missing proxy/group: {ref_text}")
+
+    if android:
+        for forbidden in ("rule-providers", "redir-port", "tproxy-port"):
+            if forbidden in config:
+                errors.append(f"{label}: Android config must not contain {forbidden}")
+        if config.get("mode") != "global":
+            warnings.append(f"{label}: Android config mode is {config.get('mode')!r}, expected 'global'")
+    else:
+        rules = config.get("rules")
+        if not isinstance(rules, list) or not rules:
+            errors.append(f"{label}: missing rules list")
+        else:
+            if not any(str(rule).startswith("MATCH,") for rule in rules):
+                errors.append(f"{label}: rules missing final MATCH rule")
+            providers = config.get("rule-providers") or {}
+            provider_names = set(providers.keys()) if isinstance(providers, dict) else set()
+            for rule in rules:
+                text = str(rule)
+                parts = [p.strip() for p in text.split(",")]
+                if len(parts) >= 2 and parts[0] == "RULE-SET":
+                    if parts[1] not in provider_names:
+                        errors.append(f"{label}: RULE-SET references missing provider: {parts[1]}")
+                target = _rule_target(text)
+                if target and target not in valid_refs:
+                    errors.append(f"{label}: rule references missing policy/group: {text}")
+
+    if "FALLBACK" in group_names and "MANUAL" in group_names:
+        fallback = next((g for g in groups if isinstance(g, dict) and g.get("name") == "FALLBACK"), None)
+        fallback_refs = fallback.get("proxies") if isinstance(fallback, dict) else []
+        if isinstance(fallback_refs, list) and fallback_refs and fallback_refs[0] != "MANUAL":
+            errors.append(f"{label}: FALLBACK must start with MANUAL when MANUAL group exists")
+
+    return errors, warnings
+
+
+def build_compatibility_report(items: list[tuple[str, str, bool]]) -> tuple[str, bool]:
+    lines: list[str] = []
+    ok = True
+    for label, text, android in items:
+        errors, warnings = validate_openclash_compatibility(text, label, android=android)
+        lines.append(f"[{label}]")
+        if not errors and not warnings:
+            lines.append("OK: compatible structure check passed")
+        for error in errors:
+            ok = False
+            lines.append("ERROR: " + error)
+        for warning in warnings:
+            lines.append("WARN: " + warning)
+        lines.append("")
+    return "\n".join(lines), ok
+
+
 def add_manual_group_to_yaml_text(yaml_text: str, manual_nodes: list[Any], *, android: bool = False) -> str:
     if not manual_nodes:
         return yaml_text
@@ -488,6 +698,7 @@ def main() -> int:
     output_manual_skipped = os.getenv("OUTPUT_MANUAL_SKIPPED", "manual_nodes_skipped.txt")
     output_android_yaml = os.getenv("OUTPUT_ANDROID_YAML", "openclash_android.yaml")
     output_stamp = os.getenv("OUTPUT_STAMP", "last_update.txt")
+    output_compat = os.getenv("OUTPUT_COMPAT_REPORT", "compatibility_report.txt")
     manual_file = os.getenv("MANUAL_NODES_FILE", "manual_nodes.txt")
 
     max_nodes = _env_int("MAX_NODES", 20)
@@ -559,6 +770,7 @@ def main() -> int:
         rule_mode=os.getenv("RULE_MODE", "Lite"),
     )
     yaml_text = add_manual_group_to_yaml_text(yaml_text, manual_nodes, android=False)
+    yaml_text = finalize_yaml_for_openclash(yaml_text)
 
     android_yaml_text = build_openclash_android_yaml(
         alive_nodes,
@@ -568,6 +780,13 @@ def main() -> int:
         health_timeout=_env_int("ANDROID_HEALTH_TIMEOUT_MS", _env_int("HEALTH_TIMEOUT_MS", 6000)),
     )
     android_yaml_text = add_manual_group_to_yaml_text(android_yaml_text, manual_nodes, android=True)
+    android_yaml_text = finalize_yaml_for_openclash(android_yaml_text)
+
+    compatibility_report, compatibility_ok = build_compatibility_report([
+        (output_yaml, yaml_text, False),
+        (output_android_yaml, android_yaml_text, True),
+    ])
+    print(compatibility_report)
 
     csv_text = build_csv(all_nodes + manual_nodes)
     akun_text = build_akun_txt(alive_nodes)
@@ -580,6 +799,7 @@ def main() -> int:
     Path(output_akun).write_text(akun_text, encoding="utf-8")
     Path(output_manual_akun).write_text(manual_akun_text, encoding="utf-8")
     Path(output_manual_skipped).write_text(manual_skipped_text, encoding="utf-8")
+    Path(output_compat).write_text(compatibility_report, encoding="utf-8")
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     summary = (
