@@ -15,7 +15,7 @@ concurrency:
 jobs:
   update-yaml:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
@@ -42,18 +42,51 @@ jobs:
           git checkout "$BRANCH"
           git pull --rebase --autostash origin "$BRANCH"
 
-      - name: Generate YAML fast 10 nodes
+      - name: Download Mihomo core for URL test
+        shell: bash
+        run: |
+          MIHOMO_URL=$(python - <<'PY'
+          import json
+          import urllib.request
+
+          data = json.load(urllib.request.urlopen("https://api.github.com/repos/MetaCubeX/mihomo/releases/latest", timeout=30))
+          candidates = []
+          for asset in data.get("assets", []):
+              name = asset.get("name", "")
+              url = asset.get("browser_download_url", "")
+              low = name.lower()
+              if ("linux-amd64-compatible" in low or "linux-amd64" in low) and low.endswith(".gz") and "debug" not in low:
+                  candidates.append((0 if "compatible" in low else 1, name, url))
+          if not candidates:
+              raise SystemExit("No linux-amd64 mihomo asset found")
+          candidates.sort()
+          print(candidates[0][2])
+          PY
+          )
+          echo "Download: $MIHOMO_URL"
+          curl -L "$MIHOMO_URL" -o mihomo.gz
+          gunzip -f mihomo.gz
+          chmod +x mihomo
+          ./mihomo -v || true
+
+      - name: Generate YAML with real URL test
         env:
           MAX_NODES: "10"
           MIN_OUTPUT_NODES: "10"
+          URLTEST_POOL_NODES: "30"
+          REQUIRE_URL_TEST: "true"
+          MIHOMO_PATH: "./mihomo"
+          URL_TEST_URL: "https://www.gstatic.com/generate_204"
+          URL_TEST_EXPECTED_STATUS: "204,200,301,302"
+          URL_TEST_TIMEOUT_MS: "6000"
           FORCE_WS_ONLY: "true"
           REQUIRE_WS_UPGRADE: "true"
           PREFER_WS: "true"
           EARLY_STOP_GOOD_NODES: "true"
           TEST_BATCH_SIZE: "80"
           CANDIDATE_MULTIPLIER: "35"
-          CANDIDATE_MIN: "350"
-          RESERVE_POOL_NODES: "10"
+          CANDIDATE_MIN: "500"
+          RESERVE_POOL_NODES: "30"
           ATTEMPTS: "2"
           REQUIRE_SUCCESSES: "1"
           TCP_TIMEOUT: "2.0"
@@ -68,6 +101,7 @@ jobs:
           ANDROID_HEALTH_TIMEOUT_MS: "6000"
           OUTPUT_YAML: "openclash_auto.yaml"
           OUTPUT_CSV: "openclash_auto_report.csv"
+          OUTPUT_URLTEST_REPORT: "urltest_report.csv"
           OUTPUT_AKUN: "akun.txt"
           OUTPUT_MANUAL_AKUN: "akun_manual.txt"
           OUTPUT_MANUAL_SKIPPED: "manual_nodes_skipped.txt"
@@ -76,27 +110,35 @@ jobs:
         run: python generate_yaml.py
 
       - name: Validate generated YAML
+        shell: bash
         run: |
           python - <<'PY'
-          import sys, yaml
+          import yaml
           for path in ["openclash_auto.yaml", "openclash_android.yaml"]:
               with open(path, "r", encoding="utf-8") as f:
                   data = yaml.safe_load(f)
               if not isinstance(data, dict):
                   raise SystemExit(f"{path}: bukan YAML config dict")
-              names = {p.get("name") for p in data.get("proxies", []) if isinstance(p, dict)}
-              if len(names) != len([p for p in data.get("proxies", []) if isinstance(p, dict)]):
+              proxy_items = [p for p in data.get("proxies", []) if isinstance(p, dict)]
+              names = [p.get("name") for p in proxy_items]
+              if len(set(names)) != len(names):
                   raise SystemExit(f"{path}: nama proxy duplikat")
               groups = {g.get("name") for g in data.get("proxy-groups", []) if isinstance(g, dict)}
-              refs = names | groups | {"DIRECT", "REJECT", "GLOBAL"}
-              for g in data.get("proxy-groups", []):
+              refs = set(names) | groups | {"DIRECT", "REJECT", "GLOBAL"}
+              for g in data.get("proxy-groups", []) or []:
                   if not isinstance(g, dict):
                       continue
                   for ref in g.get("proxies", []) or []:
                       if ref not in refs:
                           raise SystemExit(f"{path}: proxy-group {g.get('name')} referensi hilang: {ref}")
-          print("YAML compatibility check OK")
+              if path == "openclash_android.yaml":
+                  for forbidden in ["rule-providers", "redir-port", "tproxy-port"]:
+                      if forbidden in data:
+                          raise SystemExit(f"{path}: tidak boleh punya {forbidden}")
+          print("YAML reference compatibility check OK")
           PY
+          ./mihomo -t -d . -f openclash_auto.yaml
+          ./mihomo -t -d . -f openclash_android.yaml
 
       - name: Commit updated YAML
         shell: bash
@@ -104,7 +146,7 @@ jobs:
           BRANCH="${GITHUB_REF_NAME}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
+          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv urltest_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."
             exit 0
