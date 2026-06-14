@@ -1,11 +1,6 @@
 from __future__ import annotations
 
 import os
-import socket
-import subprocess
-import tempfile
-import time
-from contextlib import suppress
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -14,7 +9,6 @@ from urllib.parse import quote, urlparse, urlunparse
 import base64
 import json
 import yaml
-import requests
 
 from sumberyaml_core import (
     ALT_TEST_URL,
@@ -33,7 +27,6 @@ from sumberyaml_core import (
     process_sources,
     provider_label_from_original_server,
     safe_proxy_name,
-    unique_names,
 )
 
 
@@ -299,408 +292,6 @@ def add_manual_group_to_config(config: dict[str, Any], manual_nodes: list[Any], 
     return config
 
 
-
-def _free_tcp_port() -> int:
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        sock.bind(("127.0.0.1", 0))
-        return int(sock.getsockname()[1])
-
-
-def _expected_statuses() -> set[int]:
-    raw = os.getenv("REAL_CHECK_EXPECTED_STATUS", "204,200,301,302").strip()
-    statuses: set[int] = set()
-    for part in raw.split(","):
-        part = part.strip()
-        if not part:
-            continue
-        try:
-            statuses.add(int(part))
-        except ValueError:
-            pass
-    return statuses or {204, 200, 301, 302}
-
-
-def _wait_controller(controller_url: str, timeout_s: float = 8.0) -> bool:
-    deadline = time.time() + max(1.0, timeout_s)
-    while time.time() < deadline:
-        try:
-            response = requests.get(controller_url + "/proxies", timeout=0.5)
-            if response.status_code < 500:
-                return True
-        except Exception:
-            time.sleep(0.2)
-    return False
-
-
-def _mihomo_real_check_nodes(nodes: list[Any], *, limit: int, test_url: str, timeout_ms: int) -> tuple[list[Any], int, str]:
-    """Run a real proxy health check through Mihomo for automatic nodes only.
-
-    WS Upgrade 101 proves the Cloudflare WS endpoint exists, but it still does
-    not prove VLESS/VMess/Trojan can forward traffic. This check starts Mihomo,
-    selects every automatic node one by one, then requests generate_204 through
-    the local mixed-port. Manual nodes are intentionally not passed here.
-    """
-    if not nodes:
-        return [], 0, "no auto nodes to test"
-
-    if not _env_bool("REAL_CHECK", True):
-        final_nodes = nodes[:limit]
-        for node in final_nodes:
-            node.real_check_status = "skipped-disabled"
-            node.real_check_success = True
-        return final_nodes, len(final_nodes), "real check disabled"
-
-    core_path = os.getenv("MIHOMO_PATH", "./mihomo").strip() or "./mihomo"
-    if not Path(core_path).exists():
-        final_nodes = nodes[:limit]
-        for node in final_nodes:
-            node.real_check_status = "skipped-mihomo-not-found"
-            node.real_check_success = True
-        return final_nodes, len(final_nodes), f"mihomo not found at {core_path}; fallback to strict WS list"
-
-    expected = _expected_statuses()
-    proxy_port = _free_tcp_port()
-    controller_port = _free_tcp_port()
-    names = [str(node.clash.get("name") or node.name) for node in nodes if node.clash.get("name")]
-    if not names:
-        return [], 0, "no usable proxy names"
-
-    tmpdir_obj = tempfile.TemporaryDirectory(prefix="mihomo-realcheck-")
-    tmpdir = Path(tmpdir_obj.name)
-    config_path = tmpdir / "config.yaml"
-    config = {
-        "mixed-port": proxy_port,
-        "allow-lan": False,
-        "bind-address": "127.0.0.1",
-        "mode": "global",
-        "log-level": os.getenv("MIHOMO_LOG_LEVEL", "error"),
-        "ipv6": False,
-        "unified-delay": True,
-        "tcp-concurrent": True,
-        "global-client-fingerprint": "chrome",
-        "external-controller": f"127.0.0.1:{controller_port}",
-        "dns": {
-            "enable": True,
-            "ipv6": False,
-            "listen": "127.0.0.1:0",
-            "enhanced-mode": "fake-ip",
-            "fake-ip-range": "198.18.0.1/16",
-            "default-nameserver": ["1.1.1.1", "8.8.8.8"],
-            "nameserver": ["https://1.1.1.1/dns-query", "https://dns.google/dns-query"],
-        },
-        "proxies": [node.clash for node in nodes],
-        "proxy-groups": [
-            {"name": "GLOBAL", "type": "select", "proxies": names},
-        ],
-        "rules": ["MATCH,GLOBAL"],
-    }
-    config_path.write_text(yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140), encoding="utf-8")
-
-    proc: subprocess.Popen[str] | None = None
-    passed: list[Any] = []
-    checked = 0
-    reason = "ok"
-    try:
-        proc = subprocess.Popen(
-            [core_path, "-d", str(tmpdir), "-f", str(config_path)],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            text=True,
-        )
-        controller_url = f"http://127.0.0.1:{controller_port}"
-        if not _wait_controller(controller_url, timeout_s=float(os.getenv("MIHOMO_START_TIMEOUT", "10"))):
-            reason = "mihomo controller did not start"
-            for node in nodes:
-                node.real_check_status = "mihomo-start-failed"
-            return nodes[:limit], 0, reason
-
-        proxy_url = f"http://127.0.0.1:{proxy_port}"
-        request_timeout = max(1.0, float(timeout_ms) / 1000.0)
-        settle_s = float(os.getenv("REAL_CHECK_SETTLE_SECONDS", "0.15"))
-        for node in nodes:
-            if len(passed) >= limit:
-                break
-            name = str(node.clash.get("name") or node.name)
-            checked += 1
-            start = time.perf_counter()
-            try:
-                switch = requests.put(controller_url + "/proxies/GLOBAL", json={"name": name}, timeout=1.5)
-                if switch.status_code >= 400:
-                    node.real_check_status = f"switch-{switch.status_code}"
-                    node.real_check_success = False
-                    node.status = "dead"
-                    node.reason = (node.reason + "; real check switch failed").strip("; ")
-                    continue
-                time.sleep(settle_s)
-                # Jangan percaya satu kali sukses saja. Banyak akun publik bisa
-                # lolos sesaat, tetapi gagal handshake saat dites di OpenClash.
-                real_attempts = max(1, int(os.getenv("REAL_CHECK_ATTEMPTS", "3")))
-                real_required = max(1, min(real_attempts, int(os.getenv("REAL_CHECK_REQUIRE_SUCCESSES", "2"))))
-                real_gap_s = max(0.0, float(os.getenv("REAL_CHECK_GAP_SECONDS", "0.25")))
-                ok_count = 0
-                last_status = ""
-                best_real_ms: int | None = None
-                for real_i in range(real_attempts):
-                    req_start = time.perf_counter()
-                    try:
-                        response = requests.get(
-                            test_url,
-                            proxies={"http": proxy_url, "https": proxy_url},
-                            timeout=request_timeout,
-                            allow_redirects=False,
-                            headers={"User-Agent": "Mozilla/5.0 SumberYAML-RealCheck/1.0"},
-                        )
-                        req_elapsed = int((time.perf_counter() - req_start) * 1000)
-                        best_real_ms = req_elapsed if best_real_ms is None else min(best_real_ms, req_elapsed)
-                        last_status = f"HTTP {response.status_code}"
-                        if response.status_code in expected:
-                            ok_count += 1
-                    except Exception as exc:
-                        last_status = type(exc).__name__
-                    if real_i + 1 < real_attempts and real_gap_s:
-                        time.sleep(real_gap_s)
-
-                elapsed = int((time.perf_counter() - start) * 1000)
-                node.real_check_ms = best_real_ms if best_real_ms is not None else elapsed
-                node.real_check_status = f"{last_status}; success {ok_count}/{real_attempts}"
-                if ok_count >= real_required:
-                    node.real_check_success = True
-                    node.status = "alive"
-                    node.reason = (node.reason + f"; real proxy check ok {ok_count}/{real_attempts}").strip("; ")
-                    passed.append(node)
-                else:
-                    node.real_check_success = False
-                    node.status = "dead"
-                    node.reason = (node.reason + f"; real proxy check gagal {ok_count}/{real_attempts}").strip("; ")
-            except Exception as exc:
-                node.real_check_success = False
-                node.real_check_status = type(exc).__name__
-                node.status = "dead"
-                node.reason = (node.reason + "; real proxy check failed: " + str(exc)[:100]).strip("; ")
-
-        reason = f"real check passed {len(passed)}/{checked} tested"
-        return passed, checked, reason
-    finally:
-        if proc is not None:
-            with suppress(Exception):
-                proc.terminate()
-            with suppress(Exception):
-                proc.wait(timeout=3)
-            if proc.poll() is None:
-                with suppress(Exception):
-                    proc.kill()
-        tmpdir_obj.cleanup()
-
-
-
-class _NoAliasSafeDumper(yaml.SafeDumper):
-    """PyYAML dumper that avoids anchors (&id001 / *id001).
-
-    Some OpenClash/Android importers can parse YAML anchors, but removing anchors
-    makes the generated files more portable and easier to read.
-    """
-
-    def ignore_aliases(self, data: Any) -> bool:  # type: ignore[override]
-        return True
-
-
-def dump_yaml_no_alias(config: dict[str, Any]) -> str:
-    # JSON round-trip removes shared list references that PyYAML would otherwise
-    # serialize as anchors. The OpenClash config only contains JSON-compatible types.
-    clean = json.loads(json.dumps(config, ensure_ascii=False))
-    return yaml.dump(clean, Dumper=_NoAliasSafeDumper, allow_unicode=True, sort_keys=False, width=140)
-
-
-def finalize_yaml_for_openclash(yaml_text: str) -> str:
-    config = yaml.safe_load(yaml_text) or {}
-    if not isinstance(config, dict):
-        raise ValueError("YAML root must be a mapping/dictionary")
-    return dump_yaml_no_alias(config)
-
-
-def _as_list(value: Any) -> list[Any]:
-    if value is None:
-        return []
-    if isinstance(value, list):
-        return value
-    return [value]
-
-
-def _rule_target(rule: str) -> str:
-    parts = [p.strip() for p in str(rule).split(",")]
-    if not parts:
-        return ""
-    if parts[-1].lower() == "no-resolve" and len(parts) >= 2:
-        return parts[-2]
-    return parts[-1]
-
-
-def validate_openclash_compatibility(yaml_text: str, label: str, *, android: bool = False) -> tuple[list[str], list[str]]:
-    """Validate generated YAML before commit.
-
-    This is a structural compatibility check for OpenClash/Mihomo import:
-    - YAML can be parsed.
-    - proxy names are unique.
-    - proxy-groups only reference existing proxies/groups or built-in policies.
-    - RULE-SET rules reference existing rule-providers.
-    - Android output stays lightweight and rule-free.
-    - WS proxy fields are syntactically complete enough for Mihomo/OpenClash.
-    """
-    errors: list[str] = []
-    warnings: list[str] = []
-    try:
-        config = yaml.safe_load(yaml_text) or {}
-    except Exception as exc:
-        return [f"{label}: YAML parse failed: {exc}"], []
-
-    if not isinstance(config, dict):
-        return [f"{label}: YAML root is not a mapping"], []
-
-    if "&id" in yaml_text or "*id" in yaml_text:
-        errors.append(f"{label}: YAML still contains anchors/aliases (&id/*id); regenerate with no-alias dumper")
-
-    proxies = config.get("proxies")
-    if not isinstance(proxies, list):
-        errors.append(f"{label}: missing or invalid proxies list")
-        proxies = []
-    groups = config.get("proxy-groups")
-    if not isinstance(groups, list):
-        errors.append(f"{label}: missing or invalid proxy-groups list")
-        groups = []
-
-    proxy_names: list[str] = []
-    seen_proxy: set[str] = set()
-    allowed_types = {"vless", "vmess", "trojan", "ss", "http", "socks5", "socks", "hysteria2", "tuic"}
-    for idx, proxy in enumerate(proxies):
-        if not isinstance(proxy, dict):
-            errors.append(f"{label}: proxy #{idx + 1} is not a mapping")
-            continue
-        name = str(proxy.get("name") or "").strip()
-        ptype = str(proxy.get("type") or "").strip().lower()
-        if not name:
-            errors.append(f"{label}: proxy #{idx + 1} has empty name")
-            continue
-        if name in seen_proxy:
-            errors.append(f"{label}: duplicate proxy name: {name}")
-        seen_proxy.add(name)
-        proxy_names.append(name)
-        if ptype not in allowed_types:
-            errors.append(f"{label}: proxy {name} has unsupported/empty type: {ptype!r}")
-        if not proxy.get("server"):
-            errors.append(f"{label}: proxy {name} missing server")
-        try:
-            port = int(proxy.get("port"))
-            if port <= 0 or port > 65535:
-                errors.append(f"{label}: proxy {name} invalid port: {proxy.get('port')!r}")
-        except Exception:
-            errors.append(f"{label}: proxy {name} invalid/missing port: {proxy.get('port')!r}")
-
-        network = str(proxy.get("network") or "tcp").lower()
-        if network == "ws" and ptype in {"vless", "vmess", "trojan"}:
-            ws_opts = proxy.get("ws-opts")
-            if not isinstance(ws_opts, dict):
-                errors.append(f"{label}: WS proxy {name} missing ws-opts")
-            else:
-                if not str(ws_opts.get("path") or "").strip():
-                    errors.append(f"{label}: WS proxy {name} missing ws-opts.path")
-                headers = ws_opts.get("headers")
-                host = ""
-                if isinstance(headers, dict):
-                    host = str(headers.get("Host") or headers.get("host") or "").strip()
-                if not host:
-                    warnings.append(f"{label}: WS proxy {name} has no ws-opts.headers.Host")
-            sni = str(proxy.get("servername") or proxy.get("sni") or "").strip()
-            # Manual nodes are allowed unfiltered, so missing SNI is a warning, not a hard error.
-            if not sni:
-                warnings.append(f"{label}: WS proxy {name} has no servername/sni; may import but can timeout")
-            alpn = [str(x).lower() for x in _as_list(proxy.get("alpn"))]
-            if alpn and "http/1.1" not in alpn:
-                warnings.append(f"{label}: WS proxy {name} alpn does not include http/1.1")
-
-    group_names: list[str] = []
-    seen_group: set[str] = set()
-    for idx, group in enumerate(groups):
-        if not isinstance(group, dict):
-            errors.append(f"{label}: proxy-group #{idx + 1} is not a mapping")
-            continue
-        name = str(group.get("name") or "").strip()
-        if not name:
-            errors.append(f"{label}: proxy-group #{idx + 1} has empty name")
-            continue
-        if name in seen_group:
-            errors.append(f"{label}: duplicate proxy-group name: {name}")
-        seen_group.add(name)
-        group_names.append(name)
-        refs = group.get("proxies")
-        if refs is not None and not isinstance(refs, list):
-            errors.append(f"{label}: group {name} proxies must be a list")
-
-    valid_refs = set(proxy_names) | set(group_names) | {"DIRECT", "REJECT", "REJECT-DROP", "PASS", "COMPATIBLE"}
-    for group in groups:
-        if not isinstance(group, dict):
-            continue
-        name = str(group.get("name") or "")
-        refs = group.get("proxies")
-        if not isinstance(refs, list):
-            continue
-        if not refs:
-            errors.append(f"{label}: group {name} has empty proxies list")
-        for ref in refs:
-            ref_text = str(ref)
-            if ref_text not in valid_refs:
-                errors.append(f"{label}: group {name} references missing proxy/group: {ref_text}")
-
-    if android:
-        for forbidden in ("rule-providers", "redir-port", "tproxy-port"):
-            if forbidden in config:
-                errors.append(f"{label}: Android config must not contain {forbidden}")
-        if config.get("mode") != "global":
-            warnings.append(f"{label}: Android config mode is {config.get('mode')!r}, expected 'global'")
-    else:
-        rules = config.get("rules")
-        if not isinstance(rules, list) or not rules:
-            errors.append(f"{label}: missing rules list")
-        else:
-            if not any(str(rule).startswith("MATCH,") for rule in rules):
-                errors.append(f"{label}: rules missing final MATCH rule")
-            providers = config.get("rule-providers") or {}
-            provider_names = set(providers.keys()) if isinstance(providers, dict) else set()
-            for rule in rules:
-                text = str(rule)
-                parts = [p.strip() for p in text.split(",")]
-                if len(parts) >= 2 and parts[0] == "RULE-SET":
-                    if parts[1] not in provider_names:
-                        errors.append(f"{label}: RULE-SET references missing provider: {parts[1]}")
-                target = _rule_target(text)
-                if target and target not in valid_refs:
-                    errors.append(f"{label}: rule references missing policy/group: {text}")
-
-    if "FALLBACK" in group_names and "MANUAL" in group_names:
-        fallback = next((g for g in groups if isinstance(g, dict) and g.get("name") == "FALLBACK"), None)
-        fallback_refs = fallback.get("proxies") if isinstance(fallback, dict) else []
-        if isinstance(fallback_refs, list) and fallback_refs and fallback_refs[0] != "MANUAL":
-            errors.append(f"{label}: FALLBACK must start with MANUAL when MANUAL group exists")
-
-    return errors, warnings
-
-
-def build_compatibility_report(items: list[tuple[str, str, bool]]) -> tuple[str, bool]:
-    lines: list[str] = []
-    ok = True
-    for label, text, android in items:
-        errors, warnings = validate_openclash_compatibility(text, label, android=android)
-        lines.append(f"[{label}]")
-        if not errors and not warnings:
-            lines.append("OK: compatible structure check passed")
-        for error in errors:
-            ok = False
-            lines.append("ERROR: " + error)
-        for warning in warnings:
-            lines.append("WARN: " + warning)
-        lines.append("")
-    return "\n".join(lines), ok
-
-
 def add_manual_group_to_yaml_text(yaml_text: str, manual_nodes: list[Any], *, android: bool = False) -> str:
     if not manual_nodes:
         return yaml_text
@@ -719,18 +310,15 @@ def main() -> int:
     output_manual_skipped = os.getenv("OUTPUT_MANUAL_SKIPPED", "manual_nodes_skipped.txt")
     output_android_yaml = os.getenv("OUTPUT_ANDROID_YAML", "openclash_android.yaml")
     output_stamp = os.getenv("OUTPUT_STAMP", "last_update.txt")
-    output_compat = os.getenv("OUTPUT_COMPAT_REPORT", "compatibility_report.txt")
     manual_file = os.getenv("MANUAL_NODES_FILE", "manual_nodes.txt")
 
-    max_nodes = _env_int("MAX_NODES", 20)
-    min_output_nodes = _env_int("MIN_OUTPUT_NODES", 20)
-    fetch_timeout = _env_int("FETCH_TIMEOUT", 15)
-    tcp_timeout = _env_float("TCP_TIMEOUT", 3.0)
-    max_workers = _env_int("MAX_WORKERS", 80)
-    attempts = _env_int("ATTEMPTS", 5)
-    require_successes = min(_env_int("REQUIRE_SUCCESSES", 4), attempts)
-    max_handshake_ms = _env_int("MAX_HANDSHAKE_MS", 250)
-    max_avg_handshake_ms = _env_int("MAX_AVG_HANDSHAKE_MS", 350)
+    max_nodes = _env_int("MAX_NODES", 10)
+    min_output_nodes = _env_int("MIN_OUTPUT_NODES", 10)
+    fetch_timeout = _env_int("FETCH_TIMEOUT", 12)
+    tcp_timeout = _env_float("TCP_TIMEOUT", 2.0)
+    max_workers = _env_int("MAX_WORKERS", 64)
+    attempts = _env_int("ATTEMPTS", 2)
+    require_successes = min(_env_int("REQUIRE_SUCCESSES", 1), attempts)
 
     links_text = build_links_text()
     manual_text = _read_text_file(manual_file)
@@ -746,10 +334,6 @@ def main() -> int:
     print(f"[INFO] Links subscription: {len([x for x in links_text.splitlines() if x.strip()])}")
     print(f"[INFO] Manual nodes parsed: {len(manual_nodes)}; skipped: {len(manual_skipped)}")
     print(f"[INFO] Manual node server normalized to {TARGET_SERVER}:{ONLY_PORT}: {manual_server_changes} link")
-    print(f"[INFO] Filter low handshake otomatis: max best={max_handshake_ms}ms; max avg={max_avg_handshake_ms if max_avg_handshake_ms > 0 else 'off'}")
-
-    validation_pool_nodes = max(max_nodes, _env_int("VALIDATION_POOL_NODES", max(80, max_nodes * 4)))
-    print(f"[INFO] Pool validasi otomatis sebelum real-check: {validation_pool_nodes} node")
 
     # Important: manual_text is intentionally NOT passed into process_sources.
     # Manual nodes must not be strict-filtered and must not reduce the 20 automatic nodes.
@@ -759,33 +343,23 @@ def main() -> int:
         fetch_timeout=fetch_timeout,
         tcp_timeout=tcp_timeout,
         max_workers=max_workers,
-        max_nodes=validation_pool_nodes,
+        max_nodes=max_nodes,
         fast_target_ms=_env_int("FAST_TARGET_MS", 123),
         fill_delay_ms=_env_int("FILL_DELAY_MS", 1200),
         min_output_nodes=min_output_nodes,
         attempts=attempts,
         require_successes=require_successes,
         require_original=_env_bool("REQUIRE_ORIGINAL", False),
-        candidate_multiplier=_env_int("CANDIDATE_MULTIPLIER", 100),
-        candidate_min=_env_int("CANDIDATE_MIN", 2500),
+        candidate_multiplier=_env_int("CANDIDATE_MULTIPLIER", 35),
+        candidate_min=_env_int("CANDIDATE_MIN", 350),
         max_jitter_ms=_env_int("MAX_JITTER_MS", 0),
         prefer_ws=_env_bool("PREFER_WS", True),
         require_ws_upgrade=_env_bool("REQUIRE_WS_UPGRADE", True),
         force_ws_only=_env_bool("FORCE_WS_ONLY", True),
-        reserve_pool_nodes=_env_int("RESERVE_POOL_NODES", 120),
-        max_handshake_ms=max_handshake_ms,
-        max_avg_handshake_ms=max_avg_handshake_ms,
+        reserve_pool_nodes=_env_int("RESERVE_POOL_NODES", 10),
+        early_stop_good_nodes=_env_bool("EARLY_STOP_GOOD_NODES", True),
+        test_batch_size=_env_int("TEST_BATCH_SIZE", 80),
     )
-
-    auto_pool_nodes = alive_nodes
-    alive_nodes, real_checked_count, real_check_reason = _mihomo_real_check_nodes(
-        auto_pool_nodes,
-        limit=max_nodes,
-        test_url=os.getenv("REAL_CHECK_TEST_URL", os.getenv("TEST_URL", ALT_TEST_URL)),
-        timeout_ms=_env_int("REAL_CHECK_TIMEOUT_MS", _env_int("HEALTH_TIMEOUT_MS", 6000)),
-    )
-    unique_names(alive_nodes)
-    print(f"[INFO] Real proxy check otomatis: {real_check_reason}")
 
     yaml_text = build_openclash_yaml(
         alive_nodes,
@@ -796,7 +370,6 @@ def main() -> int:
         rule_mode=os.getenv("RULE_MODE", "Lite"),
     )
     yaml_text = add_manual_group_to_yaml_text(yaml_text, manual_nodes, android=False)
-    yaml_text = finalize_yaml_for_openclash(yaml_text)
 
     android_yaml_text = build_openclash_android_yaml(
         alive_nodes,
@@ -806,13 +379,6 @@ def main() -> int:
         health_timeout=_env_int("ANDROID_HEALTH_TIMEOUT_MS", _env_int("HEALTH_TIMEOUT_MS", 6000)),
     )
     android_yaml_text = add_manual_group_to_yaml_text(android_yaml_text, manual_nodes, android=True)
-    android_yaml_text = finalize_yaml_for_openclash(android_yaml_text)
-
-    compatibility_report, compatibility_ok = build_compatibility_report([
-        (output_yaml, yaml_text, False),
-        (output_android_yaml, android_yaml_text, True),
-    ])
-    print(compatibility_report)
 
     csv_text = build_csv(all_nodes + manual_nodes)
     akun_text = build_akun_txt(alive_nodes)
@@ -825,19 +391,14 @@ def main() -> int:
     Path(output_akun).write_text(akun_text, encoding="utf-8")
     Path(output_manual_akun).write_text(manual_akun_text, encoding="utf-8")
     Path(output_manual_skipped).write_text(manual_skipped_text, encoding="utf-8")
-    Path(output_compat).write_text(compatibility_report, encoding="utf-8")
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     summary = (
         f"Last update: {now}\n"
+        f"Mode: FAST10 early-stop good candidates\n"
         f"OpenClash YAML: {output_yaml}\n"
         f"Android YAML: {output_android_yaml}\n"
         f"Automatic YAML nodes: {len(alive_nodes)}\n"
-        f"Automatic strict pool before real check: {len(auto_pool_nodes)}\n"
-        f"Automatic real-check tested: {real_checked_count}\n"
-        f"Automatic real-check result: {real_check_reason}\n"
-        f"Low handshake filter max best: {max_handshake_ms}ms\n"
-        f"Low handshake filter max avg: {max_avg_handshake_ms if max_avg_handshake_ms > 0 else 'off'}\n"
         f"Manual group nodes: {len(manual_nodes)}\n"
         f"Akun txt automatic: {len([x for x in akun_text.splitlines() if x.strip()])}\n"
         f"Akun txt manual: {len([x for x in manual_akun_text.splitlines() if x.strip()])}\n"

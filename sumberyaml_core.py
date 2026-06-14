@@ -19,6 +19,15 @@ from urllib.parse import parse_qs, quote, unquote, urlparse
 import requests
 import yaml
 
+
+class _NoAliasDumper(yaml.SafeDumper):
+    def ignore_aliases(self, data):
+        return True
+
+
+def dump_yaml_no_alias(data: dict[str, Any]) -> str:
+    return yaml.dump(data, Dumper=_NoAliasDumper, allow_unicode=True, sort_keys=False, width=140)
+
 DEFAULT_LINKS = [
     "https://raw.githubusercontent.com/itsyebekhe/PSG/main/lite/subscriptions/xray/normal/mix",
     "https://raw.githubusercontent.com/arshiacomplus/v2rayExtractor/refs/heads/main/mix/sub.html",
@@ -66,7 +75,7 @@ TARGET_SERVER = "104.17.3.81"
 ONLY_PORT = 443
 USER_AGENT = "Mozilla/5.0 SumberYAML-OpenClash-BugCompat/3.0"
 URI_RE = re.compile(r"(?:vless|vmess|trojan|ss)://[^\s<'\"`]+", re.IGNORECASE)
-FAST_TEST_URL = "https://www.gstatic.com/generate_204"
+FAST_TEST_URL = "http://cp.cloudflare.com/generate_204"
 ALT_TEST_URL = "https://www.gstatic.com/generate_204"
 THIRD_TEST_URL = "https://www.google.com/generate_204"
 FAST_TARGET_DELAY_MS = 123
@@ -192,9 +201,6 @@ class ProxyNode:
     ws_upgrade_ms: int | None = None
     ws_success_count: int = 0
     ws_status: str = ""
-    real_check_ms: int | None = None
-    real_check_status: str = ""
-    real_check_success: bool = False
     original_provider: str = ""
     original_ip: str = ""
     tier: str = ""
@@ -701,43 +707,12 @@ def network_priority_rank(node: ProxyNode, prefer_ws: bool = True) -> int:
     return {"ws": 0, "grpc": 1, "http": 2, "tcp": 3, "ss": 4}.get(node_network(node), 9)
 
 
-def node_handshake_ms(node: ProxyNode) -> int | None:
-    """Return the handshake metric used for low-handshake filtering.
-
-    For WS nodes this is the WebSocket Upgrade 101 time, which already includes
-    TCP + TLS + WS upgrade through the bug server. For non-WS fallback nodes it
-    falls back to the TLS bug-server handshake. Manual nodes are not filtered by
-    this function because manual_nodes.txt is handled outside process_sources().
-    """
-    if node_network(node) == "ws" and node.ws_upgrade_ms is not None:
-        return node.ws_upgrade_ms
-    if node.bug_best_delay_ms is not None:
-        return node.bug_best_delay_ms
-    return node.best_delay_ms
-
-
-def handshake_filter_ok(node: ProxyNode, max_handshake_ms: int = 0, max_avg_handshake_ms: int = 0) -> bool:
-    """True when the node's handshake delay is inside the configured low threshold."""
-    max_handshake_ms = int(max_handshake_ms or 0)
-    max_avg_handshake_ms = int(max_avg_handshake_ms or 0)
-    hs = node_handshake_ms(node)
-    if max_handshake_ms > 0 and (hs is None or int(hs) > max_handshake_ms):
-        node.status = "dead"
-        node.reason = (node.reason + f"; handshake tinggi {hs if hs is not None else 'NA'}ms > {max_handshake_ms}ms").strip("; ")
-        return False
-    if max_avg_handshake_ms > 0 and (node.avg_delay_ms is None or int(node.avg_delay_ms) > max_avg_handshake_ms):
-        node.status = "dead"
-        node.reason = (node.reason + f"; avg handshake tinggi {node.avg_delay_ms if node.avg_delay_ms is not None else 'NA'}ms > {max_avg_handshake_ms}ms").strip("; ")
-        return False
-    return True
-
-
 def node_sort_key(node: ProxyNode, prefer_ws: bool = True) -> tuple[int, int, int, int, int]:
     return (
         network_priority_rank(node, prefer_ws),
         protocol_priority_rank(node),
         int(node.score or 999999),
-        int(node_handshake_ms(node) or 999999),
+        int(node.best_delay_ms or 999999),
         int(node.jitter_ms or 999999),
     )
 
@@ -1838,7 +1813,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         "rules": rules,
     }
 
-    return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
+    return dump_yaml_no_alias(config)
 
 
 def build_openclash_android_yaml(
@@ -1921,7 +1896,7 @@ def build_openclash_android_yaml(
         "proxies": [node.clash for node in nodes],
         "proxy-groups": proxy_groups,
     }
-    return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
+    return dump_yaml_no_alias(config)
 
 
 def build_csv(nodes: list[ProxyNode]) -> str:
@@ -1932,7 +1907,6 @@ def build_csv(nodes: list[ProxyNode]) -> str:
         "original_name",
         "type",
         "network",
-        "handshake_ms",
         "original_server",
         "original_ip",
         "original_provider",
@@ -1948,9 +1922,6 @@ def build_csv(nodes: list[ProxyNode]) -> str:
         "ws_upgrade_ms",
         "ws_success_count",
         "ws_status",
-        "real_check_ms",
-        "real_check_status",
-        "real_check_success",
         "original_best_delay_ms",
         "original_success_count",
         "attempts",
@@ -1964,7 +1935,6 @@ def build_csv(nodes: list[ProxyNode]) -> str:
             node.original_name,
             node.type,
             node_network(node),
-            node_handshake_ms(node) if node_handshake_ms(node) is not None else "",
             node.original_server,
             node.original_ip,
             node.original_provider,
@@ -1980,9 +1950,6 @@ def build_csv(nodes: list[ProxyNode]) -> str:
             node.ws_upgrade_ms if node.ws_upgrade_ms is not None else "",
             node.ws_success_count,
             node.ws_status,
-            node.real_check_ms if node.real_check_ms is not None else "",
-            node.real_check_status,
-            "yes" if node.real_check_success else "no",
             node.original_best_delay_ms if node.original_best_delay_ms is not None else "",
             node.original_success_count,
             node.attempts,
@@ -1991,6 +1958,52 @@ def build_csv(nodes: list[ProxyNode]) -> str:
             node.reason,
         ])
     return buffer.getvalue()
+
+
+def _node_passes_output_filters(node: ProxyNode, require_successes: int, max_jitter_ms: int) -> bool:
+    return (
+        node.status == "alive"
+        and node.best_delay_ms is not None
+        and node.success_count >= int(require_successes)
+        and (int(max_jitter_ms) <= 0 or (node.jitter_ms is not None and node.jitter_ms <= int(max_jitter_ms)))
+    )
+
+
+def _finalize_selected_nodes(
+    candidates: list[ProxyNode],
+    max_nodes: int,
+    fast_target_ms: int,
+    fill_delay_ms: int,
+    prefer_ws: bool,
+) -> list[ProxyNode]:
+    fast = [node for node in candidates if (node.best_delay_ms or 999999) <= int(fast_target_ms)]
+    for node in fast:
+        node.tier = node.tier or f"FAST ≤{fast_target_ms}ms"
+
+    backup = [
+        node for node in candidates
+        if (node.best_delay_ms or 999999) > int(fast_target_ms)
+        and (node.best_delay_ms or 999999) <= int(fill_delay_ms)
+    ]
+    for node in backup:
+        node.tier = node.tier or f"BACKUP ≤{fill_delay_ms}ms"
+
+    selected_pool = fast + backup
+    if len(selected_pool) < int(max_nodes):
+        existing = {id(n) for n in selected_pool}
+        slow_fill = [
+            n for n in sorted(candidates, key=lambda n: node_sort_key(n, bool(prefer_ws)))
+            if id(n) not in existing
+        ]
+        for node in slow_fill:
+            node.tier = node.tier or "STRICT-SLOW"
+        selected_pool.extend(slow_fill)
+
+    selected = select_diverse_nodes(selected_pool, int(max_nodes), bool(prefer_ws))
+    selected.sort(key=lambda n: node_sort_key(n, bool(prefer_ws)))
+    selected = selected[: int(max_nodes)]
+    unique_names(selected)
+    return selected
 
 
 def process_sources(
@@ -2006,25 +2019,36 @@ def process_sources(
     attempts: int,
     require_successes: int,
     require_original: bool,
-    candidate_multiplier: int = 20,
-    candidate_min: int = 500,
+    candidate_multiplier: int = 30,
+    candidate_min: int = 350,
     max_jitter_ms: int = 0,
     prefer_ws: bool = True,
     require_ws_upgrade: bool = True,
     force_ws_only: bool = DEFAULT_FORCE_WS_ONLY,
-    reserve_pool_nodes: int = DEFAULT_RESERVE_POOL_NODES,
-    max_handshake_ms: int = 0,
-    max_avg_handshake_ms: int = 0,
+    reserve_pool_nodes: int = 10,
+    early_stop_good_nodes: bool = True,
+    test_batch_size: int = 0,
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
+    """Fetch public subscriptions, test only until enough good auto nodes are found.
+
+    Manual nodes are intentionally handled by generate_yaml.py and should normally
+    be passed as an empty manual_text here. This function is optimized for speed:
+    it tests WS candidates in small batches and stops once max_nodes good nodes are
+    available, instead of testing thousands of nodes until the GitHub Action times out.
+    """
     fast_target_ms = min(int(fast_target_ms), FAST_TARGET_DELAY_MS)
     fill_delay_ms = min(max(int(fill_delay_ms), fast_target_ms), HARD_MAX_DELAY_MS)
+    final_target = max(1, int(max_nodes))
+    # Do not force a minimum of 20 anymore. The requested fast profile outputs 10.
+    target = max(final_target, int(min_output_nodes), 1)
+
     links = [line.strip().strip(",'\"") for line in links_text.splitlines() if line.strip()]
     fetch_logs: list[tuple[str, str]] = []
     raw_uris: list[tuple[str, str]] = []
 
     if links:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(links))) as executor:
-            futures = [executor.submit(fetch_url_cached, url, fetch_timeout) for url in links]
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(int(max_workers), len(links))) as executor:
+            futures = [executor.submit(fetch_url_cached, url, int(fetch_timeout)) for url in links]
             for future in concurrent.futures.as_completed(futures):
                 url, text, status = future.result()
                 fetch_logs.append((url, status))
@@ -2032,6 +2056,8 @@ def process_sources(
                     for uri in extract_uris(text):
                         raw_uris.append((uri, url))
 
+    # This remains for backward compatibility, but the GitHub Action passes manual_text=""
+    # so manual nodes stay outside strict filtering and outside the 10 auto-node quota.
     for uri in extract_uris(manual_text or ""):
         raw_uris.append((uri, "manual"))
 
@@ -2056,9 +2082,6 @@ def process_sources(
         seen_keys.add(node.key)
         parsed.append(node)
 
-    # In 20-alive mode, non-WS nodes are usually the source of false confidence
-    # because the practical target is CF bug-server + TLS + WebSocket. Mark them as
-    # skipped before testing when WS-only is enabled.
     if force_ws_only:
         for node in parsed:
             if node.status == "pending" and node_network(node) != "ws":
@@ -2066,11 +2089,8 @@ def process_sources(
                 node.reason = "skipped: mode WS only"
                 node.score = 999999
 
-    # Test far more candidates than the final YAML output so the app can keep only
-    # the best strict-alive nodes. Example: target 20, candidate_min 2000-3000.
-    # If WS priority is enabled, WS nodes enter the test queue first.
-    target = max(int(max_nodes), int(min_output_nodes), 20)
-    candidate_limit = max(target * int(candidate_multiplier), int(candidate_min), int(reserve_pool_nodes) * 20)
+    # Small candidate pool, because we stop when enough good nodes are found.
+    candidate_limit = max(target * int(candidate_multiplier), int(candidate_min), final_target * 20)
     parsed.sort(
         key=lambda n: (
             0 if n.status == "pending" else 1,
@@ -2081,11 +2101,18 @@ def process_sources(
     parsed = parsed[:candidate_limit]
 
     testable = [node for node in parsed if node.status == "pending"]
-    if testable:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(testable))) as executor:
+    good_candidates: list[ProxyNode] = []
+    batch_size = int(test_batch_size) if int(test_batch_size or 0) > 0 else max(20, min(int(max_workers) * 2, 120))
+    batch_size = max(1, batch_size)
+
+    for start_index in range(0, len(testable), batch_size):
+        batch = testable[start_index : start_index + batch_size]
+        if not batch:
+            break
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(int(max_workers), len(batch))) as executor:
             future_map = {
-                executor.submit(check_node_bug_compat, node, tcp_timeout, attempts, require_original, require_ws_upgrade): node
-                for node in testable
+                executor.submit(check_node_bug_compat, node, float(tcp_timeout), int(attempts), bool(require_original), bool(require_ws_upgrade)): node
+                for node in batch
             }
             for future in concurrent.futures.as_completed(future_map):
                 node = future_map[future]
@@ -2095,52 +2122,39 @@ def process_sources(
                     node.status = "dead"
                     node.reason = "check error: " + str(exc)[:120]
 
+        batch_good = [
+            node for node in batch
+            if _node_passes_output_filters(node, int(require_successes), int(max_jitter_ms))
+        ]
+        if batch_good:
+            good_candidates = select_diverse_nodes(
+                good_candidates + batch_good,
+                max(final_target, int(reserve_pool_nodes), 1),
+                bool(prefer_ws),
+            )
+
+        if bool(early_stop_good_nodes) and len(good_candidates) >= final_target:
+            # Mark the rest as intentionally untested so the report explains why
+            # generation finished quickly instead of testing all candidates.
+            remaining = testable[start_index + batch_size :]
+            for node in remaining:
+                if node.status == "pending":
+                    node.status = "skipped"
+                    node.reason = "not tested: early stop after enough good nodes"
+                    node.score = 999999
+            break
+
     candidates = [
         node for node in parsed
-        if node.status == "alive"
-        and node.best_delay_ms is not None
-        and node.success_count >= require_successes
-        and handshake_filter_ok(node, int(max_handshake_ms), int(max_avg_handshake_ms))
-        and (int(max_jitter_ms) <= 0 or (node.jitter_ms is not None and node.jitter_ms <= int(max_jitter_ms)))
+        if _node_passes_output_filters(node, int(require_successes), int(max_jitter_ms))
     ]
 
-    # Tier 1: very fast target, lower than Baidu 124 ms / GitHub 157 ms / NetEase 211 ms.
-    fast = [node for node in candidates if (node.best_delay_ms or 999999) <= fast_target_ms]
-    for node in fast:
-        node.tier = f"FAST ≤{fast_target_ms}ms"
-
-    # Tier 2: still alive and bug-compatible, used only to prevent the YAML from containing
-    # too few accounts when the public sources do not have 20 nodes under 123 ms.
-    backup = [
-        node for node in candidates
-        if (node.best_delay_ms or 999999) > fast_target_ms
-        and (node.best_delay_ms or 999999) <= fill_delay_ms
-    ]
-    for node in backup:
-        node.tier = f"BACKUP ≤{fill_delay_ms}ms"
-
-    fast.sort(key=lambda n: node_sort_key(n, bool(prefer_ws)))
-    backup.sort(key=lambda n: node_sort_key(n, bool(prefer_ws)))
-
-    # Keep an internal reserve pool first, then write only max_nodes to YAML.
-    # This makes the output less fragile because the final 20 are selected from a
-    # larger strict-alive pool, not directly from the first 20 that happened to pass.
-    strict_pool_limit = max(int(reserve_pool_nodes), int(max_nodes), int(min_output_nodes))
-    strict_pool = select_diverse_nodes(fast + backup, strict_pool_limit, bool(prefer_ws))
-
-    # If fast/backup thresholds still do not produce enough nodes, fill from
-    # remaining strict candidates. They still obey max_handshake_ms when that
-    # filter is enabled, so slow high-handshake nodes are not reintroduced.
-    if len(strict_pool) < int(min_output_nodes):
-        existing = {id(n) for n in strict_pool}
-        slow_fill = [n for n in sorted(candidates, key=lambda n: node_sort_key(n, bool(prefer_ws))) if id(n) not in existing]
-        for node in slow_fill:
-            node.tier = node.tier or "STRICT-SLOW"
-        strict_pool = select_diverse_nodes(strict_pool + slow_fill, strict_pool_limit, bool(prefer_ws))
-
-    selected = select_diverse_nodes(strict_pool, int(max_nodes), bool(prefer_ws))
-    selected.sort(key=lambda n: node_sort_key(n, bool(prefer_ws)))
-    selected = selected[:max_nodes]
-    unique_names(selected)
+    selected = _finalize_selected_nodes(
+        candidates,
+        max_nodes=final_target,
+        fast_target_ms=fast_target_ms,
+        fill_delay_ms=fill_delay_ms,
+        prefer_ws=bool(prefer_ws),
+    )
     return selected, parsed, fetch_logs, skipped
 

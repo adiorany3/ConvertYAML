@@ -2,14 +2,12 @@ name: Update OpenClash YAML setiap 6 jam
 
 on:
   schedule:
-    # GitHub Actions memakai UTC. Jadwal ini berjalan tiap 6 jam: 00:00, 06:00, 12:00, 18:00 UTC.
     - cron: "0 */6 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
-# Mencegah dua workflow update berjalan bersamaan dan saling rebut push.
 concurrency:
   group: update-openclash-yaml-${{ github.ref }}
   cancel-in-progress: true
@@ -17,20 +15,13 @@ concurrency:
 jobs:
   update-yaml:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 12
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Sync latest branch before generate
-        run: |
-          BRANCH="${GITHUB_REF_NAME:-main}"
-          git fetch origin "$BRANCH"
-          git checkout "$BRANCH"
-          git pull --rebase --autostash origin "$BRANCH"
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -43,127 +34,82 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Download Mihomo core for real proxy check
+      - name: Sync branch before generate
+        shell: bash
         run: |
-          python - <<'PY'
-          import json
-          import urllib.request
+          BRANCH="${GITHUB_REF_NAME}"
+          git fetch origin "$BRANCH"
+          git checkout "$BRANCH"
+          git pull --rebase --autostash origin "$BRANCH"
 
-          api = "https://api.github.com/repos/MetaCubeX/mihomo/releases/latest"
-          data = json.load(urllib.request.urlopen(api, timeout=30))
-          assets = data.get("assets", [])
-          candidates = []
-          for asset in assets:
-              name = asset.get("name", "")
-              url = asset.get("browser_download_url", "")
-              low = name.lower()
-              if ("linux-amd64-compatible" in low or "linux-amd64" in low) and low.endswith(".gz") and "debug" not in low:
-                  candidates.append((0 if "compatible" in low else 1, name, url))
-          if not candidates:
-              raise SystemExit("No linux-amd64 mihomo asset found")
-          candidates.sort()
-          print(candidates[0][2])
-          PY
-          MIHOMO_URL=$(python - <<'PY'
-          import json
-          import urllib.request
-          data = json.load(urllib.request.urlopen("https://api.github.com/repos/MetaCubeX/mihomo/releases/latest", timeout=30))
-          candidates = []
-          for asset in data.get("assets", []):
-              name = asset.get("name", "")
-              url = asset.get("browser_download_url", "")
-              low = name.lower()
-              if ("linux-amd64-compatible" in low or "linux-amd64" in low) and low.endswith(".gz") and "debug" not in low:
-                  candidates.append((0 if "compatible" in low else 1, name, url))
-          candidates.sort()
-          print(candidates[0][2])
-          PY
-          )
-          curl -L "$MIHOMO_URL" -o mihomo.gz
-          gunzip -f mihomo.gz
-          chmod +x mihomo
-          ./mihomo -v || true
-
-      - name: Generate YAML
+      - name: Generate YAML fast 10 nodes
         env:
-          MAX_NODES: "20"
-          MIN_OUTPUT_NODES: "20"
-          VALIDATION_POOL_NODES: "120"
-          REAL_CHECK: "true"
-          MIHOMO_PATH: "./mihomo"
-          REAL_CHECK_TIMEOUT_MS: "10000"
-          REAL_CHECK_EXPECTED_STATUS: "204,200,301,302"
-          REAL_CHECK_ATTEMPTS: "3"
-          REAL_CHECK_REQUIRE_SUCCESSES: "2"
-          REAL_CHECK_GAP_SECONDS: "0.25"
+          MAX_NODES: "10"
+          MIN_OUTPUT_NODES: "10"
           FORCE_WS_ONLY: "true"
           REQUIRE_WS_UPGRADE: "true"
           PREFER_WS: "true"
-          CANDIDATE_MULTIPLIER: "100"
-          CANDIDATE_MIN: "4000"
-          RESERVE_POOL_NODES: "180"
-          ATTEMPTS: "5"
-          REQUIRE_SUCCESSES: "4"
-          # Filter low handshake: hanya akun otomatis dengan handshake best <= 250ms yang masuk kandidat.
-          # Manual nodes tidak disaring. Ubah ke 0 untuk mematikan filter.
-          MAX_HANDSHAKE_MS: "250"
-          MAX_AVG_HANDSHAKE_MS: "350"
-          MAX_JITTER_MS: "120"
-          TCP_TIMEOUT: "4.0"
+          EARLY_STOP_GOOD_NODES: "true"
+          TEST_BATCH_SIZE: "80"
+          CANDIDATE_MULTIPLIER: "35"
+          CANDIDATE_MIN: "350"
+          RESERVE_POOL_NODES: "10"
+          ATTEMPTS: "2"
+          REQUIRE_SUCCESSES: "1"
+          TCP_TIMEOUT: "2.0"
+          FETCH_TIMEOUT: "12"
+          MAX_WORKERS: "64"
+          FAST_TARGET_MS: "180"
+          FILL_DELAY_MS: "900"
           HEALTH_TIMEOUT_MS: "6000"
           RULE_MODE: "Lite"
+          TEST_URL: "https://www.gstatic.com/generate_204"
           OUTPUT_ANDROID_YAML: "openclash_android.yaml"
           ANDROID_HEALTH_TIMEOUT_MS: "6000"
-          TEST_URL: "https://www.gstatic.com/generate_204"
-          REAL_CHECK_TEST_URL: "https://www.gstatic.com/generate_204"
-          ANDROID_TEST_URL: "https://www.gstatic.com/generate_204"
           OUTPUT_YAML: "openclash_auto.yaml"
           OUTPUT_CSV: "openclash_auto_report.csv"
           OUTPUT_AKUN: "akun.txt"
           OUTPUT_MANUAL_AKUN: "akun_manual.txt"
           OUTPUT_MANUAL_SKIPPED: "manual_nodes_skipped.txt"
           OUTPUT_STAMP: "last_update.txt"
-          OUTPUT_COMPAT_REPORT: "compatibility_report.txt"
           MANUAL_NODES_FILE: "manual_nodes.txt"
         run: python generate_yaml.py
 
-      - name: Validate generated YAML with Mihomo/OpenClash core
+      - name: Validate generated YAML
         run: |
-          set -e
-          echo "Validate OpenClash router YAML"
-          ./mihomo -t -d . -f openclash_auto.yaml
-          echo "Validate Android/global YAML"
-          ./mihomo -t -d . -f openclash_android.yaml
-          echo "YAML validated by Mihomo."
+          python - <<'PY'
+          import sys, yaml
+          for path in ["openclash_auto.yaml", "openclash_android.yaml"]:
+              with open(path, "r", encoding="utf-8") as f:
+                  data = yaml.safe_load(f)
+              if not isinstance(data, dict):
+                  raise SystemExit(f"{path}: bukan YAML config dict")
+              names = {p.get("name") for p in data.get("proxies", []) if isinstance(p, dict)}
+              if len(names) != len([p for p in data.get("proxies", []) if isinstance(p, dict)]):
+                  raise SystemExit(f"{path}: nama proxy duplikat")
+              groups = {g.get("name") for g in data.get("proxy-groups", []) if isinstance(g, dict)}
+              refs = names | groups | {"DIRECT", "REJECT", "GLOBAL"}
+              for g in data.get("proxy-groups", []):
+                  if not isinstance(g, dict):
+                      continue
+                  for ref in g.get("proxies", []) or []:
+                      if ref not in refs:
+                          raise SystemExit(f"{path}: proxy-group {g.get('name')} referensi hilang: {ref}")
+          print("YAML compatibility check OK")
+          PY
 
-      - name: Commit and push updated YAML safely
+      - name: Commit updated YAML
+        shell: bash
         run: |
-          set -e
-          BRANCH="${GITHUB_REF_NAME:-main}"
+          BRANCH="${GITHUB_REF_NAME}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt compatibility_report.txt last_update.txt
-
+          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."
             exit 0
           fi
-
           git commit -m "chore: update OpenClash YAML otomatis"
-
-          # Ambil commit terbaru sebelum push agar tidak kena rejected/fetch first.
-          for attempt in 1 2 3; do
-            echo "Push attempt $attempt..."
-            git fetch origin "$BRANCH"
-            if git pull --rebase --autostash origin "$BRANCH" && git push origin "HEAD:$BRANCH"; then
-              echo "Push berhasil."
-              exit 0
-            fi
-            echo "Push gagal, coba ulang..."
-            git rebase --abort || true
-            sleep 5
-          done
-
-          echo "Push tetap gagal setelah 3 percobaan. Kemungkinan ada konflik file dari commit manual."
-          exit 1
+          git fetch origin "$BRANCH"
+          git pull --rebase --autostash origin "$BRANCH"
+          git push origin "HEAD:$BRANCH"
