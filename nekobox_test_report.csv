@@ -1,12 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-132MS,vless,ws,152.67.210.234,t1s1.rittbo.kdns.fr,HTTP 204,257,291,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-130MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,266,302,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-137MS,vless,ws,104.18.95.26,hhlfy.twiladaphne.ndjp.net,HTTP 204,264,292,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-137MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,276,304,HTTP 204,yes
-AKUN-005-OPENAI-VLESS-WS-141MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,282,306,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-155MS,vless,ws,172.67.171.253,gardconfig12.bnam38637.workers.dev,HTTP 204,265,8177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=8.0)",no
-AKUN-007-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-184MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,277,283,HTTP 204,yes
-AKUN-008-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-149MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,260,284,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-132MS,vless,ws,172.64.53.74,fgnix832fx.fx6hsv0.ccwu.cc,HTTP 204,283,281,HTTP 204,yes
-AKUN-013-NET-89-116-46-0-24-VLESS-WS-440MS,vless,ws,89.116.46.8,octopusss4.com,HTTP 204,1694,1210,HTTP 204,yes
-AKUN-014-RS-RAPIDSEEDBOX-20190717-VLESS-WS-436MS,vless,ws,45.130.125.229,octopusss5.info,HTTP 204,1038,1054,HTTP 204,yes
+AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-87MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,236,231,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-98MS,vless,ws,188.114.97.6,hhlfy.twiladaphne.ndjp.net,HTTP 204,231,257,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-101MS,vless,ws,www.speedtest.net,jOLLY-snOwFlAKE-951d.apExtunNElnumbEr3.WORkERS.deV,HTTP 204,244,193,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-004-CLOUDFLARE-VLESS-WS-90MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,200,241,HTTP 204,yes
+AKUN-005-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-110MS,vless,ws,154.17.26.200,t1s1.rittbo.kdns.fr,HTTP 204,205,230,HTTP 204,yes
+AKUN-006-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-115MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,229,253,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-134MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,208,244,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-105MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,222,260,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-103MS,vless,ws,172.64.53.74,fgnix832fx.fx6hsv0.ccwu.cc,HTTP 204,233,249,HTTP 204,yes
+AKUN-014-CLOUDFLARE-VLESS-WS-443MS,vless,ws,172.64.33.162,octopusss5.info,HTTP 204,1024,1048,HTTP 204,yes
+AKUN-015-WPENG-VLESS-WS-440MS,vless,ws,141.193.213.21,octopusss4.com,HTTP 204,1029,1038,HTTP 204,yes
