@@ -50,6 +50,7 @@ DEFAULT_LINKS = [
     "https://raw.githubusercontent.com/iboxz/free-v2ray-collector/main/main/vless.txt",
     "https://raw.githubusercontent.com/iboxz/free-v2ray-collector/main/main/trojan.txt",
     "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/refs/heads/main/server.txt",
+    "https://raw.githubusercontent.com/MohammadBahemmat/V2ray-Collector/refs/heads/main/all_servers.txt",
     "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/26.txt",
     "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/25.txt",
     "https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/24.txt",
