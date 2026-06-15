@@ -1,12 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-75MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,223,246,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-76MS,vless,ws,172.67.185.178,hhlfy.twiladaphne.ndjp.net,HTTP 204,216,241,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-77MS,vless,ws,154.17.26.200,t1s1.rittbo.kdns.fr,HTTP 204,215,236,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-81MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,213,246,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-85MS,vless,ws,172.64.53.74,fgnix832fx.fx6hsv0.ccwu.cc,HTTP 204,207,256,HTTP 204,yes
-AKUN-006-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-96MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,205,240,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-92MS,vless,ws,www.speedtest.net,jOLLY-snOwFlAKE-951d.apExtunNElnumbEr3.WORkERS.deV,HTTP 204,220,191,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-008-CLOUDFLARE-VLESS-WS-102MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,218,240,HTTP 204,yes
-AKUN-009-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-123MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,215,241,HTTP 204,yes
-AKUN-014-CLOUDFLARE-VLESS-WS-307MS,vless,ws,108.162.195.45,picassooo.info,HTTP 204,637,749,HTTP 204,yes
-AKUN-018-UNKNOWN-VLESS-WS-400MS,vless,ws,45.130.125.229,octopusss5.info,HTTP 204,926,946,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-132MS,vless,ws,152.67.210.234,t1s1.rittbo.kdns.fr,HTTP 204,257,291,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-130MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,266,302,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-137MS,vless,ws,104.18.95.26,hhlfy.twiladaphne.ndjp.net,HTTP 204,264,292,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-137MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,276,304,HTTP 204,yes
+AKUN-005-OPENAI-VLESS-WS-141MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,282,306,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-155MS,vless,ws,172.67.171.253,gardconfig12.bnam38637.workers.dev,HTTP 204,265,8177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=8.0)",no
+AKUN-007-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-184MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,277,283,HTTP 204,yes
+AKUN-008-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-149MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,260,284,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-132MS,vless,ws,172.64.53.74,fgnix832fx.fx6hsv0.ccwu.cc,HTTP 204,283,281,HTTP 204,yes
+AKUN-013-NET-89-116-46-0-24-VLESS-WS-440MS,vless,ws,89.116.46.8,octopusss4.com,HTTP 204,1694,1210,HTTP 204,yes
+AKUN-014-RS-RAPIDSEEDBOX-20190717-VLESS-WS-436MS,vless,ws,45.130.125.229,octopusss5.info,HTTP 204,1038,1054,HTTP 204,yes
