@@ -1,12 +1,9 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-386MS,vless,ws,auth.vercel.com,pon.antalmani.mm.am,386,,10812,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-002-UNKNOWN-VLESS-WS-444MS,vless,ws,216.24.57.1,picassooo.info,444,,740,"SSLError: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFErro",no
-AKUN-003-DEV-VLESS-WS-598MS,vless,ws,empty-water-a05b.gfbghfbfngbdgbghngf.workers.dev,empty-water-a05b.gfbghfbfngbdgbghngf.workers.dev,598,,10713,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-004-UNKNOWN-TROJAN-WS-130MS,trojan,ws,43.218.77.16,store.timimi.dpdns.org,130,,10271,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-005-UNKNOWN-TROJAN-WS-370MS,trojan,ws,165.215.250.14,www.calmlunch.com,370,,10590,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-006-UNKNOWN-TROJAN-WS-391MS,trojan,ws,104.19.2.175,www.calmloud.com,391,,10944,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-007-UNKNOWN-TROJAN-WS-415MS,trojan,ws,27.50.48.49,www.calmloud.com,415,,12633,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-008-UNKNOWN-TROJAN-WS-499MS,trojan,ws,199.181.197.235,uk1.test3.net,499,,700,"SSLError: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLError(1",no
-AKUN-009-CLOUDFLARE-TROJAN-WS-1024MS,trojan,ws,188.114.96.3,www.creationlong.org,1024,,5130,"SSLError: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFErro",no
-AKUN-010-UNKNOWN-TROJAN-WS-1805MS,trojan,ws,104.18.12.149,www.ignitelimit.com,1805,,5124,"SSLError: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFErro",no
-AKUN-011-CLOUDFLARE-VMESS-WS-546MS,vmess,ws,188.114.97.6,vyvzyhgz.com,546,,10831,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-001-CLOUDFLARE-VLESS-WS-347MS,vless,ws,love.ns.cloudflare.com,pon.antalmani.mm.am,347,,10436,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-002-UNKNOWN-VLESS-WS-420MS,vless,ws,216.24.57.1,picassooo.info,420,,704,"SSLError: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFErro",no
+AKUN-003-AMAZON-TROJAN-WS-115MS,trojan,ws,43.218.77.16,store.timimi.dpdns.org,115,,10250,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-004-UNKNOWN-TROJAN-WS-265MS,trojan,ws,104.19.2.175,www.calmloud.com,265,,10674,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-005-UNKNOWN-TROJAN-WS-260MS,trojan,ws,27.50.48.49,www.calmloud.com,260,,10952,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-006-UNKNOWN-TROJAN-WS-285MS,trojan,ws,165.215.250.14,www.calmlunch.com,285,,10679,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-007-UNKNOWN-VMESS-WS-337MS,vmess,ws,172.64.145.202,vienna-bread-threats-amendment.trycloudflare.com,337,,5124,"SSLError: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFErro",no
+AKUN-008-UNKNOWN-VMESS-WS-399MS,vmess,ws,104.18.19.99,vyvzyhgz.com,399,,10687,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
