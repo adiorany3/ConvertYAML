@@ -1,0 +1,4 @@
+# Tambahkan link subscription khusus streaming di sini, satu URL per baris.
+# Akun dari file ini akan diproses terpisah untuk grup STREAMING-FAST.
+# Contoh:
+# https://example.com/streaming-subscription.txt

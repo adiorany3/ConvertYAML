@@ -1439,9 +1439,29 @@ def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, requir
     return node
 
 
-def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = DEFAULT_HEALTH_TIMEOUT_MS, rule_mode: str = "Lengkap") -> str:
+def build_openclash_yaml(
+    nodes: list[ProxyNode],
+    interval: int,
+    tolerance: int,
+    test_url: str,
+    health_timeout: int = DEFAULT_HEALTH_TIMEOUT_MS,
+    rule_mode: str = "Lengkap",
+    streaming_nodes: list[ProxyNode] | None = None,
+) -> str:
+    # nodes = akun standar untuk GLOBAL/AUTO-FAST.
+    # streaming_nodes = akun khusus web streaming, dipilih dari pipeline terpisah.
+    # Dengan ini STREAMING-FAST tidak mengambil pool standar, sehingga total node
+    # di YAML bisa melebihi MAX_NODES standar.
+    streaming_nodes = streaming_nodes or []
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
+
+    existing_standard_names = set(names)
+    streaming_names = [
+        node.clash["name"] for node in streaming_nodes
+        if node.clash.get("name") and node.clash["name"] not in existing_standard_names
+    ]
+    streaming_direct_or_names = streaming_names or ["DIRECT"]
 
     def env_int(name: str, default: int) -> int:
         raw = os.getenv(name, "").strip()
@@ -1452,14 +1472,14 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         except ValueError:
             return default
 
-    # Khusus web streaming: pakai url-test terpisah supaya node streaming
-    # bisa berbeda dari AUTO-FAST/GLOBAL dan selalu mengejar latency terendah
-    # untuk endpoint streaming, bukan endpoint umum.
     streaming_test_url = os.getenv("STREAMING_TEST_URL", test_url).strip() or test_url
     streaming_interval = env_int("STREAMING_URLTEST_INTERVAL", interval)
     streaming_tolerance = env_int("STREAMING_TOLERANCE", 5)
     streaming_timeout = env_int("STREAMING_HEALTH_TIMEOUT_MS", health_timeout)
-    streaming_expected_status = os.getenv("STREAMING_EXPECTED_STATUS", "200/204/301/302/403").strip() or "200/204/301/302/403"
+    streaming_expected_status = os.getenv(
+        "STREAMING_EXPECTED_STATUS",
+        "200/204/301/302/403",
+    ).strip() or "200/204/301/302/403"
 
     def selector(defaults: list[str] | None = None) -> list[str]:
         defaults = defaults or ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]
@@ -1616,12 +1636,14 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         {
             "name": "STREAMING",
             "type": "select",
-            "proxies": selector(["STREAMING-FAST", "AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]),
+            # Khusus web streaming: default ke STREAMING-FAST yang hanya berisi akun streaming.
+            # Tidak mencampur pool AUTO-FAST standar, supaya node streaming bisa berbeda.
+            "proxies": ["STREAMING-FAST", "DIRECT"] + streaming_names,
         },
         {
             "name": "STREAMING-FAST",
             "type": "url-test",
-            "proxies": direct_or_names,
+            "proxies": streaming_direct_or_names,
             "url": streaming_test_url,
             "interval": streaming_interval,
             "tolerance": streaming_tolerance,
@@ -1752,10 +1774,6 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         "DOMAIN-SUFFIX,twitch.tv,STREAMING",
         "DOMAIN-SUFFIX,viu.com,STREAMING",
         "DOMAIN-SUFFIX,wetv.vip,STREAMING",
-        "DOMAIN-SUFFIX,vidio.com,STREAMING",
-        "DOMAIN-SUFFIX,visionplus.id,STREAMING",
-        "DOMAIN-SUFFIX,rctiplus.com,STREAMING",
-        "DOMAIN-SUFFIX,iq.com,STREAMING",
         "GEOIP,netflix,STREAMING,no-resolve",
 
         # Sisanya ikut GLOBAL yang defaultnya langsung AUTO-FAST.
@@ -1809,8 +1827,6 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "DOMAIN-SUFFIX,x.com,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,t.me,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,telegram.org,SOCIAL-MEDIA",
-            # Streaming tetap dimasukkan di mode Lite agar traffic streaming
-            # tidak jatuh ke MATCH,GLOBAL.
             "DOMAIN-SUFFIX,netflix.com,STREAMING",
             "DOMAIN-SUFFIX,nflxvideo.net,STREAMING",
             "DOMAIN-SUFFIX,disneyplus.com,STREAMING",
@@ -1870,7 +1886,10 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "fallback": ["tls://1.1.1.1", "tls://8.8.8.8"],
             "fallback-filter": {"geoip": True, "geoip-code": "ID", "ipcidr": ["240.0.0.0/4"]},
         },
-        "proxies": [node.clash for node in nodes],
+        "proxies": [node.clash for node in nodes] + [
+            node.clash for node in streaming_nodes
+            if node.clash.get("name") and node.clash["name"] not in names
+        ],
         "proxy-groups": proxy_groups,
         "rule-providers": rule_providers,
         "rules": rules,
