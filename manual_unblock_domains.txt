@@ -1,0 +1,22 @@
+# Domain yang diarahkan ke grup MANUAL.
+# Satu domain atau rule per baris.
+# Contoh format yang didukung:
+# reddit.com
+# DOMAIN-SUFFIX,reddit.com
+# DOMAIN-KEYWORD,reddit
+# DOMAIN,www.reddit.com
+#
+# Catatan: jangan isi marketplace/bank Indonesia di sini, karena sudah masuk grup INDONESIA.
+# Tambahkan situs lain yang ingin selalu memakai akun manual di bawah ini.
+
+reddit.com
+redd.it
+redditmedia.com
+redditstatic.com
+vimeo.com
+vimeocdn.com
+imgur.com
+imgur.io
+pastebin.com
+tumblr.com
+medium.com

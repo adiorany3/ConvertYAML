@@ -106,6 +106,106 @@ INDONESIA_NODE_KEYWORDS = (
     "denpasar",
 )
 
+
+# Domain yang diakses lewat grup MANUAL.
+# Tujuannya: situs yang umum terblokir/terganggu di Indonesia, seperti Reddit,
+# tidak ikut AUTO-FAST/INDONESIA/STREAMING, melainkan memakai akun pilihan manual.
+# Tambah/kurangi daftar ini lewat manual_unblock_domains.txt atau env EXTRA_MANUAL_UNBLOCK_DOMAINS.
+MANUAL_UNBLOCK_DEFAULT_DOMAINS = [
+    "reddit.com",
+    "redd.it",
+    "redditmedia.com",
+    "redditstatic.com",
+    "vimeo.com",
+    "vimeocdn.com",
+    "imgur.com",
+    "imgur.io",
+    "pastebin.com",
+    "tumblr.com",
+    "medium.com",
+]
+
+
+def _manual_unblock_rule_from_line(line: str) -> str | None:
+    """Convert one editable line into a Clash rule that points to MANUAL.
+
+    Accepted examples:
+      reddit.com
+      DOMAIN-SUFFIX,reddit.com
+      DOMAIN-KEYWORD,reddit
+      DOMAIN,www.reddit.com
+      PROCESS-NAME,example.exe
+
+    A third policy column is ignored and replaced with MANUAL so the file stays safe
+    for copy-paste from older rule lists.
+    """
+    raw = (line or "").strip().strip("'\"")
+    if not raw or raw.startswith("#"):
+        return None
+    raw = raw.split("#", 1)[0].strip().strip("'\"")
+    if not raw:
+        return None
+    upper = raw.upper()
+    supported_prefixes = (
+        "DOMAIN,",
+        "DOMAIN-SUFFIX,",
+        "DOMAIN-KEYWORD,",
+        "IP-CIDR,",
+        "IP-CIDR6,",
+        "PROCESS-NAME,",
+    )
+    if upper.startswith(supported_prefixes):
+        parts = [part.strip() for part in raw.split(",") if part.strip()]
+        if len(parts) >= 2:
+            return f"{parts[0]},{parts[1]},MANUAL"
+        return None
+    if raw.startswith("+."):
+        raw = raw[2:]
+    elif raw.startswith("."):
+        raw = raw[1:]
+    if "://" in raw:
+        parsed = urlparse(raw)
+        raw = parsed.hostname or raw
+    raw = raw.strip().strip("/").lower()
+    if not raw or " " in raw:
+        return None
+    return f"DOMAIN-SUFFIX,{raw},MANUAL"
+
+
+def load_manual_unblock_rules() -> list[str]:
+    rules: list[str] = []
+    seen: set[str] = set()
+
+    def add_rule(line: str) -> None:
+        rule = _manual_unblock_rule_from_line(line)
+        if rule and rule not in seen:
+            seen.add(rule)
+            rules.append(rule)
+
+    for domain in MANUAL_UNBLOCK_DEFAULT_DOMAINS:
+        add_rule(domain)
+
+    file_path = os.getenv("MANUAL_UNBLOCK_DOMAINS_FILE", "manual_unblock_domains.txt").strip()
+    if file_path:
+        try:
+            with open(file_path, "r", encoding="utf-8") as handle:
+                for line in handle:
+                    add_rule(line)
+        except FileNotFoundError:
+            pass
+        except OSError:
+            pass
+
+    extra = os.getenv("EXTRA_MANUAL_UNBLOCK_DOMAINS", "")
+    for line in extra.replace(";", "\n").splitlines():
+        add_rule(line)
+
+    extra_rules = os.getenv("EXTRA_MANUAL_UNBLOCK_RULES", "")
+    for line in extra_rules.replace(";", "\n").splitlines():
+        add_rule(line)
+
+    return rules
+
 INDONESIA_DOMAIN_RULES = [
     # Semua domain Indonesia dan situs besar Indonesia yang sering memakai .com.
     "DOMAIN-SUFFIX,id,INDONESIA",
@@ -1674,6 +1774,8 @@ def build_openclash_yaml(
         "200/204/301/302/403",
     ).strip() or "200/204/301/302/403"
 
+    manual_unblock_rules = load_manual_unblock_rules()
+
     def selector(defaults: list[str] | None = None) -> list[str]:
         defaults = defaults or ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]
         return defaults + names
@@ -1804,12 +1906,19 @@ def build_openclash_yaml(
             "name": "GLOBAL",
             "type": "select",
             # AUTO-FAST tetap di pilihan pertama agar fresh import langsung otomatis cepat.
-            "proxies": ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT", "INDONESIA", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN"] + names,
+            "proxies": ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "MANUAL", "DIRECT", "INDONESIA", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN"] + names,
         },
         {
             "name": "PROXY",
             "type": "select",
-            "proxies": ["GLOBAL", "AUTO-FAST", "INDONESIA", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
+            "proxies": ["GLOBAL", "AUTO-FAST", "MANUAL", "INDONESIA", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
+        },
+        {
+            "name": "MANUAL",
+            "type": "select",
+            # Default aman saat manual_nodes.txt kosong. Jika ada manual node,
+            # generate_yaml.py akan mengganti isi grup ini menjadi akun manual + DIRECT.
+            "proxies": ["DIRECT"],
         },
         {
             "name": "INDONESIA",
@@ -1936,6 +2045,9 @@ def build_openclash_yaml(
         "DOMAIN-SUFFIX,googlevideo.com,YOUTUBE",
         "DOMAIN-SUFFIX,youtubei.googleapis.com,YOUTUBE",
 
+        # Situs yang perlu dibuka via akun manual, misalnya Reddit dan daftar unblock Indonesia.
+        *manual_unblock_rules,
+
         # Sosial media.
         "RULE-SET,telegram_domain,SOCIAL-MEDIA",
         "RULE-SET,twitter_domain,SOCIAL-MEDIA",
@@ -2047,6 +2159,8 @@ def build_openclash_yaml(
             "DOMAIN-SUFFIX,youtu.be,YOUTUBE",
             "DOMAIN-SUFFIX,ytimg.com,YOUTUBE",
             "DOMAIN-SUFFIX,googlevideo.com,YOUTUBE",
+            # Situs yang perlu dibuka via akun manual, misalnya Reddit dan daftar unblock Indonesia.
+            *manual_unblock_rules,
             "DOMAIN-SUFFIX,facebook.com,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,fbcdn.net,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,instagram.com,SOCIAL-MEDIA",

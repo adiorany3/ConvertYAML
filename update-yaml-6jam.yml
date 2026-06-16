@@ -212,6 +212,7 @@ jobs:
           OUTPUT_STAMP: "last_update.txt"
           OUTPUT_COMPAT_REPORT: "compatibility_report.txt"
           MANUAL_NODES_FILE: "manual_nodes.txt"
+          MANUAL_UNBLOCK_DOMAINS_FILE: "manual_unblock_domains.txt"
         run: python generate_yaml.py
 
       - name: Validate generated YAML with Mihomo/OpenClash core
@@ -230,7 +231,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv urltest_report.csv nekobox_test_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt compatibility_report.txt last_update.txt akun_streaming.txt streaming_urltest_report.csv streaming_nekobox_report.csv streaming_subscription_links.txt
+          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv urltest_report.csv nekobox_test_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt manual_unblock_domains.txt compatibility_report.txt last_update.txt akun_streaming.txt streaming_urltest_report.csv streaming_nekobox_report.csv streaming_subscription_links.txt akun_indonesia.txt indonesia_urltest_report.csv indonesia_nekobox_report.csv indonesia_subscription_links.txt
 
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."
