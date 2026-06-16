@@ -1,16 +1,26 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-86MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,218,257,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-97MS,vless,ws,198.41.223.229,accv9.mmhz9.workers.dev,HTTP 204,229,237,HTTP 204,yes
-AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-92MS,vless,ws,69.63.212.251,t1s1.rittbo.kdns.fr,HTTP 204,216,248,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-100MS,vless,ws,104.18.95.26,hhlfy.twiladaphne.ndjp.net,HTTP 204,275,255,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-125MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,220,255,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-95MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,200,253,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-128MS,vless,ws,188.114.97.6,FrEe.SeRVEr14peekCoNfIG.WoRKErS.dEV,HTTP 204,195,187,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-008-DEV-VLESS-WS-126MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,205,178,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-009-CLOUDFLARE-VLESS-WS-82MS,vless,ws,172.64.53.74,fgnix832fx.fx6hsv0.ccwu.cc,HTTP 204,215,244,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-128MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,HTTP 204,197,190,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-011-CLOUDFLARE-VLESS-WS-92MS,vless,ws,silent-thunder-8469.shsfhhdfh.workers.dev,SiLeNt-tHUNdEr-8469.sHSFHhdfh.WOrkERS.dev,HTTP 204,216,239,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-012-UNKNOWN-VLESS-WS-97MS,vless,ws,188.114.96.1,24VvD-4imRvfaQv7hQxYbU9WzJv378Qi.v2Raygulf.WorkeRS.DeV,HTTP 204,231,192,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-013-CLOUDFLARE-VLESS-WS-238MS,vless,ws,betty.ns.cloudflare.com,octopusss.net,HTTP 204,511,583,HTTP 204,yes
-AKUN-014-CLOUDFLARE-VLESS-WS-243MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,HTTP 204,497,537,HTTP 204,yes
-AKUN-015-UNKNOWN-VLESS-WS-276MS,vless,ws,172.64.146.138,octopusss4.com,HTTP 204,589,651,HTTP 204,yes
+AKUN-023-DEV-VLESS-WS-109MS,vless,ws,biyapain.biyapainbache.workers.dev,bIyapain.bIYApaiNbAcHe.WoRkers.DeV,pass 1/1 required 1; www.gstatic.com:HTTP 204/73ms,196,180,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-024-UNKNOWN-VLESS-WS-99MS,vless,ws,63.141.128.22,MiSty-tooth-78cA.FoboGAH414-e7B.WoRKERs.DEv,pass 1/1 required 1; www.gstatic.com:HTTP 204/75ms,197,260,pass 1/1 required 1; www.gstatic.com:HTTP 204/109ms,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-73MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,pass 1/1 required 1; www.gstatic.com:HTTP 204/80ms,202,183,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-013-CLOUDFLARE-VLESS-WS-76MS,vless,ws,172.66.40.139,rAyAn-007.pArViN.DpDnS.OrG,pass 1/1 required 1; www.gstatic.com:HTTP 204/80ms,202,239,pass 1/1 required 1; www.gstatic.com:HTTP 204/88ms,yes
+AKUN-041-UNKNOWN-VLESS-WS-80MS,vless,ws,152.53.236.205,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,pass 1/1 required 1; www.gstatic.com:HTTP 204/82ms,204,252,pass 1/1 required 1; www.gstatic.com:HTTP 204/101ms,yes
+AKUN-008-NEXUSMODS-VLESS-WS-71MS,vless,ws,nexusmods.com,t1s1.rittbo.kdns.fr,pass 1/1 required 1; www.gstatic.com:HTTP 204/83ms,205,241,pass 1/1 required 1; www.gstatic.com:HTTP 204/90ms,yes
+AKUN-021-UNKNOWN-VLESS-WS-66MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,pass 1/1 required 1; www.gstatic.com:HTTP 204/83ms,205,240,pass 1/1 required 1; www.gstatic.com:HTTP 204/89ms,yes
+AKUN-015-GALAKTIKA-20201015-VLESS-WS-82MS,vless,ws,45.85.119.205,old-surf-e922.v2raynplus.workers.dev,pass 1/1 required 1; www.gstatic.com:HTTP 204/84ms,206,253,pass 1/1 required 1; www.gstatic.com:HTTP 204/102ms,yes
+AKUN-032-CLOUDFLARE-VLESS-WS-89MS,vless,ws,162.159.141.147,rAyAn-007.fOtOn.dPdNs.oRg,pass 1/1 required 1; www.gstatic.com:HTTP 204/86ms,208,232,pass 1/1 required 1; www.gstatic.com:HTTP 204/82ms,yes
+AKUN-025-US-VLESS-WS-84MS,vless,ws,nuclear.us.kg,nuclear.us.kg,pass 1/1 required 1; www.gstatic.com:HTTP 204/87ms,209,261,pass 1/1 required 1; www.gstatic.com:HTTP 204/110ms,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-69MS,vless,ws,104.18.32.47,ancIEnt-HeaRt-60c5.dPccgIzieB.WoRKers.dEV,pass 1/1 required 1; www.gstatic.com:HTTP 204/87ms,210,241,pass 1/1 required 1; www.gstatic.com:HTTP 204/90ms,yes
+AKUN-014-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.19.173.68,parmis-1tk63j.parmis.workers.dev,pass 1/1 required 1; www.gstatic.com:HTTP 204/88ms,210,256,pass 1/1 required 1; www.gstatic.com:HTTP 204/105ms,yes
+AKUN-027-UNKNOWN-VLESS-WS-83MS,vless,ws,162.159.153.4,rAyAn-007.mAxImA.DpDnS.OrG,pass 1/1 required 1; www.gstatic.com:HTTP 204/88ms,210,236,pass 1/1 required 1; www.gstatic.com:HTTP 204/85ms,yes
+AKUN-029-UNKNOWN-VLESS-WS-91MS,vless,ws,172.64.53.74,fgnix832fx.fx6hsv0.ccwu.cc,pass 1/1 required 1; www.gstatic.com:HTTP 204/89ms,211,255,pass 1/1 required 1; www.gstatic.com:HTTP 204/104ms,yes
+AKUN-037-SPEEDTEST-VLESS-WS-84MS,vless,ws,www.speedtest.net,broken-mud-0a9a.rigacihir69.workers.dev,pass 1/1 required 1; www.gstatic.com:HTTP 204/89ms,211,183,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-003-CLOUDFLARE-VLESS-WS-69MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,pass 1/1 required 1; www.gstatic.com:HTTP 204/92ms,214,247,pass 1/1 required 1; www.gstatic.com:HTTP 204/97ms,yes
+AKUN-002-UNKNOWN-VLESS-WS-69MS,vless,ws,162.159.60.231,hhlfy.twiladaphne.ndjp.net,pass 1/1 required 1; www.gstatic.com:HTTP 204/93ms,215,241,pass 1/1 required 1; www.gstatic.com:HTTP 204/91ms,yes
+AKUN-016-FMN5-RENTED-NET2-VLESS-WS-94MS,vless,ws,185.193.30.94,kakoolnews.7kakoolnews.workers.dev,pass 1/1 required 1; www.gstatic.com:HTTP 204/94ms,216,240,pass 1/1 required 1; www.gstatic.com:HTTP 204/89ms,yes
+AKUN-033-DEV-VLESS-WS-98MS,vless,ws,free.server6peekconfig.workers.dev,fREE.sERVer6PeeKCOnFIG.wOrkErs.dEv,pass 1/1 required 1; www.gstatic.com:HTTP 204/94ms,216,194,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-007-CLOUDFLARE-VLESS-WS-73MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,pass 1/1 required 1; www.gstatic.com:HTTP 204/97ms,219,257,pass 1/1 required 1; www.gstatic.com:HTTP 204/106ms,yes
+AKUN-028-UNKNOWN-VLESS-WS-96MS,vless,ws,162.159.43.233,tohidza.et6m22266a.workers.dev,pass 1/1 required 1; www.gstatic.com:HTTP 204/97ms,219,258,pass 1/1 required 1; www.gstatic.com:HTTP 204/107ms,yes
+AKUN-036-MEDIUM-VLESS-WS-130MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,pass 1/1 required 1; www.gstatic.com:HTTP 204/97ms,219,227,pass 1/1 required 1; www.gstatic.com:HTTP 204/76ms,yes
+AKUN-040-UNKNOWN-VLESS-WS-88MS,vless,ws,172.64.48.201,rahammahar.photoazadeh9100.workers.dev,pass 1/1 required 1; www.gstatic.com:HTTP 204/97ms,219,246,pass 1/1 required 1; www.gstatic.com:HTTP 204/95ms,yes
+AKUN-039-DEV-VLESS-WS-95MS,vless,ws,server1.peekconfiggg.workers.dev,SeRVER1.pEekconfIGGG.wORkERS.dEv,pass 1/1 required 1; www.gstatic.com:HTTP 204/97ms,220,192,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-026-UNKNOWN-VLESS-WS-99MS,vless,ws,104.17.106.130,freepol2.3r8sv.workers.dev,pass 1/1 required 1; www.gstatic.com:HTTP 204/98ms,220,256,pass 1/1 required 1; www.gstatic.com:HTTP 204/105ms,yes
