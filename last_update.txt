@@ -1,19 +1,30 @@
-Last update: 2026-06-15 21:16:14 UTC
+Last update: 2026-06-16 03:50:48 UTC
 Mode: FAST10 + Mihomo URL test + NekoBox/sing-box test early-stop
 OpenClash YAML: openclash_auto.yaml
 Android YAML: openclash_android.yaml
-Automatic YAML nodes after NekoBox test: 10
-Automatic strict pool before URL test: 34
-Automatic Mihomo URL-test checked: 30
-Automatic Mihomo URL-test result: URL test passed 25/30 tested
-Automatic NekoBox/sing-box checked: 15
-Automatic NekoBox/sing-box result: NekoBox/sing-box passed 10/15 tested
+Automatic YAML nodes after NekoBox test: 20
+Dedicated streaming YAML nodes after NekoBox test: 30
+Total YAML proxy nodes without manual: 50
+Automatic strict pool before URL test: 80
+Automatic Mihomo URL-test checked: 40
+Automatic Mihomo URL-test result: URL test passed 40/40 tested
+Automatic NekoBox/sing-box checked: 34
+Automatic NekoBox/sing-box result: NekoBox/sing-box passed 20/34 tested
+Streaming strict pool before URL test: 192
+Streaming Mihomo URL-test checked: 97
+Streaming Mihomo URL-test result: URL test passed 90/97 tested
+Streaming NekoBox/sing-box checked: 45
+Streaming NekoBox/sing-box result: NekoBox/sing-box passed 30/45 tested
 Manual group nodes: 8
-Akun txt automatic: 10
+Akun txt automatic: 20
+Akun txt streaming: 30
 Akun txt manual: 8
-Parsed subscription nodes: 1225
-Fetched links: 51
-Skipped raw URI: 167646
+Parsed subscription nodes standard: 2800
+Parsed subscription nodes streaming: 7700
+Fetched links standard: 51
+Fetched links streaming: 51
+Skipped raw URI standard: 164200
+Skipped raw URI streaming: 164200
 Skipped manual URI: 0
 Manual server normalized: 0 link
 Manual nodes source file: manual_nodes.txt
