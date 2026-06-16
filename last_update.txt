@@ -1,31 +1,31 @@
-Last update: 2026-06-16 17:43:02 UTC
+Last update: 2026-06-16 21:40:08 UTC
 Mode: FAST10 + Mihomo URL test + NekoBox/sing-box test early-stop
 OpenClash YAML: openclash_auto.yaml
 Android YAML: openclash_android.yaml
-Automatic YAML nodes after NekoBox test: 20
-Dedicated streaming YAML nodes after NekoBox test: 6
+Automatic YAML nodes after NekoBox test: 18
+Dedicated streaming YAML nodes after NekoBox test: 20
 Dedicated Indonesia YAML nodes after NekoBox test: 0
 Standard/streaming nodes reused in INDONESIA group: 0
 Total INDONESIA group nodes: 0
-Total YAML proxy nodes without manual: 26
-Automatic strict pool before URL test: 80
-Automatic Mihomo URL-test checked: 72
-Automatic Mihomo URL-test result: URL test passed 40/72 tested
-Automatic NekoBox/sing-box checked: 32
-Automatic NekoBox/sing-box result: NekoBox/sing-box passed 20/32 tested
-Streaming strict pool before URL test: 182
-Streaming Mihomo URL-test checked: 182
-Streaming Mihomo URL-test result: URL test passed 22/182 tested
-Streaming NekoBox/sing-box checked: 22
-Streaming NekoBox/sing-box result: NekoBox/sing-box passed 6/22 tested
-Indonesia strict pool before URL test: 8
-Indonesia Mihomo URL-test checked: 8
-Indonesia Mihomo URL-test result: URL test passed 0/8 tested
-Indonesia NekoBox/sing-box checked: 0
-Indonesia NekoBox/sing-box result: no automatic nodes to NekoBox/sing-box test
+Total YAML proxy nodes without manual: 38
+Automatic strict pool before URL test: 75
+Automatic Mihomo URL-test checked: 75
+Automatic Mihomo URL-test result: URL test passed 23/75 tested
+Automatic NekoBox/sing-box checked: 23
+Automatic NekoBox/sing-box result: NekoBox/sing-box passed 18/23 tested
+Streaming strict pool before URL test: 176
+Streaming Mihomo URL-test checked: 176
+Streaming Mihomo URL-test result: URL test passed 31/176 tested
+Streaming NekoBox/sing-box checked: 31
+Streaming NekoBox/sing-box result: NekoBox/sing-box passed 20/31 tested
+Indonesia strict pool before URL test: 10
+Indonesia Mihomo URL-test checked: 10
+Indonesia Mihomo URL-test result: URL test passed 1/10 tested
+Indonesia NekoBox/sing-box checked: 1
+Indonesia NekoBox/sing-box result: NekoBox/sing-box passed 0/1 tested
 Manual group nodes: 8
-Akun txt automatic: 20
-Akun txt streaming: 6
+Akun txt automatic: 18
+Akun txt streaming: 20
 Akun txt Indonesia: 0
 Akun txt manual: 8
 Parsed subscription nodes standard: 2800
@@ -34,9 +34,9 @@ Parsed subscription nodes Indonesia: 6300
 Fetched links standard: 51
 Fetched links streaming: 51
 Fetched links Indonesia: 51
-Skipped raw URI standard: 163903
-Skipped raw URI streaming: 163899
-Skipped raw URI Indonesia: 164441
+Skipped raw URI standard: 165669
+Skipped raw URI streaming: 165671
+Skipped raw URI Indonesia: 165753
 Skipped manual URI: 0
 Manual server normalized: 0 link
 Manual nodes source file: manual_nodes.txt
