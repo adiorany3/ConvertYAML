@@ -1,2 +1,1 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-011-UNKNOWN-VMESS-WS-288MS,vmess,ws,172.64.145.202,vienna-bread-threats-amendment.trycloudflare.com,pass 4/4 required 2; www.tokopedia.com:HTTP 403/544ms; www.bca.co.id:HTTP 200/1470ms; www.detik.com:HTTP 200/1631ms; www.gstatic.com:HTTP 204/409ms,4178,4222,pass 4/4 required 2; www.tokopedia.com:HTTP 403/501ms; www.bca.co.id:HTTP 200/1626ms; www.detik.com:HTTP 200/1552ms; www.gstatic.com:HTTP 204/390ms,yes
