@@ -115,6 +115,14 @@ jobs:
           OUTPUT_ANDROID_YAML: "openclash_android.yaml"
           ANDROID_HEALTH_TIMEOUT_MS: "6000"
           TEST_URL: "https://www.gstatic.com/generate_204"
+          # URL-test khusus untuk grup STREAMING-FAST.
+          # Dengan ini web streaming memilih node latency terendah sendiri,
+          # tidak wajib sama dengan AUTO-FAST/GLOBAL.
+          STREAMING_TEST_URL: "https://www.netflix.com/"
+          STREAMING_EXPECTED_STATUS: "200/204/301/302/403"
+          STREAMING_URLTEST_INTERVAL: "60"
+          STREAMING_TOLERANCE: "5"
+          STREAMING_HEALTH_TIMEOUT_MS: "6000"
           REAL_CHECK_TEST_URL: "https://www.gstatic.com/generate_204"
           ANDROID_TEST_URL: "https://www.gstatic.com/generate_204"
           OUTPUT_YAML: "openclash_auto.yaml"
