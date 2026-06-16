@@ -1819,11 +1819,14 @@ def build_openclash_yaml(
         },
         {
             "name": "INDONESIA-FAST",
-            "type": "url-test",
+            # Fallback khusus Indonesia: MANUAL akan disisipkan sebagai prioritas
+            # pertama oleh generate_yaml.py, lalu dilanjutkan akun ID yang lolos
+            # test hidup. Dengan begitu website/marketplace/bank Indonesia akan
+            # mencoba group MANUAL lebih dulu, kemudian akun Indonesia otomatis.
+            "type": "fallback",
             "proxies": indonesia_direct_or_names,
             "url": indonesia_test_url,
             "interval": indonesia_interval,
-            "tolerance": indonesia_tolerance,
             "lazy": False,
             "timeout": indonesia_timeout,
             "expected-status": indonesia_expected_status,

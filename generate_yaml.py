@@ -981,6 +981,11 @@ def add_manual_group_to_config(config: dict[str, Any], manual_nodes: list[Any], 
             # Do not append individual manual nodes here; the MANUAL select group
             # keeps manual accounts separated and does not reduce the 20 auto nodes.
             _insert_once(proxies_list, "MANUAL", 0)
+        elif (not android) and name == "INDONESIA-FAST":
+            # Indonesia priority requested by user:
+            # INDONESIA-FAST is a fallback group that starts from MANUAL, then
+            # continues to alive-tested Indonesia accounts discovered automatically.
+            _insert_once(proxies_list, "MANUAL", 0)
         elif name == "GLOBAL":
             # Keep MANUAL visible in the main selector too.
             if "DIRECT" in proxies_list:

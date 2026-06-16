@@ -1,41 +1,31 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-NET-NL-VLESS-WS-136MS,vless,ws,185.199.158.58,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,136,,249,pass 1/1 required 1; www.gstatic.com:HTTP 204/126ms,yes
-AKUN-002-SPACECORE-VLESS-WS-132MS,vless,ws,94.156.117.125,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,132,,271,pass 1/1 required 1; www.gstatic.com:HTTP 204/149ms,yes
-AKUN-003-DIGITALOCEAN-VLESS-WS-136MS,vless,ws,95.85.39.45,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,136,,260,pass 1/1 required 1; www.gstatic.com:HTTP 204/138ms,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-137MS,vless,ws,digitalocean.com,paRMis-1Tk63J.PArMiS.WoRkeRs.DeV,137,,275,pass 1/1 required 1; www.gstatic.com:HTTP 204/152ms,yes
-AKUN-005-CLOUDWEBMANAGE-EU-FR-VLESS-WS-132MS,vless,ws,45.147.248.115,coNFIghayE.moKhaBeraTebInZON.workErS.deV,132,,279,pass 1/1 required 1; www.gstatic.com:HTTP 204/157ms,yes
-AKUN-006-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-137MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,137,,289,pass 1/1 required 1; www.gstatic.com:HTTP 204/167ms,yes
-AKUN-007-HOSTOFF-NET-VLESS-WS-135MS,vless,ws,144.31.102.181,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,135,,250,pass 1/1 required 1; www.gstatic.com:HTTP 204/128ms,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-144MS,vless,ws,104.18.32.47,ancIEnt-HeaRt-60c5.dPccgIzieB.WoRKers.dEV,144,,276,pass 1/1 required 1; www.gstatic.com:HTTP 204/153ms,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-140MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,140,,269,pass 1/1 required 1; www.gstatic.com:HTTP 204/147ms,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-143MS,vless,ws,104.21.5.155,evENt-buS-c22219-edG.stAGing-APi-5De174.woRkeRS.DEV,143,,272,pass 1/1 required 1; www.gstatic.com:HTTP 204/150ms,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-127MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,127,,286,pass 1/1 required 1; www.gstatic.com:HTTP 204/164ms,yes
-AKUN-012-CLOUDFLARE-VLESS-WS-137MS,vless,ws,172.66.40.139,rAyAn-007.pArViN.DpDnS.OrG,137,,268,pass 1/1 required 1; www.gstatic.com:HTTP 204/146ms,yes
-AKUN-013-U1HOST-FRA-VLESS-WS-143MS,vless,ws,144.31.120.120,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,143,,249,pass 1/1 required 1; www.gstatic.com:HTTP 204/126ms,yes
-AKUN-014-UNKNOWN-VLESS-WS-142MS,vless,ws,172.67.164.152,002.Inc-ElectROcElL-001-002.WoRKERS.DEV,142,,271,pass 1/1 required 1; www.gstatic.com:HTTP 204/148ms,yes
-AKUN-015-UNKNOWN-VLESS-WS-143MS,vless,ws,162.159.81.132,orange-math-8a2e.parsa-esfandpoor89.workers.dev,143,,295,pass 1/1 required 1; www.gstatic.com:HTTP 204/173ms,yes
-AKUN-016-DEV-VLESS-WS-131MS,vless,ws,biyapain.biyapainbache.workers.dev,bIyapain.bIYApaiNbAcHe.WoRkers.DeV,131,,247,pass 1/1 required 1; www.gstatic.com:HTTP 204/125ms,yes
-AKUN-017-UNKNOWN-VLESS-WS-131MS,vless,ws,152.53.236.205,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,131,,258,pass 1/1 required 1; www.gstatic.com:HTTP 204/136ms,yes
-AKUN-018-UNKNOWN-VLESS-WS-145MS,vless,ws,104.17.20.214,refighehosein.salamdadash123.workers.dev,145,,280,pass 1/1 required 1; www.gstatic.com:HTTP 204/157ms,yes
-AKUN-019-SPEEDTEST-VLESS-WS-152MS,vless,ws,www.speedtest.net,jOLLY-snOwFlAKE-951d.apExtunNElnumbEr3.WORkERS.deV,152,,257,pass 1/1 required 1; www.gstatic.com:HTTP 204/134ms,yes
-AKUN-020-DEV-VLESS-WS-139MS,vless,ws,o.server3peekconfig.workers.dev,o.SERVeR3PeEkConFIG.WOrKerS.dEv,139,,245,pass 1/1 required 1; www.gstatic.com:HTTP 204/123ms,yes
-AKUN-021-UNKNOWN-VLESS-WS-142MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,142,,240,pass 1/1 required 1; www.gstatic.com:HTTP 204/118ms,yes
-AKUN-022-ADF-VLESS-WS-139MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,139,,244,pass 1/1 required 1; www.gstatic.com:HTTP 204/122ms,yes
-AKUN-023-UNKNOWN-VLESS-WS-137MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,137,,307,pass 1/1 required 1; www.gstatic.com:HTTP 204/184ms,yes
-AKUN-024-UNKNOWN-VLESS-WS-140MS,vless,ws,104.18.95.26,hhlfy.twiladaphne.ndjp.net,140,,266,pass 1/1 required 1; www.gstatic.com:HTTP 204/144ms,yes
-AKUN-025-UNKNOWN-VLESS-WS-151MS,vless,ws,104.17.106.130,freepol2.3r8sv.workers.dev,151,,266,pass 1/1 required 1; www.gstatic.com:HTTP 204/144ms,yes
-AKUN-026-UNKNOWN-VLESS-WS-141MS,vless,ws,104.19.173.68,parmis-1tk63j.parmis.workers.dev,141,,269,pass 1/1 required 1; www.gstatic.com:HTTP 204/146ms,yes
-AKUN-027-UNKNOWN-VLESS-WS-153MS,vless,ws,188.114.97.6,057.ElecTRocElLco-Cf-057.wOrKeRs.dEv,153,,272,pass 1/1 required 1; www.gstatic.com:HTTP 204/150ms,yes
-AKUN-028-DEV-VLESS-WS-143MS,vless,ws,free.server7peekconfig.workers.dev,FrEE.sErVeR7PeEKcONfig.WoRKErS.deV,143,,255,pass 1/1 required 1; www.gstatic.com:HTTP 204/133ms,yes
-AKUN-029-UNKNOWN-VLESS-WS-157MS,vless,ws,104.17.115.113,hs.qoogl.workers.dev,157,,286,pass 1/1 required 1; www.gstatic.com:HTTP 204/164ms,yes
-AKUN-030-UNKNOWN-VLESS-WS-158MS,vless,ws,69.63.212.251,t1s1.rittbo.kdns.fr,158,,263,pass 1/1 required 1; www.gstatic.com:HTTP 204/141ms,yes
-AKUN-031-SPEEDTEST-VLESS-WS-164MS,vless,ws,www.speedtest.net,broken-mud-0a9a.rigacihir69.workers.dev,164,,243,pass 1/1 required 1; www.gstatic.com:HTTP 204/121ms,yes
-AKUN-032-UNKNOWN-VLESS-WS-163MS,vless,ws,188.114.97.6,FrEe.SeRVEr14peekCoNfIG.WoRKErS.dEV,163,,268,pass 1/1 required 1; www.gstatic.com:HTTP 204/146ms,yes
-AKUN-033-UNKNOWN-VLESS-WS-163MS,vless,ws,172.64.48.201,rahammahar.photoazadeh9100.workers.dev,163,,288,pass 1/1 required 1; www.gstatic.com:HTTP 204/166ms,yes
-AKUN-034-UNKNOWN-VLESS-WS-137MS,vless,ws,162.159.153.4,rAyAn-007.mAxImA.DpDnS.OrG,137,,281,pass 1/1 required 1; www.gstatic.com:HTTP 204/159ms,yes
-AKUN-035-DEV-VLESS-WS-151MS,vless,ws,free.server6peekconfig.workers.dev,fREE.sERVer6PeeKCOnFIG.wOrkErs.dEv,151,,244,pass 1/1 required 1; www.gstatic.com:HTTP 204/122ms,yes
-AKUN-036-UNKNOWN-VLESS-WS-144MS,vless,ws,104.27.30.20,sfsl.ardomains1.dpdns.org,144,,275,pass 1/1 required 1; www.gstatic.com:HTTP 204/153ms,yes
-AKUN-037-SPEEDTEST-VLESS-WS-163MS,vless,ws,www.speedtest.net,blacKNet0.blACkNet89.WOrKErS.dev,163,,256,pass 1/1 required 1; www.gstatic.com:HTTP 204/134ms,yes
-AKUN-038-DEV-VLESS-WS-166MS,vless,ws,o.server5peekconfig.workers.dev,O.seRVer5peEKCOnFIG.WOrKers.dEV,166,,248,pass 1/1 required 1; www.gstatic.com:HTTP 204/126ms,yes
-AKUN-039-UNKNOWN-VLESS-WS-146MS,vless,ws,162.159.141.147,rAyAn-007.fOtOn.dPdNs.oRg,146,,255,pass 1/1 required 1; www.gstatic.com:HTTP 204/133ms,yes
-AKUN-040-1PASSWORD-VLESS-WS-175MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,175,,240,pass 1/1 required 1; www.gstatic.com:HTTP 204/118ms,yes
+AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-86MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,86,,218,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-97MS,vless,ws,198.41.223.229,accv9.mmhz9.workers.dev,97,,229,HTTP 204,yes
+AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-92MS,vless,ws,69.63.212.251,t1s1.rittbo.kdns.fr,92,,216,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-100MS,vless,ws,104.18.95.26,hhlfy.twiladaphne.ndjp.net,100,,275,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-125MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,125,,220,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-95MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,95,,200,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-128MS,vless,ws,188.114.97.6,FrEe.SeRVEr14peekCoNfIG.WoRKErS.dEV,128,,195,HTTP 204,yes
+AKUN-008-DEV-VLESS-WS-126MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,126,,205,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-82MS,vless,ws,172.64.53.74,fgnix832fx.fx6hsv0.ccwu.cc,82,,215,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-128MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,128,,197,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-92MS,vless,ws,silent-thunder-8469.shsfhhdfh.workers.dev,SiLeNt-tHUNdEr-8469.sHSFHhdfh.WOrkERS.dev,92,,216,HTTP 204,yes
+AKUN-012-UNKNOWN-VLESS-WS-97MS,vless,ws,188.114.96.1,24VvD-4imRvfaQv7hQxYbU9WzJv378Qi.v2Raygulf.WorkeRS.DeV,97,,231,HTTP 204,yes
+AKUN-013-CLOUDFLARE-VLESS-WS-238MS,vless,ws,betty.ns.cloudflare.com,octopusss.net,238,,511,HTTP 204,yes
+AKUN-014-CLOUDFLARE-VLESS-WS-243MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,243,,497,HTTP 204,yes
+AKUN-015-UNKNOWN-VLESS-WS-276MS,vless,ws,172.64.146.138,octopusss4.com,276,,589,HTTP 204,yes
+AKUN-016-CLOUDFLARE-VLESS-WS-283MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,283,,583,HTTP 204,yes
+AKUN-017-CLOUDFLARE-VLESS-WS-220MS,vless,ws,162.159.38.119,pon.antalmani.mm.am,220,,2753,HTTP 204,yes
+AKUN-018-RS-RAPIDSEEDBOX-20190717-VLESS-WS-284MS,vless,ws,45.130.125.229,octopusss5.info,284,,575,HTTP 204,yes
+AKUN-019-CLOUDFLARE-VLESS-WS-268MS,vless,ws,betty.ns.cloudflare.com,amoosamiii.net,268,,587,HTTP 204,yes
+AKUN-020-CLOUDFLARE-VLESS-WS-272MS,vless,ws,betty.ns.cloudflare.com,vangoghhh.info,272,,582,HTTP 204,yes
+AKUN-021-CLOUDFLARE-VLESS-WS-290MS,vless,ws,betty.ns.cloudflare.com,terazhediii.info,290,,723,HTTP 204,yes
+AKUN-022-CLOUDFLARE-VLESS-WS-354MS,vless,ws,108.162.195.45,picassooo.info,354,,659,HTTP 204,yes
+AKUN-023-RU-ZAYMER-20221025-VLESS-WS-437MS,vless,ws,erosan.appleseraj.ir,falkinichlol.appleseraj.ir,437,,535,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-024-APNIC-AP-VLESS-WS-484MS,vless,ws,103.160.204.239,testing.bo2tabere30.ir,484,,582,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-025-APNIC-AP-VLESS-WS-487MS,vless,ws,103.160.204.239,testing.bo2tabere30.ir,487,,605,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-026-CLOUDFLARE-VLESS-WS-447MS,vless,ws,172.67.158.125,PrO.nImBaHa.InFo,447,,633,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-027-BIGCOMMERCE-VLESS-WS-457MS,vless,ws,63.141.128.205,sync.amordad.xyz,457,,742,HTTP 204,yes
+AKUN-028-CLOUDFLARE-VLESS-WS-497MS,vless,ws,104.16.72.139,cdn-pro4.postshup.ir.,497,,965,HTTP 204,yes
+AKUN-029-CHATGPT-VLESS-WS-400MS,vless,ws,www.chatgpt.com,download.myvipnet.com,400,,556,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-030-CLOUDFLARE-VLESS-WS-450MS,vless,ws,elma.ns.cloudflare.com,as2.fanosorang.com,450,,762,HTTP 204,yes
