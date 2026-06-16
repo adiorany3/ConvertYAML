@@ -97,6 +97,54 @@ def _expected_statuses(raw: str | None = None) -> set[int]:
     return statuses or {204, 200, 301, 302}
 
 
+
+
+def _split_test_urls(raw: str | None) -> list[str]:
+    """Parse one or more test URLs.
+
+    Separate URLs with newline, semicolon, pipe, or comma. Comma is accepted
+    because GitHub Actions env values are easier to write that way.
+    """
+    raw = str(raw or "").strip()
+    if not raw:
+        return [ALT_TEST_URL]
+    # Do not split inside the URL scheme; only split on common env separators.
+    for sep in ["\n", "\r", ";", "|"]:
+        raw = raw.replace(sep, ",")
+    urls: list[str] = []
+    for item in raw.split(","):
+        item = item.strip()
+        if item:
+            urls.append(item)
+    return urls or [ALT_TEST_URL]
+
+
+def _bounded_required_successes(value: int | None, total_urls: int) -> int:
+    if value is None:
+        return 1
+    try:
+        required = int(value)
+    except Exception:
+        required = 1
+    return max(1, min(required, max(1, total_urls)))
+
+
+def _latency_sort_key(node: Any) -> tuple[int, int, int, str]:
+    """Sort by real URL checks first, then handshake fallback."""
+    def as_int_attr(name: str, default: int) -> int:
+        try:
+            value = getattr(node, name, default)
+            if value in (None, ""):
+                return default
+            return int(float(value))
+        except Exception:
+            return default
+
+    streaming_score = as_int_attr("streaming_score_ms", 10**9)
+    nekobox_ms = as_int_attr("nekobox_test_ms", 10**9)
+    url_ms = as_int_attr("url_test_ms", 10**9)
+    return (streaming_score, nekobox_ms, url_ms, _node_name(node))
+
 def _wait_controller(controller_url: str, timeout_s: float = 10.0) -> bool:
     deadline = time.time() + max(1.0, timeout_s)
     while time.time() < deadline:
@@ -120,6 +168,7 @@ def _mihomo_url_test_nodes(
     test_url: str,
     timeout_ms: int,
     expected_statuses: set[int] | None = None,
+    min_successes: int | None = None,
 ) -> tuple[list[Any], int, str, list[dict[str, Any]]]:
     """Filter automatic nodes with a real Mihomo URL test.
 
@@ -143,6 +192,8 @@ def _mihomo_url_test_nodes(
         raise SystemExit(f"Mihomo binary tidak ditemukan di {core_path}; URL test wajib aktif.")
 
     expected = expected_statuses or _expected_statuses()
+    test_urls = _split_test_urls(test_url)
+    required_successes = _bounded_required_successes(min_successes, len(test_urls))
     proxy_port = _free_tcp_port()
     controller_port = _free_tcp_port()
     names = [_node_name(node) for node in nodes if _node_name(node)]
@@ -213,15 +264,29 @@ def _mihomo_url_test_nodes(
                     status_text = f"switch HTTP {switch.status_code}"
                 else:
                     time.sleep(settle_s)
-                    response = requests.get(
-                        test_url,
-                        proxies={"http": proxy_url, "https": proxy_url},
-                        timeout=request_timeout,
-                        allow_redirects=False,
-                        headers={"User-Agent": user_agent},
-                    )
-                    status_text = f"HTTP {response.status_code}"
-                    success = response.status_code in expected
+                    success_count = 0
+                    status_parts: list[str] = []
+                    total_elapsed_ms = 0
+                    for url in test_urls:
+                        single_start = time.perf_counter()
+                        response = requests.get(
+                            url,
+                            proxies={"http": proxy_url, "https": proxy_url},
+                            timeout=request_timeout,
+                            allow_redirects=False,
+                            headers={"User-Agent": user_agent},
+                        )
+                        single_elapsed = int((time.perf_counter() - single_start) * 1000)
+                        total_elapsed_ms += single_elapsed
+                        ok = response.status_code in expected
+                        success_count += 1 if ok else 0
+                        host = urlparse(url).netloc or url[:40]
+                        status_parts.append(f"{host}:HTTP {response.status_code}/{single_elapsed}ms")
+                        if len(test_urls) > 1 and success_count + (len(test_urls) - len(status_parts)) < required_successes:
+                            break
+                    status_text = f"pass {success_count}/{len(test_urls)} required {required_successes}; " + "; ".join(status_parts)
+                    success = success_count >= required_successes
+                    node.streaming_score_ms = total_elapsed_ms
             except Exception as exc:
                 status_text = type(exc).__name__ + ": " + str(exc)[:120]
 
@@ -251,6 +316,7 @@ def _mihomo_url_test_nodes(
                 node.status = "dead"
                 node.reason = (getattr(node, "reason", "") + "; URL test failed: " + status_text).strip("; ")
 
+        passed.sort(key=_latency_sort_key)
         reason = f"URL test passed {len(passed)}/{checked} tested"
         return passed, checked, reason, rows
     finally:
@@ -405,6 +471,7 @@ def _singbox_url_test_nodes(
     test_url: str,
     timeout_ms: int,
     expected_statuses: set[int] | None = None,
+    min_successes: int | None = None,
 ) -> tuple[list[Any], int, str, list[dict[str, Any]]]:
     """Filter automatic nodes with sing-box, as a NekoBox compatibility check.
 
@@ -429,6 +496,8 @@ def _singbox_url_test_nodes(
         raise SystemExit(f"sing-box binary tidak ditemukan di {core_path}; NekoBox test wajib aktif.")
 
     expected = expected_statuses or _expected_statuses()
+    test_urls = _split_test_urls(test_url)
+    required_successes = _bounded_required_successes(min_successes, len(test_urls))
     passed: list[Any] = []
     checked = 0
     request_timeout = max(1.0, float(timeout_ms) / 1000.0)
@@ -490,15 +559,29 @@ def _singbox_url_test_nodes(
                 status_text = "sing-box inbound did not start"
             else:
                 proxy_url = f"http://127.0.0.1:{proxy_port}"
-                response = requests.get(
-                    test_url,
-                    proxies={"http": proxy_url, "https": proxy_url},
-                    timeout=request_timeout,
-                    allow_redirects=False,
-                    headers={"User-Agent": user_agent},
-                )
-                status_text = f"HTTP {response.status_code}"
-                success = response.status_code in expected
+                success_count = 0
+                status_parts: list[str] = []
+                total_elapsed_ms = 0
+                for url in test_urls:
+                    single_start = time.perf_counter()
+                    response = requests.get(
+                        url,
+                        proxies={"http": proxy_url, "https": proxy_url},
+                        timeout=request_timeout,
+                        allow_redirects=False,
+                        headers={"User-Agent": user_agent},
+                    )
+                    single_elapsed = int((time.perf_counter() - single_start) * 1000)
+                    total_elapsed_ms += single_elapsed
+                    ok = response.status_code in expected
+                    success_count += 1 if ok else 0
+                    host = urlparse(url).netloc or url[:40]
+                    status_parts.append(f"{host}:HTTP {response.status_code}/{single_elapsed}ms")
+                    if len(test_urls) > 1 and success_count + (len(test_urls) - len(status_parts)) < required_successes:
+                        break
+                status_text = f"pass {success_count}/{len(test_urls)} required {required_successes}; " + "; ".join(status_parts)
+                success = success_count >= required_successes
+                node.streaming_score_ms = total_elapsed_ms
         except Exception as exc:
             status_text = type(exc).__name__ + ": " + str(exc)[:140]
         finally:
@@ -537,6 +620,7 @@ def _singbox_url_test_nodes(
             node.status = "dead"
             node.reason = (getattr(node, "reason", "") + "; NekoBox/sing-box failed: " + status_text).strip("; ")
 
+    passed.sort(key=_latency_sort_key)
     reason = f"NekoBox/sing-box passed {len(passed)}/{checked} tested"
     return passed, checked, reason, rows
 
@@ -1012,12 +1096,18 @@ def main() -> int:
         streaming_expected_statuses = _expected_statuses(
             os.getenv("STREAMING_URL_TEST_EXPECTED_STATUS", os.getenv("STREAMING_EXPECTED_STATUS", "200,204,301,302,403"))
         )
+        streaming_check_urls = os.getenv(
+            "STREAMING_CHECK_URLS",
+            "https://www.netflix.com/;https://www.disneyplus.com/;https://www.primevideo.com/;https://www.gstatic.com/generate_204",
+        )
+        streaming_min_check_successes = _env_int("STREAMING_MIN_CHECK_SUCCESSES", 2)
         streaming_mihomo_pass_nodes, streaming_urltest_checked_count, streaming_urltest_reason, streaming_urltest_rows = _mihomo_url_test_nodes(
             streaming_pool_nodes_list,
             target_count=streaming_nekobox_pool_nodes,
-            test_url=os.getenv("STREAMING_REAL_CHECK_TEST_URL", os.getenv("STREAMING_TEST_URL", os.getenv("URL_TEST_URL", os.getenv("TEST_URL", ALT_TEST_URL)))),
+            test_url=streaming_check_urls,
             timeout_ms=_env_int("STREAMING_URL_TEST_TIMEOUT_MS", _env_int("URL_TEST_TIMEOUT_MS", _env_int("HEALTH_TIMEOUT_MS", 6000))),
             expected_statuses=streaming_expected_statuses,
+            min_successes=streaming_min_check_successes,
         )
         streaming_mihomo_pass_nodes = _exclude_existing_identities(streaming_mihomo_pass_nodes, alive_nodes)
         print(f"[INFO] URL test Mihomo khusus streaming: {streaming_urltest_reason}")
@@ -1025,11 +1115,12 @@ def main() -> int:
         streaming_alive_nodes, streaming_nekobox_checked_count, streaming_nekobox_reason, streaming_nekobox_rows = _singbox_url_test_nodes(
             streaming_mihomo_pass_nodes,
             target_count=streaming_max_nodes,
-            test_url=os.getenv("STREAMING_NEKOBOX_TEST_URL", os.getenv("STREAMING_TEST_URL", os.getenv("NEKOBOX_TEST_URL", os.getenv("URL_TEST_URL", os.getenv("TEST_URL", ALT_TEST_URL))))),
+            test_url=streaming_check_urls,
             timeout_ms=_env_int("STREAMING_NEKOBOX_TEST_TIMEOUT_MS", _env_int("NEKOBOX_TEST_TIMEOUT_MS", _env_int("URL_TEST_TIMEOUT_MS", _env_int("HEALTH_TIMEOUT_MS", 6000)))),
             expected_statuses=streaming_expected_statuses,
+            min_successes=streaming_min_check_successes,
         )
-        streaming_alive_nodes = _exclude_existing_identities(streaming_alive_nodes, alive_nodes)[:streaming_max_nodes]
+        streaming_alive_nodes = sorted(_exclude_existing_identities(streaming_alive_nodes, alive_nodes), key=_latency_sort_key)[:streaming_max_nodes]
         _unique_streaming_names(streaming_alive_nodes, {node.clash.get("name") for node in alive_nodes if node.clash.get("name")})
         print(f"[INFO] NekoBox/sing-box test khusus streaming: {streaming_nekobox_reason}")
         if len(streaming_alive_nodes) < streaming_min_nodes:

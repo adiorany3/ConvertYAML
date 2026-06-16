@@ -1461,7 +1461,10 @@ def build_openclash_yaml(
         node.clash["name"] for node in streaming_nodes
         if node.clash.get("name") and node.clash["name"] not in existing_standard_names
     ]
-    streaming_direct_or_names = streaming_names or ["DIRECT"]
+    # Fallback ini hanya aktif kalau pool streaming kosong/gagal. Default tetap STREAMING-FAST.
+    # Jika ingin murni hanya akun streaming, set STREAMING_ALLOW_STANDARD_FALLBACK=false.
+    streaming_allow_standard_fallback = os.getenv("STREAMING_ALLOW_STANDARD_FALLBACK", "true").strip().lower() in {"1", "true", "yes", "y", "on", "aktif"}
+    streaming_direct_or_names = streaming_names or (direct_or_names if streaming_allow_standard_fallback else ["DIRECT"])
 
     def env_int(name: str, default: int) -> int:
         raw = os.getenv(name, "").strip()
@@ -1471,6 +1474,12 @@ def build_openclash_yaml(
             return int(raw)
         except ValueError:
             return default
+
+    def env_bool(name: str, default: bool) -> bool:
+        raw = os.getenv(name, "").strip().lower()
+        if not raw:
+            return default
+        return raw in {"1", "true", "yes", "y", "on", "aktif"}
 
     streaming_test_url = os.getenv("STREAMING_TEST_URL", test_url).strip() or test_url
     streaming_interval = env_int("STREAMING_URLTEST_INTERVAL", interval)
@@ -1638,7 +1647,7 @@ def build_openclash_yaml(
             "type": "select",
             # Khusus web streaming: default ke STREAMING-FAST yang hanya berisi akun streaming.
             # Tidak mencampur pool AUTO-FAST standar, supaya node streaming bisa berbeda.
-            "proxies": ["STREAMING-FAST", "DIRECT"] + streaming_names,
+            "proxies": (["STREAMING-FAST", "AUTO-FAST", "FALLBACK", "DIRECT"] if streaming_allow_standard_fallback else ["STREAMING-FAST", "DIRECT"]) + streaming_names,
         },
         {
             "name": "STREAMING-FAST",
@@ -1759,10 +1768,24 @@ def build_openclash_yaml(
 
         # Streaming umum selain YouTube.
         "RULE-SET,netflix_domain,STREAMING",
+        "RULE-SET,netflix_ip,STREAMING",
         "RULE-SET,spotify_domain,STREAMING",
         "RULE-SET,biliintl_domain,STREAMING",
         "DOMAIN-SUFFIX,netflix.com,STREAMING",
         "DOMAIN-SUFFIX,nflxvideo.net,STREAMING",
+        "DOMAIN-SUFFIX,nflximg.net,STREAMING",
+        "DOMAIN-SUFFIX,nflxext.com,STREAMING",
+        "DOMAIN-SUFFIX,nflxso.net,STREAMING",
+        "DOMAIN-SUFFIX,disney-plus.net,STREAMING",
+        "DOMAIN-SUFFIX,disneyplus.com,STREAMING",
+        "DOMAIN-SUFFIX,bamgrid.com,STREAMING",
+        "DOMAIN-SUFFIX,dssott.com,STREAMING",
+        "DOMAIN-SUFFIX,media.dssott.com,STREAMING",
+        "DOMAIN-SUFFIX,pv-cdn.net,STREAMING",
+        "DOMAIN-SUFFIX,aiv-cdn.net,STREAMING",
+        "DOMAIN-SUFFIX,video.a2z.com,STREAMING",
+        "DOMAIN-SUFFIX,scdn.co,STREAMING",
+        "DOMAIN-SUFFIX,huluim.com,STREAMING",
         "DOMAIN-SUFFIX,disneyplus.com,STREAMING",
         "DOMAIN-SUFFIX,hotstar.com,STREAMING",
         "DOMAIN-SUFFIX,primevideo.com,STREAMING",
@@ -1829,6 +1852,19 @@ def build_openclash_yaml(
             "DOMAIN-SUFFIX,telegram.org,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,netflix.com,STREAMING",
             "DOMAIN-SUFFIX,nflxvideo.net,STREAMING",
+        "DOMAIN-SUFFIX,nflximg.net,STREAMING",
+        "DOMAIN-SUFFIX,nflxext.com,STREAMING",
+        "DOMAIN-SUFFIX,nflxso.net,STREAMING",
+        "DOMAIN-SUFFIX,disney-plus.net,STREAMING",
+        "DOMAIN-SUFFIX,disneyplus.com,STREAMING",
+        "DOMAIN-SUFFIX,bamgrid.com,STREAMING",
+        "DOMAIN-SUFFIX,dssott.com,STREAMING",
+        "DOMAIN-SUFFIX,media.dssott.com,STREAMING",
+        "DOMAIN-SUFFIX,pv-cdn.net,STREAMING",
+        "DOMAIN-SUFFIX,aiv-cdn.net,STREAMING",
+        "DOMAIN-SUFFIX,video.a2z.com,STREAMING",
+        "DOMAIN-SUFFIX,scdn.co,STREAMING",
+        "DOMAIN-SUFFIX,huluim.com,STREAMING",
             "DOMAIN-SUFFIX,disneyplus.com,STREAMING",
             "DOMAIN-SUFFIX,hotstar.com,STREAMING",
             "DOMAIN-SUFFIX,primevideo.com,STREAMING",
