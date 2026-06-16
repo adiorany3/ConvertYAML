@@ -88,6 +88,118 @@ USER_AGENT = "Mozilla/5.0 SumberYAML-OpenClash-BugCompat/3.0"
 URI_RE = re.compile(r"(?:vless|vmess|trojan|ss)://[^\s<'\"`]+", re.IGNORECASE)
 FAST_TEST_URL = "http://cp.cloudflare.com/generate_204"
 ALT_TEST_URL = "https://www.gstatic.com/generate_204"
+
+
+INDONESIA_NODE_KEYWORDS = (
+    "🇮🇩",
+    "indonesia",
+    "indo",
+    "idn",
+    "jakarta",
+    "jkt",
+    "surabaya",
+    "sby",
+    "bandung",
+    "bdg",
+    "batam",
+    "bali",
+    "denpasar",
+)
+
+INDONESIA_DOMAIN_RULES = [
+    # Semua domain Indonesia dan situs besar Indonesia yang sering memakai .com.
+    "DOMAIN-SUFFIX,id,INDONESIA",
+    "DOMAIN-SUFFIX,go.id,INDONESIA",
+    "DOMAIN-SUFFIX,co.id,INDONESIA",
+    "DOMAIN-SUFFIX,or.id,INDONESIA",
+    "DOMAIN-SUFFIX,ac.id,INDONESIA",
+    "DOMAIN-SUFFIX,sch.id,INDONESIA",
+    "DOMAIN-SUFFIX,web.id,INDONESIA",
+    "DOMAIN-SUFFIX,my.id,INDONESIA",
+
+    # Marketplace / e-commerce Indonesia.
+    "DOMAIN-SUFFIX,tokopedia.com,INDONESIA",
+    "DOMAIN-SUFFIX,tokopedia.net,INDONESIA",
+    "DOMAIN-SUFFIX,shopee.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,bukalapak.com,INDONESIA",
+    "DOMAIN-SUFFIX,blibli.com,INDONESIA",
+    "DOMAIN-SUFFIX,lazada.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,orami.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,jd.id,INDONESIA",
+    "DOMAIN-SUFFIX,zalora.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,akulaku.com,INDONESIA",
+    "DOMAIN-SUFFIX,ralali.com,INDONESIA",
+    "DOMAIN-SUFFIX,bhinneka.com,INDONESIA",
+
+    # Bank, e-wallet, QRIS, dan payment gateway Indonesia.
+    "DOMAIN-SUFFIX,bca.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,klikbca.com,INDONESIA",
+    "DOMAIN-SUFFIX,mybca.id,INDONESIA",
+    "DOMAIN-SUFFIX,bankmandiri.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,livinbymandiri.com,INDONESIA",
+    "DOMAIN-SUFFIX,bri.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,brimo.bri.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,bni.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,bnizona.com,INDONESIA",
+    "DOMAIN-SUFFIX,cimbniaga.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,octoclicks.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,bankbsi.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,bsimobile.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,bankmega.com,INDONESIA",
+    "DOMAIN-SUFFIX,danamon.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,permatabank.com,INDONESIA",
+    "DOMAIN-SUFFIX,ocbcnisp.com,INDONESIA",
+    "DOMAIN-SUFFIX,jenius.com,INDONESIA",
+    "DOMAIN-SUFFIX,bankjago.com,INDONESIA",
+    "DOMAIN-SUFFIX,seabank.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,blu.id,INDONESIA",
+    "DOMAIN-SUFFIX,dana.id,INDONESIA",
+    "DOMAIN-SUFFIX,ovo.id,INDONESIA",
+    "DOMAIN-SUFFIX,gopay.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,linkaja.id,INDONESIA",
+    "DOMAIN-SUFFIX,shopeepay.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,midtrans.com,INDONESIA",
+    "DOMAIN-SUFFIX,xendit.co,INDONESIA",
+    "DOMAIN-SUFFIX,doku.com,INDONESIA",
+    "DOMAIN-SUFFIX,duitku.com,INDONESIA",
+    "DOMAIN-SUFFIX,flip.id,INDONESIA",
+    "DOMAIN-SUFFIX,qris.id,INDONESIA",
+
+    # Layanan lokal populer: berita, transportasi, travel, telco, pemerintahan.
+    "DOMAIN-SUFFIX,detik.com,INDONESIA",
+    "DOMAIN-SUFFIX,kompas.com,INDONESIA",
+    "DOMAIN-SUFFIX,kompas.id,INDONESIA",
+    "DOMAIN-SUFFIX,tempo.co,INDONESIA",
+    "DOMAIN-SUFFIX,cnnindonesia.com,INDONESIA",
+    "DOMAIN-SUFFIX,liputan6.com,INDONESIA",
+    "DOMAIN-SUFFIX,tribunnews.com,INDONESIA",
+    "DOMAIN-SUFFIX,merdeka.com,INDONESIA",
+    "DOMAIN-SUFFIX,kumparan.com,INDONESIA",
+    "DOMAIN-SUFFIX,antaranews.com,INDONESIA",
+    "DOMAIN-SUFFIX,gojek.com,INDONESIA",
+    "DOMAIN-SUFFIX,goto.com,INDONESIA",
+    "DOMAIN-SUFFIX,grab.com,INDONESIA",
+    "DOMAIN-SUFFIX,traveloka.com,INDONESIA",
+    "DOMAIN-SUFFIX,tiket.com,INDONESIA",
+    "DOMAIN-SUFFIX,pegipegi.com,INDONESIA",
+    "DOMAIN-SUFFIX,telkomsel.com,INDONESIA",
+    "DOMAIN-SUFFIX,mytelkomsel.com,INDONESIA",
+    "DOMAIN-SUFFIX,indihome.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,xl.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,axis.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,indosatooredoo.com,INDONESIA",
+    "DOMAIN-SUFFIX,tri.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,smartfren.com,INDONESIA",
+    "DOMAIN-SUFFIX,pln.co.id,INDONESIA",
+    "DOMAIN-SUFFIX,bpjs-kesehatan.go.id,INDONESIA",
+    "DOMAIN-SUFFIX,bpjs.go.id,INDONESIA",
+    "DOMAIN-SUFFIX,pajak.go.id,INDONESIA",
+    "DOMAIN-SUFFIX,oss.go.id,INDONESIA",
+    "DOMAIN-SUFFIX,dukcapil.kemendagri.go.id,INDONESIA",
+
+    # Routing IP Indonesia. Ditaruh setelah domain agar DNS/sniffer tetap mengutamakan domain.
+    "GEOIP,ID,INDONESIA",
+]
 THIRD_TEST_URL = "https://www.google.com/generate_204"
 FAST_TARGET_DELAY_MS = 123
 DEFAULT_FILL_DELAY_MS = 400
@@ -1001,6 +1113,58 @@ def node_identity_key(node: ProxyNode) -> tuple[str, str, str, str, str]:
     )
 
 
+
+
+def _node_text_for_location(node: ProxyNode) -> str:
+    clash = node.clash or {}
+    values: list[str] = [
+        node.name,
+        node.original_name,
+        node.source,
+        node.original_server,
+        node.original_provider,
+        node.bug_sni,
+        str(clash.get("server") or ""),
+        str(clash.get("servername") or ""),
+        str(clash.get("sni") or ""),
+    ]
+    ws_opts = clash.get("ws-opts") if isinstance(clash.get("ws-opts"), dict) else {}
+    headers = ws_opts.get("headers") if isinstance(ws_opts.get("headers"), dict) else {}
+    values.append(str(headers.get("Host") or ""))
+    try:
+        parsed = urlparse(node.raw or "")
+        if parsed.fragment:
+            values.append(unquote(parsed.fragment))
+        if parsed.hostname:
+            values.append(parsed.hostname)
+    except Exception:
+        pass
+    return " ".join(v for v in values if v).lower()
+
+
+def looks_like_indonesia_node(node: ProxyNode) -> bool:
+    """Best-effort filter for server/location labels that look Indonesian.
+
+    Public proxy subscriptions usually do not expose reliable ASN/country metadata.
+    This matcher therefore uses source/node labels, original server hostnames,
+    SNI/Host headers, and common Indonesian city/country markers. The result is
+    still verified later by real Mihomo + sing-box URL tests before being emitted.
+    """
+    text = _node_text_for_location(node)
+    if not text:
+        return False
+    if any(keyword in text for keyword in INDONESIA_NODE_KEYWORDS):
+        return True
+    # Match standalone ID labels without catching random UUID fragments.
+    if re.search(r"(^|[\s_\-|/\[\]().:@#])id($|[\s_\-|/\[\]().:@#])", text):
+        return True
+    if re.search(r"(^|[\s_\-|/\[\]().:@#])id[0-9]{1,3}($|[\s_\-|/\[\]().:@#])", text):
+        return True
+    # Indonesian host/domain suffix in SNI, Host, source URL, or original hostname.
+    if re.search(r"[a-z0-9-]+\.(co\.id|go\.id|or\.id|ac\.id|sch\.id|web\.id|my\.id|id)(?:[\s/:]|$)", text):
+        return True
+    return False
+
 def select_diverse_nodes(nodes: list[ProxyNode], limit: int, prefer_ws: bool = True) -> list[ProxyNode]:
     """Pick stable nodes while avoiding many copies of the same host/root domain.
 
@@ -1447,12 +1611,14 @@ def build_openclash_yaml(
     health_timeout: int = DEFAULT_HEALTH_TIMEOUT_MS,
     rule_mode: str = "Lengkap",
     streaming_nodes: list[ProxyNode] | None = None,
+    indonesia_nodes: list[ProxyNode] | None = None,
 ) -> str:
     # nodes = akun standar untuk GLOBAL/AUTO-FAST.
     # streaming_nodes = akun khusus web streaming, dipilih dari pipeline terpisah.
     # Dengan ini STREAMING-FAST tidak mengambil pool standar, sehingga total node
     # di YAML bisa melebihi MAX_NODES standar.
     streaming_nodes = streaming_nodes or []
+    indonesia_nodes = indonesia_nodes or []
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
 
@@ -1465,6 +1631,15 @@ def build_openclash_yaml(
     # Jika ingin murni hanya akun streaming, set STREAMING_ALLOW_STANDARD_FALLBACK=false.
     streaming_allow_standard_fallback = os.getenv("STREAMING_ALLOW_STANDARD_FALLBACK", "true").strip().lower() in {"1", "true", "yes", "y", "on", "aktif"}
     streaming_direct_or_names = streaming_names or (direct_or_names if streaming_allow_standard_fallback else ["DIRECT"])
+
+    indonesia_names: list[str] = []
+    indonesia_seen_names: set[str] = set()
+    for node in indonesia_nodes:
+        name = node.clash.get("name")
+        if name and name not in indonesia_seen_names:
+            indonesia_seen_names.add(name)
+            indonesia_names.append(name)
+    indonesia_direct_or_names = indonesia_names or ["DIRECT"]
 
     def env_int(name: str, default: int) -> int:
         raw = os.getenv(name, "").strip()
@@ -1487,6 +1662,15 @@ def build_openclash_yaml(
     streaming_timeout = env_int("STREAMING_HEALTH_TIMEOUT_MS", health_timeout)
     streaming_expected_status = os.getenv(
         "STREAMING_EXPECTED_STATUS",
+        "200/204/301/302/403",
+    ).strip() or "200/204/301/302/403"
+
+    indonesia_test_url = os.getenv("INDONESIA_TEST_URL", "https://www.tokopedia.com/").strip() or "https://www.tokopedia.com/"
+    indonesia_interval = env_int("INDONESIA_URLTEST_INTERVAL", interval)
+    indonesia_tolerance = env_int("INDONESIA_TOLERANCE", 20)
+    indonesia_timeout = env_int("INDONESIA_HEALTH_TIMEOUT_MS", health_timeout)
+    indonesia_expected_status = os.getenv(
+        "INDONESIA_EXPECTED_STATUS",
         "200/204/301/302/403",
     ).strip() or "200/204/301/302/403"
 
@@ -1620,12 +1804,29 @@ def build_openclash_yaml(
             "name": "GLOBAL",
             "type": "select",
             # AUTO-FAST tetap di pilihan pertama agar fresh import langsung otomatis cepat.
-            "proxies": ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN"] + names,
+            "proxies": ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT", "INDONESIA", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN"] + names,
         },
         {
             "name": "PROXY",
             "type": "select",
-            "proxies": ["GLOBAL", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
+            "proxies": ["GLOBAL", "AUTO-FAST", "INDONESIA", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
+        },
+        {
+            "name": "INDONESIA",
+            "type": "select",
+            # Khusus marketplace, bank, dan website Indonesia: hanya pakai akun Indonesia yang sudah hidup.
+            "proxies": ["INDONESIA-FAST", "DIRECT"] + indonesia_names,
+        },
+        {
+            "name": "INDONESIA-FAST",
+            "type": "url-test",
+            "proxies": indonesia_direct_or_names,
+            "url": indonesia_test_url,
+            "interval": indonesia_interval,
+            "tolerance": indonesia_tolerance,
+            "lazy": False,
+            "timeout": indonesia_timeout,
+            "expected-status": indonesia_expected_status,
         },
         {
             "name": "SOCIAL-MEDIA",
@@ -1766,6 +1967,9 @@ def build_openclash_yaml(
         "DOMAIN-SUFFIX,github.com,EDUKASI",
         "DOMAIN-SUFFIX,githubusercontent.com,EDUKASI",
 
+        # Marketplace, bank, dan semua website Indonesia.
+        *INDONESIA_DOMAIN_RULES,
+
         # Streaming umum selain YouTube.
         "RULE-SET,netflix_domain,STREAMING",
         "RULE-SET,netflix_ip,STREAMING",
@@ -1850,6 +2054,7 @@ def build_openclash_yaml(
             "DOMAIN-SUFFIX,x.com,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,t.me,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,telegram.org,SOCIAL-MEDIA",
+            *INDONESIA_DOMAIN_RULES,
             "DOMAIN-SUFFIX,netflix.com,STREAMING",
             "DOMAIN-SUFFIX,nflxvideo.net,STREAMING",
         "DOMAIN-SUFFIX,nflximg.net,STREAMING",
@@ -1925,6 +2130,9 @@ def build_openclash_yaml(
         "proxies": [node.clash for node in nodes] + [
             node.clash for node in streaming_nodes
             if node.clash.get("name") and node.clash["name"] not in names
+        ] + [
+            node.clash for node in indonesia_nodes
+            if node.clash.get("name") and node.clash["name"] not in set(names + streaming_names)
         ],
         "proxy-groups": proxy_groups,
         "rule-providers": rule_providers,
@@ -2146,6 +2354,7 @@ def process_sources(
     reserve_pool_nodes: int = 10,
     early_stop_good_nodes: bool = True,
     test_batch_size: int = 0,
+    location_filter: str = "",
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
     """Fetch public subscriptions, test only until enough good auto nodes are found.
 
@@ -2205,6 +2414,14 @@ def process_sources(
             if node.status == "pending" and node_network(node) != "ws":
                 node.status = "skipped"
                 node.reason = "skipped: mode WS only"
+                node.score = 999999
+
+    normalized_location_filter = str(location_filter or "").strip().lower()
+    if normalized_location_filter in {"id", "indonesia", "indo"}:
+        for node in parsed:
+            if node.status == "pending" and not looks_like_indonesia_node(node):
+                node.status = "skipped"
+                node.reason = "skipped: bukan kandidat server Indonesia"
                 node.score = 999999
 
     # Small candidate pool, because we stop when enough good nodes are found.

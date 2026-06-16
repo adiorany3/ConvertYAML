@@ -1,0 +1,4 @@
+# Tambahkan link subscription khusus server Indonesia di sini.
+# Format: satu link per baris.
+# Contoh:
+# https://example.com/indonesia-subscription.txt

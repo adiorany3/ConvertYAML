@@ -27,6 +27,7 @@ from sumberyaml_core import (
     build_openclash_android_yaml,
     build_openclash_yaml,
     extract_uris,
+    looks_like_indonesia_node,
     node_identity_key,
     node_network,
     normalize_name,
@@ -696,6 +697,61 @@ def build_streaming_links_text() -> str:
     return "\n".join(unique)
 
 
+
+
+def build_indonesia_links_text() -> str:
+    """Build a separate subscription list for INDONESIA-FAST.
+
+    Indonesian nodes are selected from their own scan pool so they do not reduce
+    the standard MAX_NODES quota. Add Indonesia-specific subscriptions in
+    indonesia_subscription_links.txt or EXTRA_INDONESIA_SUBSCRIPTION_LINKS.
+    """
+    links: list[str] = []
+    if _env_bool("INDONESIA_USE_DEFAULT_LINKS", True):
+        links.extend(DEFAULT_LINKS)
+
+    if _env_bool("INDONESIA_INCLUDE_STANDARD_LINKS", True):
+        _extend_links_from_text(links, _read_text_file(os.getenv("SUBSCRIPTION_LINKS_FILE", "subscription_links.txt")))
+        _extend_links_from_text(links, os.getenv("EXTRA_SUBSCRIPTION_LINKS", ""))
+
+    indonesia_file = os.getenv("INDONESIA_SUBSCRIPTION_LINKS_FILE", "indonesia_subscription_links.txt")
+    _extend_links_from_text(links, _read_text_file(indonesia_file))
+    _extend_links_from_text(links, os.getenv("EXTRA_INDONESIA_SUBSCRIPTION_LINKS", ""))
+
+    unique: list[str] = []
+    seen: set[str] = set()
+    for link in links:
+        if link not in seen:
+            seen.add(link)
+            unique.append(link)
+    return "\n".join(unique)
+
+
+def _unique_indonesia_names(nodes: list[Any], existing_names: set[str]) -> None:
+    seen = set(existing_names)
+    for i, node in enumerate(nodes, start=1):
+        node.original_name = node.original_name or normalize_name(node.name, f"INDONESIA-ORIGINAL-{i:03d}")
+        proto = safe_proxy_name(str(getattr(node, "type", "NODE")).upper(), "NODE")
+        net = safe_proxy_name(node_network(node).upper(), "NET")
+        delay_value = getattr(node, "nekobox_test_ms", None) or getattr(node, "url_test_ms", None) or getattr(node, "best_delay_ms", None)
+        try:
+            delay = f"{int(delay_value)}MS" if delay_value is not None else "NA"
+        except Exception:
+            delay = "NA"
+        provider = provider_label_from_original_server(node)
+        base = safe_proxy_name(f"ID-{i:03d}-{provider}-{proto}-{net}-{delay}", f"ID-{i:03d}")
+        name = base
+        counter = 2
+        while name in seen:
+            suffix = f"-{counter}"
+            name = (base[: 64 - len(suffix)] + suffix).strip("-._") or f"ID-{i:03d}-{counter}"
+            counter += 1
+        seen.add(name)
+        node.name = name
+        node.clash["name"] = name
+        node.tier = node.tier or "INDONESIA"
+        node.reason = (getattr(node, "reason", "") + "; selected for INDONESIA dedicated pool").strip("; ")
+
 def _exclude_existing_identities(nodes: list[Any], existing_nodes: list[Any]) -> list[Any]:
     existing_keys = {node_identity_key(node) for node in existing_nodes}
     out: list[Any] = []
@@ -964,6 +1020,9 @@ def main() -> int:
     output_streaming_urltest_report = os.getenv("OUTPUT_STREAMING_URLTEST_REPORT", "streaming_urltest_report.csv")
     output_streaming_nekobox_report = os.getenv("OUTPUT_STREAMING_NEKOBOX_REPORT", "streaming_nekobox_report.csv")
     output_streaming_akun = os.getenv("OUTPUT_STREAMING_AKUN", "akun_streaming.txt")
+    output_indonesia_urltest_report = os.getenv("OUTPUT_INDONESIA_URLTEST_REPORT", "indonesia_urltest_report.csv")
+    output_indonesia_nekobox_report = os.getenv("OUTPUT_INDONESIA_NEKOBOX_REPORT", "indonesia_nekobox_report.csv")
+    output_indonesia_akun = os.getenv("OUTPUT_INDONESIA_AKUN", "akun_indonesia.txt")
     output_android_yaml = os.getenv("OUTPUT_ANDROID_YAML", "openclash_android.yaml")
     output_stamp = os.getenv("OUTPUT_STAMP", "last_update.txt")
     manual_file = os.getenv("MANUAL_NODES_FILE", "manual_nodes.txt")
@@ -978,6 +1037,7 @@ def main() -> int:
 
     links_text = build_links_text()
     streaming_links_text = build_streaming_links_text()
+    indonesia_links_text = build_indonesia_links_text()
     manual_text = _read_text_file(manual_file)
     manual_text, manual_server_changes = normalize_manual_nodes_text(manual_text)
     if manual_text:
@@ -990,6 +1050,7 @@ def main() -> int:
     print(f"[INFO] Target output otomatis: {max_nodes} node, minimal: {min_output_nodes} node")
     print(f"[INFO] Links subscription standar: {len([x for x in links_text.splitlines() if x.strip()])}")
     print(f"[INFO] Links subscription streaming khusus: {len([x for x in streaming_links_text.splitlines() if x.strip()])}")
+    print(f"[INFO] Links subscription Indonesia khusus: {len([x for x in indonesia_links_text.splitlines() if x.strip()])}")
     print(f"[INFO] Manual nodes parsed: {len(manual_nodes)}; skipped: {len(manual_skipped)}")
     print(f"[INFO] Manual node server normalized to {TARGET_SERVER}:{ONLY_PORT}: {manual_server_changes} link")
 
@@ -1054,6 +1115,20 @@ def main() -> int:
     streaming_nekobox_checked_count = 0
     streaming_urltest_reason = "streaming dedicated pool disabled"
     streaming_nekobox_reason = "streaming dedicated pool disabled"
+
+    indonesia_enabled = _env_bool("ENABLE_INDONESIA_DEDICATED_POOL", True)
+    indonesia_all_nodes: list[Any] = []
+    indonesia_pool_nodes_list: list[Any] = []
+    indonesia_mihomo_pass_nodes: list[Any] = []
+    indonesia_alive_nodes: list[Any] = []
+    indonesia_fetch_logs: list[tuple[str, str]] = []
+    indonesia_skipped: list[str] = []
+    indonesia_urltest_rows: list[dict[str, Any]] = []
+    indonesia_nekobox_rows: list[dict[str, Any]] = []
+    indonesia_urltest_checked_count = 0
+    indonesia_nekobox_checked_count = 0
+    indonesia_urltest_reason = "Indonesia dedicated pool disabled"
+    indonesia_nekobox_reason = "Indonesia dedicated pool disabled"
 
     if streaming_enabled and streaming_links_text.strip():
         streaming_max_nodes = _env_int("STREAMING_MAX_NODES", 20)
@@ -1128,6 +1203,88 @@ def main() -> int:
     else:
         print("[INFO] Pool khusus streaming dimatikan atau tidak ada link streaming.")
 
+    standard_indonesia_nodes = [node for node in alive_nodes if looks_like_indonesia_node(node)]
+    streaming_indonesia_nodes = [node for node in streaming_alive_nodes if looks_like_indonesia_node(node)]
+
+    if indonesia_enabled and indonesia_links_text.strip():
+        indonesia_max_nodes = _env_int("INDONESIA_MAX_NODES", 20)
+        indonesia_min_nodes = _env_int("INDONESIA_MIN_OUTPUT_NODES", min(6, indonesia_max_nodes))
+        indonesia_urltest_pool_nodes = max(
+            indonesia_max_nodes,
+            _env_int("INDONESIA_URLTEST_POOL_NODES", max(120, indonesia_max_nodes * 6)),
+        )
+        indonesia_nekobox_pool_nodes = max(
+            indonesia_max_nodes,
+            _env_int("INDONESIA_NEKOBOX_POOL_NODES", max(50, indonesia_max_nodes * 3)),
+        )
+        print(f"[INFO] Pool kandidat khusus Indonesia sebelum URL test: {indonesia_urltest_pool_nodes} node")
+        indonesia_pool_nodes_list, indonesia_all_nodes, indonesia_fetch_logs, indonesia_skipped = process_sources(
+            links_text=indonesia_links_text,
+            manual_text="",
+            fetch_timeout=_env_int("INDONESIA_FETCH_TIMEOUT", fetch_timeout),
+            tcp_timeout=_env_float("INDONESIA_TCP_TIMEOUT", tcp_timeout),
+            max_workers=_env_int("INDONESIA_MAX_WORKERS", max_workers),
+            max_nodes=indonesia_urltest_pool_nodes,
+            fast_target_ms=_env_int("INDONESIA_FAST_TARGET_MS", _env_int("FAST_TARGET_MS", 180)),
+            fill_delay_ms=_env_int("INDONESIA_FILL_DELAY_MS", _env_int("FILL_DELAY_MS", 1200)),
+            min_output_nodes=indonesia_min_nodes,
+            attempts=_env_int("INDONESIA_ATTEMPTS", attempts),
+            require_successes=min(_env_int("INDONESIA_REQUIRE_SUCCESSES", require_successes), _env_int("INDONESIA_ATTEMPTS", attempts)),
+            require_original=_env_bool("INDONESIA_REQUIRE_ORIGINAL", _env_bool("REQUIRE_ORIGINAL", False)),
+            candidate_multiplier=_env_int("INDONESIA_CANDIDATE_MULTIPLIER", _env_int("CANDIDATE_MULTIPLIER", 35)),
+            candidate_min=_env_int("INDONESIA_CANDIDATE_MIN", max(_env_int("CANDIDATE_MIN", 1200), 1800)),
+            max_jitter_ms=_env_int("INDONESIA_MAX_JITTER_MS", _env_int("MAX_JITTER_MS", 0)),
+            prefer_ws=_env_bool("INDONESIA_PREFER_WS", _env_bool("PREFER_WS", True)),
+            require_ws_upgrade=_env_bool("INDONESIA_REQUIRE_WS_UPGRADE", _env_bool("REQUIRE_WS_UPGRADE", True)),
+            force_ws_only=_env_bool("INDONESIA_FORCE_WS_ONLY", _env_bool("FORCE_WS_ONLY", True)),
+            reserve_pool_nodes=_env_int("INDONESIA_RESERVE_POOL_NODES", indonesia_urltest_pool_nodes),
+            early_stop_good_nodes=_env_bool("INDONESIA_EARLY_STOP_GOOD_NODES", False),
+            test_batch_size=_env_int("INDONESIA_TEST_BATCH_SIZE", _env_int("TEST_BATCH_SIZE", 80)),
+            location_filter="indonesia",
+        )
+        indonesia_pool_nodes_list = _exclude_existing_identities(indonesia_pool_nodes_list, alive_nodes + streaming_alive_nodes)
+        print(f"[INFO] Pool khusus Indonesia setelah buang duplikat standar/streaming: {len(indonesia_pool_nodes_list)} node")
+
+        indonesia_expected_statuses = _expected_statuses(
+            os.getenv("INDONESIA_URL_TEST_EXPECTED_STATUS", os.getenv("INDONESIA_EXPECTED_STATUS", "200,204,301,302,403"))
+        )
+        indonesia_check_urls = os.getenv(
+            "INDONESIA_CHECK_URLS",
+            "https://www.tokopedia.com/;https://www.bca.co.id/;https://www.detik.com/;https://www.gstatic.com/generate_204",
+        )
+        indonesia_min_check_successes = _env_int("INDONESIA_MIN_CHECK_SUCCESSES", 2)
+        indonesia_mihomo_pass_nodes, indonesia_urltest_checked_count, indonesia_urltest_reason, indonesia_urltest_rows = _mihomo_url_test_nodes(
+            indonesia_pool_nodes_list,
+            target_count=indonesia_nekobox_pool_nodes,
+            test_url=indonesia_check_urls,
+            timeout_ms=_env_int("INDONESIA_URL_TEST_TIMEOUT_MS", _env_int("URL_TEST_TIMEOUT_MS", _env_int("HEALTH_TIMEOUT_MS", 6000))),
+            expected_statuses=indonesia_expected_statuses,
+            min_successes=indonesia_min_check_successes,
+        )
+        indonesia_mihomo_pass_nodes = _exclude_existing_identities(indonesia_mihomo_pass_nodes, alive_nodes + streaming_alive_nodes)
+        print(f"[INFO] URL test Mihomo khusus Indonesia: {indonesia_urltest_reason}")
+
+        indonesia_alive_nodes, indonesia_nekobox_checked_count, indonesia_nekobox_reason, indonesia_nekobox_rows = _singbox_url_test_nodes(
+            indonesia_mihomo_pass_nodes,
+            target_count=indonesia_max_nodes,
+            test_url=indonesia_check_urls,
+            timeout_ms=_env_int("INDONESIA_NEKOBOX_TEST_TIMEOUT_MS", _env_int("NEKOBOX_TEST_TIMEOUT_MS", _env_int("URL_TEST_TIMEOUT_MS", _env_int("HEALTH_TIMEOUT_MS", 6000)))),
+            expected_statuses=indonesia_expected_statuses,
+            min_successes=indonesia_min_check_successes,
+        )
+        indonesia_alive_nodes = sorted(_exclude_existing_identities(indonesia_alive_nodes, alive_nodes + streaming_alive_nodes), key=_latency_sort_key)[:indonesia_max_nodes]
+        _unique_indonesia_names(
+            indonesia_alive_nodes,
+            {node.clash.get("name") for node in (alive_nodes + streaming_alive_nodes) if node.clash.get("name")},
+        )
+        print(f"[INFO] NekoBox/sing-box test khusus Indonesia: {indonesia_nekobox_reason}")
+        if len(indonesia_alive_nodes) + len(standard_indonesia_nodes) + len(streaming_indonesia_nodes) < indonesia_min_nodes:
+            print(f"[WARN] Node Indonesia hidup hanya {len(indonesia_alive_nodes) + len(standard_indonesia_nodes) + len(streaming_indonesia_nodes)}/{indonesia_min_nodes}. INDONESIA-FAST tetap dibuat dari node Indonesia yang tersedia.")
+    else:
+        print("[INFO] Pool khusus Indonesia dimatikan atau tidak ada link Indonesia.")
+
+    all_indonesia_yaml_nodes = standard_indonesia_nodes + streaming_indonesia_nodes + indonesia_alive_nodes
+
     yaml_text = build_openclash_yaml(
         alive_nodes,
         interval=_env_int("URLTEST_INTERVAL", 60),
@@ -1136,6 +1293,7 @@ def main() -> int:
         health_timeout=_env_int("HEALTH_TIMEOUT_MS", 6000),
         rule_mode=os.getenv("RULE_MODE", "Lite"),
         streaming_nodes=streaming_alive_nodes,
+        indonesia_nodes=all_indonesia_yaml_nodes,
     )
     yaml_text = add_manual_group_to_yaml_text(yaml_text, manual_nodes, android=False)
 
@@ -1148,9 +1306,10 @@ def main() -> int:
     )
     android_yaml_text = add_manual_group_to_yaml_text(android_yaml_text, manual_nodes, android=True)
 
-    csv_text = build_csv(all_nodes + streaming_all_nodes + manual_nodes)
+    csv_text = build_csv(all_nodes + streaming_all_nodes + indonesia_all_nodes + manual_nodes)
     akun_text = build_akun_txt(alive_nodes)
     streaming_akun_text = build_akun_txt(streaming_alive_nodes)
+    indonesia_akun_text = build_akun_txt(all_indonesia_yaml_nodes)
     manual_akun_text = build_akun_txt(manual_nodes)
     manual_skipped_text = "\n".join(manual_skipped) + ("\n" if manual_skipped else "")
 
@@ -1159,12 +1318,15 @@ def main() -> int:
     Path(output_csv).write_text(csv_text, encoding="utf-8")
     Path(output_akun).write_text(akun_text, encoding="utf-8")
     Path(output_streaming_akun).write_text(streaming_akun_text, encoding="utf-8")
+    Path(output_indonesia_akun).write_text(indonesia_akun_text, encoding="utf-8")
     Path(output_manual_akun).write_text(manual_akun_text, encoding="utf-8")
     Path(output_manual_skipped).write_text(manual_skipped_text, encoding="utf-8")
     Path(output_urltest_report).write_text(_build_urltest_report_csv(urltest_rows), encoding="utf-8")
     Path(output_nekobox_report).write_text(_build_nekobox_report_csv(nekobox_rows), encoding="utf-8")
     Path(output_streaming_urltest_report).write_text(_build_urltest_report_csv(streaming_urltest_rows), encoding="utf-8")
     Path(output_streaming_nekobox_report).write_text(_build_nekobox_report_csv(streaming_nekobox_rows), encoding="utf-8")
+    Path(output_indonesia_urltest_report).write_text(_build_urltest_report_csv(indonesia_urltest_rows), encoding="utf-8")
+    Path(output_indonesia_nekobox_report).write_text(_build_nekobox_report_csv(indonesia_nekobox_rows), encoding="utf-8")
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     summary = (
@@ -1174,7 +1336,10 @@ def main() -> int:
         f"Android YAML: {output_android_yaml}\n"
         f"Automatic YAML nodes after NekoBox test: {len(alive_nodes)}\n"
         f"Dedicated streaming YAML nodes after NekoBox test: {len(streaming_alive_nodes)}\n"
-        f"Total YAML proxy nodes without manual: {len(alive_nodes) + len(streaming_alive_nodes)}\n"
+        f"Dedicated Indonesia YAML nodes after NekoBox test: {len(indonesia_alive_nodes)}\n"
+        f"Standard/streaming nodes reused in INDONESIA group: {len(standard_indonesia_nodes) + len(streaming_indonesia_nodes)}\n"
+        f"Total INDONESIA group nodes: {len(all_indonesia_yaml_nodes)}\n"
+        f"Total YAML proxy nodes without manual: {len(alive_nodes) + len(streaming_alive_nodes) + len(indonesia_alive_nodes)}\n"
         f"Automatic strict pool before URL test: {len(auto_pool_nodes)}\n"
         f"Automatic Mihomo URL-test checked: {urltest_checked_count}\n"
         f"Automatic Mihomo URL-test result: {urltest_reason}\n"
@@ -1185,16 +1350,25 @@ def main() -> int:
         f"Streaming Mihomo URL-test result: {streaming_urltest_reason}\n"
         f"Streaming NekoBox/sing-box checked: {streaming_nekobox_checked_count}\n"
         f"Streaming NekoBox/sing-box result: {streaming_nekobox_reason}\n"
+        f"Indonesia strict pool before URL test: {len(indonesia_pool_nodes_list)}\n"
+        f"Indonesia Mihomo URL-test checked: {indonesia_urltest_checked_count}\n"
+        f"Indonesia Mihomo URL-test result: {indonesia_urltest_reason}\n"
+        f"Indonesia NekoBox/sing-box checked: {indonesia_nekobox_checked_count}\n"
+        f"Indonesia NekoBox/sing-box result: {indonesia_nekobox_reason}\n"
         f"Manual group nodes: {len(manual_nodes)}\n"
         f"Akun txt automatic: {len([x for x in akun_text.splitlines() if x.strip()])}\n"
         f"Akun txt streaming: {len([x for x in streaming_akun_text.splitlines() if x.strip()])}\n"
+        f"Akun txt Indonesia: {len([x for x in indonesia_akun_text.splitlines() if x.strip()])}\n"
         f"Akun txt manual: {len([x for x in manual_akun_text.splitlines() if x.strip()])}\n"
         f"Parsed subscription nodes standard: {len(all_nodes)}\n"
         f"Parsed subscription nodes streaming: {len(streaming_all_nodes)}\n"
+        f"Parsed subscription nodes Indonesia: {len(indonesia_all_nodes)}\n"
         f"Fetched links standard: {len(fetch_logs)}\n"
         f"Fetched links streaming: {len(streaming_fetch_logs)}\n"
+        f"Fetched links Indonesia: {len(indonesia_fetch_logs)}\n"
         f"Skipped raw URI standard: {len(skipped)}\n"
         f"Skipped raw URI streaming: {len(streaming_skipped)}\n"
+        f"Skipped raw URI Indonesia: {len(indonesia_skipped)}\n"
         f"Skipped manual URI: {len(manual_skipped)}\n"
         f"Manual server normalized: {manual_server_changes} link\n"
         f"Manual nodes source file: {manual_file}\n"
