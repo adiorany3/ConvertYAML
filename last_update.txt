@@ -1,32 +1,32 @@
-Last update: 2026-06-16 05:15:46 UTC
+Last update: 2026-06-16 05:33:38 UTC
 Mode: FAST10 + Mihomo URL test + NekoBox/sing-box test early-stop
 OpenClash YAML: openclash_auto.yaml
 Android YAML: openclash_android.yaml
 Automatic YAML nodes after NekoBox test: 20
 Dedicated streaming YAML nodes after NekoBox test: 30
-Dedicated Indonesia YAML nodes after NekoBox test: 0
+Dedicated Indonesia YAML nodes after NekoBox test: 1
 Standard/streaming nodes reused in INDONESIA group: 0
-Total INDONESIA group nodes: 0
-Total YAML proxy nodes without manual: 50
+Total INDONESIA group nodes: 1
+Total YAML proxy nodes without manual: 51
 Automatic strict pool before URL test: 80
-Automatic Mihomo URL-test checked: 41
-Automatic Mihomo URL-test result: URL test passed 40/41 tested
-Automatic NekoBox/sing-box checked: 28
-Automatic NekoBox/sing-box result: NekoBox/sing-box passed 20/28 tested
-Streaming strict pool before URL test: 193
-Streaming Mihomo URL-test checked: 98
-Streaming Mihomo URL-test result: URL test passed 90/98 tested
+Automatic Mihomo URL-test checked: 40
+Automatic Mihomo URL-test result: URL test passed 40/40 tested
+Automatic NekoBox/sing-box checked: 29
+Automatic NekoBox/sing-box result: NekoBox/sing-box passed 20/29 tested
+Streaming strict pool before URL test: 192
+Streaming Mihomo URL-test checked: 105
+Streaming Mihomo URL-test result: URL test passed 90/105 tested
 Streaming NekoBox/sing-box checked: 44
 Streaming NekoBox/sing-box result: NekoBox/sing-box passed 30/44 tested
 Indonesia strict pool before URL test: 12
 Indonesia Mihomo URL-test checked: 12
 Indonesia Mihomo URL-test result: URL test passed 1/12 tested
 Indonesia NekoBox/sing-box checked: 1
-Indonesia NekoBox/sing-box result: NekoBox/sing-box passed 0/1 tested
+Indonesia NekoBox/sing-box result: NekoBox/sing-box passed 1/1 tested
 Manual group nodes: 8
 Akun txt automatic: 20
 Akun txt streaming: 30
-Akun txt Indonesia: 0
+Akun txt Indonesia: 1
 Akun txt manual: 8
 Parsed subscription nodes standard: 2800
 Parsed subscription nodes streaming: 7700
@@ -34,9 +34,9 @@ Parsed subscription nodes Indonesia: 6300
 Fetched links standard: 51
 Fetched links streaming: 51
 Fetched links Indonesia: 51
-Skipped raw URI standard: 164012
-Skipped raw URI streaming: 164012
-Skipped raw URI Indonesia: 163392
+Skipped raw URI standard: 163666
+Skipped raw URI streaming: 163666
+Skipped raw URI Indonesia: 163961
 Skipped manual URI: 0
 Manual server normalized: 0 link
 Manual nodes source file: manual_nodes.txt
