@@ -1,1 +1,2 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
+AKUN-011-CLOUDFLARE-VMESS-WS-294MS,vmess,ws,104.18.42.54,vienna-bread-threats-amendment.trycloudflare.com,pass 4/4 required 2; www.tokopedia.com:HTTP 403/2118ms; www.bca.co.id:HTTP 200/1442ms; www.detik.com:HTTP 200/2386ms; www.gstatic.com:HTTP 204/653ms,6722,397,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
