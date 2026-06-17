@@ -1,0 +1,207 @@
+{
+  "api_ok": true,
+  "generated_by": "openwrt_report_status.py",
+  "groups": {
+    "AUTO-FAST": {
+      "all_count": 10,
+      "history_last_delay": 73,
+      "now": "AKUN-003-CLOUDFLARE-VLESS-WS-80MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "EDUKASI": {
+      "all_count": 15,
+      "history_last_delay": 69,
+      "now": "WARM-UP",
+      "type": "Selector",
+      "udp": true
+    },
+    "FALLBACK": {
+      "all_count": 18,
+      "history_last_delay": 96,
+      "now": "AKUN-001-UNKNOWN-VLESS-WS-71MS",
+      "type": "Fallback",
+      "udp": true
+    },
+    "GLOBAL": {
+      "all_count": 23,
+      "history_last_delay": null,
+      "now": "WARM-UP",
+      "type": "Selector",
+      "udp": true
+    },
+    "PROXY": {
+      "all_count": 24,
+      "history_last_delay": null,
+      "now": "WARM-UP",
+      "type": "Selector",
+      "udp": true
+    },
+    "SOCIAL-MEDIA": {
+      "all_count": 15,
+      "history_last_delay": 74,
+      "now": "DIRECT",
+      "type": "Selector",
+      "udp": true
+    },
+    "STREAMING": {
+      "all_count": 16,
+      "history_last_delay": 109,
+      "now": "STREAMING-FAST",
+      "type": "Selector",
+      "udp": true
+    },
+    "STREAMING-FAST": {
+      "all_count": 8,
+      "history_last_delay": 0,
+      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-86MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "WARM-UP": {
+      "all_count": 7,
+      "history_last_delay": 105,
+      "now": "AKUN-003-CLOUDFLARE-VLESS-WS-80MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "WARM-UP-CF": {
+      "all_count": 5,
+      "history_last_delay": 86,
+      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-86MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "YOUTUBE": {
+      "all_count": 15,
+      "history_last_delay": 77,
+      "now": "WARM-UP-CF",
+      "type": "Selector",
+      "udp": true
+    }
+  },
+  "log_summary": {
+    "delay_summary": {
+      "DIRECT": {
+        "avg": 0.0,
+        "max": 0,
+        "min": 0,
+        "samples": 81
+      },
+      "STREAMING-FAST": {
+        "avg": 92.7,
+        "max": 158,
+        "min": 70,
+        "samples": 6
+      },
+      "WARM-UP": {
+        "avg": 67.7,
+        "max": 290,
+        "min": 50,
+        "samples": 137
+      },
+      "WARM-UP-CF": {
+        "avg": 77.8,
+        "max": 96,
+        "min": 69,
+        "samples": 22
+      }
+    },
+    "exists": true,
+    "fail_counts": {
+      "AUTO-FAST": 81,
+      "FALLBACK": 81,
+      "STREAMING-FAST": 20,
+      "WARM-UP": 88,
+      "WARM-UP-CF": 97
+    },
+    "gateway_503_504_count": 14,
+    "group_log_counts": {
+      "EDUKASI": 41,
+      "GLOBAL": 41,
+      "PROXY": 41,
+      "SOCIAL-MEDIA": 41,
+      "STREAMING": 41,
+      "YOUTUBE": 41
+    },
+    "last_lines": [
+      "[PROXY] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 301s), WARM-UP-CF:FAIL(cooldown 301s), AUTO-FAST:FAIL(cooldown 301s), FALLBACK:FAIL(cooldown 301s), DIRECT:0ms]",
+      "[STREAMING] current=DIRECT selected=DIRECT checks=[WARM-UP-CF:FAIL(cooldown 301s), STREAMING-FAST:FAIL(cooldown 23s), WARM-UP:FAIL(cooldown 301s), AUTO-FAST:FAIL(cooldown 301s), FALLBACK:FAIL(cooldown 301s), DIRECT:0ms]",
+      "[SOCIAL-MEDIA] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 301s), WARM-UP-CF:FAIL(cooldown 301s), AUTO-FAST:FAIL(cooldown 301s), FALLBACK:FAIL(cooldown 301s), DIRECT:0ms]",
+      "[YOUTUBE] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 301s), WARM-UP-CF:FAIL(cooldown 301s), AUTO-FAST:FAIL(cooldown 301s), FALLBACK:FAIL(cooldown 301s), DIRECT:0ms]",
+      "[EDUKASI] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 301s), WARM-UP-CF:FAIL(cooldown 301s), AUTO-FAST:FAIL(cooldown 301s), FALLBACK:FAIL(cooldown 301s), DIRECT:0ms]",
+      "[GLOBAL] current=WARM-UP-CF selected=DIRECT checks=[WARM-UP:FAIL(cooldown 181s), WARM-UP-CF:FAIL(cooldown 181s), AUTO-FAST:FAIL(cooldown 181s), FALLBACK:FAIL(cooldown 181s), DIRECT:0ms]",
+      "[OK] GLOBAL -> DIRECT",
+      "[PROXY] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 181s), WARM-UP-CF:FAIL(cooldown 181s), AUTO-FAST:FAIL(cooldown 181s), FALLBACK:FAIL(cooldown 181s), DIRECT:0ms]",
+      "[STREAMING] current=STREAMING-FAST selected=DIRECT checks=[WARM-UP-CF:FAIL(cooldown 181s), STREAMING-FAST:FAIL(HTTP Error 504: Gateway Timeout), WARM-UP:FAIL(cooldown 178s), AUTO-FAST:FAIL(cooldown 178s), FALLBACK:FAIL(cooldown 178s), DIRECT:0ms]",
+      "[OK] STREAMING -> DIRECT",
+      "[SOCIAL-MEDIA] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 178s), WARM-UP-CF:FAIL(cooldown 178s), AUTO-FAST:FAIL(cooldown 178s), FALLBACK:FAIL(cooldown 178s), DIRECT:0ms]",
+      "[YOUTUBE] current=WARM-UP selected=DIRECT checks=[WARM-UP:FAIL(cooldown 178s), WARM-UP-CF:FAIL(cooldown 178s), AUTO-FAST:FAIL(cooldown 178s), FALLBACK:FAIL(cooldown 178s), DIRECT:0ms]",
+      "[OK] YOUTUBE -> DIRECT",
+      "[EDUKASI] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 178s), WARM-UP-CF:FAIL(cooldown 178s), AUTO-FAST:FAIL(cooldown 178s), FALLBACK:FAIL(cooldown 178s), DIRECT:0ms]",
+      "[GLOBAL] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 62s), WARM-UP-CF:FAIL(cooldown 62s), AUTO-FAST:FAIL(cooldown 62s), FALLBACK:FAIL(cooldown 62s), DIRECT:0ms]",
+      "[PROXY] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 62s), WARM-UP-CF:FAIL(cooldown 62s), AUTO-FAST:FAIL(cooldown 62s), FALLBACK:FAIL(cooldown 62s), DIRECT:0ms]",
+      "[STREAMING] current=DIRECT selected=DIRECT checks=[WARM-UP-CF:FAIL(cooldown 62s), STREAMING-FAST:FAIL(cooldown 868s), WARM-UP:FAIL(cooldown 62s), AUTO-FAST:FAIL(cooldown 62s), FALLBACK:FAIL(cooldown 62s), DIRECT:0ms]",
+      "[SOCIAL-MEDIA] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 62s), WARM-UP-CF:FAIL(cooldown 62s), AUTO-FAST:FAIL(cooldown 62s), FALLBACK:FAIL(cooldown 62s), DIRECT:0ms]",
+      "[YOUTUBE] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 62s), WARM-UP-CF:FAIL(cooldown 62s), AUTO-FAST:FAIL(cooldown 62s), FALLBACK:FAIL(cooldown 62s), DIRECT:0ms]",
+      "[EDUKASI] current=DIRECT selected=DIRECT checks=[WARM-UP:FAIL(cooldown 62s), WARM-UP-CF:FAIL(cooldown 62s), AUTO-FAST:FAIL(cooldown 62s), FALLBACK:FAIL(cooldown 62s), DIRECT:0ms]"
+    ],
+    "lines_checked": 300,
+    "recent_switches": [
+      {
+        "group": "PROXY",
+        "line": "[OK] PROXY -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "STREAMING",
+        "line": "[OK] STREAMING -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "SOCIAL-MEDIA",
+        "line": "[OK] SOCIAL-MEDIA -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "YOUTUBE",
+        "line": "[OK] YOUTUBE -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "EDUKASI",
+        "line": "[OK] EDUKASI -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "STREAMING",
+        "line": "[OK] STREAMING -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "YOUTUBE",
+        "line": "[OK] YOUTUBE -> DIRECT",
+        "selected": "DIRECT"
+      }
+    ],
+    "unauthorized_401_count": 0
+  },
+  "mihomo_api": "http://127.0.0.1:9090",
+  "router": "openwrt-home",
+  "timestamp_utc": "2026-06-17T17:15:00.874032+00:00"
+}
