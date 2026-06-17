@@ -11,53 +11,41 @@
 ## Rekomendasi Pakai
 - Harian/browsing: pilih `WARM-UP` atau `AUTO-FAST`.
 - Cloudflare/Worker dan streaming: pilih `WARM-UP-CF` atau `STREAMING-FAST`.
-- Kalau koneksi putus-putus: pilih `FALLBACK`, karena urutannya automatic strict dulu lalu manual backup.
+- Kalau koneksi putus-putus: pilih `FALLBACK`, karena urutannya sudah automatic strict dulu lalu manual backup.
 - Router RAM kecil: pakai `openclash_lite.yaml`.
 
 ## Tier 1 - WARM-UP
-- AKUN-007-CLOUDFLARE-VLESS-WS-82MS
-- AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-86MS
-- AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-92MS
-- AKUN-006-CLOUDFLARE-VLESS-WS-95MS
-- AKUN-002-CLOUDFLARE-VLESS-WS-97MS
-- AKUN-004-CLOUDFLARE-VLESS-WS-100MS
-- AKUN-005-CLOUDFLARE-VLESS-WS-125MS
+- AKUN-001-104-253-175-0-1-VLESS-WS-88MS
+- AKUN-002-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-94MS
+- AKUN-003-UNKNOWN-VLESS-WS-100MS
+- AKUN-005-CLOUDFLARE-VLESS-WS-102MS
+- AKUN-004-CLOUDFLARE-VLESS-WS-107MS
+- AKUN-006-CLOUDFLARE-VLESS-WS-110MS
+- AKUN-007-CLOUDFLARE-VLESS-WS-115MS
 
 ## Tier 1B - WARM-UP-CF
-- AKUN-007-CLOUDFLARE-VLESS-WS-82MS
-- AKUN-006-CLOUDFLARE-VLESS-WS-95MS
-- AKUN-002-CLOUDFLARE-VLESS-WS-97MS
-- AKUN-004-CLOUDFLARE-VLESS-WS-100MS
-- AKUN-005-CLOUDFLARE-VLESS-WS-125MS
+- AKUN-005-CLOUDFLARE-VLESS-WS-102MS
+- AKUN-004-CLOUDFLARE-VLESS-WS-107MS
+- AKUN-006-CLOUDFLARE-VLESS-WS-110MS
+- AKUN-007-CLOUDFLARE-VLESS-WS-115MS
+- AKUN-010-CLOUDFLARE-VLESS-WS-152MS
 
 ## Streaming Pool
-- AKUN-007-CLOUDFLARE-VLESS-WS-82MS
-- AKUN-006-CLOUDFLARE-VLESS-WS-95MS
-- AKUN-002-CLOUDFLARE-VLESS-WS-97MS
-- AKUN-004-CLOUDFLARE-VLESS-WS-100MS
-- AKUN-005-CLOUDFLARE-VLESS-WS-125MS
-- AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-86MS
-- AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-92MS
-- AKUN-008-CLOUDFLARE-VLESS-WS-238MS
-
-## AUTO-FAST Pool
-- AKUN-007-CLOUDFLARE-VLESS-WS-82MS
-- AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-86MS
-- AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-92MS
-- AKUN-006-CLOUDFLARE-VLESS-WS-95MS
-- AKUN-002-CLOUDFLARE-VLESS-WS-97MS
-- AKUN-004-CLOUDFLARE-VLESS-WS-100MS
-- AKUN-005-CLOUDFLARE-VLESS-WS-125MS
-- AKUN-008-CLOUDFLARE-VLESS-WS-238MS
-- AKUN-009-CLOUDFLARE-VLESS-WS-243MS
-- AKUN-010-UNKNOWN-VLESS-WS-276MS
+- AKUN-001-104-253-175-0-1-VLESS-WS-88MS
+- AKUN-002-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-94MS
+- AKUN-003-UNKNOWN-VLESS-WS-100MS
+- AKUN-005-CLOUDFLARE-VLESS-WS-102MS
+- AKUN-004-CLOUDFLARE-VLESS-WS-107MS
+- AKUN-006-CLOUDFLARE-VLESS-WS-110MS
+- AKUN-007-CLOUDFLARE-VLESS-WS-115MS
+- AKUN-010-CLOUDFLARE-VLESS-WS-152MS
 
 ## Node Berisiko dari NekoBox/sing-box Test
-- AKUN-007-CLOUDFLARE-VLESS-WS-128MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
-- AKUN-008-DEV-VLESS-WS-126MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
-- AKUN-010-CLOUDFLARE-VLESS-WS-128MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
-- AKUN-011-CLOUDFLARE-VLESS-WS-92MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
-- AKUN-012-UNKNOWN-VLESS-WS-97MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+- AKUN-003-CLOUDFLARE-VLESS-WS-105MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+- AKUN-010-CLOUDFLARE-VLESS-WS-115MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+- AKUN-011-CLOUDFLARE-VLESS-WS-116MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+- AKUN-012-CLOUDFLARE-VLESS-WS-116MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+- AKUN-013-2A0698C131212-VLESS-WS-107MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
 
 ## Catatan Smart Mode
 - Health-check cepat hanya untuk pool kecil, bukan semua node.
