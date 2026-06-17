@@ -882,9 +882,99 @@ MIHOMO_SECRET di cron AutoPilot
 MIHOMO_SECRET di workflow jika perlu
 ```
 
-Ganti IP cepat:
 
-```text
-sed -i "s/104.17.3.81/IP_BUG_BARU/g" openclash_auto.yaml openclash_lite.yaml openclash_android.yaml openclash_safe_names_rule_split.yaml
+---
+
+## Force After OpenClash Reload
+
+Fitur ini berguna agar setelah OpenClash reload/restart, koneksi langsung dipaksa masuk ke jalur/node sehat tanpa menunggu lama.
+
+### Masalah yang diselesaikan
+
+Kadang setelah OpenClash reload, node belum langsung siap. Akibatnya dashboard belum hijau, koneksi terasa delay, atau traffic pertama masih nyangkut di pilihan lama. Patch ini menambahkan script yang akan:
+
+1. Menunggu Mihomo API hidup.
+2. Menjalankan AutoPilot beberapa kali.
+3. Memilih group sehat seperti `WARM-UP`, `WARM-UP-CF`, `AUTO-FAST`, atau `STREAMING-FAST`.
+4. Menutup koneksi lama agar koneksi baru langsung memakai jalur yang sudah sehat.
+
+### Install khusus Force After Reload
+
+Upload folder `scripts` ke router, lalu jalankan:
+
+```sh
+opkg update
+opkg install python3 curl ca-certificates
+cd /root/scripts
+MIHOMO_SECRET='reyre' sh install_force_after_reload_openwrt.sh
+```
+
+### Tes manual
+
+```sh
+sh /etc/mihomo-autopilot/force_after_openclash_reload.sh
+```
+
+### Reload OpenClash sekaligus paksa node siap
+
+Setelah installer berjalan, gunakan wrapper ini:
+
+```sh
+openclash-reload-autopilot restart
+```
+
+Bisa juga:
+
+```sh
+openclash-reload-autopilot reload
+```
+
+### Guard otomatis setelah reload dari LuCI
+
+Installer juga memasang guard cron tiap 1 menit. Kalau kamu reload OpenClash dari LuCI/OpenClash, guard akan mendeteksi PID core berubah, lalu menjalankan force-after-reload otomatis.
+
+Cek cron:
+
+```sh
+crontab -l
+```
+
+Cek log:
+
+```sh
+tail -f /tmp/mihomo_force_after_reload.log
+```
+
+### Setting opsional
+
+Edit file:
+
+```sh
+vi /etc/mihomo-autopilot/github.env
+```
+
+Tambahkan atau ubah:
+
+```sh
+FORCE_WAIT_SECONDS='90'
+FORCE_PASSES='3'
+FORCE_SLEEP_BETWEEN='5'
+FORCE_DELAY_TIMEOUT_MS='3000'
+FORCE_MAX_DELAY_MS='1500'
+FORCE_FLUSH_FAKEIP='0'
+```
+
+Rekomendasi:
+
+- `FORCE_PASSES='3'` sudah cukup untuk router normal.
+- `FORCE_FLUSH_FAKEIP='0'` lebih aman untuk harian.
+- Pakai `FORCE_FLUSH_FAKEIP='1'` hanya kalau DNS/fake-ip sering nyangkut setelah reload.
+
+### Kalau ingin install lewat Router ↔ GitHub Sync
+
+Installer router-sync juga sudah menyalin file force-after-reload dan menambahkan cron guard otomatis:
+
+```sh
+sh /root/scripts/install_router_github_sync_openwrt.sh
 ```
 

@@ -12,7 +12,9 @@ for f in \
   openwrt_report_status.py \
   trigger_github_rebuild.sh \
   rollback_openclash_config.sh \
-  run_autopilot_once.sh; do
+  run_autopilot_once.sh \
+  force_after_openclash_reload.sh \
+  openclash_reload_guard.sh; do
   if [ -f "$SRC_DIR/$f" ]; then
     cp "$SRC_DIR/$f" "$BASE/$f"
     chmod +x "$BASE/$f"
@@ -35,6 +37,11 @@ MIHOMO_SECRET='reyre'
 OPENCLASH_CONFIG_DIR='/etc/openclash/config'
 CONFIG_NAME='openclash_auto.yaml'
 
+# Force-after-reload: paksa selector/node sehat setelah OpenClash reload/restart
+FORCE_WAIT_SECONDS='90'
+FORCE_PASSES='3'
+FORCE_SLEEP_BETWEEN='5'
+
 # Opsional: kalau repo private dan raw.githubusercontent.com gagal, tetap isi GITHUB_TOKEN.
 # Opsional: override raw base, contoh:
 # GITHUB_RAW_BASE='https://raw.githubusercontent.com/username/repo/main'
@@ -49,7 +56,7 @@ fi
 
 # Remove old entries to avoid duplicates.
 TMP_CRON="/tmp/router_github_sync_cron.$$"
-crontab -l 2>/dev/null | grep -v "mihomo_autopilot.py" | grep -v "openwrt_report_status.py" | grep -v "openwrt_pull_config.sh" > "$TMP_CRON" || true
+crontab -l 2>/dev/null | grep -v "mihomo_autopilot.py" | grep -v "openwrt_report_status.py" | grep -v "openwrt_pull_config.sh" | grep -v "force_after_openclash_reload.sh" | grep -v "openclash_reload_guard.sh" > "$TMP_CRON" || true
 cat >> "$TMP_CRON" <<EOF
 # mihomo autopilot self-healing, every 2 minutes
 */2 * * * * . $ENV_FILE; python3 $BASE/mihomo_autopilot.py --once --close-connections >> /tmp/mihomo_autopilot.log 2>&1
@@ -57,6 +64,10 @@ cat >> "$TMP_CRON" <<EOF
 */15 * * * * . $ENV_FILE; python3 $BASE/openwrt_report_status.py --upload >> /tmp/router_github_sync.log 2>&1
 # github -> router config pull, every 3 hours at minute 5
 5 */3 * * * . $ENV_FILE; sh $BASE/openwrt_pull_config.sh >> /tmp/router_github_sync.log 2>&1
+# force selector/node readiness on boot after OpenClash starts
+@reboot sleep 70; . $ENV_FILE; sh $BASE/force_after_openclash_reload.sh >> /tmp/mihomo_force_after_reload.log 2>&1
+# detect OpenClash/Mihomo core reload from LuCI and force selector/node readiness
+* * * * . $ENV_FILE; sh $BASE/openclash_reload_guard.sh >/dev/null 2>&1
 EOF
 crontab "$TMP_CRON"
 rm -f "$TMP_CRON"
@@ -66,4 +77,6 @@ echo "Install selesai."
 echo "1) Edit token/repo: vi $ENV_FILE"
 echo "2) Test report: python3 $BASE/openwrt_report_status.py --upload"
 echo "3) Test pull: sh $BASE/openwrt_pull_config.sh"
-echo "4) Lihat log: tail -f /tmp/router_github_sync.log"
+echo "4) Lihat log sync: tail -f /tmp/router_github_sync.log"
+echo "5) Force setelah reload: sh $BASE/force_after_openclash_reload.sh"
+echo "6) Log force reload: tail -f /tmp/mihomo_force_after_reload.log"
