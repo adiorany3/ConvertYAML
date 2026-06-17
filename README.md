@@ -882,3 +882,9 @@ MIHOMO_SECRET di cron AutoPilot
 MIHOMO_SECRET di workflow jika perlu
 ```
 
+Ganti IP cepat:
+
+```text
+sed -i "s/104.17.3.81/IP_BUG_BARU/g" openclash_auto.yaml openclash_lite.yaml openclash_android.yaml openclash_safe_names_rule_split.yaml
+```
+
