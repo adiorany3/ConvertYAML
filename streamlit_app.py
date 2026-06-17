@@ -1408,12 +1408,12 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "name": "GLOBAL",
             "type": "select",
             # WARM-UP dibuat paling depan supaya fresh import langsung memakai pool kecil yang sudah dipanaskan.
-            "proxies": ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "LOAD-BALANCE"] + names,
+            "proxies": ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "LOAD-BALANCE"] + names + ["DIRECT"],
         },
         {
             "name": "PROXY",
             "type": "select",
-            "proxies": ["GLOBAL", "WARM-UP", "WARM-UP-CF", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "FALLBACK", "DIRECT", "LOAD-BALANCE"] + names,
+            "proxies": ["GLOBAL", "WARM-UP", "WARM-UP-CF", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE"] + names + ["DIRECT"],
         },
         {
             "name": "SOCIAL-MEDIA",
@@ -1428,7 +1428,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         {
             "name": "EDUKASI",
             "type": "select",
-            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "DIRECT", "FALLBACK"]),
+            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT"]),
         },
         {
             "name": "STREAMING",
@@ -1476,7 +1476,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         {
             "name": "CLEAN",
             "type": "select",
-            "proxies": ["DIRECT", "WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK"],
+            "proxies": ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT"],
         },
         {
             "name": "AUTO-FAST",

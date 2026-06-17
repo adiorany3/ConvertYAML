@@ -766,14 +766,14 @@ def add_manual_group_to_config(config: dict[str, Any], manual_nodes: list[Any], 
         elif name == "GLOBAL":
             # Keep MANUAL visible in the main selector too.
             if "DIRECT" in proxies_list:
-                _insert_once(proxies_list, "MANUAL", proxies_list.index("DIRECT") + 1)
+                _insert_once(proxies_list, "MANUAL", proxies_list.index("DIRECT"))
             elif "FALLBACK" in proxies_list:
                 _insert_once(proxies_list, "MANUAL", proxies_list.index("FALLBACK") + 1)
             else:
                 _insert_once(proxies_list, "MANUAL", 0)
         elif (not android) and name == "PROXY":
             if "DIRECT" in proxies_list:
-                _insert_once(proxies_list, "MANUAL", proxies_list.index("DIRECT") + 1)
+                _insert_once(proxies_list, "MANUAL", proxies_list.index("DIRECT"))
             else:
                 _insert_once(proxies_list, "MANUAL", 1)
 

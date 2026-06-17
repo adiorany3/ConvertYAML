@@ -11,7 +11,7 @@ tcp-concurrent: true
 find-process-mode: strict
 global-client-fingerprint: chrome
 external-controller: 0.0.0.0:9090
-secret: "reyre"
+secret: reyre
 profile:
   store-selected: true
   store-fake-ip: true
@@ -405,7 +405,6 @@ proxy-groups:
   - WARM-UP
   - AUTO-FAST
   - FALLBACK
-  - DIRECT
   - SOCIAL-MEDIA
   - YOUTUBE
   - EDUKASI
@@ -433,6 +432,7 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
+  - DIRECT
 - name: PROXY
   type: select
   proxies:
@@ -446,7 +446,6 @@ proxy-groups:
   - STREAMING
   - CLEAN
   - FALLBACK
-  - DIRECT
   - LOAD-BALANCE
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
@@ -468,13 +467,13 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
+  - DIRECT
 - name: SOCIAL-MEDIA
   type: select
   proxies:
   - WARM-UP
   - AUTO-FAST
   - FALLBACK
-  - DIRECT
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
   - AKUN-003-VLESS-91MS
@@ -495,13 +494,13 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
+  - DIRECT
 - name: YOUTUBE
   type: select
   proxies:
   - WARM-UP
   - AUTO-FAST
   - FALLBACK
-  - DIRECT
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
   - AKUN-003-VLESS-91MS
@@ -522,12 +521,12 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
+  - DIRECT
 - name: EDUKASI
   type: select
   proxies:
   - WARM-UP
   - AUTO-FAST
-  - DIRECT
   - FALLBACK
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
@@ -549,6 +548,7 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
+  - DIRECT
 - name: STREAMING
   type: select
   proxies:
@@ -556,7 +556,6 @@ proxy-groups:
   - STREAMING-FAST
   - AUTO-FAST
   - FALLBACK
-  - DIRECT
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
   - AKUN-003-VLESS-91MS
@@ -577,13 +576,14 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
+  - DIRECT
 - name: CLEAN
   type: select
   proxies:
-  - DIRECT
   - WARM-UP
   - AUTO-FAST
   - FALLBACK
+  - DIRECT
 - name: WARM-UP
   type: url-test
   proxies:

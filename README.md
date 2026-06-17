@@ -978,3 +978,56 @@ Installer router-sync juga sudah menyalin file force-after-reload dan menambahka
 sh /root/scripts/install_router_github_sync_openwrt.sh
 ```
 
+
+## No DIRECT After OpenClash Reload
+
+Patch ini mencegah selector utama jatuh ke `DIRECT` setelah OpenClash reload/restart. Setelah core Mihomo aktif, script `force_after_openclash_reload.sh` menjalankan AutoPilot dengan mode:
+
+```sh
+--avoid-direct
+```
+
+Dengan mode ini, AutoPilot akan memilih jalur proxy sehat seperti:
+
+```text
+WARM-UP → WARM-UP-CF → AUTO-FAST → STREAMING-FAST → FALLBACK
+```
+
+`DIRECT` tetap tersedia sebagai opsi manual darurat, tetapi tidak dipilih otomatis saat force-after-reload berjalan.
+
+### Install ulang di OpenWrt
+
+```sh
+cd /root/scripts
+MIHOMO_SECRET='reyre' FORCE_AVOID_DIRECT=1 sh install_force_after_reload_openwrt.sh
+```
+
+### Tes manual
+
+```sh
+FORCE_AVOID_DIRECT=1 sh /etc/mihomo-autopilot/force_after_openclash_reload.sh
+```
+
+### Reload OpenClash + paksa proxy siap
+
+```sh
+openclash-reload-autopilot restart
+```
+
+### Cek log
+
+```sh
+tail -f /tmp/mihomo_force_after_reload.log
+```
+
+Jika ingin mengizinkan `DIRECT` sebagai fallback otomatis setelah reload, ubah:
+
+```sh
+FORCE_AVOID_DIRECT=0
+```
+
+Namun untuk mencegah traffic bocor ke koneksi langsung, biarkan default:
+
+```sh
+FORCE_AVOID_DIRECT=1
+```

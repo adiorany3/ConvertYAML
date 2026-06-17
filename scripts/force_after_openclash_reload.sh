@@ -17,9 +17,16 @@ DELAY_TIMEOUT_MS="${FORCE_DELAY_TIMEOUT_MS:-3000}"
 MAX_DELAY_MS="${FORCE_MAX_DELAY_MS:-1500}"
 LOG_FILE="${FORCE_LOG_FILE:-/tmp/mihomo_force_after_reload.log}"
 FLUSH_FLAG=""
+AVOID_DIRECT_FLAG=""
 
 if [ "${FORCE_FLUSH_FAKEIP:-0}" = "1" ]; then
   FLUSH_FLAG="--flush-fakeip"
+fi
+
+# Default: setelah reload jangan izinkan selector jatuh ke DIRECT.
+# Ubah FORCE_AVOID_DIRECT=0 hanya kalau benar-benar ingin DIRECT sebagai emergency fallback.
+if [ "${FORCE_AVOID_DIRECT:-1}" = "1" ]; then
+  AVOID_DIRECT_FLAG="--avoid-direct"
 fi
 
 log() {
@@ -79,13 +86,13 @@ run_autopilot_pass() {
 
   log "[FORCE] AutoPilot pass $pass/$PASSES"
   MIHOMO_API="$MIHOMO_API" MIHOMO_SECRET="$MIHOMO_SECRET" \
-    python3 "$AUTOPILOT_SCRIPT" --once --close-connections $FLUSH_FLAG \
+    python3 "$AUTOPILOT_SCRIPT" --once --close-connections $FLUSH_FLAG $AVOID_DIRECT_FLAG \
       --delay-timeout-ms "$DELAY_TIMEOUT_MS" \
       --max-delay-ms "$MAX_DELAY_MS" >> "$LOG_FILE" 2>&1
 }
 
 main() {
-  log "[START] force-after-reload api=$MIHOMO_API wait=${WAIT_SECONDS}s passes=$PASSES"
+  log "[START] force-after-reload api=$MIHOMO_API wait=${WAIT_SECONDS}s passes=$PASSES avoid_direct=${FORCE_AVOID_DIRECT:-1}"
 
   if ! wait_api; then
     log "[ERROR] Mihomo API belum siap setelah ${WAIT_SECONDS}s. Cek OpenClash/external-controller/secret."

@@ -298,10 +298,16 @@ def choose_target(
     max_delay_ms: int,
     cooldown_seconds: int,
     failures_before_cooldown: int,
+    avoid_direct: bool = False,
 ) -> Tuple[Optional[str], List[DelayResult]]:
     allowed = set(available_targets(selector_info))
     candidates = [(name, url) for name, url in policy if name in allowed]
+    if avoid_direct:
+        candidates = [(name, url) for name, url in candidates if name != "DIRECT"]
     results: List[DelayResult] = []
+
+    if avoid_direct and current_target(selector_info) == "DIRECT":
+        results.append(DelayResult(name="DIRECT", ok=False, delay_ms=None, error="blocked by --avoid-direct"))
 
     for name, url in candidates:
         if state.in_cooldown(name):
@@ -365,6 +371,7 @@ def run_once(args: argparse.Namespace) -> int:
             max_delay_ms=args.max_delay_ms,
             cooldown_seconds=args.cooldown_seconds,
             failures_before_cooldown=args.failures_before_cooldown,
+            avoid_direct=args.avoid_direct,
         )
 
         current = current_target(selector_info)
@@ -409,6 +416,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--http-timeout", type=float, default=6.0, help="Timeout request API")
     parser.add_argument("--close-connections", action="store_true", help="Tutup koneksi lama saat selector berpindah")
     parser.add_argument("--flush-fakeip", action="store_true", help="Coba flush fake-ip saat selector berpindah")
+    parser.add_argument("--avoid-direct", action="store_true", help="Jangan pilih DIRECT sebagai target selector. Cocok dipakai setelah OpenClash reload agar traffic tidak bocor ke DIRECT.")
     return parser
 
 
