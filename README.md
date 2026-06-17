@@ -188,3 +188,21 @@ Rekomendasi import:
 - Router normal: `openclash_auto.yaml`
 - Router ringan: `openclash_lite.yaml`
 - Android: `openclash_android.yaml`
+
+## AutoPilot Self-Healing
+
+Versi ini sudah dilengkapi AutoPilot runtime untuk OpenClash/Mihomo. AutoPilot memantau group `WARM-UP`, `WARM-UP-CF`, `AUTO-FAST`, `STREAMING-FAST`, dan `FALLBACK`, lalu memilih jalur sehat secara otomatis melalui External Controller.
+
+Dokumentasi lengkap ada di `README_AUTOPILOT.md`.
+
+Tes manual:
+
+```sh
+python3 scripts/mihomo_autopilot.py --once --close-connections
+```
+
+Install cron OpenWrt:
+
+```sh
+sh scripts/install_autopilot_openwrt.sh
+```

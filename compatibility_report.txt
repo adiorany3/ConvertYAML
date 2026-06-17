@@ -1,25 +1,17 @@
-Smart Stable v2 Compatibility Report
-Generated: 2026-06-17
+Compatibility Report — AutoPilot Self-Healing
 
-Status:
-- Python compile: OK
-- openclash_auto.yaml parse: OK
-- openclash_android.yaml parse: OK
-- openclash_lite.yaml parse: OK
+Status validasi lokal:
+- Python compile generator: OK
+- Python compile AutoPilot: OK
+- Shell installer syntax: OK
+- YAML parse openclash_auto.yaml: OK
+- YAML parse openclash_android.yaml: OK
+- YAML parse openclash_lite.yaml: OK
 - Proxy/group reference check: OK
-- Android YAML forbidden keys: OK (no rule-providers, redir-port, tproxy-port)
+- Android YAML tetap tanpa rule-providers/redir-port/tproxy-port: OK
 
-Smart groups:
-- WARM-UP: daily hot pool, 15s interval, 3000ms timeout
-- WARM-UP-CF: Cloudflare/Worker hot pool, 20s interval, 3000ms timeout, endpoint https://cp.cloudflare.com
-- STREAMING-FAST: streaming pool, 30s interval, 3000ms timeout, endpoint https://cp.cloudflare.com
-- AUTO-FAST: smart fast pool, 30s interval, 3000ms timeout
-- FALLBACK: automatic strict nodes first, manual nodes last, 60s interval, 5000ms timeout
-- LOAD-BALANCE: warm pool only, 90s interval
-
-Additional outputs:
-- openclash_lite.yaml: lightweight router mode
-- node_quality_report.md: node tier and quality summary
-
-Note:
-Real Mihomo core test could not be executed inside this sandbox because the runtime does not include the mihomo binary. GitHub Actions will validate with Mihomo when the workflow runs.
+Catatan:
+- AutoPilot membutuhkan Mihomo/OpenClash External Controller aktif.
+- Default endpoint AutoPilot: http://127.0.0.1:9090
+- Jika OpenClash memakai secret, set environment MIHOMO_SECRET.
+- Real-test Mihomo core langsung di router tetap disarankan setelah import config.

@@ -1819,7 +1819,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         {
             "name": "LOAD-BALANCE",
             "type": "load-balance",
-            "strategy": "consistent-hashing",
+            "strategy": "sticky-sessions",
             "proxies": warmup_or_direct,
             "url": test_url,
             "interval": balance_interval,

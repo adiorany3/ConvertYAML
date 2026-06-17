@@ -171,6 +171,13 @@ jobs:
           MANUAL_NODES_FILE: "manual_nodes.txt"
         run: python generate_yaml.py
 
+      - name: Validate AutoPilot script
+        shell: bash
+        run: |
+          python -m py_compile scripts/mihomo_autopilot.py
+          sh -n scripts/install_autopilot_openwrt.sh
+          sh -n scripts/run_autopilot_once.sh
+
       - name: Validate generated YAML
         shell: bash
         run: |
@@ -209,7 +216,7 @@ jobs:
           BRANCH="${GITHUB_REF_NAME}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add openclash_auto.yaml openclash_android.yaml openclash_lite.yaml node_quality_report.md openclash_auto_report.csv urltest_report.csv nekobox_test_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
+          git add openclash_auto.yaml openclash_android.yaml openclash_lite.yaml node_quality_report.md scripts/mihomo_autopilot.py scripts/install_autopilot_openwrt.sh scripts/run_autopilot_once.sh README_AUTOPILOT.md PATCH_NOTES_AUTOPILOT_SELF_HEALING.md openclash_auto_report.csv urltest_report.csv nekobox_test_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."
             exit 0
