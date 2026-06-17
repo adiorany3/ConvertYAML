@@ -765,6 +765,11 @@ def add_manual_group_to_config(config: dict[str, Any], manual_nodes: list[Any], 
             # the automatic node quota.
             for manual_name in reversed(manual_names):
                 _insert_once(proxies_list, manual_name, 0)
+        elif name == "STREAMING-FAST":
+            # Keep manual streaming candidates warm too, so the STREAMING panel can
+            # show real green delay without waiting for a nested selector to be used.
+            for manual_name in reversed(manual_names):
+                _insert_once(proxies_list, manual_name, 0)
         elif name == "GLOBAL":
             # Keep MANUAL visible in the main selector too.
             if "DIRECT" in proxies_list:

@@ -1,7 +1,7 @@
-[openclash_auto.yaml]
-OK: compatible structure check passed
-OK: responsive anti-hibernation tuning applied
-
-[openclash_android.yaml]
-OK: compatible structure check passed
-OK: responsive anti-hibernation tuning applied
+Compatibility check: OK
+- YAML parse: OK
+- Python compile: OK
+- Missing proxy-group references: 0
+- openclash_auto.yaml: STREAMING-FAST url-test added and linked to STREAMING/GLOBAL/PROXY
+- openclash_android.yaml: STREAMING-FAST url-test added to GLOBAL
+- Android lite config still omits rule-providers, redir-port, and tproxy-port

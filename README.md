@@ -156,3 +156,7 @@ URLTEST_POOL_NODES: "50"
 NEKOBOX_POOL_NODES: "35"
 CANDIDATE_MIN: "900"
 ```
+
+## Patch STREAMING-FAST
+
+Versi ini menambahkan grup `STREAMING-FAST` bertipe `url-test` agar menu streaming punya health-check langsung dan lebih sering muncul ping hijau di OpenClash. Grup `STREAMING` sekarang otomatis memilih `STREAMING-FAST` di urutan pertama. `STREAMING-FAST` memakai `lazy: false`, `interval: 30`, `timeout: 5000`, dan `tolerance: 50`, serta memasukkan node manual dan node otomatis yang sudah tersedia.

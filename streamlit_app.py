@@ -1275,12 +1275,12 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "name": "GLOBAL",
             "type": "select",
             # AUTO-FAST tetap di pilihan pertama agar fresh import langsung otomatis cepat.
-            "proxies": ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN"] + names,
+            "proxies": ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN"] + names,
         },
         {
             "name": "PROXY",
             "type": "select",
-            "proxies": ["GLOBAL", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
+            "proxies": ["GLOBAL", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
         },
         {
             "name": "SOCIAL-MEDIA",
@@ -1300,7 +1300,20 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         {
             "name": "STREAMING",
             "type": "select",
-            "proxies": selector(["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]),
+            # STREAMING-FAST dibuat url-test khusus agar panel OpenClash punya delay hijau
+            # sendiri, bukan hanya delay dari nested select group.
+            "proxies": selector(["STREAMING-FAST", "AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]),
+        },
+        {
+            "name": "STREAMING-FAST",
+            "type": "url-test",
+            "proxies": direct_or_names,
+            "url": test_url,
+            "interval": active_interval,
+            "tolerance": max(tolerance, 50),
+            "lazy": False,
+            "timeout": health_timeout,
+            "expected-status": "200/204/301/302",
         },
         {
             "name": "CLEAN",
