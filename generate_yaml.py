@@ -748,9 +748,9 @@ def add_manual_group_to_config(config: dict[str, Any], manual_nodes: list[Any], 
         "proxies": manual_names + ["DIRECT"],
     }
 
-    # Manual nodes remain outside the automatic 20-node quota. However, the
-    # FALLBACK group intentionally starts with MANUAL so manually curated nodes
-    # are tried first, then the strict automatic nodes continue after it.
+    # Manual nodes remain outside the automatic quota. Smart mode keeps strict
+    # automatic nodes first in FALLBACK, then appends manual nodes as late-stage
+    # backup. This prevents untested/manual nodes from delaying the first usable route.
     for group in groups:
         if not isinstance(group, dict):
             continue
@@ -759,12 +759,10 @@ def add_manual_group_to_config(config: dict[str, Any], manual_nodes: list[Any], 
         if not isinstance(proxies_list, list):
             continue
         if name == "FALLBACK":
-            # Put individual manual nodes first so FALLBACK can health-check them directly.
-            # This avoids a nested select group getting chosen while the selected manual
-            # node is asleep/dead, and it keeps manual nodes warm without reducing
-            # the automatic node quota.
-            for manual_name in reversed(manual_names):
-                _insert_once(proxies_list, manual_name, 0)
+            # Append individual manual nodes after strict automatic nodes. They are
+            # still directly health-checked, but no longer delay the first fallback pick.
+            for manual_name in manual_names:
+                _insert_once(proxies_list, manual_name)
         elif name == "GLOBAL":
             # Keep MANUAL visible in the main selector too.
             if "DIRECT" in proxies_list:
@@ -793,6 +791,140 @@ def add_manual_group_to_yaml_text(yaml_text: str, manual_nodes: list[Any], *, an
     return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
 
 
+def _delay_from_name(name: str) -> int:
+    import re
+    m = re.search(r"(\d+)MS\b", str(name).upper())
+    return int(m.group(1)) if m else 999999
+
+
+def _dedupe_values(values: list[str]) -> list[str]:
+    out: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        item = str(value or "").strip()
+        if not item or item in seen:
+            continue
+        seen.add(item)
+        out.append(item)
+    return out
+
+
+def _group_map(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    return {str(g.get("name")): g for g in config.get("proxy-groups", []) if isinstance(g, dict)}
+
+
+def _build_lite_yaml_from_text(yaml_text: str) -> str:
+    """Build a lightweight router config from the smart full YAML."""
+    config = yaml.safe_load(yaml_text) or {}
+    if not isinstance(config, dict):
+        return yaml_text
+    groups = _group_map(config)
+    keep_group_names = ["GLOBAL", "PROXY", "WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "MANUAL"]
+    proxies = [p for p in config.get("proxies", []) if isinstance(p, dict)]
+    proxy_names = [str(p.get("name")) for p in proxies if p.get("name")]
+    refs_available = set(proxy_names) | set(keep_group_names) | {"DIRECT", "REJECT", "GLOBAL"}
+
+    lite_groups: list[dict[str, Any]] = []
+    for name in keep_group_names:
+        g = groups.get(name)
+        if not g:
+            continue
+        new_g = dict(g)
+        gtype = str(new_g.get("type") or "")
+        refs = [str(x) for x in (new_g.get("proxies") or []) if str(x) in refs_available]
+        if name in {"GLOBAL", "PROXY"}:
+            preferred = ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "MANUAL", "DIRECT"]
+            refs = _dedupe_values([x for x in preferred if x in refs_available] + [x for x in refs if x in refs_available])
+        elif name == "WARM-UP":
+            refs = refs[:5]
+            new_g["interval"] = max(20, int(new_g.get("interval") or 20))
+            new_g["timeout"] = min(int(new_g.get("timeout") or 3000), 3000)
+        elif name == "WARM-UP-CF":
+            refs = refs[:5]
+            new_g["interval"] = max(25, int(new_g.get("interval") or 25))
+            new_g["timeout"] = min(int(new_g.get("timeout") or 3000), 3000)
+        elif name == "AUTO-FAST":
+            refs = refs[:8]
+            new_g["interval"] = max(45, int(new_g.get("interval") or 45))
+            new_g["timeout"] = min(int(new_g.get("timeout") or 3000), 3000)
+        elif name == "FALLBACK":
+            new_g["interval"] = max(90, int(new_g.get("interval") or 90))
+            new_g["timeout"] = max(4000, int(new_g.get("timeout") or 5000))
+        if gtype in {"url-test", "fallback", "load-balance"} and not refs:
+            refs = ["DIRECT"]
+        new_g["proxies"] = refs
+        lite_groups.append(new_g)
+
+    config["proxy-groups"] = lite_groups
+    config.pop("rule-providers", None)
+    config["rules"] = [
+        "DOMAIN-SUFFIX,local,DIRECT",
+        "DOMAIN-SUFFIX,lan,DIRECT",
+        "IP-CIDR,127.0.0.0/8,DIRECT,no-resolve",
+        "IP-CIDR,10.0.0.0/8,DIRECT,no-resolve",
+        "IP-CIDR,172.16.0.0/12,DIRECT,no-resolve",
+        "IP-CIDR,192.168.0.0/16,DIRECT,no-resolve",
+        "MATCH,GLOBAL",
+    ]
+    config["log-level"] = "warning"
+    return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
+
+
+def _build_node_quality_report(yaml_text: str, urltest_rows: list[dict[str, Any]], nekobox_rows: list[dict[str, Any]]) -> str:
+    config = yaml.safe_load(yaml_text) or {}
+    groups = _group_map(config if isinstance(config, dict) else {})
+    url_map = {str(row.get("name")): row for row in urltest_rows}
+    neko_map = {str(row.get("name")): row for row in nekobox_rows}
+
+    proxy_names = [str(p.get("name")) for p in config.get("proxies", []) if isinstance(p, dict) and p.get("name")] if isinstance(config, dict) else []
+    warmup = groups.get("WARM-UP", {}).get("proxies", []) or []
+    warmup_cf = groups.get("WARM-UP-CF", {}).get("proxies", []) or []
+    streaming = groups.get("STREAMING-FAST", {}).get("proxies", []) or []
+    auto_fast = groups.get("AUTO-FAST", {}).get("proxies", []) or []
+    fallback = groups.get("FALLBACK", {}).get("proxies", []) or []
+
+    def metric(name: str) -> tuple[int, int, str]:
+        u = url_map.get(name, {})
+        n = neko_map.get(name, {})
+        return _as_int(n.get("nekobox_test_ms"), 999999), _as_int(u.get("url_test_ms"), 999999), str(n.get("nekobox_ready") or "")
+
+    ranked = sorted(proxy_names, key=lambda x: (_delay_from_name(x), metric(x)[0], metric(x)[1]))
+    hot = [x for x in ranked if x in warmup]
+    cf = [x for x in ranked if x in warmup_cf]
+    stream = [x for x in ranked if x in streaming]
+    manual = [x for x in fallback if str(x).startswith("MANUAL-")]
+    risky = [name for name, row in neko_map.items() if str(row.get("nekobox_ready")) != "yes"]
+
+    lines = [
+        "# Node Quality Report - Smart Stable",
+        "",
+        "## Ringkasan",
+        f"- Total proxy di YAML: {len(proxy_names)}",
+        f"- WARM-UP harian: {len(warmup)} node",
+        f"- WARM-UP-CF Cloudflare/Worker: {len(warmup_cf)} node",
+        f"- STREAMING-FAST: {len(streaming)} node",
+        f"- AUTO-FAST: {len(auto_fast)} node",
+        f"- FALLBACK: {len(fallback)} referensi, manual backup: {len(manual)} node",
+        "",
+        "## Rekomendasi Pakai",
+        "- Harian/browsing: pilih `WARM-UP` atau `AUTO-FAST`.",
+        "- Cloudflare/Worker dan streaming: pilih `WARM-UP-CF` atau `STREAMING-FAST`.",
+        "- Kalau koneksi putus-putus: pilih `FALLBACK`, karena urutannya sudah automatic strict dulu lalu manual backup.",
+        "- Router RAM kecil: pakai `openclash_lite.yaml`.",
+        "",
+        "## Tier 1 - WARM-UP",
+    ]
+    lines += [f"- {name}" for name in hot] or ["- Tidak ada"]
+    lines += ["", "## Tier 1B - WARM-UP-CF"]
+    lines += [f"- {name}" for name in cf] or ["- Tidak ada"]
+    lines += ["", "## Streaming Pool"]
+    lines += [f"- {name}" for name in stream] or ["- Tidak ada"]
+    lines += ["", "## Node Berisiko dari NekoBox/sing-box Test"]
+    lines += [f"- {name}: {neko_map[name].get('nekobox_status', '')}" for name in risky[:30]] or ["- Tidak ada yang gagal pada laporan terakhir"]
+    lines += ["", "## Catatan Smart Mode", "- Health-check cepat hanya untuk pool kecil, bukan semua node.", "- Cloudflare/Worker punya endpoint test sendiri: `https://cp.cloudflare.com`.", "- `fake-ip-filter` diperluas untuk domain LAN, NTP, connectivity check, router, dan perbankan."]
+    return "\n".join(lines) + "\n"
+
+
 def main() -> int:
     output_yaml = os.getenv("OUTPUT_YAML", "openclash_auto.yaml")
     output_csv = os.getenv("OUTPUT_CSV", "openclash_auto_report.csv")
@@ -802,6 +934,8 @@ def main() -> int:
     output_urltest_report = os.getenv("OUTPUT_URLTEST_REPORT", "urltest_report.csv")
     output_nekobox_report = os.getenv("OUTPUT_NEKOBOX_REPORT", "nekobox_test_report.csv")
     output_android_yaml = os.getenv("OUTPUT_ANDROID_YAML", "openclash_android.yaml")
+    output_lite_yaml = os.getenv("OUTPUT_LITE_YAML", "openclash_lite.yaml")
+    output_node_quality_report = os.getenv("OUTPUT_NODE_QUALITY_REPORT", "node_quality_report.md")
     output_stamp = os.getenv("OUTPUT_STAMP", "last_update.txt")
     manual_file = os.getenv("MANUAL_NODES_FILE", "manual_nodes.txt")
 
@@ -895,6 +1029,9 @@ def main() -> int:
     )
     android_yaml_text = add_manual_group_to_yaml_text(android_yaml_text, manual_nodes, android=True)
 
+    lite_yaml_text = _build_lite_yaml_from_text(yaml_text)
+    node_quality_text = _build_node_quality_report(yaml_text, urltest_rows, nekobox_rows)
+
     csv_text = build_csv(all_nodes + manual_nodes)
     akun_text = build_akun_txt(alive_nodes)
     manual_akun_text = build_akun_txt(manual_nodes)
@@ -902,6 +1039,8 @@ def main() -> int:
 
     Path(output_yaml).write_text(yaml_text, encoding="utf-8")
     Path(output_android_yaml).write_text(android_yaml_text, encoding="utf-8")
+    Path(output_lite_yaml).write_text(lite_yaml_text, encoding="utf-8")
+    Path(output_node_quality_report).write_text(node_quality_text, encoding="utf-8")
     Path(output_csv).write_text(csv_text, encoding="utf-8")
     Path(output_akun).write_text(akun_text, encoding="utf-8")
     Path(output_manual_akun).write_text(manual_akun_text, encoding="utf-8")
@@ -915,6 +1054,8 @@ def main() -> int:
         f"Mode: FAST10 + Mihomo URL test + NekoBox/sing-box test early-stop\n"
         f"OpenClash YAML: {output_yaml}\n"
         f"Android YAML: {output_android_yaml}\n"
+        f"Lite router YAML: {output_lite_yaml}\n"
+        f"Node quality report: {output_node_quality_report}\n"
         f"Automatic YAML nodes after NekoBox test: {len(alive_nodes)}\n"
         f"Automatic strict pool before URL test: {len(auto_pool_nodes)}\n"
         f"Automatic Mihomo URL-test checked: {urltest_checked_count}\n"

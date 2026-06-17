@@ -114,6 +114,15 @@ jobs:
           ANDROID_URLTEST_INTERVAL: "30"
           WARMUP_INTERVAL: "15"
           WARMUP_TIMEOUT_MS: "3000"
+          CF_WARMUP_INTERVAL: "20"
+          CF_WARMUP_TIMEOUT_MS: "3000"
+          CF_WARMUP_NODE_LIMIT: "5"
+          CF_WARMUP_MAX_DELAY_MS: "350"
+          FAST_NODE_LIMIT: "12"
+          FAST_MAX_DELAY_MS: "700"
+          STREAMING_NODE_LIMIT: "8"
+          CF_TEST_URL: "https://cp.cloudflare.com"
+          STREAMING_TEST_URL: "https://cp.cloudflare.com"
           FAST_HEALTH_TIMEOUT_MS: "3000"
           FALLBACK_INTERVAL: "60"
           WARMUP_NODE_LIMIT: "7"
@@ -125,6 +134,8 @@ jobs:
           BALANCE_INTERVAL: "90"
           RULE_MODE: "Lite"
           OUTPUT_ANDROID_YAML: "openclash_android.yaml"
+          OUTPUT_LITE_YAML: "openclash_lite.yaml"
+          OUTPUT_NODE_QUALITY_REPORT: "node_quality_report.md"
           ANDROID_HEALTH_TIMEOUT_MS: "5000"
           TEST_URL: "https://www.gstatic.com/generate_204"
           REAL_CHECK_TEST_URL: "https://www.gstatic.com/generate_204"
@@ -146,6 +157,7 @@ jobs:
           ./mihomo -t -d . -f openclash_auto.yaml
           echo "Validate Android/global YAML"
           ./mihomo -t -d . -f openclash_android.yaml
+          ./mihomo -t -d . -f openclash_lite.yaml
           echo "YAML validated by Mihomo."
 
       - name: Commit and push updated YAML safely
@@ -155,7 +167,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt compatibility_report.txt last_update.txt
+          git add openclash_auto.yaml openclash_android.yaml openclash_lite.yaml node_quality_report.md openclash_auto_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt compatibility_report.txt last_update.txt
 
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."

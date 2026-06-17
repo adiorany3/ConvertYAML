@@ -54,21 +54,108 @@ def _active_health_interval(interval: int) -> int:
 
 
 def _delay_from_proxy_name(name: str) -> int:
-    """Extract delay suffix from names like AKUN-001-...-86MS for warm-up ranking."""
-    match = re.search(r"(\d+)MS\b", str(name).upper())
+    """Extract delay suffix from names like AKUN-001-...-86MS for smart ranking."""
+    match = re.search(r"(\d+)MS", str(name).upper())
     return int(match.group(1)) if match else 999999
 
 
-def _select_warmup_names(names: list[str]) -> list[str]:
-    """Pick a small, low-latency warm pool so the router does not health-check every node too often."""
+def _dedupe_names(values: list[str]) -> list[str]:
+    out: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        item = str(value or "").strip()
+        if not item or item in seen:
+            continue
+        seen.add(item)
+        out.append(item)
+    return out
+
+
+def _rank_names_by_delay(names: list[str]) -> list[str]:
     clean_names = [str(n) for n in names if str(n) and str(n) != "DIRECT"]
-    if not clean_names:
+    original_index = {name: idx for idx, name in enumerate(clean_names)}
+    return sorted(clean_names, key=lambda n: (_delay_from_proxy_name(n), original_index[n]))
+
+
+def _is_cloudflare_like(name: str) -> bool:
+    upper = str(name or "").upper()
+    return any(token in upper for token in ("CLOUDFLARE", "WORKER", "WORKERS", "CF-", "-CF", "DEV-"))
+
+
+def _select_fast_pool_names(names: list[str]) -> list[str]:
+    """Tier-2 pool: quick enough for AUTO-FAST, but not as aggressive as WARM-UP."""
+    ranked = _rank_names_by_delay(names)
+    if not ranked:
+        return []
+    limit = _env_int_range("FAST_NODE_LIMIT", 12, 5, 30)
+    max_delay = _env_int_range("FAST_MAX_DELAY_MS", 700, 120, 3000)
+    good = [name for name in ranked if _delay_from_proxy_name(name) <= max_delay]
+    pool = good or ranked
+    return pool[: min(limit, len(pool))]
+
+
+def _select_warmup_names(names: list[str]) -> list[str]:
+    """Tier-1 pool: small hot pool to keep daily nodes awake without overloading the router."""
+    ranked = _rank_names_by_delay(names)
+    if not ranked:
         return []
     limit = _env_int_range("WARMUP_NODE_LIMIT", 7, 3, 12)
     max_delay = _env_int_range("WARMUP_MAX_DELAY_MS", 180, 80, 1000)
-    original_index = {name: idx for idx, name in enumerate(clean_names)}
-    ranked = sorted(clean_names, key=lambda n: (_delay_from_proxy_name(n) > max_delay, _delay_from_proxy_name(n), original_index[n]))
-    return ranked[: min(limit, len(ranked))]
+    preferred = [name for name in ranked if _delay_from_proxy_name(name) <= max_delay]
+    pool = preferred or ranked
+    return pool[: min(limit, len(pool))]
+
+
+def _select_cf_warmup_names(names: list[str]) -> list[str]:
+    """Dedicated Cloudflare/Worker warm-up pool with its own health endpoint."""
+    ranked = _rank_names_by_delay([name for name in names if _is_cloudflare_like(name)])
+    if not ranked:
+        return []
+    limit = _env_int_range("CF_WARMUP_NODE_LIMIT", 5, 2, 12)
+    max_delay = _env_int_range("CF_WARMUP_MAX_DELAY_MS", 350, 100, 2000)
+    preferred = [name for name in ranked if _delay_from_proxy_name(name) <= max_delay]
+    pool = preferred or ranked
+    return pool[: min(limit, len(pool))]
+
+
+def _select_streaming_names(names: list[str], warmup_names: list[str] | None = None, cf_names: list[str] | None = None) -> list[str]:
+    """Streaming pool prioritizes Cloudflare/WS nodes, then the general warm pool."""
+    limit = _env_int_range("STREAMING_NODE_LIMIT", 8, 3, 16)
+    fast_names = _select_fast_pool_names(names)
+    ordered = _dedupe_names((cf_names or []) + (warmup_names or []) + fast_names + _rank_names_by_delay(names))
+    return ordered[: min(limit, len(ordered))]
+
+
+def _fallback_order_names(names: list[str], warmup_names: list[str] | None = None, cf_names: list[str] | None = None) -> list[str]:
+    """Fallback should try strict automatic nodes first; manual nodes are appended later by generate_yaml.py."""
+    return _dedupe_names((warmup_names or []) + (cf_names or []) + _rank_names_by_delay(names))
+
+
+SMART_FAKE_IP_FILTER = [
+    "+.lan",
+    "+.local",
+    "localhost.ptlogin2.qq.com",
+    "dns.msftncsi.com",
+    "www.msftconnecttest.com",
+    "connectivitycheck.gstatic.com",
+    "connect.rom.miui.com",
+    "time.*.com",
+    "ntp.*.com",
+    "+.pool.ntp.org",
+    "router.asus.com",
+    "tplinkwifi.net",
+    "tendawifi.com",
+    "+.bank*",
+    "+.bca.co.id",
+    "+.bni.co.id",
+    "+.bri.co.id",
+    "+.mandiri.co.id",
+]
+
+
+def _dns_fake_ip_filter() -> list[str]:
+    extra = [x.strip() for x in os.getenv("EXTRA_FAKE_IP_FILTER", "").split(",") if x.strip()]
+    return _dedupe_names(SMART_FAKE_IP_FILTER + extra)
 
 DEFAULT_LINKS = [
     "https://raw.githubusercontent.com/itsyebekhe/PSG/main/lite/subscriptions/xray/normal/mix",
@@ -1485,17 +1572,29 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
     warmup_names = _select_warmup_names(names)
+    cf_warmup_names = _select_cf_warmup_names(names)
+    fast_names = _select_fast_pool_names(names)
+    streaming_names = _select_streaming_names(names, warmup_names, cf_warmup_names)
+    fallback_names = _fallback_order_names(names, warmup_names, cf_warmup_names)
     warmup_or_direct = warmup_names or direct_or_names
+    cf_or_warmup = cf_warmup_names or warmup_or_direct
+    fast_or_direct = fast_names or direct_or_names
+    streaming_or_direct = streaming_names or warmup_or_direct
+    fallback_or_direct = fallback_names or direct_or_names
     active_interval = _active_health_interval(interval)
     warmup_interval = _env_int_range("WARMUP_INTERVAL", 15, 10, 120)
+    cf_interval = _env_int_range("CF_WARMUP_INTERVAL", 20, 10, 120)
     fallback_interval = max(active_interval, _env_int_range("FALLBACK_INTERVAL", 60, 30, 600))
     balance_interval = max(fallback_interval, _env_int_range("BALANCE_INTERVAL", 90, 60, 600))
     base_timeout = int(health_timeout)
     warmup_timeout = _env_int_range("WARMUP_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
+    cf_timeout = _env_int_range("CF_WARMUP_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
     fast_timeout = _env_int_range("FAST_HEALTH_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
+    cf_test_url = os.getenv("CF_TEST_URL", "https://cp.cloudflare.com").strip() or "https://cp.cloudflare.com"
+    streaming_test_url = os.getenv("STREAMING_TEST_URL", cf_test_url).strip() or cf_test_url
 
     def selector(defaults: list[str] | None = None) -> list[str]:
-        defaults = defaults or ["WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT"]
+        defaults = defaults or ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT"]
         return defaults + names
 
     domain_provider = {
@@ -1624,34 +1723,34 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "name": "GLOBAL",
             "type": "select",
             # WARM-UP dibuat paling depan supaya fresh import langsung memakai pool kecil yang sudah dipanaskan.
-            "proxies": ["WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "LOAD-BALANCE"] + names,
+            "proxies": ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "LOAD-BALANCE"] + names,
         },
         {
             "name": "PROXY",
             "type": "select",
-            "proxies": ["GLOBAL", "WARM-UP", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "FALLBACK", "DIRECT", "LOAD-BALANCE"] + names,
+            "proxies": ["GLOBAL", "WARM-UP", "WARM-UP-CF", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "FALLBACK", "DIRECT", "LOAD-BALANCE"] + names,
         },
         {
             "name": "SOCIAL-MEDIA",
             "type": "select",
-            "proxies": selector(["WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT"]),
+            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT"]),
         },
         {
             "name": "YOUTUBE",
             "type": "select",
-            "proxies": selector(["WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT"]),
+            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT"]),
         },
         {
             "name": "EDUKASI",
             "type": "select",
-            "proxies": selector(["WARM-UP", "AUTO-FAST", "DIRECT", "FALLBACK"]),
+            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "DIRECT", "FALLBACK"]),
         },
         {
             "name": "STREAMING",
             "type": "select",
             # STREAMING-FAST dibuat url-test khusus agar panel OpenClash punya delay hijau
             # sendiri, bukan hanya delay dari nested select group.
-            "proxies": selector(["WARM-UP", "STREAMING-FAST", "AUTO-FAST", "FALLBACK", "DIRECT"]),
+            "proxies": selector(["WARM-UP-CF", "STREAMING-FAST", "WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT"]),
         },
         {
             "name": "WARM-UP",
@@ -1666,10 +1765,22 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "max-failed-times": 2,
         },
         {
+            "name": "WARM-UP-CF",
+            "type": "url-test",
+            "proxies": cf_or_warmup,
+            "url": cf_test_url,
+            "interval": cf_interval,
+            "tolerance": min(tolerance, 30),
+            "lazy": False,
+            "timeout": cf_timeout,
+            "expected-status": "200/204/301/302",
+            "max-failed-times": 2,
+        },
+        {
             "name": "STREAMING-FAST",
             "type": "url-test",
-            "proxies": warmup_or_direct,
-            "url": test_url,
+            "proxies": streaming_or_direct,
+            "url": streaming_test_url,
             "interval": active_interval,
             "tolerance": max(tolerance, 50),
             "lazy": False,
@@ -1680,12 +1791,12 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         {
             "name": "CLEAN",
             "type": "select",
-            "proxies": ["DIRECT", "WARM-UP", "AUTO-FAST", "FALLBACK"],
+            "proxies": ["DIRECT", "WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK"],
         },
         {
             "name": "AUTO-FAST",
             "type": "url-test",
-            "proxies": direct_or_names,
+            "proxies": fast_or_direct,
             "url": test_url,
             "interval": active_interval,
             "tolerance": tolerance,
@@ -1697,7 +1808,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         {
             "name": "FALLBACK",
             "type": "fallback",
-            "proxies": direct_or_names,
+            "proxies": fallback_or_direct,
             "url": test_url,
             "interval": fallback_interval,
             "lazy": False,
@@ -1893,7 +2004,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "listen": "0.0.0.0:7874",
             "enhanced-mode": "fake-ip",
             "fake-ip-range": "198.18.0.1/16",
-            "fake-ip-filter": ["+.lan", "+.local", "time.*.com", "ntp.*.com"],
+            "fake-ip-filter": _dns_fake_ip_filter(),
             "default-nameserver": ["1.1.1.1", "8.8.8.8"],
             "nameserver": ["https://1.1.1.1/dns-query", "https://dns.google/dns-query"],
             "fallback": ["tls://1.1.1.1", "tls://8.8.8.8"],
@@ -1925,19 +2036,31 @@ def build_openclash_android_yaml(
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
     warmup_names = _select_warmup_names(names)
+    cf_warmup_names = _select_cf_warmup_names(names)
+    fast_names = _select_fast_pool_names(names)
+    streaming_names = _select_streaming_names(names, warmup_names, cf_warmup_names)
+    fallback_names = _fallback_order_names(names, warmup_names, cf_warmup_names)
     warmup_or_direct = warmup_names or direct_or_names
+    cf_or_warmup = cf_warmup_names or warmup_or_direct
+    fast_or_direct = fast_names or direct_or_names
+    streaming_or_direct = streaming_names or warmup_or_direct
+    fallback_or_direct = fallback_names or direct_or_names
     active_interval = _active_health_interval(interval)
     warmup_interval = _env_int_range("WARMUP_INTERVAL", 15, 10, 120)
+    cf_interval = _env_int_range("CF_WARMUP_INTERVAL", 20, 10, 120)
     fallback_interval = max(active_interval, _env_int_range("FALLBACK_INTERVAL", 60, 30, 600))
     base_timeout = int(health_timeout)
     warmup_timeout = _env_int_range("WARMUP_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
+    cf_timeout = _env_int_range("CF_WARMUP_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
     fast_timeout = _env_int_range("FAST_HEALTH_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
+    cf_test_url = os.getenv("CF_TEST_URL", "https://cp.cloudflare.com").strip() or "https://cp.cloudflare.com"
+    streaming_test_url = os.getenv("STREAMING_TEST_URL", cf_test_url).strip() or cf_test_url
 
     proxy_groups: list[dict[str, Any]] = [
         {
             "name": "GLOBAL",
             "type": "select",
-            "proxies": ["WARM-UP", "STREAMING-FAST", "AUTO-FAST", "FALLBACK", "DIRECT"] + names,
+            "proxies": ["WARM-UP-CF", "STREAMING-FAST", "WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT"] + names,
         },
         {
             "name": "WARM-UP",
@@ -1952,10 +2075,22 @@ def build_openclash_android_yaml(
             "max-failed-times": 2,
         },
         {
+            "name": "WARM-UP-CF",
+            "type": "url-test",
+            "proxies": cf_or_warmup,
+            "url": cf_test_url,
+            "interval": cf_interval,
+            "tolerance": min(tolerance, 30),
+            "lazy": False,
+            "timeout": cf_timeout,
+            "expected-status": "200/204/301/302",
+            "max-failed-times": 2,
+        },
+        {
             "name": "STREAMING-FAST",
             "type": "url-test",
-            "proxies": warmup_or_direct,
-            "url": test_url,
+            "proxies": streaming_or_direct,
+            "url": streaming_test_url,
             "interval": active_interval,
             "tolerance": max(tolerance, 50),
             "lazy": False,
@@ -1966,7 +2101,7 @@ def build_openclash_android_yaml(
         {
             "name": "AUTO-FAST",
             "type": "url-test",
-            "proxies": direct_or_names,
+            "proxies": fast_or_direct,
             "url": test_url,
             "interval": active_interval,
             "tolerance": tolerance,
@@ -1978,7 +2113,7 @@ def build_openclash_android_yaml(
         {
             "name": "FALLBACK",
             "type": "fallback",
-            "proxies": direct_or_names,
+            "proxies": fallback_or_direct,
             "url": test_url,
             "interval": fallback_interval,
             "lazy": False,
@@ -2016,7 +2151,7 @@ def build_openclash_android_yaml(
             "ipv6": False,
             "enhanced-mode": "fake-ip",
             "fake-ip-range": "198.18.0.1/16",
-            "fake-ip-filter": ["+.lan", "+.local", "time.*.com", "ntp.*.com"],
+            "fake-ip-filter": _dns_fake_ip_filter(),
             "default-nameserver": ["1.1.1.1", "8.8.8.8"],
             "nameserver": ["https://1.1.1.1/dns-query", "https://dns.google/dns-query"],
         },

@@ -169,3 +169,22 @@ CANDIDATE_MIN: "900"
 ## Patch STREAMING-FAST + WARM-UP
 
 Versi ini mempertahankan `STREAMING-FAST` bertipe `url-test`, lalu menambahkan `WARM-UP` sebagai pool kecil anti-hibernasi. `STREAMING` sekarang mengutamakan `WARM-UP`, lalu `STREAMING-FAST`, `AUTO-FAST`, dan `FALLBACK`. `STREAMING-FAST` tidak lagi berisi semua node/manual; isinya dibuat lebih kecil agar health-check ringan dan ping hijau lebih stabil.
+
+
+## Smart Stable v2
+
+Versi ini memakai pemisahan pool agar koneksi lebih responsif tanpa membebani router:
+
+- `WARM-UP`: pool utama harian agar node cepat siap.
+- `WARM-UP-CF`: pool khusus Cloudflare/Worker dengan endpoint `https://cp.cloudflare.com`.
+- `STREAMING-FAST`: pool streaming yang diprioritaskan dari Cloudflare/WS dan warm pool.
+- `AUTO-FAST`: fast pool tier-2.
+- `FALLBACK`: automatic strict nodes dulu, manual nodes belakangan.
+- `openclash_lite.yaml`: mode ringan untuk router RAM/CPU kecil.
+- `node_quality_report.md`: laporan tier dan kualitas node terakhir.
+
+Rekomendasi import:
+
+- Router normal: `openclash_auto.yaml`
+- Router ringan: `openclash_lite.yaml`
+- Android: `openclash_android.yaml`
