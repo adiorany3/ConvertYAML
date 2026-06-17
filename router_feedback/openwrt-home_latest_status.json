@@ -4,28 +4,28 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 64,
+      "history_last_delay": 67,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-142MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 81,
+      "history_last_delay": 63,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 16,
-      "history_last_delay": 64,
+      "history_last_delay": 51,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-142MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 62,
+      "history_last_delay": 70,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
@@ -39,28 +39,28 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 72,
+      "history_last_delay": 60,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 61,
+      "history_last_delay": 67,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 65,
+      "history_last_delay": 57,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-142MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 125,
+      "history_last_delay": 68,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-142MS",
       "type": "URLTest",
       "udp": true
@@ -74,7 +74,7 @@
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 58,
+      "history_last_delay": 72,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
@@ -203,5 +203,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-06-17T23:30:14.300733+00:00"
+  "timestamp_utc": "2026-06-17T23:45:12.420336+00:00"
 }
