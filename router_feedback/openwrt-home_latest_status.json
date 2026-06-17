@@ -11,21 +11,21 @@
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 360,
+      "history_last_delay": 405,
       "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 18,
-      "history_last_delay": 369,
+      "history_last_delay": 400,
       "now": "MANUAL-reddit",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 371,
+      "history_last_delay": 363,
       "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
@@ -39,14 +39,14 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 0,
+      "history_last_delay": 398,
       "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 0,
+      "history_last_delay": 406,
       "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
@@ -74,7 +74,7 @@
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 369,
+      "history_last_delay": 406,
       "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
@@ -83,97 +83,77 @@
   "log_summary": {
     "delay_summary": {
       "AUTO-FAST": {
-        "avg": 59.3,
+        "avg": 59.4,
         "max": 67,
         "min": 50,
-        "samples": 38
+        "samples": 36
       },
       "FALLBACK": {
-        "avg": 68.1,
+        "avg": 76.1,
         "max": 372,
         "min": 50,
-        "samples": 34
+        "samples": 17
       },
       "STREAMING-FAST": {
-        "avg": 68.0,
+        "avg": 68.4,
         "max": 76,
         "min": 61,
-        "samples": 12
+        "samples": 10
       },
       "WARM-UP": {
         "avg": 59.6,
         "max": 70,
         "min": 50,
-        "samples": 40
+        "samples": 36
       },
       "WARM-UP-CF": {
-        "avg": 118.9,
+        "avg": 132.2,
         "max": 302,
         "min": 61,
-        "samples": 10
+        "samples": 8
       }
     },
     "exists": true,
     "fail_counts": {
-      "AUTO-FAST": 88,
-      "FALLBACK": 54,
-      "STREAMING-FAST": 17,
-      "WARM-UP": 134,
-      "WARM-UP-CF": 140
+      "AUTO-FAST": 112,
+      "FALLBACK": 95,
+      "STREAMING-FAST": 23,
+      "WARM-UP": 155,
+      "WARM-UP-CF": 160
     },
-    "gateway_503_504_count": 36,
+    "gateway_503_504_count": 39,
     "group_log_counts": {
-      "EDUKASI": 32,
-      "GLOBAL": 31,
-      "PROXY": 31,
-      "SOCIAL-MEDIA": 31,
-      "STREAMING": 31,
-      "YOUTUBE": 32
+      "EDUKASI": 34,
+      "GLOBAL": 33,
+      "PROXY": 33,
+      "SOCIAL-MEDIA": 34,
+      "STREAMING": 34,
+      "YOUTUBE": 34
     },
     "last_lines": [
-      "[YOUTUBE] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 660s), WARM-UP-CF:FAIL(cooldown 899s), AUTO-FAST:FAIL(cooldown 60s), FALLBACK:FAIL(cooldown 180s)]",
-      "[EDUKASI] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 660s), WARM-UP-CF:FAIL(cooldown 899s), AUTO-FAST:FAIL(cooldown 60s), FALLBACK:FAIL(cooldown 180s)]",
-      "[GLOBAL] current=WARM-UP selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 541s), WARM-UP-CF:FAIL(cooldown 780s), AUTO-FAST:FAIL(HTTP Error 503: Service Unavailable), FALLBACK:FAIL(cooldown 61s)]",
+      "[PROXY] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 780s), WARM-UP-CF:FAIL(cooldown 61s), AUTO-FAST:FAIL(cooldown 181s), FALLBACK:FAIL(cooldown 303s)]",
+      "[STREAMING] current=FALLBACK selected=STREAMING-FAST checks=[WARM-UP-CF:FAIL(cooldown 61s), STREAMING-FAST:FAIL(HTTP Error 503: Service Unavailable), WARM-UP:FAIL(cooldown 780s), AUTO-FAST:FAIL(cooldown 181s), FALLBACK:FAIL(cooldown 303s)]",
+      "[OK] STREAMING -> STREAMING-FAST",
+      "[SOCIAL-MEDIA] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 780s), WARM-UP-CF:FAIL(cooldown 61s), AUTO-FAST:FAIL(cooldown 181s), FALLBACK:FAIL(cooldown 302s)]",
+      "[YOUTUBE] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 780s), WARM-UP-CF:FAIL(cooldown 61s), AUTO-FAST:FAIL(cooldown 181s), FALLBACK:FAIL(cooldown 302s)]",
+      "[EDUKASI] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 780s), WARM-UP-CF:FAIL(cooldown 61s), AUTO-FAST:FAIL(cooldown 181s), FALLBACK:FAIL(cooldown 302s)]",
+      "[GLOBAL] current=FALLBACK selected=WARM-UP-CF checks=[WARM-UP:FAIL(cooldown 660s), WARM-UP-CF:FAIL(HTTP Error 503: Service Unavailable), AUTO-FAST:FAIL(cooldown 61s), FALLBACK:FAIL(cooldown 183s)]",
+      "[OK] GLOBAL -> WARM-UP-CF",
+      "[PROXY] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 660s), WARM-UP-CF:FAIL(HTTP Error 503: Service Unavailable), AUTO-FAST:FAIL(cooldown 60s), FALLBACK:FAIL(cooldown 182s)]",
+      "[STREAMING] current=FALLBACK selected=FALLBACK checks=[WARM-UP-CF:FAIL(cooldown 899s), STREAMING-FAST:FAIL(HTTP Error 503: Service Unavailable), WARM-UP:FAIL(cooldown 659s), AUTO-FAST:FAIL(cooldown 60s), FALLBACK:FAIL(cooldown 182s)]",
+      "[SOCIAL-MEDIA] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 659s), WARM-UP-CF:FAIL(cooldown 899s), AUTO-FAST:FAIL(cooldown 60s), FALLBACK:FAIL(cooldown 182s)]",
+      "[YOUTUBE] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 659s), WARM-UP-CF:FAIL(cooldown 899s), AUTO-FAST:FAIL(cooldown 60s), FALLBACK:FAIL(cooldown 182s)]",
+      "[EDUKASI] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 659s), WARM-UP-CF:FAIL(cooldown 899s), AUTO-FAST:FAIL(cooldown 60s), FALLBACK:FAIL(cooldown 182s)]",
+      "[GLOBAL] current=FALLBACK selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 540s), WARM-UP-CF:FAIL(cooldown 780s), AUTO-FAST:FAIL(HTTP Error 503: Service Unavailable), FALLBACK:FAIL(cooldown 63s)]",
       "[OK] GLOBAL -> AUTO-FAST",
-      "[PROXY] current=GLOBAL selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 540s), WARM-UP-CF:FAIL(cooldown 780s), AUTO-FAST:FAIL(HTTP Error 503: Service Unavailable), FALLBACK:FAIL(cooldown 60s)]",
-      "[OK] PROXY -> FALLBACK",
-      "[STREAMING] current=WARM-UP-CF selected=FALLBACK checks=[WARM-UP-CF:FAIL(cooldown 779s), STREAMING-FAST:FAIL(cooldown 659s), WARM-UP:FAIL(cooldown 540s), AUTO-FAST:FAIL(cooldown 899s), FALLBACK:FAIL(cooldown 60s)]",
-      "[OK] STREAMING -> FALLBACK",
-      "[SOCIAL-MEDIA] current=WARM-UP selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 540s), WARM-UP-CF:FAIL(cooldown 779s), AUTO-FAST:FAIL(cooldown 899s), FALLBACK:FAIL(cooldown 60s)]",
-      "[OK] SOCIAL-MEDIA -> FALLBACK",
-      "[YOUTUBE] current=WARM-UP selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 539s), WARM-UP-CF:FAIL(cooldown 779s), AUTO-FAST:FAIL(cooldown 899s), FALLBACK:FAIL(cooldown 59s)]",
-      "[OK] YOUTUBE -> FALLBACK",
-      "[EDUKASI] current=WARM-UP selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 537s), WARM-UP-CF:FAIL(cooldown 777s), AUTO-FAST:FAIL(cooldown 897s), FALLBACK:FAIL(cooldown 57s)]",
-      "[OK] EDUKASI -> FALLBACK",
-      "[GLOBAL] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 421s), WARM-UP-CF:FAIL(cooldown 660s), AUTO-FAST:FAIL(cooldown 780s), FALLBACK:FAIL(HTTP Error 503: Service Unavailable)]",
-      "[PROXY] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 421s), WARM-UP-CF:FAIL(cooldown 660s), AUTO-FAST:FAIL(cooldown 780s), FALLBACK:372ms]",
-      "[STREAMING] current=FALLBACK selected=FALLBACK checks=[WARM-UP-CF:FAIL(cooldown 658s), STREAMING-FAST:FAIL(cooldown 538s), WARM-UP:FAIL(cooldown 419s), AUTO-FAST:FAIL(cooldown 778s), FALLBACK:FAIL(HTTP Error 503: Service Unavailable)]",
-      "[SOCIAL-MEDIA] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 418s), WARM-UP-CF:FAIL(cooldown 658s), AUTO-FAST:FAIL(cooldown 778s), FALLBACK:FAIL(HTTP Error 503: Service Unavailable)]",
-      "[YOUTUBE] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 418s), WARM-UP-CF:FAIL(cooldown 658s), AUTO-FAST:FAIL(cooldown 778s), FALLBACK:FAIL(cooldown 899s)]",
-      "[EDUKASI] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 418s), WARM-UP-CF:FAIL(cooldown 658s), AUTO-FAST:FAIL(cooldown 778s), FALLBACK:FAIL(cooldown 899s)]"
+      "[PROXY] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 540s), WARM-UP-CF:FAIL(cooldown 780s), AUTO-FAST:FAIL(HTTP Error 503: Service Unavailable), FALLBACK:FAIL(cooldown 62s)]",
+      "[STREAMING] current=FALLBACK selected=FALLBACK checks=[WARM-UP-CF:FAIL(cooldown 780s), STREAMING-FAST:FAIL(cooldown 780s), WARM-UP:FAIL(cooldown 539s), AUTO-FAST:FAIL(cooldown 899s), FALLBACK:FAIL(cooldown 62s)]",
+      "[SOCIAL-MEDIA] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 539s), WARM-UP-CF:FAIL(cooldown 780s), AUTO-FAST:FAIL(cooldown 899s), FALLBACK:FAIL(cooldown 62s)]",
+      "[YOUTUBE] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 539s), WARM-UP-CF:FAIL(cooldown 780s), AUTO-FAST:FAIL(cooldown 899s), FALLBACK:FAIL(cooldown 62s)]",
+      "[EDUKASI] current=FALLBACK selected=FALLBACK checks=[WARM-UP:FAIL(cooldown 539s), WARM-UP-CF:FAIL(cooldown 780s), AUTO-FAST:FAIL(cooldown 899s), FALLBACK:FAIL(cooldown 62s)]"
     ],
     "lines_checked": 300,
     "recent_switches": [
-      {
-        "group": "YOUTUBE",
-        "line": "[OK] YOUTUBE -> FALLBACK",
-        "selected": "FALLBACK"
-      },
-      {
-        "group": "EDUKASI",
-        "line": "[OK] EDUKASI -> FALLBACK",
-        "selected": "FALLBACK"
-      },
-      {
-        "group": "GLOBAL",
-        "line": "[OK] GLOBAL -> WARM-UP-CF",
-        "selected": "WARM-UP-CF"
-      },
-      {
-        "group": "PROXY",
-        "line": "[OK] PROXY -> FALLBACK",
-        "selected": "FALLBACK"
-      },
       {
         "group": "GLOBAL",
         "line": "[OK] GLOBAL -> AUTO-FAST",
@@ -203,11 +183,31 @@
         "group": "EDUKASI",
         "line": "[OK] EDUKASI -> FALLBACK",
         "selected": "FALLBACK"
+      },
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> WARM-UP",
+        "selected": "WARM-UP"
+      },
+      {
+        "group": "STREAMING",
+        "line": "[OK] STREAMING -> STREAMING-FAST",
+        "selected": "STREAMING-FAST"
+      },
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> WARM-UP-CF",
+        "selected": "WARM-UP-CF"
+      },
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> AUTO-FAST",
+        "selected": "AUTO-FAST"
       }
     ],
     "unauthorized_401_count": 0
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-06-17T21:45:00.507584+00:00"
+  "timestamp_utc": "2026-06-17T22:00:00.626326+00:00"
 }
