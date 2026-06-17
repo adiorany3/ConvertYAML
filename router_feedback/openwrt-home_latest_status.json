@@ -1,0 +1,213 @@
+{
+  "api_ok": true,
+  "generated_by": "openwrt_report_status.py",
+  "groups": {
+    "AUTO-FAST": {
+      "all_count": 10,
+      "history_last_delay": 98,
+      "now": "AKUN-008-CLOUDFLARE-VLESS-WS-78MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "EDUKASI": {
+      "all_count": 14,
+      "history_last_delay": 80,
+      "now": "WARM-UP",
+      "type": "Fallback",
+      "udp": true
+    },
+    "FALLBACK": {
+      "all_count": 18,
+      "history_last_delay": 75,
+      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-79MS",
+      "type": "Fallback",
+      "udp": true
+    },
+    "GLOBAL": {
+      "all_count": 22,
+      "history_last_delay": 112,
+      "now": "WARM-UP",
+      "type": "Fallback",
+      "udp": true
+    },
+    "PROXY": {
+      "all_count": 23,
+      "history_last_delay": null,
+      "now": "WARM-UP",
+      "type": "Fallback",
+      "udp": true
+    },
+    "SOCIAL-MEDIA": {
+      "all_count": 14,
+      "history_last_delay": 106,
+      "now": "WARM-UP",
+      "type": "Fallback",
+      "udp": true
+    },
+    "STREAMING": {
+      "all_count": 15,
+      "history_last_delay": 75,
+      "now": "WARM-UP",
+      "type": "Fallback",
+      "udp": true
+    },
+    "STREAMING-FAST": {
+      "all_count": 8,
+      "history_last_delay": 75,
+      "now": "AKUN-007-CLOUDFLARE-VLESS-WS-87MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "WARM-UP": {
+      "all_count": 7,
+      "history_last_delay": 78,
+      "now": "AKUN-005-FMN5-RENTED-NET2-VLESS-WS-97MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "WARM-UP-CF": {
+      "all_count": 5,
+      "history_last_delay": 94,
+      "now": "AKUN-007-CLOUDFLARE-VLESS-WS-87MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "YOUTUBE": {
+      "all_count": 14,
+      "history_last_delay": 86,
+      "now": "WARM-UP",
+      "type": "Fallback",
+      "udp": true
+    }
+  },
+  "log_summary": {
+    "delay_summary": {
+      "AUTO-FAST": {
+        "avg": 58.0,
+        "max": 58,
+        "min": 58,
+        "samples": 1
+      },
+      "DIRECT": {
+        "avg": 0.0,
+        "max": 0,
+        "min": 0,
+        "samples": 81
+      },
+      "STREAMING-FAST": {
+        "avg": 92.7,
+        "max": 158,
+        "min": 70,
+        "samples": 6
+      },
+      "WARM-UP": {
+        "avg": 68.2,
+        "max": 290,
+        "min": 53,
+        "samples": 132
+      },
+      "WARM-UP-CF": {
+        "avg": 77.9,
+        "max": 96,
+        "min": 69,
+        "samples": 21
+      }
+    },
+    "exists": true,
+    "fail_counts": {
+      "AUTO-FAST": 81,
+      "FALLBACK": 81,
+      "STREAMING-FAST": 20,
+      "WARM-UP": 89,
+      "WARM-UP-CF": 98
+    },
+    "gateway_503_504_count": 15,
+    "group_log_counts": {
+      "EDUKASI": 41,
+      "GLOBAL": 40,
+      "PROXY": 40,
+      "SOCIAL-MEDIA": 40,
+      "STREAMING": 40,
+      "YOUTUBE": 40
+    },
+    "last_lines": [
+      "[ERROR] tidak bisa akses Mihomo API http://127.0.0.1:9090: <urlopen error [Errno 111] Connection refused>",
+      "[FIX] Pastikan OpenClash aktif dan external-controller memakai 127.0.0.1:9090 atau 0.0.0.0:9090.",
+      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:59ms]",
+      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:60ms]",
+      "[STREAMING] current=WARM-UP selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 666s), STREAMING-FAST:FAIL(cooldown 267s), WARM-UP:69ms]",
+      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:72ms]",
+      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:70ms]",
+      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:75ms]",
+      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:65ms]",
+      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:58ms]",
+      "[STREAMING] current=WARM-UP selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 547s), STREAMING-FAST:FAIL(cooldown 148s), WARM-UP:62ms]",
+      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:63ms]",
+      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:70ms]",
+      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:70ms]",
+      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:64ms]",
+      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:72ms]",
+      "[STREAMING] current=WARM-UP selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 426s), STREAMING-FAST:FAIL(cooldown 27s), WARM-UP:79ms]",
+      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:69ms]",
+      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:60ms]",
+      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:71ms]"
+    ],
+    "lines_checked": 300,
+    "recent_switches": [
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "STREAMING",
+        "line": "[OK] STREAMING -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "YOUTUBE",
+        "line": "[OK] YOUTUBE -> DIRECT",
+        "selected": "DIRECT"
+      },
+      {
+        "group": "STREAMING",
+        "line": "[OK] STREAMING -> WARM-UP",
+        "selected": "WARM-UP"
+      },
+      {
+        "group": "YOUTUBE",
+        "line": "[OK] YOUTUBE -> WARM-UP",
+        "selected": "WARM-UP"
+      },
+      {
+        "group": "PROXY",
+        "line": "[OK] PROXY -> WARM-UP",
+        "selected": "WARM-UP"
+      },
+      {
+        "group": "STREAMING",
+        "line": "[OK] STREAMING -> WARM-UP",
+        "selected": "WARM-UP"
+      },
+      {
+        "group": "SOCIAL-MEDIA",
+        "line": "[OK] SOCIAL-MEDIA -> AUTO-FAST",
+        "selected": "AUTO-FAST"
+      }
+    ],
+    "unauthorized_401_count": 0
+  },
+  "mihomo_api": "http://127.0.0.1:9090",
+  "router": "openwrt-home",
+  "timestamp_utc": "2026-06-17T17:30:00.847592+00:00"
+}
