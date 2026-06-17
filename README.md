@@ -1,139 +1,208 @@
-# SumberYAML Fast 10 + NekoBox Ready + Anti-Hibernasi
+# ConvertYAML Smart Stable AutoPilot
 
-Versi ini membuat YAML OpenClash/Mihomo dan YAML ringan untuk Android, lalu menyaring akun otomatis dengan dua tahap test nyata:
+ConvertYAML adalah project untuk membuat konfigurasi **OpenClash/Mihomo** dan konfigurasi ringan untuk Android/NekoBox dari kumpulan akun/proxy. Versi ini sudah dilengkapi mode **Smart Stable**, **AutoPilot Self-Healing**, dan **Router ↔ GitHub Sync** agar koneksi lebih stabil, responsif, dan otomatis.
 
-1. **Mihomo URL test** untuk memastikan akun bisa dipakai di OpenClash/Mihomo.
-2. **sing-box URL test** untuk memastikan akun lebih siap dipakai di NekoBox/Android.
+Fokus utama project ini:
 
-Node dari `manual_nodes.txt` tetap **tidak disaring** dan tetap masuk group `MANUAL`.
+- Mengambil dan menyaring node otomatis.
+- Menghasilkan YAML OpenClash yang siap import.
+- Membuat pool node cepat dan stabil seperti `WARM-UP`, `WARM-UP-CF`, `AUTO-FAST`, `STREAMING-FAST`, dan `FALLBACK`.
+- Mengurangi waktu tunggu saat node hibernasi.
+- Menjalankan AutoPilot di OpenWrt untuk memilih jalur sehat otomatis.
+- Membuat OpenWrt dan GitHub saling mengisi: GitHub generate config, router mengirim feedback, router pull config terbaru, dan rollback otomatis jika config gagal.
 
-## Output GitHub Action
+---
 
-Workflow akan membuat/update file berikut:
+## 1. Output utama
 
-```text
-openclash_auto.yaml
-openclash_android.yaml
-openclash_auto_report.csv
-urltest_report.csv
-nekobox_test_report.csv
-akun.txt
-akun_manual.txt
-manual_nodes.txt
-manual_nodes_skipped.txt
-last_update.txt
-```
-
-## Perilaku utama
-
-- Target akun otomatis: **10 node**.
-- Akun otomatis wajib `network: ws`.
-- Akun otomatis wajib punya `sni/servername` valid.
-- Akun otomatis wajib lolos WebSocket upgrade.
-- Akun otomatis wajib lolos URL test Mihomo.
-- Akun otomatis wajib lolos URL test sing-box.
-- Generator berhenti ketika sudah menemukan 10 akun yang bagus.
-- Manual node tidak mengurangi kuota 10 akun otomatis.
-- Manual node tetap masuk group `MANUAL`.
-- Group `FALLBACK` sekarang memasukkan node manual satu per satu di depan node otomatis agar ikut di-health-check dan tidak mudah tertahan saat node manual/worker sedang hibernasi.
-- Server link di `akun.txt` dan `manual_nodes.txt` dinormalisasi ke `104.17.3.81:443`.
-
-
-## Mode responsif / anti-hibernasi
-
-Versi ini menambahkan tuning agar node lebih cepat bangun dan tidak terlalu lama diam:
-
-```yaml
-URLTEST_INTERVAL: "30"
-ANDROID_URLTEST_INTERVAL: "30"
-WARMUP_INTERVAL: "15"
-WARMUP_TIMEOUT_MS: "3000"
-FAST_HEALTH_TIMEOUT_MS: "3000"
-FALLBACK_INTERVAL: "60"
-WARMUP_NODE_LIMIT: "7"
-WARMUP_MAX_DELAY_MS: "180"
-WAKEUP_INTERVAL: "30"
-BALANCE_INTERVAL: "90"
-KEEP_ALIVE_INTERVAL: "15"
-KEEP_ALIVE_IDLE: "600"
-HEALTH_TIMEOUT_MS: "5000"
-```
-
-Perubahan penting:
-
-- `WARM-UP` dibuat sebagai pool kecil berisi 7 node terbaik dengan interval 15 detik agar node utama selalu siap.
-- `GLOBAL`, `PROXY`, kategori sosial, YouTube, edukasi, dan streaming menaruh `WARM-UP` di pilihan awal.
-- `AUTO-FAST` tetap mengecek semua node otomatis setiap 30 detik, tetapi timeout dipangkas ke 3000 ms agar node mati tidak menahan koneksi terlalu lama.
-- `FALLBACK` menjadi cadangan aman dengan interval 60 detik dan timeout 5000 ms.
-- `LOAD-BALANCE` diperlambat ke 90 detik dan hanya memakai pool cepat agar router tidak terlalu berat.
-- `lazy: false` tetap dipertahankan supaya health-check tetap berjalan walau group belum dipilih.
-- TCP keep-alive global diaktifkan agar koneksi idle tidak cepat mati.
-- Manual node dimasukkan langsung ke `FALLBACK` supaya ikut diuji aktif, tetapi tidak lagi dipaksa masuk `STREAMING-FAST` agar health-check tetap ringan.
-- Workflow GitHub berjalan setiap 3 jam untuk refresh kandidat lebih sering.
-
-## File Android
-
-Gunakan file ini untuk OpenClash/Clash Android/NekoBox-style config sederhana:
+Setelah workflow GitHub selesai, project akan menghasilkan/update file berikut:
 
 ```text
-openclash_android.yaml
+openclash_auto.yaml                 # Config utama OpenClash/Mihomo, performa penuh
+openclash_lite.yaml                 # Config ringan untuk router RAM/CPU kecil
+openclash_android.yaml              # Config ringan untuk Android/NekoBox-style
+openclash_safe_names_rule_split.yaml # Config kompatibilitas/aman
+openclash_auto_report.csv           # Laporan node output
+urltest_report.csv                  # Laporan hasil URL test Mihomo
+nekobox_test_report.csv             # Laporan kompatibilitas sing-box/NekoBox
+node_quality_report.md              # Ringkasan tier/kualitas node
+akun.txt                            # Link akun otomatis hasil generate
+akun_manual.txt                     # Link akun manual
+manual_nodes.txt                    # Input node manual
+manual_nodes_skipped.txt            # Node manual yang dilewati
+compatibility_report.txt            # Laporan kompatibilitas
+last_update.txt                     # Stempel waktu update terakhir
+router_feedback/                    # Feedback router OpenWrt ke GitHub
 ```
 
-File Android dibuat tanpa:
+Rekomendasi pemakaian:
 
 ```text
-rule-providers
-redir-port
-tproxy-port
+Router normal        : openclash_auto.yaml
+Router spek ringan   : openclash_lite.yaml
+Android/NekoBox      : openclash_android.yaml
+Cadangan/kompatibel  : openclash_safe_names_rule_split.yaml
 ```
 
-## Laporan NekoBox
+---
 
-Cek hasil test NekoBox/sing-box di:
+## 2. Fitur utama
+
+### 2.1 Smart Stable YAML
+
+Config dibuat dengan beberapa proxy group khusus:
 
 ```text
-nekobox_test_report.csv
+WARM-UP          = pool kecil node harian yang selalu dipanaskan
+WARM-UP-CF       = pool Cloudflare/Worker dengan endpoint Cloudflare
+AUTO-FAST        = fast pool tier-2
+STREAMING-FAST   = pool streaming cepat
+FALLBACK         = jalur cadangan otomatis
+LOAD-BALANCE     = untuk browsing/download, dibuat sticky agar lebih stabil
+MANUAL           = node manual dari manual_nodes.txt
+GLOBAL/PROXY     = selector utama
 ```
 
-Kolom penting:
+Tujuannya bukan membuat semua node dicek terlalu agresif, tetapi membuat node terbaik tetap siap pakai dan node cadangan tetap tersedia tanpa membebani router.
+
+### 2.2 Anti-hibernasi node
+
+Tuning penting yang digunakan:
 
 ```text
-name
-type
-network
-original_server
-bug_sni
-mihomo_status
-url_test_ms
-nekobox_test_ms
-nekobox_status
-nekobox_ready
+WARMUP_INTERVAL           = 15 detik
+WARMUP_TIMEOUT_MS         = 3000 ms
+CF_WARMUP_INTERVAL        = 20 detik
+CF_WARMUP_TIMEOUT_MS      = 3000 ms
+FAST_HEALTH_TIMEOUT_MS    = 3000 ms
+FALLBACK_INTERVAL         = 60 detik
+BALANCE_INTERVAL          = 90 detik
+KEEP_ALIVE_INTERVAL       = 15 detik
+KEEP_ALIVE_IDLE           = 600 detik
+HEALTH_TIMEOUT_MS         = 5000 ms
 ```
 
-`nekobox_ready=yes` berarti akun otomatis lolos test sing-box.
+`WARM-UP` dibuat kecil agar node utama tetap hidup tanpa membuat semua node gratis terkena health-check berlebihan.
 
-## Cara pakai
+### 2.3 AutoPilot Self-Healing
 
-1. Upload semua isi ZIP ke repository GitHub.
-2. Pastikan workflow berada di:
+AutoPilot adalah script runtime di OpenWrt yang mengakses Mihomo/OpenClash External Controller. Ia akan:
+
+- Mengecek group utama secara berkala.
+- Memilih group paling sehat.
+- Memindahkan selector seperti `GLOBAL`, `PROXY`, `STREAMING`, `SOCIAL-MEDIA`, `YOUTUBE`, dan `EDUKASI`.
+- Memberi cooldown pada group yang gagal berulang.
+- Menutup koneksi lama saat pindah jalur jika opsi `--close-connections` aktif.
+- Membantu mengurangi kasus node sudah mati tetapi masih dipilih.
+
+File penting:
+
+```text
+scripts/mihomo_autopilot.py
+scripts/install_autopilot_openwrt.sh
+scripts/run_autopilot_once.sh
+README_AUTOPILOT.md
+```
+
+### 2.4 Router ↔ GitHub Sync
+
+Fitur ini membuat OpenWrt dan GitHub saling mengisi:
+
+```text
+GitHub → OpenWrt
+Generate config baru → router pull config → backup → validasi → restart OpenClash → rollback jika gagal
+
+OpenWrt → GitHub
+Router baca status Mihomo → kirim feedback JSON → trigger workflow rebuild → GitHub generate ulang
+```
+
+File penting:
+
+```text
+scripts/openwrt_pull_config.sh
+scripts/openwrt_report_status.py
+scripts/trigger_github_rebuild.sh
+scripts/rollback_openclash_config.sh
+scripts/install_router_github_sync_openwrt.sh
+openwrt_github.env.example
+.github/workflows/router-feedback.yml
+README_ROUTER_GITHUB_SYNC.md
+```
+
+---
+
+## 3. Struktur folder
+
+```text
+ConvertYAML-main/
+├─ .github/workflows/
+│  ├─ update-yaml-6jam.yml
+│  └─ router-feedback.yml
+├─ router_feedback/
+│  └─ .gitkeep
+├─ scripts/
+│  ├─ mihomo_autopilot.py
+│  ├─ install_autopilot_openwrt.sh
+│  ├─ run_autopilot_once.sh
+│  ├─ openwrt_pull_config.sh
+│  ├─ openwrt_report_status.py
+│  ├─ trigger_github_rebuild.sh
+│  ├─ rollback_openclash_config.sh
+│  └─ install_router_github_sync_openwrt.sh
+├─ generate_yaml.py
+├─ sumberyaml_core.py
+├─ streamlit_app.py
+├─ requirements.txt
+├─ subscription_links.txt
+├─ manual_nodes.txt
+├─ openwrt_github.env.example
+├─ README.md
+├─ README_AUTOPILOT.md
+├─ README_ROUTER_GITHUB_SYNC.md
+└─ PATCH_NOTES_*.md
+```
+
+---
+
+## 4. Cara pakai di GitHub
+
+### 4.1 Upload project ke repository
+
+1. Extract ZIP project.
+2. Upload semua isi folder `ConvertYAML-main` ke repository GitHub.
+3. Pastikan workflow berada di:
+
+```text
+.github/workflows/update-yaml-6jam.yml
+.github/workflows/router-feedback.yml
+```
+
+4. Buka tab **Actions**.
+5. Jalankan workflow **Update OpenClash YAML responsif setiap 3 jam** dengan tombol **Run workflow**.
+
+Workflow utama akan berjalan otomatis setiap 3 jam.
+
+### 4.2 File workflow utama
+
+Workflow utama:
 
 ```text
 .github/workflows/update-yaml-6jam.yml
 ```
 
-3. Buka tab **Actions**.
-4. Jalankan **Run workflow**.
-5. Tunggu sampai selesai.
-6. Ambil file:
+Fungsinya:
 
-```text
-openclash_auto.yaml
-openclash_android.yaml
-akun.txt
-nekobox_test_report.csv
-```
+- Checkout repo.
+- Install dependency Python.
+- Download Mihomo core untuk test OpenClash/Mihomo.
+- Download sing-box untuk test kompatibilitas NekoBox.
+- Generate YAML.
+- Validasi YAML.
+- Commit hasil generate ke repo.
 
-## Setting penting di workflow
+### 4.3 Setting penting workflow
+
+Nilai penting yang dipakai:
 
 ```yaml
 MAX_NODES: "10"
@@ -144,10 +213,13 @@ REQUIRE_URL_TEST: "true"
 REQUIRE_NEKOBOX_TEST: "true"
 URL_TEST_URL: "https://www.gstatic.com/generate_204"
 NEKOBOX_TEST_URL: "https://www.gstatic.com/generate_204"
+CF_TEST_URL: "https://cp.cloudflare.com"
+STREAMING_TEST_URL: "https://cp.cloudflare.com"
 URL_TEST_TIMEOUT_MS: "5000"
 NEKOBOX_TEST_TIMEOUT_MS: "7000"
 FORCE_WS_ONLY: "true"
 REQUIRE_WS_UPGRADE: "true"
+MIHOMO_SECRET: "reyre"
 ```
 
 Jika proses terlalu lama, turunkan:
@@ -166,43 +238,647 @@ NEKOBOX_POOL_NODES: "35"
 CANDIDATE_MIN: "900"
 ```
 
-## Patch STREAMING-FAST + WARM-UP
+---
 
-Versi ini mempertahankan `STREAMING-FAST` bertipe `url-test`, lalu menambahkan `WARM-UP` sebagai pool kecil anti-hibernasi. `STREAMING` sekarang mengutamakan `WARM-UP`, lalu `STREAMING-FAST`, `AUTO-FAST`, dan `FALLBACK`. `STREAMING-FAST` tidak lagi berisi semua node/manual; isinya dibuat lebih kecil agar health-check ringan dan ping hijau lebih stabil.
+## 5. Cara import YAML ke OpenClash
 
+1. Masuk ke LuCI OpenWrt.
+2. Buka:
 
-## Smart Stable v2
+```text
+Services / VPN → OpenClash → Config Manage
+```
 
-Versi ini memakai pemisahan pool agar koneksi lebih responsif tanpa membebani router:
+3. Upload salah satu file:
 
-- `WARM-UP`: pool utama harian agar node cepat siap.
-- `WARM-UP-CF`: pool khusus Cloudflare/Worker dengan endpoint `https://cp.cloudflare.com`.
-- `STREAMING-FAST`: pool streaming yang diprioritaskan dari Cloudflare/WS dan warm pool.
-- `AUTO-FAST`: fast pool tier-2.
-- `FALLBACK`: automatic strict nodes dulu, manual nodes belakangan.
-- `openclash_lite.yaml`: mode ringan untuk router RAM/CPU kecil.
-- `node_quality_report.md`: laporan tier dan kualitas node terakhir.
+```text
+openclash_auto.yaml
+```
 
-Rekomendasi import:
+atau untuk router kecil:
 
-- Router normal: `openclash_auto.yaml`
-- Router ringan: `openclash_lite.yaml`
-- Android: `openclash_android.yaml`
+```text
+openclash_lite.yaml
+```
 
-## AutoPilot Self-Healing
+4. Jadikan config tersebut sebagai config aktif.
+5. Restart OpenClash.
 
-Versi ini sudah dilengkapi AutoPilot runtime untuk OpenClash/Mihomo. AutoPilot memantau group `WARM-UP`, `WARM-UP-CF`, `AUTO-FAST`, `STREAMING-FAST`, dan `FALLBACK`, lalu memilih jalur sehat secara otomatis melalui External Controller.
+Pastikan config memiliki External Controller dan secret:
 
-Dokumentasi lengkap ada di `README_AUTOPILOT.md`.
+```yaml
+external-controller: 127.0.0.1:9090
+secret: "reyre"
+```
+
+Kalau ingin dashboard bisa diakses dari LAN, boleh memakai:
+
+```yaml
+external-controller: 0.0.0.0:9090
+secret: "reyre"
+```
+
+Namun untuk keamanan, jangan kosongkan `secret` jika memakai `0.0.0.0`.
+
+---
+
+## 6. Install AutoPilot di OpenWrt
+
+### 6.1 Install dependency
+
+SSH ke router:
+
+```sh
+ssh root@192.168.1.1
+```
+
+Install paket:
+
+```sh
+opkg update
+opkg install python3 curl ca-certificates
+```
+
+### 6.2 Upload scripts ke router
+
+Upload folder `scripts` ke router, misalnya:
+
+```text
+/root/scripts
+```
+
+Struktur minimal:
+
+```text
+/root/scripts/mihomo_autopilot.py
+/root/scripts/install_autopilot_openwrt.sh
+/root/scripts/run_autopilot_once.sh
+```
+
+### 6.3 Tes AutoPilot sekali jalan
+
+```sh
+MIHOMO_SECRET='reyre' python3 /root/scripts/mihomo_autopilot.py --once --close-connections
+```
+
+Jika sudah terinstall ke `/etc/mihomo-autopilot`:
+
+```sh
+MIHOMO_SECRET='reyre' python3 /etc/mihomo-autopilot/mihomo_autopilot.py --once --close-connections
+```
+
+Output sehat biasanya seperti:
+
+```text
+[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:66ms]
+[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:64ms]
+[STREAMING] current=STREAMING-FAST selected=STREAMING-FAST checks=[STREAMING-FAST:141ms]
+```
+
+### 6.4 Install AutoPilot otomatis
+
+Dari folder `/root/scripts`:
+
+```sh
+sh /root/scripts/install_autopilot_openwrt.sh
+```
+
+Installer akan:
+
+- Menyalin script ke `/etc/mihomo-autopilot/mihomo_autopilot.py`.
+- Menambahkan cron setiap 2 menit.
+- Memasang `MIHOMO_SECRET='reyre'` otomatis.
+- Menyimpan log ke `/tmp/mihomo_autopilot.log`.
+
+Cek cron:
+
+```sh
+crontab -l | grep mihomo_autopilot
+```
+
+Cek log:
+
+```sh
+tail -f /tmp/mihomo_autopilot.log
+```
+
+### 6.5 Urutan jalur AutoPilot
+
+Untuk `GLOBAL` dan `PROXY`:
+
+```text
+WARM-UP → WARM-UP-CF → AUTO-FAST → FALLBACK → DIRECT
+```
+
+Untuk `STREAMING`:
+
+```text
+WARM-UP-CF → STREAMING-FAST → WARM-UP → AUTO-FAST → FALLBACK → DIRECT
+```
+
+Jika group gagal dua kali, group masuk cooldown sekitar 15 menit agar tidak dipilih berulang saat sedang buruk.
+
+---
+
+## 7. Install Router ↔ GitHub Sync di OpenWrt
+
+### 7.1 Install helper sync
+
+Upload folder `scripts` ke router, lalu jalankan:
+
+```sh
+opkg update
+opkg install python3 curl ca-certificates
+sh /root/scripts/install_router_github_sync_openwrt.sh
+```
+
+Installer akan membuat folder:
+
+```text
+/etc/mihomo-autopilot
+/etc/mihomo-autopilot/backups
+```
+
+Dan membuat template env:
+
+```text
+/etc/mihomo-autopilot/github.env
+```
+
+### 7.2 Isi konfigurasi GitHub
+
+Edit file:
+
+```sh
+vi /etc/mihomo-autopilot/github.env
+```
+
+Isi minimal:
+
+```sh
+GITHUB_REPO='username/repo'
+GITHUB_BRANCH='main'
+GITHUB_TOKEN='isi_token_github_kamu'
+ROUTER_NAME='openwrt-home'
+
+MIHOMO_API='http://127.0.0.1:9090'
+MIHOMO_SECRET='reyre'
+OPENCLASH_CONFIG_DIR='/etc/openclash/config'
+CONFIG_NAME='openclash_auto.yaml'
+```
+
+Ganti `username/repo` sesuai repo kamu, misalnya:
+
+```sh
+GITHUB_REPO='marcusthornework/ConvertYAML-main'
+```
+
+Amankan file token:
+
+```sh
+chmod 600 /etc/mihomo-autopilot/github.env
+```
+
+### 7.3 Token GitHub yang dibutuhkan
+
+Gunakan **Fine-grained Personal Access Token** dengan akses hanya ke repo project ini.
+
+Permission minimal:
+
+```text
+Repository access: Only selected repositories
+Contents: Read and Write
+Actions: Read and Write
+Metadata: Read-only
+```
+
+Token dipakai untuk:
+
+- Upload feedback router ke `router_feedback/*.json`.
+- Trigger workflow rebuild melalui `repository_dispatch`.
+- Pull config dari private repo jika repo tidak public.
+
+Jangan simpan token di YAML OpenClash. Simpan hanya di:
+
+```text
+/etc/mihomo-autopilot/github.env
+```
+
+### 7.4 Tes token GitHub dari OpenWrt
+
+```sh
+. /etc/mihomo-autopilot/github.env
+curl -H "Authorization: Bearer $GITHUB_TOKEN" \
+     -H "Accept: application/vnd.github+json" \
+     https://api.github.com/repos/$GITHUB_REPO
+```
+
+Jika benar, keluar JSON data repo. Jika `401`, token salah/expired. Jika `404`, repo salah atau token belum diberi akses ke repo itu.
+
+### 7.5 Tes kirim feedback router ke GitHub
+
+```sh
+. /etc/mihomo-autopilot/github.env
+python3 /etc/mihomo-autopilot/openwrt_report_status.py --upload
+```
+
+Hasilnya akan membuat/update file:
+
+```text
+router_feedback/<nama-router>_latest_status.json
+```
+
+### 7.6 Tes trigger rebuild GitHub
+
+```sh
+. /etc/mihomo-autopilot/github.env
+sh /etc/mihomo-autopilot/trigger_github_rebuild.sh "manual-test"
+```
+
+Jika berhasil, workflow `router-feedback.yml` akan menerima dispatch lalu memicu workflow generate YAML.
+
+### 7.7 Tes pull config dari GitHub
+
+```sh
+. /etc/mihomo-autopilot/github.env
+sh /etc/mihomo-autopilot/openwrt_pull_config.sh
+```
+
+Script akan:
+
+1. Download config dari GitHub.
+2. Validasi dasar YAML.
+3. Test syntax dengan Mihomo core jika binary ditemukan.
+4. Backup config lama.
+5. Replace config OpenClash.
+6. Restart OpenClash.
+7. Cek API Mihomo.
+8. Rollback otomatis jika config baru gagal.
+
+### 7.8 Cron otomatis Router ↔ GitHub Sync
+
+Installer memasang cron:
+
+```text
+*/2 * * * * AutoPilot self-healing
+*/15 * * * * Kirim feedback router ke GitHub
+5 */3 * * * Pull config terbaru dari GitHub ke OpenWrt
+```
+
+Cek:
+
+```sh
+crontab -l
+```
+
+Log:
+
+```sh
+tail -f /tmp/mihomo_autopilot.log
+tail -f /tmp/router_github_sync.log
+```
+
+---
+
+## 8. Rollback manual
+
+Jika config baru bermasalah:
+
+```sh
+sh /etc/mihomo-autopilot/rollback_openclash_config.sh
+```
+
+Backup berada di:
+
+```text
+/etc/mihomo-autopilot/backups
+```
+
+Script akan mengambil backup terbaru untuk `CONFIG_NAME` lalu restart OpenClash.
+
+---
+
+## 9. Cara membaca log AutoPilot
+
+Contoh log normal:
+
+```text
+[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:66ms]
+[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:64ms]
+[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:52ms]
+[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:52ms]
+```
+
+Artinya group sehat dan AutoPilot tidak perlu pindah jalur.
+
+Contoh log self-healing:
+
+```text
+[STREAMING] current=STREAMING-FAST selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 639s), STREAMING-FAST:FAIL(HTTP Error 504: Gateway Timeout), WARM-UP:58ms]
+[OK] STREAMING -> WARM-UP
+```
+
+Artinya `STREAMING-FAST` sedang gagal, lalu AutoPilot memindahkan `STREAMING` ke `WARM-UP`.
+
+Contoh log cooldown:
+
+```text
+WARM-UP-CF:FAIL(cooldown 858s)
+```
+
+Artinya group tersebut sedang ditahan sementara agar tidak dipilih berulang.
+
+---
+
+## 10. Troubleshooting
+
+### 10.1 HTTP Error 401 Unauthorized di AutoPilot
+
+Penyebab: AutoPilot memanggil API Mihomo tanpa secret atau secret salah.
+
+Pastikan YAML berisi:
+
+```yaml
+secret: "reyre"
+```
+
+Pastikan cron membawa secret:
+
+```sh
+crontab -l | grep mihomo_autopilot
+```
+
+Baris yang benar:
+
+```sh
+MIHOMO_SECRET='reyre'
+```
+
+Cara bersihkan cron lama yang dobel:
+
+```sh
+crontab -l | grep -v "mihomo_autopilot.py" | crontab -
+(crontab -l 2>/dev/null; echo "*/2 * * * * MIHOMO_API=http://127.0.0.1:9090 MIHOMO_SECRET='reyre' python3 /etc/mihomo-autopilot/mihomo_autopilot.py --once --close-connections >> /tmp/mihomo_autopilot.log 2>&1") | crontab -
+/etc/init.d/cron restart
+: > /tmp/mihomo_autopilot.log
+```
 
 Tes manual:
 
 ```sh
-python3 scripts/mihomo_autopilot.py --once --close-connections
+MIHOMO_SECRET='reyre' python3 /etc/mihomo-autopilot/mihomo_autopilot.py --once --close-connections
 ```
 
-Install cron OpenWrt:
+### 10.2 API Mihomo tidak bisa diakses
+
+Tes:
 
 ```sh
-sh scripts/install_autopilot_openwrt.sh
+curl -H "Authorization: Bearer reyre" http://127.0.0.1:9090/proxies
 ```
+
+Jika gagal:
+
+- Pastikan OpenClash aktif.
+- Pastikan `external-controller` benar.
+- Pastikan port `9090` tidak berubah.
+- Restart OpenClash:
+
+```sh
+/etc/init.d/openclash restart
+```
+
+### 10.3 WARM-UP-CF sering 503/504
+
+Ini masih normal pada node Cloudflare/Worker gratis. AutoPilot akan memberi cooldown lalu memilih group lain seperti `WARM-UP` atau `AUTO-FAST`.
+
+Selama log masih menunjukkan `WARM-UP:xxms`, koneksi utama masih sehat.
+
+### 10.4 Workflow gagal karena file tidak ada
+
+Versi ini sudah membuat workflow lebih aman. File opsional yang tidak ada akan dilewati otomatis.
+
+Jika masih error `pathspec ... did not match any files`, pastikan workflow terbaru sudah mengganti:
+
+```text
+.github/workflows/update-yaml-6jam.yml
+```
+
+### 10.5 GitHub token 401/404
+
+Tes:
+
+```sh
+. /etc/mihomo-autopilot/github.env
+curl -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/$GITHUB_REPO
+```
+
+- `401`: token salah/expired.
+- `404`: repo salah atau token tidak punya akses repo.
+- `403`: permission kurang atau rate limit.
+
+### 10.6 Config baru gagal setelah pull
+
+Jalankan rollback:
+
+```sh
+sh /etc/mihomo-autopilot/rollback_openclash_config.sh
+```
+
+Cek log:
+
+```sh
+tail -n 100 /tmp/router_github_sync.log
+```
+
+---
+
+## 11. Rekomendasi mode pemakaian
+
+### Router normal
+
+```text
+Config: openclash_auto.yaml
+AutoPilot: aktif tiap 2 menit
+Router sync: aktif
+LOAD-BALANCE: boleh untuk browsing/download
+Streaming/game: pilih WARM-UP atau STREAMING-FAST, bukan LOAD-BALANCE
+```
+
+### Router kecil/RAM rendah
+
+```text
+Config: openclash_lite.yaml
+AutoPilot: aktif tiap 2 menit
+Router sync: aktif
+LOAD-BALANCE: jangan dipakai untuk streaming/game
+Jika router terasa berat, kurangi interval feedback/pull di crontab
+```
+
+### Android/NekoBox
+
+```text
+Config: openclash_android.yaml
+Tanpa rule-providers
+Tanpa redir-port
+Tanpa tproxy-port
+```
+
+---
+
+## 12. File manual node
+
+Manual node disimpan di:
+
+```text
+manual_nodes.txt
+```
+
+Node manual tetap masuk group `MANUAL` dan `FALLBACK`, tetapi tidak dipaksa masuk semua fast pool agar health-check tidak terlalu berat.
+
+Node manual yang tidak bisa diproses akan dicatat di:
+
+```text
+manual_nodes_skipped.txt
+```
+
+---
+
+## 13. Laporan kualitas node
+
+Lihat:
+
+```text
+node_quality_report.md
+```
+
+File ini membantu melihat:
+
+- Node tier utama.
+- Node yang layak masuk `WARM-UP`.
+- Node Cloudflare yang cocok untuk `WARM-UP-CF`.
+- Node cadangan.
+- Rekomendasi pemakaian config.
+
+Laporan CSV:
+
+```text
+openclash_auto_report.csv
+urltest_report.csv
+nekobox_test_report.csv
+```
+
+---
+
+## 14. Keamanan
+
+- Jangan simpan token GitHub di YAML OpenClash.
+- Simpan token hanya di:
+
+```text
+/etc/mihomo-autopilot/github.env
+```
+
+- Amankan permission:
+
+```sh
+chmod 600 /etc/mihomo-autopilot/github.env
+```
+
+- Jika memakai `external-controller: 0.0.0.0:9090`, wajib pakai `secret`.
+- Lebih aman untuk router lokal:
+
+```yaml
+external-controller: 127.0.0.1:9090
+secret: "reyre"
+```
+
+- Gunakan token GitHub dengan permission minimal dan hanya untuk repo ini.
+
+---
+
+## 15. Quick command reference
+
+### OpenWrt install lengkap
+
+```sh
+opkg update
+opkg install python3 curl ca-certificates
+sh /root/scripts/install_router_github_sync_openwrt.sh
+vi /etc/mihomo-autopilot/github.env
+chmod 600 /etc/mihomo-autopilot/github.env
+/etc/init.d/cron restart
+```
+
+### Tes AutoPilot
+
+```sh
+. /etc/mihomo-autopilot/github.env
+python3 /etc/mihomo-autopilot/mihomo_autopilot.py --once --close-connections
+```
+
+### Tes feedback ke GitHub
+
+```sh
+. /etc/mihomo-autopilot/github.env
+python3 /etc/mihomo-autopilot/openwrt_report_status.py --upload
+```
+
+### Tes trigger rebuild
+
+```sh
+. /etc/mihomo-autopilot/github.env
+sh /etc/mihomo-autopilot/trigger_github_rebuild.sh "manual-test"
+```
+
+### Tes pull config
+
+```sh
+. /etc/mihomo-autopilot/github.env
+sh /etc/mihomo-autopilot/openwrt_pull_config.sh
+```
+
+### Rollback
+
+```sh
+sh /etc/mihomo-autopilot/rollback_openclash_config.sh
+```
+
+### Lihat log
+
+```sh
+tail -f /tmp/mihomo_autopilot.log
+tail -f /tmp/router_github_sync.log
+```
+
+---
+
+## 16. Catatan versi ini
+
+Versi ini adalah gabungan dari beberapa patch:
+
+```text
+Responsif anti-hibernasi
+STREAMING-FAST url-test
+WARM-UP stabil responsif
+Smart Stable v2
+AutoPilot Self-Healing
+Secret reire/reyre fix
+Router ↔ GitHub Sync
+README lengkap
+```
+
+Secret default paket ini:
+
+```yaml
+secret: "reyre"
+```
+
+Jika kamu mengganti secret OpenClash, sesuaikan juga:
+
+```text
+MIHOMO_SECRET di /etc/mihomo-autopilot/github.env
+MIHOMO_SECRET di cron AutoPilot
+MIHOMO_SECRET di workflow jika perlu
+```
+
