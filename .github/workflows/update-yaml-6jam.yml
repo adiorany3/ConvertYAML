@@ -161,6 +161,7 @@ jobs:
           OUTPUT_NODE_QUALITY_REPORT: "node_quality_report.md"
           ANDROID_HEALTH_TIMEOUT_MS: "5000"
           OUTPUT_YAML: "openclash_auto.yaml"
+          MIHOMO_SECRET: "reyre"
           OUTPUT_CSV: "openclash_auto_report.csv"
           OUTPUT_URLTEST_REPORT: "urltest_report.csv"
           OUTPUT_NEKOBOX_REPORT: "nekobox_test_report.csv"
@@ -213,14 +214,63 @@ jobs:
       - name: Commit updated YAML
         shell: bash
         run: |
-          BRANCH="${GITHUB_REF_NAME}"
+          set -e
+          BRANCH="${GITHUB_REF_NAME:-main}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add openclash_auto.yaml openclash_android.yaml openclash_lite.yaml node_quality_report.md scripts/mihomo_autopilot.py scripts/install_autopilot_openwrt.sh scripts/run_autopilot_once.sh README_AUTOPILOT.md PATCH_NOTES_AUTOPILOT_SELF_HEALING.md openclash_auto_report.csv urltest_report.csv nekobox_test_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
+
+          FILES=(
+            openclash_auto.yaml
+            openclash_android.yaml
+            openclash_lite.yaml
+            node_quality_report.md
+            scripts/mihomo_autopilot.py
+            scripts/install_autopilot_openwrt.sh
+            scripts/run_autopilot_once.sh
+            scripts/openwrt_pull_config.sh
+            scripts/openwrt_report_status.py
+            scripts/trigger_github_rebuild.sh
+            scripts/rollback_openclash_config.sh
+            scripts/install_router_github_sync_openwrt.sh
+            README_ROUTER_GITHUB_SYNC.md
+            PATCH_NOTES_ROUTER_GITHUB_SYNC.md
+            openwrt_github.env.example
+            .github/workflows/router-feedback.yml
+            router_feedback/.gitkeep
+            README_AUTOPILOT.md
+            PATCH_NOTES_AUTOPILOT_SELF_HEALING.md
+            openclash_auto_report.csv
+            urltest_report.csv
+            nekobox_test_report.csv
+            akun.txt
+            akun_manual.txt
+            manual_nodes.txt
+            manual_nodes_skipped.txt
+            compatibility_report.txt
+            last_update.txt
+          )
+
+          EXISTING=()
+          for f in "${FILES[@]}"; do
+            if [ -e "$f" ]; then
+              EXISTING+=("$f")
+            else
+              echo "Skip missing optional file: $f"
+            fi
+          done
+
+          if [ ${#EXISTING[@]} -eq 0 ]; then
+            echo "Tidak ada file yang bisa ditambahkan."
+            exit 0
+          fi
+
+          git add "${EXISTING[@]}"
+
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."
             exit 0
           fi
+
           git commit -m "chore: update OpenClash YAML otomatis"
           git fetch origin "$BRANCH"
           git pull --rebase --autostash origin "$BRANCH"

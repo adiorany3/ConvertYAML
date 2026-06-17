@@ -11,7 +11,7 @@ Tujuan:
 
 Default aman untuk config ini:
 - Controller: http://127.0.0.1:9090
-- Secret: kosong. Jika OpenClash kamu memakai secret, set env MIHOMO_SECRET.
+- Secret default untuk paket ini: reyre. Bisa dioverride dengan env MIHOMO_SECRET.
 
 Contoh OpenWrt/OpenClash:
   python3 /etc/mihomo-autopilot/mihomo_autopilot.py --once
@@ -19,15 +19,17 @@ Contoh OpenWrt/OpenClash:
 
 Environment:
   MIHOMO_API=http://127.0.0.1:9090
-  MIHOMO_SECRET=isi_secret_jika_ada
+  MIHOMO_SECRET=reyre  # sesuaikan kalau secret OpenClash diganti
   AUTOPILOT_STATE=/tmp/mihomo_autopilot_state.json
 """
 
 from __future__ import annotations
 
 import argparse
+import glob
 import json
 import os
+import re
 import sys
 import time
 from dataclasses import dataclass
@@ -37,8 +39,60 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlencode
 from urllib.request import Request, urlopen
 
+def _clean_secret(value: str) -> str:
+    value = (value or "").strip()
+    if not value:
+        return ""
+    # Hilangkan quote YAML dan komentar di belakangnya.
+    value = value.split("#", 1)[0].strip()
+    if (value.startswith('"') and value.endswith('"')) or (value.startswith("'") and value.endswith("'")):
+        value = value[1:-1].strip()
+    return value
+
+
+def _detect_mihomo_secret() -> str:
+    """Deteksi secret OpenClash/Mihomo tanpa dependency PyYAML.
+
+    Ini membantu di OpenWrt karena paket python3-yaml sering tidak tersedia.
+    Env MIHOMO_SECRET tetap prioritas tertinggi.
+    """
+    explicit = _clean_secret(os.environ.get("MIHOMO_SECRET", ""))
+    if explicit:
+        return explicit
+
+    candidates: list[str] = []
+    env_config = os.environ.get("OPENCLASH_CONFIG") or os.environ.get("MIHOMO_CONFIG")
+    if env_config:
+        candidates.append(env_config)
+    patterns = [
+        "/etc/openclash/config/config.yaml",
+        "/etc/openclash/config/*.yaml",
+        "/etc/openclash/*.yaml",
+        "/etc/mihomo/config.yaml",
+        "/etc/clash/config.yaml",
+    ]
+    for pattern in patterns:
+        candidates.extend(glob.glob(pattern))
+
+    seen: set[str] = set()
+    for path in candidates:
+        if not path or path in seen:
+            continue
+        seen.add(path)
+        try:
+            raw = Path(path).read_text(encoding="utf-8", errors="ignore")
+        except Exception:
+            continue
+        match = re.search(r"(?m)^\s*secret\s*:\s*(.+?)\s*$", raw)
+        if match:
+            secret = _clean_secret(match.group(1))
+            if secret:
+                return secret
+    return ""
+
+
 DEFAULT_API = os.environ.get("MIHOMO_API", "http://127.0.0.1:9090").rstrip("/")
-DEFAULT_SECRET = os.environ.get("MIHOMO_SECRET", "")
+DEFAULT_SECRET = _detect_mihomo_secret() or "reyre"
 DEFAULT_STATE = os.environ.get("AUTOPILOT_STATE", "/tmp/mihomo_autopilot_state.json")
 
 TEST_URL_GSTATIC = "https://www.gstatic.com/generate_204"
@@ -275,8 +329,17 @@ def run_once(args: argparse.Namespace) -> int:
 
     try:
         proxies = client.proxies()
-    except (HTTPError, URLError, TimeoutError, OSError) as exc:
+    except HTTPError as exc:
+        if exc.code == 401:
+            print(f"[ERROR] Mihomo API 401 Unauthorized di {args.api}.")
+            print("[FIX] Secret API salah/kosong. Untuk paket ini gunakan: MIHOMO_SECRET='reyre'")
+            print("[FIX] Pastikan YAML OpenClash berisi: secret: \"reyre\" lalu restart OpenClash.")
+        else:
+            print(f"[ERROR] tidak bisa akses Mihomo API {args.api}: HTTP {exc.code} {exc.reason}")
+        return 2
+    except (URLError, TimeoutError, OSError) as exc:
         print(f"[ERROR] tidak bisa akses Mihomo API {args.api}: {exc}")
+        print("[FIX] Pastikan OpenClash aktif dan external-controller memakai 127.0.0.1:9090 atau 0.0.0.0:9090.")
         return 2
 
     changed = False
@@ -334,7 +397,7 @@ def run_once(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Mihomo/OpenClash AutoPilot Self-Healing")
     parser.add_argument("--api", default=DEFAULT_API, help="Mihomo external-controller URL")
-    parser.add_argument("--secret", default=DEFAULT_SECRET, help="Mihomo API secret, kosongkan kalau tidak pakai")
+    parser.add_argument("--secret", default=DEFAULT_SECRET, help="Mihomo API secret. Default paket ini: reyre; bisa dioverride env MIHOMO_SECRET")
     parser.add_argument("--state", default=DEFAULT_STATE, help="Path state cooldown AutoPilot")
     parser.add_argument("--once", action="store_true", help="Jalankan sekali lalu keluar")
     parser.add_argument("--loop", action="store_true", help="Jalankan terus-menerus")

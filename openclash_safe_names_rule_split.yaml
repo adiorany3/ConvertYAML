@@ -11,6 +11,7 @@ tcp-concurrent: true
 find-process-mode: strict
 global-client-fingerprint: chrome
 external-controller: 0.0.0.0:9090
+secret: "reyre"
 profile:
   store-selected: true
   store-fake-ip: true

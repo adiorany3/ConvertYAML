@@ -141,6 +141,7 @@ jobs:
           REAL_CHECK_TEST_URL: "https://www.gstatic.com/generate_204"
           ANDROID_TEST_URL: "https://www.gstatic.com/generate_204"
           OUTPUT_YAML: "openclash_auto.yaml"
+          MIHOMO_SECRET: "reyre"
           OUTPUT_CSV: "openclash_auto_report.csv"
           OUTPUT_AKUN: "akun.txt"
           OUTPUT_MANUAL_AKUN: "akun_manual.txt"
@@ -160,14 +161,60 @@ jobs:
           ./mihomo -t -d . -f openclash_lite.yaml
           echo "YAML validated by Mihomo."
 
-      - name: Commit and push updated YAML safely
+      - name: Commit updated YAML
+        shell: bash
         run: |
           set -e
           BRANCH="${GITHUB_REF_NAME:-main}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add openclash_auto.yaml openclash_android.yaml openclash_lite.yaml node_quality_report.md scripts/mihomo_autopilot.py scripts/install_autopilot_openwrt.sh scripts/run_autopilot_once.sh README_AUTOPILOT.md PATCH_NOTES_AUTOPILOT_SELF_HEALING.md openclash_auto_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt compatibility_report.txt last_update.txt
+          FILES=(
+            openclash_auto.yaml
+            openclash_android.yaml
+            openclash_lite.yaml
+            node_quality_report.md
+            scripts/mihomo_autopilot.py
+            scripts/install_autopilot_openwrt.sh
+            scripts/run_autopilot_once.sh
+            scripts/openwrt_pull_config.sh
+            scripts/openwrt_report_status.py
+            scripts/trigger_github_rebuild.sh
+            scripts/rollback_openclash_config.sh
+            scripts/install_router_github_sync_openwrt.sh
+            README_ROUTER_GITHUB_SYNC.md
+            PATCH_NOTES_ROUTER_GITHUB_SYNC.md
+            openwrt_github.env.example
+            .github/workflows/router-feedback.yml
+            router_feedback/.gitkeep
+            README_AUTOPILOT.md
+            PATCH_NOTES_AUTOPILOT_SELF_HEALING.md
+            openclash_auto_report.csv
+            urltest_report.csv
+            nekobox_test_report.csv
+            akun.txt
+            akun_manual.txt
+            manual_nodes.txt
+            manual_nodes_skipped.txt
+            compatibility_report.txt
+            last_update.txt
+          )
+
+          EXISTING=()
+          for f in "${FILES[@]}"; do
+            if [ -e "$f" ]; then
+              EXISTING+=("$f")
+            else
+              echo "Skip missing optional file: $f"
+            fi
+          done
+
+          if [ ${#EXISTING[@]} -eq 0 ]; then
+            echo "Tidak ada file yang bisa ditambahkan."
+            exit 0
+          fi
+
+          git add "${EXISTING[@]}"
 
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."
@@ -175,19 +222,6 @@ jobs:
           fi
 
           git commit -m "chore: update OpenClash YAML otomatis"
-
-          # Ambil commit terbaru sebelum push agar tidak kena rejected/fetch first.
-          for attempt in 1 2 3; do
-            echo "Push attempt $attempt..."
-            git fetch origin "$BRANCH"
-            if git pull --rebase --autostash origin "$BRANCH" && git push origin "HEAD:$BRANCH"; then
-              echo "Push berhasil."
-              exit 0
-            fi
-            echo "Push gagal, coba ulang..."
-            git rebase --abort || true
-            sleep 5
-          done
-
-          echo "Push tetap gagal setelah 3 percobaan. Kemungkinan ada konflik file dari commit manual."
-          exit 1
+          git fetch origin "$BRANCH"
+          git pull --rebase --autostash origin "$BRANCH"
+          git push origin "HEAD:$BRANCH"
