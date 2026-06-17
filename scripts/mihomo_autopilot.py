@@ -105,14 +105,12 @@ POLICIES: Dict[str, List[Tuple[str, str]]] = {
         ("WARM-UP-CF", TEST_URL_CF),
         ("AUTO-FAST", TEST_URL_GSTATIC),
         ("FALLBACK", TEST_URL_GSTATIC),
-        ("DIRECT", TEST_URL_GSTATIC),
     ],
     "PROXY": [
         ("WARM-UP", TEST_URL_GSTATIC),
         ("WARM-UP-CF", TEST_URL_CF),
         ("AUTO-FAST", TEST_URL_GSTATIC),
         ("FALLBACK", TEST_URL_GSTATIC),
-        ("DIRECT", TEST_URL_GSTATIC),
     ],
     "STREAMING": [
         ("WARM-UP-CF", TEST_URL_CF),
@@ -120,7 +118,6 @@ POLICIES: Dict[str, List[Tuple[str, str]]] = {
         ("WARM-UP", TEST_URL_GSTATIC),
         ("AUTO-FAST", TEST_URL_GSTATIC),
         ("FALLBACK", TEST_URL_GSTATIC),
-        ("DIRECT", TEST_URL_GSTATIC),
     ],
 }
 
@@ -132,7 +129,6 @@ for selector in OPTIONAL_SELECTORS:
         ("WARM-UP-CF", TEST_URL_CF),
         ("AUTO-FAST", TEST_URL_GSTATIC),
         ("FALLBACK", TEST_URL_GSTATIC),
-        ("DIRECT", TEST_URL_GSTATIC),
     ]
 
 
@@ -416,7 +412,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--http-timeout", type=float, default=6.0, help="Timeout request API")
     parser.add_argument("--close-connections", action="store_true", help="Tutup koneksi lama saat selector berpindah")
     parser.add_argument("--flush-fakeip", action="store_true", help="Coba flush fake-ip saat selector berpindah")
-    parser.add_argument("--avoid-direct", action="store_true", help="Jangan pilih DIRECT sebagai target selector. Cocok dipakai setelah OpenClash reload agar traffic tidak bocor ke DIRECT.")
+    parser.add_argument("--avoid-direct", action="store_true", help="Jangan pilih DIRECT sebagai target selector. Pada paket no-selector, DIRECT memang tidak dipakai di proxy-group.")
     return parser
 
 

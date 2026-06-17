@@ -400,7 +400,7 @@ proxies:
   - http/1.1
 proxy-groups:
 - name: GLOBAL
-  type: select
+  type: fallback
   proxies:
   - WARM-UP
   - AUTO-FAST
@@ -432,8 +432,14 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
+  url: https://www.gstatic.com/generate_204
+  interval: 15
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 - name: PROXY
-  type: select
+  type: fallback
   proxies:
   - GLOBAL
   - WARM-UP
@@ -466,9 +472,14 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
-  - DIRECT
+  url: https://www.gstatic.com/generate_204
+  interval: 30
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 - name: SOCIAL-MEDIA
-  type: select
+  type: fallback
   proxies:
   - WARM-UP
   - AUTO-FAST
@@ -493,9 +504,14 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
-  - DIRECT
+  url: https://www.gstatic.com/generate_204
+  interval: 30
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 - name: YOUTUBE
-  type: select
+  type: fallback
   proxies:
   - WARM-UP
   - AUTO-FAST
@@ -520,9 +536,14 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
-  - DIRECT
+  url: https://www.gstatic.com/generate_204
+  interval: 30
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 - name: EDUKASI
-  type: select
+  type: fallback
   proxies:
   - WARM-UP
   - AUTO-FAST
@@ -547,9 +568,14 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
-  - DIRECT
+  url: https://www.gstatic.com/generate_204
+  interval: 30
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 - name: STREAMING
-  type: select
+  type: fallback
   proxies:
   - WARM-UP
   - STREAMING-FAST
@@ -575,14 +601,24 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
-  - DIRECT
+  url: https://www.gstatic.com/generate_204
+  interval: 30
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 - name: CLEAN
-  type: select
+  type: fallback
   proxies:
   - WARM-UP
   - AUTO-FAST
   - FALLBACK
-  - DIRECT
+  url: https://www.gstatic.com/generate_204
+  interval: 30
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 - name: WARM-UP
   type: url-test
   proxies:

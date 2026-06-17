@@ -1123,3 +1123,20 @@ Urutan aman setelah reload:
 GLOBAL -> WARM-UP / WARM-UP-CF / AUTO-FAST / FALLBACK / MANUAL
 LAN/private -> DIRECT lewat rules
 ```
+
+
+## Mode No Selector / No DIRECT Proxy Group
+
+Versi ini memakai mode **full automatic**. Group utama tidak lagi memakai `type: select`, tetapi diubah menjadi group otomatis seperti `fallback`, `url-test`, dan `load-balance`. Tujuannya agar setelah OpenClash reload, traffic tidak tertahan di selector manual dan tidak jatuh ke `DIRECT`.
+
+Prinsipnya:
+
+```text
+GLOBAL / PROXY / STREAMING / SOCIAL-MEDIA / YOUTUBE / EDUKASI / CLEAN / MANUAL = otomatis
+DIRECT di proxy-groups = tidak ada
+DIRECT di rules LAN/private = tetap ada
+```
+
+`DIRECT` tetap dipakai hanya untuk rule lokal seperti `192.168.0.0/16`, `10.0.0.0/8`, `localhost`, `.lan`, dan `.local`, supaya akses router/perangkat lokal tidak rusak. Untuk internet umum, jalur otomatis akan memilih node dari `WARM-UP`, `WARM-UP-CF`, `AUTO-FAST`, `STREAMING-FAST`, atau `FALLBACK`.
+
+Domain yang ada di `manual_unblock_domains.txt` tetap diarahkan ke group `MANUAL`. Pada versi ini `MANUAL` juga otomatis, bukan selector, dan tidak memiliki pilihan `DIRECT`.

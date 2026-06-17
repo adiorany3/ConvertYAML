@@ -368,7 +368,7 @@ proxies:
       Host: id-herza.viptunnel.net
 proxy-groups:
 - name: GLOBAL
-  type: select
+  type: fallback
   proxies:
   - WARM-UP
   - WARM-UP-CF
@@ -385,8 +385,14 @@ proxy-groups:
   - AKUN-008-CLOUDFLARE-VLESS-WS-238MS
   - AKUN-009-CLOUDFLARE-VLESS-WS-243MS
   - AKUN-010-UNKNOWN-VLESS-WS-276MS
+  url: https://www.gstatic.com/generate_204
+  interval: 15
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 - name: PROXY
-  type: select
+  type: fallback
   proxies:
   - WARM-UP
   - WARM-UP-CF
@@ -404,7 +410,12 @@ proxy-groups:
   - AKUN-008-CLOUDFLARE-VLESS-WS-238MS
   - AKUN-009-CLOUDFLARE-VLESS-WS-243MS
   - AKUN-010-UNKNOWN-VLESS-WS-276MS
-  - DIRECT
+  url: https://www.gstatic.com/generate_204
+  interval: 30
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 - name: WARM-UP
   type: url-test
   proxies:
@@ -481,7 +492,7 @@ proxy-groups:
   expected-status: 200/204/301/302
   max-failed-times: 3
 - name: MANUAL
-  type: select
+  type: fallback
   proxies:
   - MANUAL-reddit
   - MANUAL-VMess-WS-TLS-443-akuku8
@@ -491,7 +502,12 @@ proxy-groups:
   - MANUAL-11 🇦🇺 Vultr Holdings WS TLS [cf
   - MANUAL-8 🇸🇬 Vultr Holdings WS TLS [cf
   - MANUAL-herzaku8
-  - DIRECT
+  url: https://www.gstatic.com/generate_204
+  interval: 30
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 rules:
 - DOMAIN-SUFFIX,local,DIRECT
 - DOMAIN-SUFFIX,lan,DIRECT

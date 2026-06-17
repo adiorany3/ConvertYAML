@@ -95,6 +95,77 @@ def _active_health_interval(interval: int) -> int:
     return max(15, min(int(interval), 30))
 
 
+
+
+def _enforce_no_selector_no_direct_config(config: dict[str, Any]) -> dict[str, Any]:
+    """Force automatic proxy groups and prevent proxy-group DIRECT fallback.
+
+    DIRECT is still allowed in LAN/private rules. This function only cleans
+    proxy-groups so OpenClash reload cannot leave selectors on DIRECT.
+    """
+    if not isinstance(config, dict):
+        return config
+    groups = config.get("proxy-groups")
+    if not isinstance(groups, list):
+        return config
+
+    proxy_names: list[str] = []
+    for proxy in config.get("proxies", []) or []:
+        if isinstance(proxy, dict) and proxy.get("name"):
+            proxy_names.append(str(proxy["name"]))
+
+    group_names = [str(g.get("name")) for g in groups if isinstance(g, dict) and g.get("name")]
+    automatic_defaults = [
+        "WARM-UP",
+        "WARM-UP-CF",
+        "AUTO-FAST",
+        "STREAMING-FAST",
+        "FALLBACK",
+        "LOAD-BALANCE",
+    ]
+
+    def dedupe(values: list[str]) -> list[str]:
+        out: list[str] = []
+        seen: set[str] = set()
+        for value in values:
+            if not value or value in seen:
+                continue
+            seen.add(value)
+            out.append(value)
+        return out
+
+    def clean_refs(name: str, values: Any) -> list[str]:
+        refs: list[str] = []
+        for value in values or []:
+            text = str(value).strip()
+            if not text or text == "DIRECT" or text == name:
+                continue
+            refs.append(text)
+        refs = dedupe(refs)
+        if refs:
+            return refs
+        fallback_refs = [x for x in automatic_defaults if x in group_names and x != name]
+        fallback_refs += [x for x in proxy_names if x != name]
+        fallback_refs = dedupe(fallback_refs)
+        return fallback_refs or ["REJECT"]
+
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        name = str(group.get("name") or "")
+        gtype = str(group.get("type") or "").lower()
+        if gtype == "select":
+            group["type"] = "fallback"
+            group.setdefault("url", "https://www.gstatic.com/generate_204")
+            group.setdefault("interval", 15 if name == "GLOBAL" else 30)
+            group.setdefault("lazy", False)
+            group.setdefault("timeout", 3000)
+            group.setdefault("expected-status", "200/204/301/302")
+            group.setdefault("max-failed-times", 2)
+        if isinstance(group.get("proxies"), list):
+            group["proxies"] = clean_refs(name, group.get("proxies"))
+    return config
+
 def _env_int_range(name: str, default: int, minimum: int, maximum: int) -> int:
     raw = os.getenv(name, "").strip()
     try:
@@ -1418,7 +1489,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
     streaming_test_url = os.getenv("STREAMING_TEST_URL", cf_test_url).strip() or cf_test_url
 
     def selector(defaults: list[str] | None = None) -> list[str]:
-        defaults = defaults or ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT"]
+        defaults = defaults or ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK"]
         return defaults + names
 
     domain_provider = {
@@ -1552,29 +1623,29 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         {
             "name": "PROXY",
             "type": "select",
-            "proxies": ["GLOBAL", "WARM-UP", "WARM-UP-CF", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE"] + names + ["DIRECT"],
+            "proxies": ["GLOBAL", "WARM-UP", "WARM-UP-CF", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE"] + names,
         },
         {
             "name": "SOCIAL-MEDIA",
             "type": "select",
-            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT"]),
+            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK"]),
         },
         {
             "name": "YOUTUBE",
             "type": "select",
-            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT"]),
+            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK"]),
         },
         {
             "name": "EDUKASI",
             "type": "select",
-            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT"]),
+            "proxies": selector(["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK"]),
         },
         {
             "name": "STREAMING",
             "type": "select",
             # STREAMING-FAST dibuat url-test khusus agar panel OpenClash punya delay hijau
             # sendiri, bukan hanya delay dari nested select group.
-            "proxies": selector(["WARM-UP-CF", "STREAMING-FAST", "WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT"]),
+            "proxies": selector(["WARM-UP-CF", "STREAMING-FAST", "WARM-UP", "AUTO-FAST", "FALLBACK"]),
         },
         {
             "name": "WARM-UP",
@@ -1615,7 +1686,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         {
             "name": "CLEAN",
             "type": "select",
-            "proxies": ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "DIRECT"],
+            "proxies": ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK"],
         },
         {
             "name": "AUTO-FAST",
@@ -1842,6 +1913,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         "rule-providers": rule_providers,
         "rules": rules,
     }
+    config = _enforce_no_selector_no_direct_config(config)
     return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
 
 def build_csv(nodes: list[ProxyNode]) -> str:

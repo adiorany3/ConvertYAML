@@ -746,8 +746,14 @@ def add_manual_group_to_config(config: dict[str, Any], manual_nodes: list[Any], 
 
     manual_group = {
         "name": "MANUAL",
-        "type": "select",
-        "proxies": manual_names + ["DIRECT"],
+        "type": "fallback",
+        "proxies": manual_names or ["AUTO-FAST"],
+        "url": "https://www.gstatic.com/generate_204",
+        "interval": 30,
+        "lazy": False,
+        "timeout": 3000,
+        "expected-status": "200/204/301/302",
+        "max-failed-times": 2,
     }
 
     # Manual nodes remain outside the automatic quota. Smart mode keeps strict
@@ -950,6 +956,57 @@ def _dedupe_values(values: list[str]) -> list[str]:
     return out
 
 
+
+
+def _enforce_no_selector_no_direct_yaml_text(yaml_text: str) -> str:
+    """Convert selector groups to automatic fallback groups and remove DIRECT from proxy-groups."""
+    try:
+        config = yaml.safe_load(yaml_text) or {}
+    except Exception:
+        return yaml_text
+    if not isinstance(config, dict):
+        return yaml_text
+    groups = config.get("proxy-groups")
+    if not isinstance(groups, list):
+        return yaml_text
+    proxy_names = [str(p.get("name")) for p in config.get("proxies", []) if isinstance(p, dict) and p.get("name")]
+    group_names = [str(g.get("name")) for g in groups if isinstance(g, dict) and g.get("name")]
+    defaults = ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "STREAMING-FAST", "FALLBACK", "LOAD-BALANCE"]
+
+    def dedupe(values: list[str]) -> list[str]:
+        out: list[str] = []
+        seen: set[str] = set()
+        for value in values:
+            if value and value not in seen:
+                seen.add(value)
+                out.append(value)
+        return out
+
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        name = str(group.get("name") or "")
+        if str(group.get("type") or "").lower() == "select":
+            group["type"] = "fallback"
+            group.setdefault("url", "https://www.gstatic.com/generate_204")
+            group.setdefault("interval", 15 if name == "GLOBAL" else 30)
+            group.setdefault("lazy", False)
+            group.setdefault("timeout", 3000)
+            group.setdefault("expected-status", "200/204/301/302")
+            group.setdefault("max-failed-times", 2)
+        if isinstance(group.get("proxies"), list):
+            refs = []
+            for ref in group.get("proxies") or []:
+                text = str(ref).strip()
+                if not text or text == "DIRECT" or text == name:
+                    continue
+                refs.append(text)
+            refs = dedupe(refs)
+            if not refs:
+                refs = dedupe([x for x in defaults if x in group_names and x != name] + [x for x in proxy_names if x != name]) or ["REJECT"]
+            group["proxies"] = refs
+    return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
+
 def _group_map(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {str(g.get("name")): g for g in config.get("proxy-groups", []) if isinstance(g, dict)}
 
@@ -963,7 +1020,7 @@ def _build_lite_yaml_from_text(yaml_text: str) -> str:
     keep_group_names = ["GLOBAL", "PROXY", "WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "MANUAL"]
     proxies = [p for p in config.get("proxies", []) if isinstance(p, dict)]
     proxy_names = [str(p.get("name")) for p in proxies if p.get("name")]
-    refs_available = set(proxy_names) | set(keep_group_names) | {"DIRECT", "REJECT", "GLOBAL"}
+    refs_available = set(proxy_names) | set(keep_group_names) | {"REJECT", "GLOBAL"}
 
     lite_groups: list[dict[str, Any]] = []
     for name in keep_group_names:
@@ -978,7 +1035,7 @@ def _build_lite_yaml_from_text(yaml_text: str) -> str:
             preferred = ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "MANUAL"]
             refs = _dedupe_values([x for x in preferred if x in refs_available] + [x for x in refs if x in refs_available and x != "DIRECT"])
         elif name == "PROXY":
-            preferred = ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "MANUAL", "DIRECT"]
+            preferred = ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "MANUAL"]
             refs = _dedupe_values([x for x in preferred if x in refs_available] + [x for x in refs if x in refs_available])
         elif name == "WARM-UP":
             refs = refs[:5]
@@ -996,7 +1053,7 @@ def _build_lite_yaml_from_text(yaml_text: str) -> str:
             new_g["interval"] = max(90, int(new_g.get("interval") or 90))
             new_g["timeout"] = max(4000, int(new_g.get("timeout") or 5000))
         if gtype in {"url-test", "fallback", "load-balance"} and not refs:
-            refs = ["DIRECT"]
+            refs = ["REJECT"]
         new_g["proxies"] = refs
         lite_groups.append(new_g)
 
@@ -1164,6 +1221,7 @@ def main() -> int:
         rule_mode=os.getenv("RULE_MODE", "Lite"),
     )
     yaml_text = add_manual_group_to_yaml_text(yaml_text, manual_nodes, android=False)
+    yaml_text = _enforce_no_selector_no_direct_yaml_text(yaml_text)
 
     android_yaml_text = build_openclash_android_yaml(
         alive_nodes,
@@ -1173,8 +1231,10 @@ def main() -> int:
         health_timeout=_env_int("ANDROID_HEALTH_TIMEOUT_MS", _env_int("HEALTH_TIMEOUT_MS", 5000)),
     )
     android_yaml_text = add_manual_group_to_yaml_text(android_yaml_text, manual_nodes, android=True)
+    android_yaml_text = _enforce_no_selector_no_direct_yaml_text(android_yaml_text)
 
     lite_yaml_text = _build_lite_yaml_from_text(yaml_text)
+    lite_yaml_text = _enforce_no_selector_no_direct_yaml_text(lite_yaml_text)
     node_quality_text = _build_node_quality_report(yaml_text, urltest_rows, nekobox_rows)
 
     csv_text = build_csv(all_nodes + manual_nodes)
