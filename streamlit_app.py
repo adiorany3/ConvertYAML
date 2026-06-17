@@ -74,13 +74,25 @@ FAST_TARGET_DELAY_MS = 123
 DEFAULT_FILL_DELAY_MS = 400
 HARD_MAX_DELAY_MS = 1500
 MIN_OUTPUT_NODES = 20
-DEFAULT_URLTEST_INTERVAL = 60
+DEFAULT_URLTEST_INTERVAL = 30
 DEFAULT_TOLERANCE_MS = 40
 DEFAULT_TCP_TIMEOUT = 1.5
 DEFAULT_FETCH_TIMEOUT = 15
 DEFAULT_HEALTH_TIMEOUT_MS = 5000
 DEFAULT_RESERVE_POOL_NODES = 100
 DEFAULT_FORCE_WS_ONLY = True
+
+
+def _mihomo_keep_alive_config() -> dict[str, Any]:
+    return {
+        "keep-alive-interval": 15,
+        "keep-alive-idle": 600,
+        "disable-keep-alive": False,
+    }
+
+
+def _active_health_interval(interval: int) -> int:
+    return max(15, min(int(interval), 30))
 
 OPTIMIZATION_PRESETS: dict[str, dict[str, Any]] = {
     "Cepat": {
@@ -92,7 +104,7 @@ OPTIMIZATION_PRESETS: dict[str, dict[str, Any]] = {
         "tcp_timeout": 1.5,
         "max_workers": 64,
         "fetch_timeout": 10,
-        "urltest_interval": 60,
+        "urltest_interval": 30,
         "tolerance": 50,
         "require_original": False,
         "candidate_multiplier": 40,
@@ -112,7 +124,7 @@ OPTIMIZATION_PRESETS: dict[str, dict[str, Any]] = {
         "tcp_timeout": 2.0,
         "max_workers": 64,
         "fetch_timeout": 15,
-        "urltest_interval": 60,
+        "urltest_interval": 30,
         "tolerance": 50,
         "require_original": False,
         "candidate_multiplier": 80,
@@ -132,7 +144,7 @@ OPTIMIZATION_PRESETS: dict[str, dict[str, Any]] = {
         "tcp_timeout": 3.0,
         "max_workers": 80,
         "fetch_timeout": 20,
-        "urltest_interval": 60,
+        "urltest_interval": 30,
         "tolerance": 80,
         "require_original": False,
         "candidate_multiplier": 120,
@@ -152,7 +164,7 @@ OPTIMIZATION_PRESETS: dict[str, dict[str, Any]] = {
         "tcp_timeout": 3.0,
         "max_workers": 60,
         "fetch_timeout": 25,
-        "urltest_interval": 90,
+        "urltest_interval": 45,
         "tolerance": 60,
         "require_original": True,
         "candidate_multiplier": 120,
@@ -1130,6 +1142,8 @@ def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, requir
 def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = DEFAULT_HEALTH_TIMEOUT_MS, rule_mode: str = "Lengkap") -> str:
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
+    active_interval = _active_health_interval(interval)
+    balance_interval = max(active_interval, 60)
 
     def selector(defaults: list[str] | None = None) -> list[str]:
         defaults = defaults or ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]
@@ -1298,21 +1312,21 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "type": "url-test",
             "proxies": direct_or_names,
             "url": test_url,
-            "interval": interval,
+            "interval": active_interval,
             "tolerance": tolerance,
             "lazy": False,
             "timeout": health_timeout,
-            "expected-status": 204,
+            "expected-status": "200/204/301/302",
         },
         {
             "name": "FALLBACK",
             "type": "fallback",
             "proxies": direct_or_names,
             "url": test_url,
-            "interval": interval,
+            "interval": active_interval,
             "lazy": False,
             "timeout": health_timeout,
-            "expected-status": 204,
+            "expected-status": "200/204/301/302",
         },
         {
             "name": "LOAD-BALANCE",
@@ -1320,10 +1334,10 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "strategy": "consistent-hashing",
             "proxies": direct_or_names,
             "url": test_url,
-            "interval": max(interval, 120),
+            "interval": balance_interval,
             "lazy": False,
             "timeout": health_timeout,
-            "expected-status": 204,
+            "expected-status": "200/204/301/302",
         },
     ]
 
@@ -1478,8 +1492,9 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         "ipv6": False,
         "unified-delay": True,
         "tcp-concurrent": True,
-        "find-process-mode": "strict",
+        "find-process-mode": "off",
         "global-client-fingerprint": "chrome",
+        **_mihomo_keep_alive_config(),
         "external-controller": "0.0.0.0:9090",
         "profile": {
             "store-selected": True,
@@ -1808,7 +1823,7 @@ with st.expander("Pengaturan cepat anti delay + bug server", expanded=True):
         index=1,
         help="Default memakai Gstatic generate_204 agar health check OpenClash tidak bias ke domain Cloudflare yang sama dengan bug server.",
     )
-    st.caption("Optimasi 20 hidup: over-collect kandidat, WS only, validasi WS Upgrade 101 berulang, pool cadangan internal, filter jitter, skip original saat tidak wajib, Rule Lite, GLOBAL langsung AUTO-FAST, dan timeout health OpenClash lebih longgar.")
+    st.caption("Optimasi 20 hidup: over-collect kandidat, WS only, validasi WS Upgrade 101 berulang, pool cadangan internal, filter jitter, skip original saat tidak wajib, Rule Lite, GLOBAL langsung AUTO-FAST, interval health-check 30 detik, TCP keep-alive aktif, dan timeout health OpenClash seimbang.")
 
 links_text = st.text_area(
     "Link subscription bawaan",

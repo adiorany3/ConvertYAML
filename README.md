@@ -1,4 +1,4 @@
-# SumberYAML Fast 10 + NekoBox Ready
+# SumberYAML Fast 10 + NekoBox Ready + Anti-Hibernasi
 
 Versi ini membuat YAML OpenClash/Mihomo dan YAML ringan untuk Android, lalu menyaring akun otomatis dengan dua tahap test nyata:
 
@@ -35,8 +35,32 @@ last_update.txt
 - Generator berhenti ketika sudah menemukan 10 akun yang bagus.
 - Manual node tidak mengurangi kuota 10 akun otomatis.
 - Manual node tetap masuk group `MANUAL`.
-- Group `FALLBACK` dimulai dari `MANUAL`, lalu dilanjutkan node otomatis.
+- Group `FALLBACK` sekarang memasukkan node manual satu per satu di depan node otomatis agar ikut di-health-check dan tidak mudah tertahan saat node manual/worker sedang hibernasi.
 - Server link di `akun.txt` dan `manual_nodes.txt` dinormalisasi ke `104.17.3.81:443`.
+
+
+## Mode responsif / anti-hibernasi
+
+Versi ini menambahkan tuning agar node lebih cepat bangun dan tidak terlalu lama diam:
+
+```yaml
+URLTEST_INTERVAL: "30"
+ANDROID_URLTEST_INTERVAL: "30"
+WAKEUP_INTERVAL: "30"
+BALANCE_INTERVAL: "60"
+KEEP_ALIVE_INTERVAL: "15"
+KEEP_ALIVE_IDLE: "600"
+HEALTH_TIMEOUT_MS: "5000"
+```
+
+Perubahan penting:
+
+- `AUTO-FAST` dan `FALLBACK` dicek setiap 30 detik.
+- `LOAD-BALANCE` dicek setiap 60 detik agar tidak terlalu berat.
+- `lazy: false` tetap dipertahankan supaya health-check tetap berjalan walau group belum dipilih.
+- TCP keep-alive global diaktifkan agar koneksi idle tidak cepat mati.
+- Manual node dimasukkan langsung ke `FALLBACK` supaya ikut diuji aktif, bukan hanya lewat group `MANUAL`.
+- Workflow GitHub berjalan setiap 3 jam untuk refresh kandidat lebih sering.
 
 ## File Android
 
@@ -111,8 +135,8 @@ REQUIRE_URL_TEST: "true"
 REQUIRE_NEKOBOX_TEST: "true"
 URL_TEST_URL: "https://www.gstatic.com/generate_204"
 NEKOBOX_TEST_URL: "https://www.gstatic.com/generate_204"
-URL_TEST_TIMEOUT_MS: "6000"
-NEKOBOX_TEST_TIMEOUT_MS: "8000"
+URL_TEST_TIMEOUT_MS: "5000"
+NEKOBOX_TEST_TIMEOUT_MS: "7000"
 FORCE_WS_ONLY: "true"
 REQUIRE_WS_UPGRADE: "true"
 ```

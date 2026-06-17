@@ -1,43 +1,22 @@
-Last update: 2026-06-17 05:20:15 UTC
+Last update: 2026-06-15 21:16:14 UTC
 Mode: FAST10 + Mihomo URL test + NekoBox/sing-box test early-stop
 OpenClash YAML: openclash_auto.yaml
 Android YAML: openclash_android.yaml
-Automatic YAML nodes after NekoBox test: 20
-Dedicated streaming YAML nodes after NekoBox test: 30
-Dedicated Indonesia YAML nodes after NekoBox test: 0
-Standard/streaming nodes reused in INDONESIA group: 0
-Total INDONESIA group nodes: 0
-Total YAML proxy nodes without manual: 50
-Automatic strict pool before URL test: 76
-Automatic Mihomo URL-test checked: 40
-Automatic Mihomo URL-test result: URL test passed 40/40 tested
-Automatic NekoBox/sing-box checked: 32
-Automatic NekoBox/sing-box result: NekoBox/sing-box passed 20/32 tested
-Streaming strict pool before URL test: 191
-Streaming Mihomo URL-test checked: 124
-Streaming Mihomo URL-test result: URL test passed 90/124 tested
-Streaming NekoBox/sing-box checked: 51
-Streaming NekoBox/sing-box result: NekoBox/sing-box passed 30/51 tested
-Indonesia strict pool before URL test: 13
-Indonesia Mihomo URL-test checked: 13
-Indonesia Mihomo URL-test result: URL test passed 0/13 tested
-Indonesia NekoBox/sing-box checked: 0
-Indonesia NekoBox/sing-box result: no automatic nodes to NekoBox/sing-box test
+Automatic YAML nodes after NekoBox test: 10
+Automatic strict pool before URL test: 34
+Automatic Mihomo URL-test checked: 30
+Automatic Mihomo URL-test result: URL test passed 25/30 tested
+Automatic NekoBox/sing-box checked: 15
+Automatic NekoBox/sing-box result: NekoBox/sing-box passed 10/15 tested
 Manual group nodes: 8
-Akun txt automatic: 20
-Akun txt streaming: 30
-Akun txt Indonesia: 0
+Akun txt automatic: 10
 Akun txt manual: 8
-Parsed subscription nodes standard: 2800
-Parsed subscription nodes streaming: 7700
-Parsed subscription nodes Indonesia: 6300
-Fetched links standard: 51
-Fetched links streaming: 51
-Fetched links Indonesia: 51
-Skipped raw URI standard: 164937
-Skipped raw URI streaming: 164937
-Skipped raw URI Indonesia: 165122
+Parsed subscription nodes: 1225
+Fetched links: 51
+Skipped raw URI: 167646
 Skipped manual URI: 0
 Manual server normalized: 0 link
 Manual nodes source file: manual_nodes.txt
 Bug server for akun txt/manual_nodes: 104.17.3.81:443
+
+Responsif patch: health-check 30s, load-balance 60s, TCP keep-alive 15s/600s, manual nodes direct in FALLBACK, workflow 3 jam.

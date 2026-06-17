@@ -28,6 +28,30 @@ class _NoAliasDumper(yaml.SafeDumper):
 def dump_yaml_no_alias(data: dict[str, Any]) -> str:
     return yaml.dump(data, Dumper=_NoAliasDumper, allow_unicode=True, sort_keys=False, width=140)
 
+
+def _env_int_range(name: str, default: int, minimum: int, maximum: int) -> int:
+    """Read integer env safely and clamp it for stable generated YAML."""
+    raw = os.getenv(name, "").strip()
+    try:
+        value = int(raw) if raw else int(default)
+    except ValueError:
+        value = int(default)
+    return max(minimum, min(maximum, value))
+
+
+def _mihomo_keep_alive_config() -> dict[str, Any]:
+    """Global TCP keep-alive tuning to reduce idle/hibernating proxy sessions."""
+    return {
+        "keep-alive-interval": _env_int_range("KEEP_ALIVE_INTERVAL", 15, 5, 120),
+        "keep-alive-idle": _env_int_range("KEEP_ALIVE_IDLE", 600, 15, 3600),
+        "disable-keep-alive": False,
+    }
+
+
+def _active_health_interval(interval: int) -> int:
+    """Use a shorter active health-check interval without allowing extreme values."""
+    return _env_int_range("WAKEUP_INTERVAL", max(20, min(int(interval), 30)), 15, 300)
+
 DEFAULT_LINKS = [
     "https://raw.githubusercontent.com/itsyebekhe/PSG/main/lite/subscriptions/xray/normal/mix",
     "https://raw.githubusercontent.com/arshiacomplus/v2rayExtractor/refs/heads/main/mix/sub.html",
@@ -88,224 +112,12 @@ USER_AGENT = "Mozilla/5.0 SumberYAML-OpenClash-BugCompat/3.0"
 URI_RE = re.compile(r"(?:vless|vmess|trojan|ss)://[^\s<'\"`]+", re.IGNORECASE)
 FAST_TEST_URL = "http://cp.cloudflare.com/generate_204"
 ALT_TEST_URL = "https://www.gstatic.com/generate_204"
-
-
-INDONESIA_NODE_KEYWORDS = (
-    "🇮🇩",
-    "indonesia",
-    "indo",
-    "idn",
-    "jakarta",
-    "jkt",
-    "surabaya",
-    "sby",
-    "bandung",
-    "bdg",
-    "batam",
-    "bali",
-    "denpasar",
-)
-
-
-# Domain yang diakses lewat grup MANUAL.
-# Tujuannya: situs yang umum terblokir/terganggu di Indonesia, seperti Reddit,
-# tidak ikut AUTO-FAST/INDONESIA/STREAMING, melainkan memakai akun pilihan manual.
-# Tambah/kurangi daftar ini lewat manual_unblock_domains.txt atau env EXTRA_MANUAL_UNBLOCK_DOMAINS.
-MANUAL_UNBLOCK_DEFAULT_DOMAINS = [
-    "reddit.com",
-    "redd.it",
-    "redditmedia.com",
-    "redditstatic.com",
-    "vimeo.com",
-    "vimeocdn.com",
-    "imgur.com",
-    "imgur.io",
-    "pastebin.com",
-    "tumblr.com",
-    "medium.com",
-]
-
-
-def _manual_unblock_rule_from_line(line: str) -> str | None:
-    """Convert one editable line into a Clash rule that points to MANUAL.
-
-    Accepted examples:
-      reddit.com
-      DOMAIN-SUFFIX,reddit.com
-      DOMAIN-KEYWORD,reddit
-      DOMAIN,www.reddit.com
-      PROCESS-NAME,example.exe
-
-    A third policy column is ignored and replaced with MANUAL so the file stays safe
-    for copy-paste from older rule lists.
-    """
-    raw = (line or "").strip().strip("'\"")
-    if not raw or raw.startswith("#"):
-        return None
-    raw = raw.split("#", 1)[0].strip().strip("'\"")
-    if not raw:
-        return None
-    upper = raw.upper()
-    supported_prefixes = (
-        "DOMAIN,",
-        "DOMAIN-SUFFIX,",
-        "DOMAIN-KEYWORD,",
-        "IP-CIDR,",
-        "IP-CIDR6,",
-        "PROCESS-NAME,",
-    )
-    if upper.startswith(supported_prefixes):
-        parts = [part.strip() for part in raw.split(",") if part.strip()]
-        if len(parts) >= 2:
-            return f"{parts[0]},{parts[1]},MANUAL"
-        return None
-    if raw.startswith("+."):
-        raw = raw[2:]
-    elif raw.startswith("."):
-        raw = raw[1:]
-    if "://" in raw:
-        parsed = urlparse(raw)
-        raw = parsed.hostname or raw
-    raw = raw.strip().strip("/").lower()
-    if not raw or " " in raw:
-        return None
-    return f"DOMAIN-SUFFIX,{raw},MANUAL"
-
-
-def load_manual_unblock_rules() -> list[str]:
-    rules: list[str] = []
-    seen: set[str] = set()
-
-    def add_rule(line: str) -> None:
-        rule = _manual_unblock_rule_from_line(line)
-        if rule and rule not in seen:
-            seen.add(rule)
-            rules.append(rule)
-
-    for domain in MANUAL_UNBLOCK_DEFAULT_DOMAINS:
-        add_rule(domain)
-
-    file_path = os.getenv("MANUAL_UNBLOCK_DOMAINS_FILE", "manual_unblock_domains.txt").strip()
-    if file_path:
-        try:
-            with open(file_path, "r", encoding="utf-8") as handle:
-                for line in handle:
-                    add_rule(line)
-        except FileNotFoundError:
-            pass
-        except OSError:
-            pass
-
-    extra = os.getenv("EXTRA_MANUAL_UNBLOCK_DOMAINS", "")
-    for line in extra.replace(";", "\n").splitlines():
-        add_rule(line)
-
-    extra_rules = os.getenv("EXTRA_MANUAL_UNBLOCK_RULES", "")
-    for line in extra_rules.replace(";", "\n").splitlines():
-        add_rule(line)
-
-    return rules
-
-INDONESIA_DOMAIN_RULES = [
-    # Semua domain Indonesia dan situs besar Indonesia yang sering memakai .com.
-    "DOMAIN-SUFFIX,id,INDONESIA",
-    "DOMAIN-SUFFIX,go.id,INDONESIA",
-    "DOMAIN-SUFFIX,co.id,INDONESIA",
-    "DOMAIN-SUFFIX,or.id,INDONESIA",
-    "DOMAIN-SUFFIX,ac.id,INDONESIA",
-    "DOMAIN-SUFFIX,sch.id,INDONESIA",
-    "DOMAIN-SUFFIX,web.id,INDONESIA",
-    "DOMAIN-SUFFIX,my.id,INDONESIA",
-
-    # Marketplace / e-commerce Indonesia.
-    "DOMAIN-SUFFIX,tokopedia.com,INDONESIA",
-    "DOMAIN-SUFFIX,tokopedia.net,INDONESIA",
-    "DOMAIN-SUFFIX,shopee.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,bukalapak.com,INDONESIA",
-    "DOMAIN-SUFFIX,blibli.com,INDONESIA",
-    "DOMAIN-SUFFIX,lazada.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,orami.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,jd.id,INDONESIA",
-    "DOMAIN-SUFFIX,zalora.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,akulaku.com,INDONESIA",
-    "DOMAIN-SUFFIX,ralali.com,INDONESIA",
-    "DOMAIN-SUFFIX,bhinneka.com,INDONESIA",
-
-    # Bank, e-wallet, QRIS, dan payment gateway Indonesia.
-    "DOMAIN-SUFFIX,bca.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,klikbca.com,INDONESIA",
-    "DOMAIN-SUFFIX,mybca.id,INDONESIA",
-    "DOMAIN-SUFFIX,bankmandiri.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,livinbymandiri.com,INDONESIA",
-    "DOMAIN-SUFFIX,bri.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,brimo.bri.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,bni.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,bnizona.com,INDONESIA",
-    "DOMAIN-SUFFIX,cimbniaga.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,octoclicks.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,bankbsi.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,bsimobile.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,bankmega.com,INDONESIA",
-    "DOMAIN-SUFFIX,danamon.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,permatabank.com,INDONESIA",
-    "DOMAIN-SUFFIX,ocbcnisp.com,INDONESIA",
-    "DOMAIN-SUFFIX,jenius.com,INDONESIA",
-    "DOMAIN-SUFFIX,bankjago.com,INDONESIA",
-    "DOMAIN-SUFFIX,seabank.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,blu.id,INDONESIA",
-    "DOMAIN-SUFFIX,dana.id,INDONESIA",
-    "DOMAIN-SUFFIX,ovo.id,INDONESIA",
-    "DOMAIN-SUFFIX,gopay.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,linkaja.id,INDONESIA",
-    "DOMAIN-SUFFIX,shopeepay.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,midtrans.com,INDONESIA",
-    "DOMAIN-SUFFIX,xendit.co,INDONESIA",
-    "DOMAIN-SUFFIX,doku.com,INDONESIA",
-    "DOMAIN-SUFFIX,duitku.com,INDONESIA",
-    "DOMAIN-SUFFIX,flip.id,INDONESIA",
-    "DOMAIN-SUFFIX,qris.id,INDONESIA",
-
-    # Layanan lokal populer: berita, transportasi, travel, telco, pemerintahan.
-    "DOMAIN-SUFFIX,detik.com,INDONESIA",
-    "DOMAIN-SUFFIX,kompas.com,INDONESIA",
-    "DOMAIN-SUFFIX,kompas.id,INDONESIA",
-    "DOMAIN-SUFFIX,tempo.co,INDONESIA",
-    "DOMAIN-SUFFIX,cnnindonesia.com,INDONESIA",
-    "DOMAIN-SUFFIX,liputan6.com,INDONESIA",
-    "DOMAIN-SUFFIX,tribunnews.com,INDONESIA",
-    "DOMAIN-SUFFIX,merdeka.com,INDONESIA",
-    "DOMAIN-SUFFIX,kumparan.com,INDONESIA",
-    "DOMAIN-SUFFIX,antaranews.com,INDONESIA",
-    "DOMAIN-SUFFIX,gojek.com,INDONESIA",
-    "DOMAIN-SUFFIX,goto.com,INDONESIA",
-    "DOMAIN-SUFFIX,grab.com,INDONESIA",
-    "DOMAIN-SUFFIX,traveloka.com,INDONESIA",
-    "DOMAIN-SUFFIX,tiket.com,INDONESIA",
-    "DOMAIN-SUFFIX,pegipegi.com,INDONESIA",
-    "DOMAIN-SUFFIX,telkomsel.com,INDONESIA",
-    "DOMAIN-SUFFIX,mytelkomsel.com,INDONESIA",
-    "DOMAIN-SUFFIX,indihome.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,xl.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,axis.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,indosatooredoo.com,INDONESIA",
-    "DOMAIN-SUFFIX,tri.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,smartfren.com,INDONESIA",
-    "DOMAIN-SUFFIX,pln.co.id,INDONESIA",
-    "DOMAIN-SUFFIX,bpjs-kesehatan.go.id,INDONESIA",
-    "DOMAIN-SUFFIX,bpjs.go.id,INDONESIA",
-    "DOMAIN-SUFFIX,pajak.go.id,INDONESIA",
-    "DOMAIN-SUFFIX,oss.go.id,INDONESIA",
-    "DOMAIN-SUFFIX,dukcapil.kemendagri.go.id,INDONESIA",
-
-    # Routing IP Indonesia. Ditaruh setelah domain agar DNS/sniffer tetap mengutamakan domain.
-    "GEOIP,ID,INDONESIA",
-]
 THIRD_TEST_URL = "https://www.google.com/generate_204"
 FAST_TARGET_DELAY_MS = 123
 DEFAULT_FILL_DELAY_MS = 400
 HARD_MAX_DELAY_MS = 1500
 MIN_OUTPUT_NODES = 20
-DEFAULT_URLTEST_INTERVAL = 60
+DEFAULT_URLTEST_INTERVAL = 30
 DEFAULT_TOLERANCE_MS = 40
 DEFAULT_TCP_TIMEOUT = 1.5
 DEFAULT_FETCH_TIMEOUT = 15
@@ -1213,58 +1025,6 @@ def node_identity_key(node: ProxyNode) -> tuple[str, str, str, str, str]:
     )
 
 
-
-
-def _node_text_for_location(node: ProxyNode) -> str:
-    clash = node.clash or {}
-    values: list[str] = [
-        node.name,
-        node.original_name,
-        node.source,
-        node.original_server,
-        node.original_provider,
-        node.bug_sni,
-        str(clash.get("server") or ""),
-        str(clash.get("servername") or ""),
-        str(clash.get("sni") or ""),
-    ]
-    ws_opts = clash.get("ws-opts") if isinstance(clash.get("ws-opts"), dict) else {}
-    headers = ws_opts.get("headers") if isinstance(ws_opts.get("headers"), dict) else {}
-    values.append(str(headers.get("Host") or ""))
-    try:
-        parsed = urlparse(node.raw or "")
-        if parsed.fragment:
-            values.append(unquote(parsed.fragment))
-        if parsed.hostname:
-            values.append(parsed.hostname)
-    except Exception:
-        pass
-    return " ".join(v for v in values if v).lower()
-
-
-def looks_like_indonesia_node(node: ProxyNode) -> bool:
-    """Best-effort filter for server/location labels that look Indonesian.
-
-    Public proxy subscriptions usually do not expose reliable ASN/country metadata.
-    This matcher therefore uses source/node labels, original server hostnames,
-    SNI/Host headers, and common Indonesian city/country markers. The result is
-    still verified later by real Mihomo + sing-box URL tests before being emitted.
-    """
-    text = _node_text_for_location(node)
-    if not text:
-        return False
-    if any(keyword in text for keyword in INDONESIA_NODE_KEYWORDS):
-        return True
-    # Match standalone ID labels without catching random UUID fragments.
-    if re.search(r"(^|[\s_\-|/\[\]().:@#])id($|[\s_\-|/\[\]().:@#])", text):
-        return True
-    if re.search(r"(^|[\s_\-|/\[\]().:@#])id[0-9]{1,3}($|[\s_\-|/\[\]().:@#])", text):
-        return True
-    # Indonesian host/domain suffix in SNI, Host, source URL, or original hostname.
-    if re.search(r"[a-z0-9-]+\.(co\.id|go\.id|or\.id|ac\.id|sch\.id|web\.id|my\.id|id)(?:[\s/:]|$)", text):
-        return True
-    return False
-
 def select_diverse_nodes(nodes: list[ProxyNode], limit: int, prefer_ws: bool = True) -> list[ProxyNode]:
     """Pick stable nodes while avoiding many copies of the same host/root domain.
 
@@ -1703,78 +1463,11 @@ def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, requir
     return node
 
 
-def build_openclash_yaml(
-    nodes: list[ProxyNode],
-    interval: int,
-    tolerance: int,
-    test_url: str,
-    health_timeout: int = DEFAULT_HEALTH_TIMEOUT_MS,
-    rule_mode: str = "Lengkap",
-    streaming_nodes: list[ProxyNode] | None = None,
-    indonesia_nodes: list[ProxyNode] | None = None,
-) -> str:
-    # nodes = akun standar untuk GLOBAL/AUTO-FAST.
-    # streaming_nodes = akun khusus web streaming, dipilih dari pipeline terpisah.
-    # Dengan ini STREAMING-FAST tidak mengambil pool standar, sehingga total node
-    # di YAML bisa melebihi MAX_NODES standar.
-    streaming_nodes = streaming_nodes or []
-    indonesia_nodes = indonesia_nodes or []
+def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = DEFAULT_HEALTH_TIMEOUT_MS, rule_mode: str = "Lengkap") -> str:
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
-
-    existing_standard_names = set(names)
-    streaming_names = [
-        node.clash["name"] for node in streaming_nodes
-        if node.clash.get("name") and node.clash["name"] not in existing_standard_names
-    ]
-    # Fallback ini hanya aktif kalau pool streaming kosong/gagal. Default tetap STREAMING-FAST.
-    # Jika ingin murni hanya akun streaming, set STREAMING_ALLOW_STANDARD_FALLBACK=false.
-    streaming_allow_standard_fallback = os.getenv("STREAMING_ALLOW_STANDARD_FALLBACK", "true").strip().lower() in {"1", "true", "yes", "y", "on", "aktif"}
-    streaming_direct_or_names = streaming_names or (direct_or_names if streaming_allow_standard_fallback else ["DIRECT"])
-
-    indonesia_names: list[str] = []
-    indonesia_seen_names: set[str] = set()
-    for node in indonesia_nodes:
-        name = node.clash.get("name")
-        if name and name not in indonesia_seen_names:
-            indonesia_seen_names.add(name)
-            indonesia_names.append(name)
-    indonesia_direct_or_names = indonesia_names or ["DIRECT"]
-
-    def env_int(name: str, default: int) -> int:
-        raw = os.getenv(name, "").strip()
-        if not raw:
-            return default
-        try:
-            return int(raw)
-        except ValueError:
-            return default
-
-    def env_bool(name: str, default: bool) -> bool:
-        raw = os.getenv(name, "").strip().lower()
-        if not raw:
-            return default
-        return raw in {"1", "true", "yes", "y", "on", "aktif"}
-
-    streaming_test_url = os.getenv("STREAMING_TEST_URL", test_url).strip() or test_url
-    streaming_interval = env_int("STREAMING_URLTEST_INTERVAL", interval)
-    streaming_tolerance = env_int("STREAMING_TOLERANCE", 5)
-    streaming_timeout = env_int("STREAMING_HEALTH_TIMEOUT_MS", health_timeout)
-    streaming_expected_status = os.getenv(
-        "STREAMING_EXPECTED_STATUS",
-        "200/204/301/302/403",
-    ).strip() or "200/204/301/302/403"
-
-    indonesia_test_url = os.getenv("INDONESIA_TEST_URL", "https://www.tokopedia.com/").strip() or "https://www.tokopedia.com/"
-    indonesia_interval = env_int("INDONESIA_URLTEST_INTERVAL", interval)
-    indonesia_tolerance = env_int("INDONESIA_TOLERANCE", 20)
-    indonesia_timeout = env_int("INDONESIA_HEALTH_TIMEOUT_MS", health_timeout)
-    indonesia_expected_status = os.getenv(
-        "INDONESIA_EXPECTED_STATUS",
-        "200/204/301/302/403",
-    ).strip() or "200/204/301/302/403"
-
-    manual_unblock_rules = load_manual_unblock_rules()
+    active_interval = _active_health_interval(interval)
+    balance_interval = max(active_interval, _env_int_range("BALANCE_INTERVAL", 60, 30, 600))
 
     def selector(defaults: list[str] | None = None) -> list[str]:
         defaults = defaults or ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]
@@ -1906,39 +1599,12 @@ def build_openclash_yaml(
             "name": "GLOBAL",
             "type": "select",
             # AUTO-FAST tetap di pilihan pertama agar fresh import langsung otomatis cepat.
-            "proxies": ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "MANUAL", "DIRECT", "INDONESIA", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN"] + names,
+            "proxies": ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN"] + names,
         },
         {
             "name": "PROXY",
             "type": "select",
-            "proxies": ["GLOBAL", "AUTO-FAST", "MANUAL", "INDONESIA", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
-        },
-        {
-            "name": "MANUAL",
-            "type": "select",
-            # Default aman saat manual_nodes.txt kosong. Jika ada manual node,
-            # generate_yaml.py akan mengganti isi grup ini menjadi akun manual + DIRECT.
-            "proxies": ["DIRECT"],
-        },
-        {
-            "name": "INDONESIA",
-            "type": "select",
-            # Khusus marketplace, bank, dan website Indonesia: hanya pakai akun Indonesia yang sudah hidup.
-            "proxies": ["INDONESIA-FAST", "DIRECT"] + indonesia_names,
-        },
-        {
-            "name": "INDONESIA-FAST",
-            # Fallback khusus Indonesia: MANUAL akan disisipkan sebagai prioritas
-            # pertama oleh generate_yaml.py, lalu dilanjutkan akun ID yang lolos
-            # test hidup. Dengan begitu website/marketplace/bank Indonesia akan
-            # mencoba group MANUAL lebih dulu, kemudian akun Indonesia otomatis.
-            "type": "fallback",
-            "proxies": indonesia_direct_or_names,
-            "url": indonesia_test_url,
-            "interval": indonesia_interval,
-            "lazy": False,
-            "timeout": indonesia_timeout,
-            "expected-status": indonesia_expected_status,
+            "proxies": ["GLOBAL", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
         },
         {
             "name": "SOCIAL-MEDIA",
@@ -1958,20 +1624,7 @@ def build_openclash_yaml(
         {
             "name": "STREAMING",
             "type": "select",
-            # Khusus web streaming: default ke STREAMING-FAST yang hanya berisi akun streaming.
-            # Tidak mencampur pool AUTO-FAST standar, supaya node streaming bisa berbeda.
-            "proxies": (["STREAMING-FAST", "AUTO-FAST", "FALLBACK", "DIRECT"] if streaming_allow_standard_fallback else ["STREAMING-FAST", "DIRECT"]) + streaming_names,
-        },
-        {
-            "name": "STREAMING-FAST",
-            "type": "url-test",
-            "proxies": streaming_direct_or_names,
-            "url": streaming_test_url,
-            "interval": streaming_interval,
-            "tolerance": streaming_tolerance,
-            "lazy": False,
-            "timeout": streaming_timeout,
-            "expected-status": streaming_expected_status,
+            "proxies": selector(["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]),
         },
         {
             "name": "CLEAN",
@@ -1983,7 +1636,7 @@ def build_openclash_yaml(
             "type": "url-test",
             "proxies": direct_or_names,
             "url": test_url,
-            "interval": interval,
+            "interval": active_interval,
             "tolerance": tolerance,
             "lazy": False,
             "timeout": health_timeout,
@@ -1994,7 +1647,7 @@ def build_openclash_yaml(
             "type": "fallback",
             "proxies": direct_or_names,
             "url": test_url,
-            "interval": interval,
+            "interval": active_interval,
             "lazy": False,
             "timeout": health_timeout,
             "expected-status": "200/204/301/302",
@@ -2005,7 +1658,7 @@ def build_openclash_yaml(
             "strategy": "consistent-hashing",
             "proxies": direct_or_names,
             "url": test_url,
-            "interval": max(interval, 120),
+            "interval": balance_interval,
             "lazy": False,
             "timeout": health_timeout,
             "expected-status": "200/204/301/302",
@@ -2045,9 +1698,6 @@ def build_openclash_yaml(
         "DOMAIN-SUFFIX,googlevideo.com,YOUTUBE",
         "DOMAIN-SUFFIX,youtubei.googleapis.com,YOUTUBE",
 
-        # Situs yang perlu dibuka via akun manual, misalnya Reddit dan daftar unblock Indonesia.
-        *manual_unblock_rules,
-
         # Sosial media.
         "RULE-SET,telegram_domain,SOCIAL-MEDIA",
         "RULE-SET,twitter_domain,SOCIAL-MEDIA",
@@ -2082,29 +1732,12 @@ def build_openclash_yaml(
         "DOMAIN-SUFFIX,github.com,EDUKASI",
         "DOMAIN-SUFFIX,githubusercontent.com,EDUKASI",
 
-        # Marketplace, bank, dan semua website Indonesia.
-        *INDONESIA_DOMAIN_RULES,
-
         # Streaming umum selain YouTube.
         "RULE-SET,netflix_domain,STREAMING",
-        "RULE-SET,netflix_ip,STREAMING",
         "RULE-SET,spotify_domain,STREAMING",
         "RULE-SET,biliintl_domain,STREAMING",
         "DOMAIN-SUFFIX,netflix.com,STREAMING",
         "DOMAIN-SUFFIX,nflxvideo.net,STREAMING",
-        "DOMAIN-SUFFIX,nflximg.net,STREAMING",
-        "DOMAIN-SUFFIX,nflxext.com,STREAMING",
-        "DOMAIN-SUFFIX,nflxso.net,STREAMING",
-        "DOMAIN-SUFFIX,disney-plus.net,STREAMING",
-        "DOMAIN-SUFFIX,disneyplus.com,STREAMING",
-        "DOMAIN-SUFFIX,bamgrid.com,STREAMING",
-        "DOMAIN-SUFFIX,dssott.com,STREAMING",
-        "DOMAIN-SUFFIX,media.dssott.com,STREAMING",
-        "DOMAIN-SUFFIX,pv-cdn.net,STREAMING",
-        "DOMAIN-SUFFIX,aiv-cdn.net,STREAMING",
-        "DOMAIN-SUFFIX,video.a2z.com,STREAMING",
-        "DOMAIN-SUFFIX,scdn.co,STREAMING",
-        "DOMAIN-SUFFIX,huluim.com,STREAMING",
         "DOMAIN-SUFFIX,disneyplus.com,STREAMING",
         "DOMAIN-SUFFIX,hotstar.com,STREAMING",
         "DOMAIN-SUFFIX,primevideo.com,STREAMING",
@@ -2159,8 +1792,6 @@ def build_openclash_yaml(
             "DOMAIN-SUFFIX,youtu.be,YOUTUBE",
             "DOMAIN-SUFFIX,ytimg.com,YOUTUBE",
             "DOMAIN-SUFFIX,googlevideo.com,YOUTUBE",
-            # Situs yang perlu dibuka via akun manual, misalnya Reddit dan daftar unblock Indonesia.
-            *manual_unblock_rules,
             "DOMAIN-SUFFIX,facebook.com,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,fbcdn.net,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,instagram.com,SOCIAL-MEDIA",
@@ -2171,37 +1802,6 @@ def build_openclash_yaml(
             "DOMAIN-SUFFIX,x.com,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,t.me,SOCIAL-MEDIA",
             "DOMAIN-SUFFIX,telegram.org,SOCIAL-MEDIA",
-            *INDONESIA_DOMAIN_RULES,
-            "DOMAIN-SUFFIX,netflix.com,STREAMING",
-            "DOMAIN-SUFFIX,nflxvideo.net,STREAMING",
-        "DOMAIN-SUFFIX,nflximg.net,STREAMING",
-        "DOMAIN-SUFFIX,nflxext.com,STREAMING",
-        "DOMAIN-SUFFIX,nflxso.net,STREAMING",
-        "DOMAIN-SUFFIX,disney-plus.net,STREAMING",
-        "DOMAIN-SUFFIX,disneyplus.com,STREAMING",
-        "DOMAIN-SUFFIX,bamgrid.com,STREAMING",
-        "DOMAIN-SUFFIX,dssott.com,STREAMING",
-        "DOMAIN-SUFFIX,media.dssott.com,STREAMING",
-        "DOMAIN-SUFFIX,pv-cdn.net,STREAMING",
-        "DOMAIN-SUFFIX,aiv-cdn.net,STREAMING",
-        "DOMAIN-SUFFIX,video.a2z.com,STREAMING",
-        "DOMAIN-SUFFIX,scdn.co,STREAMING",
-        "DOMAIN-SUFFIX,huluim.com,STREAMING",
-            "DOMAIN-SUFFIX,disneyplus.com,STREAMING",
-            "DOMAIN-SUFFIX,hotstar.com,STREAMING",
-            "DOMAIN-SUFFIX,primevideo.com,STREAMING",
-            "DOMAIN-SUFFIX,amazonvideo.com,STREAMING",
-            "DOMAIN-SUFFIX,hulu.com,STREAMING",
-            "DOMAIN-SUFFIX,hbomax.com,STREAMING",
-            "DOMAIN-SUFFIX,max.com,STREAMING",
-            "DOMAIN-SUFFIX,spotify.com,STREAMING",
-            "DOMAIN-SUFFIX,twitch.tv,STREAMING",
-            "DOMAIN-SUFFIX,viu.com,STREAMING",
-            "DOMAIN-SUFFIX,wetv.vip,STREAMING",
-            "DOMAIN-SUFFIX,vidio.com,STREAMING",
-            "DOMAIN-SUFFIX,visionplus.id,STREAMING",
-            "DOMAIN-SUFFIX,rctiplus.com,STREAMING",
-            "DOMAIN-SUFFIX,iq.com,STREAMING",
             "MATCH,GLOBAL",
         ]
 
@@ -2216,8 +1816,9 @@ def build_openclash_yaml(
         "ipv6": False,
         "unified-delay": True,
         "tcp-concurrent": True,
-        "find-process-mode": "strict",
+        "find-process-mode": "off",
         "global-client-fingerprint": "chrome",
+        **_mihomo_keep_alive_config(),
         "external-controller": "0.0.0.0:9090",
         "profile": {
             "store-selected": True,
@@ -2244,13 +1845,7 @@ def build_openclash_yaml(
             "fallback": ["tls://1.1.1.1", "tls://8.8.8.8"],
             "fallback-filter": {"geoip": True, "geoip-code": "ID", "ipcidr": ["240.0.0.0/4"]},
         },
-        "proxies": [node.clash for node in nodes] + [
-            node.clash for node in streaming_nodes
-            if node.clash.get("name") and node.clash["name"] not in names
-        ] + [
-            node.clash for node in indonesia_nodes
-            if node.clash.get("name") and node.clash["name"] not in set(names + streaming_names)
-        ],
+        "proxies": [node.clash for node in nodes],
         "proxy-groups": proxy_groups,
         "rule-providers": rule_providers,
         "rules": rules,
@@ -2275,6 +1870,7 @@ def build_openclash_android_yaml(
     """
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
+    active_interval = _active_health_interval(interval)
 
     proxy_groups: list[dict[str, Any]] = [
         {
@@ -2287,7 +1883,7 @@ def build_openclash_android_yaml(
             "type": "url-test",
             "proxies": direct_or_names,
             "url": test_url,
-            "interval": interval,
+            "interval": active_interval,
             "tolerance": tolerance,
             "lazy": False,
             "timeout": health_timeout,
@@ -2298,7 +1894,7 @@ def build_openclash_android_yaml(
             "type": "fallback",
             "proxies": direct_or_names,
             "url": test_url,
-            "interval": interval,
+            "interval": active_interval,
             "lazy": False,
             "timeout": health_timeout,
             "expected-status": "200/204/301/302",
@@ -2315,6 +1911,7 @@ def build_openclash_android_yaml(
         "unified-delay": True,
         "tcp-concurrent": True,
         "global-client-fingerprint": "chrome",
+        **_mihomo_keep_alive_config(),
         "profile": {
             "store-selected": True,
             "store-fake-ip": True,
@@ -2471,7 +2068,6 @@ def process_sources(
     reserve_pool_nodes: int = 10,
     early_stop_good_nodes: bool = True,
     test_batch_size: int = 0,
-    location_filter: str = "",
 ) -> tuple[list[ProxyNode], list[ProxyNode], list[tuple[str, str]], list[str]]:
     """Fetch public subscriptions, test only until enough good auto nodes are found.
 
@@ -2531,14 +2127,6 @@ def process_sources(
             if node.status == "pending" and node_network(node) != "ws":
                 node.status = "skipped"
                 node.reason = "skipped: mode WS only"
-                node.score = 999999
-
-    normalized_location_filter = str(location_filter or "").strip().lower()
-    if normalized_location_filter in {"id", "indonesia", "indo"}:
-        for node in parsed:
-            if node.status == "pending" and not looks_like_indonesia_node(node):
-                node.status = "skipped"
-                node.reason = "skipped: bukan kandidat server Indonesia"
                 node.score = 999999
 
     # Small candidate pool, because we stop when enough good nodes are found.

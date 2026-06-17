@@ -1,5 +1,7 @@
 [openclash_auto.yaml]
 OK: compatible structure check passed
+OK: responsive anti-hibernation tuning applied
 
 [openclash_android.yaml]
 OK: compatible structure check passed
+OK: responsive anti-hibernation tuning applied

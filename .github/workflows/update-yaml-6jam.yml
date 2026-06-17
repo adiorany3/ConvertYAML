@@ -1,8 +1,8 @@
-name: Update OpenClash YAML setiap 6 jam
+name: Update OpenClash YAML responsif setiap 3 jam
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 */3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -15,7 +15,7 @@ concurrency:
 jobs:
   update-yaml:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
@@ -104,56 +104,10 @@ jobs:
 
       - name: Generate YAML with Mihomo and NekoBox tests
         env:
-          MAX_NODES: "20"
-          MIN_OUTPUT_NODES: "20"
-          URLTEST_POOL_NODES: "80"
-          NEKOBOX_POOL_NODES: "40"
-          ENABLE_STREAMING_DEDICATED_POOL: "true"
-          STREAMING_MAX_NODES: "30"
-          STREAMING_MIN_OUTPUT_NODES: "12"
-          STREAMING_URLTEST_POOL_NODES: "220"
-          STREAMING_NEKOBOX_POOL_NODES: "90"
-          STREAMING_SUBSCRIPTION_LINKS_FILE: "streaming_subscription_links.txt"
-          STREAMING_USE_DEFAULT_LINKS: "true"
-          STREAMING_INCLUDE_STANDARD_LINKS: "true"
-          STREAMING_ALLOW_STANDARD_FALLBACK: "true"
-          STREAMING_CHECK_URLS: "https://www.netflix.com/;https://www.disneyplus.com/;https://www.primevideo.com/;https://www.gstatic.com/generate_204"
-          STREAMING_MIN_CHECK_SUCCESSES: "2"
-          STREAMING_REAL_CHECK_TEST_URL: "https://www.netflix.com/;https://www.disneyplus.com/;https://www.primevideo.com/;https://www.gstatic.com/generate_204"
-          STREAMING_NEKOBOX_TEST_URL: "https://www.netflix.com/;https://www.disneyplus.com/;https://www.primevideo.com/;https://www.gstatic.com/generate_204"
-          STREAMING_TEST_URL: "https://www.gstatic.com/generate_204"
-          STREAMING_EXPECTED_STATUS: "200,204,301,302,403"
-          STREAMING_URL_TEST_EXPECTED_STATUS: "200,204,301,302,403"
-          STREAMING_URLTEST_INTERVAL: "45"
-          STREAMING_TOLERANCE: "30"
-          STREAMING_HEALTH_TIMEOUT_MS: "8000"
-          STREAMING_URL_TEST_TIMEOUT_MS: "10000"
-          STREAMING_NEKOBOX_TEST_TIMEOUT_MS: "12000"
-          OUTPUT_STREAMING_AKUN: "akun_streaming.txt"
-          OUTPUT_STREAMING_URLTEST_REPORT: "streaming_urltest_report.csv"
-          OUTPUT_STREAMING_NEKOBOX_REPORT: "streaming_nekobox_report.csv"
-          ENABLE_INDONESIA_DEDICATED_POOL: "true"
-          INDONESIA_MAX_NODES: "20"
-          INDONESIA_MIN_OUTPUT_NODES: "6"
-          INDONESIA_URLTEST_POOL_NODES: "180"
-          INDONESIA_NEKOBOX_POOL_NODES: "70"
-          INDONESIA_SUBSCRIPTION_LINKS_FILE: "indonesia_subscription_links.txt"
-          INDONESIA_USE_DEFAULT_LINKS: "true"
-          INDONESIA_INCLUDE_STANDARD_LINKS: "true"
-          INDONESIA_CHECK_URLS: "https://www.tokopedia.com/;https://www.bca.co.id/;https://www.detik.com/;https://www.gstatic.com/generate_204"
-          INDONESIA_MIN_CHECK_SUCCESSES: "2"
-          INDONESIA_TEST_URL: "https://www.tokopedia.com/"
-          INDONESIA_EXPECTED_STATUS: "200,204,301,302,403"
-          INDONESIA_URL_TEST_EXPECTED_STATUS: "200,204,301,302,403"
-          INDONESIA_URLTEST_INTERVAL: "45"
-          INDONESIA_TOLERANCE: "25"
-          INDONESIA_HEALTH_TIMEOUT_MS: "8000"
-          INDONESIA_URL_TEST_TIMEOUT_MS: "10000"
-          INDONESIA_NEKOBOX_TEST_TIMEOUT_MS: "12000"
-          INDONESIA_EARLY_STOP_GOOD_NODES: "false"
-          OUTPUT_INDONESIA_AKUN: "akun_indonesia.txt"
-          OUTPUT_INDONESIA_URLTEST_REPORT: "indonesia_urltest_report.csv"
-          OUTPUT_INDONESIA_NEKOBOX_REPORT: "indonesia_nekobox_report.csv"
+          MAX_NODES: "10"
+          MIN_OUTPUT_NODES: "10"
+          URLTEST_POOL_NODES: "35"
+          NEKOBOX_POOL_NODES: "25"
           REQUIRE_URL_TEST: "true"
           REQUIRE_NEKOBOX_TEST: "true"
           MIHOMO_PATH: "./mihomo"
@@ -161,16 +115,16 @@ jobs:
           URL_TEST_URL: "https://www.gstatic.com/generate_204"
           NEKOBOX_TEST_URL: "https://www.gstatic.com/generate_204"
           URL_TEST_EXPECTED_STATUS: "204,200,301,302"
-          URL_TEST_TIMEOUT_MS: "6000"
-          NEKOBOX_TEST_TIMEOUT_MS: "8000"
+          URL_TEST_TIMEOUT_MS: "5000"
+          NEKOBOX_TEST_TIMEOUT_MS: "7000"
           FORCE_WS_ONLY: "true"
           REQUIRE_WS_UPGRADE: "true"
           PREFER_WS: "true"
           EARLY_STOP_GOOD_NODES: "true"
           TEST_BATCH_SIZE: "80"
           CANDIDATE_MULTIPLIER: "35"
-          CANDIDATE_MIN: "1200"
-          RESERVE_POOL_NODES: "80"
+          CANDIDATE_MIN: "600"
+          RESERVE_POOL_NODES: "35"
           ATTEMPTS: "2"
           REQUIRE_SUCCESSES: "1"
           TCP_TIMEOUT: "2.0"
@@ -178,11 +132,17 @@ jobs:
           MAX_WORKERS: "64"
           FAST_TARGET_MS: "180"
           FILL_DELAY_MS: "900"
-          HEALTH_TIMEOUT_MS: "6000"
+          URLTEST_INTERVAL: "30"
+          ANDROID_URLTEST_INTERVAL: "30"
+          HEALTH_TIMEOUT_MS: "5000"
+          KEEP_ALIVE_INTERVAL: "15"
+          KEEP_ALIVE_IDLE: "600"
+          WAKEUP_INTERVAL: "30"
+          BALANCE_INTERVAL: "60"
           RULE_MODE: "Lite"
           TEST_URL: "https://www.gstatic.com/generate_204"
           OUTPUT_ANDROID_YAML: "openclash_android.yaml"
-          ANDROID_HEALTH_TIMEOUT_MS: "6000"
+          ANDROID_HEALTH_TIMEOUT_MS: "5000"
           OUTPUT_YAML: "openclash_auto.yaml"
           OUTPUT_CSV: "openclash_auto_report.csv"
           OUTPUT_URLTEST_REPORT: "urltest_report.csv"
@@ -192,7 +152,6 @@ jobs:
           OUTPUT_MANUAL_SKIPPED: "manual_nodes_skipped.txt"
           OUTPUT_STAMP: "last_update.txt"
           MANUAL_NODES_FILE: "manual_nodes.txt"
-          MANUAL_UNBLOCK_DOMAINS_FILE: "manual_unblock_domains.txt"
         run: python generate_yaml.py
 
       - name: Validate generated YAML
@@ -232,7 +191,7 @@ jobs:
           BRANCH="${GITHUB_REF_NAME}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv urltest_report.csv nekobox_test_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt manual_unblock_domains.txt last_update.txt akun_streaming.txt streaming_urltest_report.csv streaming_nekobox_report.csv streaming_subscription_links.txt akun_indonesia.txt indonesia_urltest_report.csv indonesia_nekobox_report.csv indonesia_subscription_links.txt
+          git add openclash_auto.yaml openclash_android.yaml openclash_auto_report.csv urltest_report.csv nekobox_test_report.csv akun.txt akun_manual.txt manual_nodes.txt manual_nodes_skipped.txt last_update.txt
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan YAML/report."
             exit 0
