@@ -1031,3 +1031,83 @@ Namun untuk mencegah traffic bocor ke koneksi langsung, biarkan default:
 ```sh
 FORCE_AVOID_DIRECT=1
 ```
+
+---
+
+## Manual Unblock Domains → Group MANUAL
+
+Project ini mendukung file khusus:
+
+```text
+manual_unblock_domains.txt
+```
+
+Semua domain aktif yang ditulis di file tersebut akan **dipaksa berjalan melalui group `MANUAL`**.
+
+Fitur ini cocok untuk domain/web tertentu yang harus memakai node manual, misalnya domain yang lebih cocok memakai SNI/Host manual atau domain yang tidak ingin lewat `GLOBAL`, `AUTO-FAST`, `STREAMING`, maupun `DIRECT`.
+
+### Cara isi file
+
+Buka `manual_unblock_domains.txt`, lalu isi satu domain per baris:
+
+```txt
+reddit.com
+medium.com
+old.reddit.com
+```
+
+Format yang didukung:
+
+```txt
+example.com
+*.example.com
++.example.com
+https://example.com/path
+DOMAIN,sub.example.com
+DOMAIN-SUFFIX,example.com
+DOMAIN-KEYWORD,keyword
+GEOSITE,category
+```
+
+Contoh lengkap:
+
+```txt
+reddit.com
+DOMAIN,old.reddit.com
+DOMAIN-SUFFIX,medium.com
+DOMAIN-KEYWORD,reddit
+```
+
+Setelah GitHub Action/generator berjalan, rule akan dimasukkan otomatis ke YAML:
+
+```yaml
+- DOMAIN-SUFFIX,reddit.com,MANUAL
+- DOMAIN,old.reddit.com,MANUAL
+- DOMAIN-SUFFIX,medium.com,MANUAL
+- DOMAIN-KEYWORD,reddit,MANUAL
+```
+
+### Posisi rule
+
+Rule dari `manual_unblock_domains.txt` dimasukkan setelah rule LAN/private dan sebelum rule iklan, sosial media, YouTube, streaming, dan `MATCH`.
+
+Urutan ini sengaja dibuat agar:
+
+- akses router/LAN tetap `DIRECT`,
+- domain manual tetap prioritas ke `MANUAL`,
+- domain tersebut tidak tertimpa rule `GLOBAL`, `STREAMING`, `SOCIAL-MEDIA`, atau `REJECT`.
+
+### Generate ulang
+
+Setelah mengubah `manual_unblock_domains.txt`, jalankan GitHub Action atau generate lokal:
+
+```sh
+python3 generate_yaml.py
+```
+
+Lalu OpenWrt bisa pull config terbaru seperti biasa.
+
+### Catatan penting
+
+`manual_unblock_domains.txt` hanya mengatur **routing domain**. Node yang dipakai tetap berasal dari group `MANUAL`, yaitu daftar node di `manual_nodes.txt`.
+

@@ -153,6 +153,145 @@ SMART_FAKE_IP_FILTER = [
 ]
 
 
+
+
+# -----------------------------
+# Manual unblock domain routing
+# -----------------------------
+def _strip_inline_comment(line: str) -> str:
+    """Strip comments in simple txt lists without damaging URL fragments too much."""
+    text = str(line or "").strip()
+    if not text:
+        return ""
+    for marker in (" //", "\t//"):
+        if marker in text:
+            text = text.split(marker, 1)[0].strip()
+    # Treat # as a comment when it starts a line or is preceded by whitespace.
+    if text.startswith("#"):
+        return ""
+    match = re.search(r"\s+#", text)
+    if match:
+        text = text[: match.start()].strip()
+    return text.strip()
+
+
+def _domain_from_manual_line(line: str) -> tuple[str, str] | None:
+    """Convert one manual_unblock_domains.txt line into a Clash rule tuple.
+
+    Supported active line formats:
+      example.com
+      *.example.com
+      +.example.com
+      https://example.com/path
+      DOMAIN,example.com
+      DOMAIN-SUFFIX,example.com
+      DOMAIN-KEYWORD,keyword
+      GEOSITE,category
+    The target policy is always injected later as MANUAL.
+    """
+    text = _strip_inline_comment(line)
+    if not text:
+        return None
+    text = text.strip().strip('"\'')
+    if not text:
+        return None
+
+    upper = text.upper()
+    if "," in text:
+        parts = [p.strip() for p in text.split(",") if p.strip()]
+        if len(parts) >= 2:
+            kind = parts[0].upper()
+            value = parts[1].strip().strip('"\'')
+            if kind in {"DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "GEOSITE"} and value:
+                return kind, value.lower() if kind != "DOMAIN-KEYWORD" else value
+
+    # Remove URL scheme/path/query if a full URL is pasted.
+    if "://" in text:
+        parsed = urlparse(text)
+        text = parsed.hostname or parsed.netloc or text
+    else:
+        text = text.split("/", 1)[0].split("?", 1)[0].split("#", 1)[0]
+
+    text = text.strip().strip(".").lower()
+    for prefix in ("+.", "*.", "."):
+        if text.startswith(prefix):
+            text = text[len(prefix):].strip(".")
+            break
+    if not text or " " in text or ":" in text:
+        return None
+    if "*" in text:
+        return None
+    if looks_like_ip(text):
+        return "IP-CIDR", f"{text}/32"
+    if re.fullmatch(r"[a-z0-9][a-z0-9.-]*\.[a-z]{2,}", text):
+        return "DOMAIN-SUFFIX", text
+    return None
+
+
+def _read_manual_unblock_domains_file() -> list[str]:
+    path = os.getenv("MANUAL_UNBLOCK_DOMAINS_FILE", "manual_unblock_domains.txt").strip() or "manual_unblock_domains.txt"
+    try:
+        with open(path, "r", encoding="utf-8", errors="ignore") as handle:
+            return handle.readlines()
+    except FileNotFoundError:
+        return []
+    except Exception:
+        return []
+
+
+def _manual_unblock_domain_rules(target: str = "MANUAL") -> list[str]:
+    """Build high-priority rules so listed domains always use the MANUAL group."""
+    target = str(target or "MANUAL").strip() or "MANUAL"
+    rules: list[str] = []
+    seen: set[str] = set()
+    for raw_line in _read_manual_unblock_domains_file():
+        item = _domain_from_manual_line(raw_line)
+        if not item:
+            continue
+        kind, value = item
+        if kind == "IP-CIDR":
+            rule = f"IP-CIDR,{value},{target},no-resolve"
+        else:
+            rule = f"{kind},{value},{target}"
+        if rule not in seen:
+            seen.add(rule)
+            rules.append(rule)
+    return rules
+
+
+def _inject_manual_unblock_rules(rules: list[str], target: str = "MANUAL") -> list[str]:
+    """Insert manual-unblock rules after LAN/DIRECT rules and before reject/category rules."""
+    manual_rules = _manual_unblock_domain_rules(target=target)
+    if not manual_rules:
+        return rules
+
+    out: list[str] = []
+    seen: set[str] = set()
+    for rule in rules:
+        if rule not in seen:
+            seen.add(rule)
+            out.append(rule)
+
+    # Remove older generated manual rules if this function is called repeatedly.
+    out = [r for r in out if r not in manual_rules]
+
+    insert_at = 0
+    for idx, rule in enumerate(out):
+        text = str(rule)
+        if (
+            ",DIRECT" in text
+            or text.startswith("GEOIP,LAN,")
+            or text.startswith("IP-CIDR,127.")
+            or text.startswith("IP-CIDR,10.")
+            or text.startswith("IP-CIDR,172.16.")
+            or text.startswith("IP-CIDR,192.168.")
+            or text.startswith("IP-CIDR,169.254.")
+        ):
+            insert_at = idx + 1
+            continue
+        break
+    return out[:insert_at] + manual_rules + out[insert_at:]
+
 def _dns_fake_ip_filter() -> list[str]:
     extra = [x.strip() for x in os.getenv("EXTRA_FAKE_IP_FILTER", "").split(",") if x.strip()]
     return _dedupe_names(SMART_FAKE_IP_FILTER + extra)
@@ -1919,6 +2058,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         # Sisanya ikut GLOBAL yang defaultnya langsung AUTO-FAST.
         "MATCH,GLOBAL",
     ]
+    rules = _inject_manual_unblock_rules(rules, target="MANUAL")
 
     if rule_mode == "Lite":
         # Rule Lite lebih ringan untuk router/OpenClash kecil: provider lebih sedikit, import lebih cepat,
@@ -1969,6 +2109,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "DOMAIN-SUFFIX,telegram.org,SOCIAL-MEDIA",
             "MATCH,GLOBAL",
         ]
+        rules = _inject_manual_unblock_rules(rules, target="MANUAL")
 
     config: dict[str, Any] = {
         "mixed-port": 7890,

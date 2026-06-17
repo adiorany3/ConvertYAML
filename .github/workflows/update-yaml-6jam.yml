@@ -170,6 +170,7 @@ jobs:
           OUTPUT_MANUAL_SKIPPED: "manual_nodes_skipped.txt"
           OUTPUT_STAMP: "last_update.txt"
           MANUAL_NODES_FILE: "manual_nodes.txt"
+          MANUAL_UNBLOCK_DOMAINS_FILE: "manual_unblock_domains.txt"
         run: python generate_yaml.py
 
       - name: Validate AutoPilot script
@@ -245,6 +246,7 @@ jobs:
             akun.txt
             akun_manual.txt
             manual_nodes.txt
+            manual_unblock_domains.txt
             manual_nodes_skipped.txt
             compatibility_report.txt
             last_update.txt
