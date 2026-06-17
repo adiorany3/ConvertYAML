@@ -1,0 +1,207 @@
+{
+  "api_ok": true,
+  "generated_by": "openwrt_report_status.py",
+  "groups": {
+    "AUTO-FAST": {
+      "all_count": 10,
+      "history_last_delay": 73,
+      "now": "AKUN-009-CLOUDFLARE-VLESS-WS-132MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "EDUKASI": {
+      "all_count": 14,
+      "history_last_delay": 60,
+      "now": "AUTO-FAST",
+      "type": "Fallback",
+      "udp": true
+    },
+    "FALLBACK": {
+      "all_count": 18,
+      "history_last_delay": 63,
+      "now": "AKUN-009-CLOUDFLARE-VLESS-WS-132MS",
+      "type": "Fallback",
+      "udp": true
+    },
+    "GLOBAL": {
+      "all_count": 22,
+      "history_last_delay": 70,
+      "now": "AUTO-FAST",
+      "type": "Fallback",
+      "udp": true
+    },
+    "PROXY": {
+      "all_count": 23,
+      "history_last_delay": null,
+      "now": "AUTO-FAST",
+      "type": "Fallback",
+      "udp": true
+    },
+    "SOCIAL-MEDIA": {
+      "all_count": 14,
+      "history_last_delay": 53,
+      "now": "AUTO-FAST",
+      "type": "Fallback",
+      "udp": true
+    },
+    "STREAMING": {
+      "all_count": 15,
+      "history_last_delay": 66,
+      "now": "AUTO-FAST",
+      "type": "Fallback",
+      "udp": true
+    },
+    "STREAMING-FAST": {
+      "all_count": 8,
+      "history_last_delay": 0,
+      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-73MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "WARM-UP": {
+      "all_count": 7,
+      "history_last_delay": 0,
+      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-73MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "WARM-UP-CF": {
+      "all_count": 5,
+      "history_last_delay": 0,
+      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-73MS",
+      "type": "URLTest",
+      "udp": true
+    },
+    "YOUTUBE": {
+      "all_count": 14,
+      "history_last_delay": 60,
+      "now": "AUTO-FAST",
+      "type": "Fallback",
+      "udp": true
+    }
+  },
+  "log_summary": {
+    "delay_summary": {
+      "AUTO-FAST": {
+        "avg": 168.0,
+        "max": 265,
+        "min": 46,
+        "samples": 55
+      },
+      "DIRECT": {
+        "avg": 0.0,
+        "max": 0,
+        "min": 0,
+        "samples": 5
+      },
+      "FALLBACK": {
+        "avg": 285.9,
+        "max": 447,
+        "min": 51,
+        "samples": 96
+      },
+      "STREAMING-FAST": {
+        "avg": 237.1,
+        "max": 306,
+        "min": 220,
+        "samples": 12
+      }
+    },
+    "exists": true,
+    "fail_counts": {
+      "AUTO-FAST": 186,
+      "FALLBACK": 90,
+      "STREAMING-FAST": 30,
+      "WARM-UP": 241,
+      "WARM-UP-CF": 253
+    },
+    "gateway_503_504_count": 41,
+    "group_log_counts": {
+      "EDUKASI": 43,
+      "GLOBAL": 43,
+      "PROXY": 42,
+      "SOCIAL-MEDIA": 42,
+      "STREAMING": 42,
+      "YOUTUBE": 42
+    },
+    "last_lines": [
+      "[EDUKASI] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 894s), WARM-UP-CF:FAIL(cooldown 54s), AUTO-FAST:225ms]",
+      "[GLOBAL] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 781s), WARM-UP-CF:FAIL(HTTP Error 503: Service Unavailable), AUTO-FAST:56ms]",
+      "[PROXY] current=GLOBAL selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 780s), WARM-UP-CF:FAIL(HTTP Error 503: Service Unavailable), AUTO-FAST:63ms]",
+      "[OK] PROXY -> AUTO-FAST",
+      "[STREAMING] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP-CF:FAIL(cooldown 899s), STREAMING-FAST:FAIL(HTTP Error 503: Service Unavailable), WARM-UP:FAIL(cooldown 780s), AUTO-FAST:47ms]",
+      "[SOCIAL-MEDIA] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 779s), WARM-UP-CF:FAIL(cooldown 898s), AUTO-FAST:51ms]",
+      "[YOUTUBE] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 779s), WARM-UP-CF:FAIL(cooldown 898s), AUTO-FAST:67ms]",
+      "[EDUKASI] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 778s), WARM-UP-CF:FAIL(cooldown 898s), AUTO-FAST:57ms]",
+      "[GLOBAL] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 661s), WARM-UP-CF:FAIL(cooldown 780s), AUTO-FAST:67ms]",
+      "[PROXY] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 661s), WARM-UP-CF:FAIL(cooldown 780s), AUTO-FAST:59ms]",
+      "[STREAMING] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP-CF:FAIL(cooldown 779s), STREAMING-FAST:FAIL(HTTP Error 503: Service Unavailable), WARM-UP:FAIL(cooldown 660s), AUTO-FAST:53ms]",
+      "[SOCIAL-MEDIA] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 660s), WARM-UP-CF:FAIL(cooldown 779s), AUTO-FAST:53ms]",
+      "[YOUTUBE] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 659s), WARM-UP-CF:FAIL(cooldown 779s), AUTO-FAST:65ms]",
+      "[EDUKASI] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 659s), WARM-UP-CF:FAIL(cooldown 778s), AUTO-FAST:64ms]",
+      "[GLOBAL] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 542s), WARM-UP-CF:FAIL(cooldown 661s), AUTO-FAST:49ms]",
+      "[PROXY] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 542s), WARM-UP-CF:FAIL(cooldown 661s), AUTO-FAST:58ms]",
+      "[STREAMING] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP-CF:FAIL(cooldown 660s), STREAMING-FAST:FAIL(cooldown 781s), WARM-UP:FAIL(cooldown 541s), AUTO-FAST:72ms]",
+      "[SOCIAL-MEDIA] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 541s), WARM-UP-CF:FAIL(cooldown 660s), AUTO-FAST:59ms]",
+      "[YOUTUBE] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 540s), WARM-UP-CF:FAIL(cooldown 660s), AUTO-FAST:58ms]",
+      "[EDUKASI] current=AUTO-FAST selected=AUTO-FAST checks=[WARM-UP:FAIL(cooldown 540s), WARM-UP-CF:FAIL(cooldown 659s), AUTO-FAST:46ms]"
+    ],
+    "lines_checked": 300,
+    "recent_switches": [
+      {
+        "group": "SOCIAL-MEDIA",
+        "line": "[OK] SOCIAL-MEDIA -> FALLBACK",
+        "selected": "FALLBACK"
+      },
+      {
+        "group": "YOUTUBE",
+        "line": "[OK] YOUTUBE -> FALLBACK",
+        "selected": "FALLBACK"
+      },
+      {
+        "group": "EDUKASI",
+        "line": "[OK] EDUKASI -> FALLBACK",
+        "selected": "FALLBACK"
+      },
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> FALLBACK",
+        "selected": "FALLBACK"
+      },
+      {
+        "group": "GLOBAL",
+        "line": "[OK] GLOBAL -> FALLBACK",
+        "selected": "FALLBACK"
+      },
+      {
+        "group": "SOCIAL-MEDIA",
+        "line": "[OK] SOCIAL-MEDIA -> FALLBACK",
+        "selected": "FALLBACK"
+      },
+      {
+        "group": "YOUTUBE",
+        "line": "[OK] YOUTUBE -> FALLBACK",
+        "selected": "FALLBACK"
+      },
+      {
+        "group": "EDUKASI",
+        "line": "[OK] EDUKASI -> FALLBACK",
+        "selected": "FALLBACK"
+      },
+      {
+        "group": "PROXY",
+        "line": "[OK] PROXY -> AUTO-FAST",
+        "selected": "AUTO-FAST"
+      },
+      {
+        "group": "PROXY",
+        "line": "[OK] PROXY -> AUTO-FAST",
+        "selected": "AUTO-FAST"
+      }
+    ],
+    "unauthorized_401_count": 0
+  },
+  "mihomo_api": "http://127.0.0.1:9090",
+  "router": "openwrt-home",
+  "timestamp_utc": "2026-06-17T23:21:31.965627+00:00"
+}
