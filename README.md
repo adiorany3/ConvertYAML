@@ -1186,3 +1186,34 @@ tail -f /tmp/mihomo_force_after_reload.log
 ```
 
 Jika masih no-ping, kemungkinan penyebabnya: node benar-benar mati, endpoint test diblokir, IP bug sedang tidak cocok, atau config OpenClash belum memakai `secret` yang sama.
+
+---
+
+## OpenWrt One-Click Install / Reinstall Aman
+
+Untuk memasang ulang semua komponen OpenWrt tanpa menghilangkan setting yang sudah berhasil, gunakan:
+
+```sh
+cd /root/scripts
+sh install_reinstall_all_openwrt.sh
+```
+
+Script ini tidak menimpa atau menghapus:
+
+```text
+/etc/mihomo-autopilot/github.env
+```
+
+Jadi token GitHub, secret Mihomo, repo, branch, dan setting yang sudah berhasil tetap aman.
+
+Untuk hanya memeriksa instalasi:
+
+```sh
+sh /etc/mihomo-autopilot/install_reinstall_all_openwrt.sh check
+```
+
+Dokumentasi lengkap ada di:
+
+```text
+README_OPENWRT_ONE_CLICK_INSTALL.md
+```
