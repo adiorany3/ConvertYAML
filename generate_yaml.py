@@ -973,7 +973,11 @@ def _build_lite_yaml_from_text(yaml_text: str) -> str:
         new_g = dict(g)
         gtype = str(new_g.get("type") or "")
         refs = [str(x) for x in (new_g.get("proxies") or []) if str(x) in refs_available]
-        if name in {"GLOBAL", "PROXY"}:
+        if name == "GLOBAL":
+            # GLOBAL selector intentionally has no DIRECT. Local/LAN traffic still goes DIRECT via rules.
+            preferred = ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "MANUAL"]
+            refs = _dedupe_values([x for x in preferred if x in refs_available] + [x for x in refs if x in refs_available and x != "DIRECT"])
+        elif name == "PROXY":
             preferred = ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "MANUAL", "DIRECT"]
             refs = _dedupe_values([x for x in preferred if x in refs_available] + [x for x in refs if x in refs_available])
         elif name == "WARM-UP":

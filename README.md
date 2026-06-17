@@ -1111,3 +1111,15 @@ Lalu OpenWrt bisa pull config terbaru seperti biasa.
 
 `manual_unblock_domains.txt` hanya mengatur **routing domain**. Node yang dipakai tetap berasal dari group `MANUAL`, yaitu daftar node di `manual_nodes.txt`.
 
+
+
+### No DIRECT di Selector GLOBAL
+
+Pada versi ini, selector `GLOBAL` sengaja tidak lagi menampilkan pilihan `DIRECT`. Tujuannya agar setelah OpenClash reload, jalur utama tidak jatuh ke koneksi langsung. Akses lokal/LAN tetap aman karena rule private/LAN masih diarahkan ke `DIRECT` melalui bagian `rules`, bukan melalui selector `GLOBAL`.
+
+Urutan aman setelah reload:
+
+```text
+GLOBAL -> WARM-UP / WARM-UP-CF / AUTO-FAST / FALLBACK / MANUAL
+LAN/private -> DIRECT lewat rules
+```

@@ -432,7 +432,6 @@ proxy-groups:
   - AKUN-018-VLESS-120MS
   - AKUN-019-VLESS-103MS
   - AKUN-020-VLESS-104MS
-  - DIRECT
 - name: PROXY
   type: select
   proxies:

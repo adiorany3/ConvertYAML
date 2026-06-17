@@ -1862,7 +1862,7 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "name": "GLOBAL",
             "type": "select",
             # WARM-UP dibuat paling depan supaya fresh import langsung memakai pool kecil yang sudah dipanaskan.
-            "proxies": ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "LOAD-BALANCE"] + names + ["DIRECT"],
+            "proxies": ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "LOAD-BALANCE"] + names,
         },
         {
             "name": "PROXY",
@@ -2202,7 +2202,7 @@ def build_openclash_android_yaml(
         {
             "name": "GLOBAL",
             "type": "select",
-            "proxies": ["WARM-UP-CF", "STREAMING-FAST", "WARM-UP", "AUTO-FAST", "FALLBACK"] + names + ["DIRECT"],
+            "proxies": ["WARM-UP-CF", "STREAMING-FAST", "WARM-UP", "AUTO-FAST", "FALLBACK"] + names,
         },
         {
             "name": "WARM-UP",

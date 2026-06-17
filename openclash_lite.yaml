@@ -385,7 +385,6 @@ proxy-groups:
   - AKUN-008-CLOUDFLARE-VLESS-WS-238MS
   - AKUN-009-CLOUDFLARE-VLESS-WS-243MS
   - AKUN-010-UNKNOWN-VLESS-WS-276MS
-  - DIRECT
 - name: PROXY
   type: select
   proxies:
