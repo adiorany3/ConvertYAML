@@ -5,7 +5,7 @@
     "AUTO-FAST": {
       "all_count": 10,
       "history_last_delay": null,
-      "now": "AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-99MS",
+      "now": "AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-92MS",
       "type": "URLTest",
       "udp": true
     },
@@ -19,19 +19,19 @@
     "FALLBACK": {
       "all_count": 18,
       "history_last_delay": null,
-      "now": "AKUN-001-NEXUSMODS-VLESS-WS-93MS",
+      "now": "AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-86MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
-      "all_count": 23,
+      "all_count": 22,
       "history_last_delay": null,
       "now": "WARM-UP",
       "type": "Selector",
       "udp": true
     },
     "PROXY": {
-      "all_count": 24,
+      "all_count": 23,
       "history_last_delay": null,
       "now": "WARM-UP",
       "type": "Selector",
@@ -53,22 +53,22 @@
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 0,
-      "now": "AKUN-010-CLOUDFLARE-VLESS-WS-102MS",
+      "history_last_delay": null,
+      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-95MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 61,
-      "now": "AKUN-007-UNKNOWN-VLESS-WS-110MS",
+      "history_last_delay": 79,
+      "now": "AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-92MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 0,
-      "now": "AKUN-010-CLOUDFLARE-VLESS-WS-102MS",
+      "history_last_delay": null,
+      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-95MS",
       "type": "URLTest",
       "udp": true
     },
@@ -89,10 +89,10 @@
         "samples": 5
       },
       "WARM-UP": {
-        "avg": 63.8,
+        "avg": 65.1,
         "max": 170,
         "min": 49,
-        "samples": 102
+        "samples": 126
       },
       "WARM-UP-CF": {
         "avg": 153.0,
@@ -103,41 +103,41 @@
     },
     "exists": true,
     "fail_counts": {
-      "STREAMING-FAST": 12,
-      "WARM-UP-CF": 17
+      "STREAMING-FAST": 16,
+      "WARM-UP-CF": 21
     },
     "gateway_503_504_count": 6,
     "group_log_counts": {
-      "EDUKASI": 18,
-      "GLOBAL": 18,
-      "PROXY": 18,
-      "SOCIAL-MEDIA": 18,
-      "STREAMING": 18,
-      "YOUTUBE": 18
+      "EDUKASI": 22,
+      "GLOBAL": 22,
+      "PROXY": 22,
+      "SOCIAL-MEDIA": 22,
+      "STREAMING": 22,
+      "YOUTUBE": 22
     },
     "last_lines": [
-      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:59ms]",
+      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:64ms]",
+      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:57ms]",
+      "[STREAMING] current=WARM-UP selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 540s), STREAMING-FAST:FAIL(cooldown 541s), WARM-UP:68ms]",
+      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:59ms]",
+      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:58ms]",
+      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:51ms]",
       "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:62ms]",
-      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:59ms]",
-      "[STREAMING] current=WARM-UP-CF selected=WARM-UP checks=[WARM-UP-CF:FAIL(HTTP Error 503: Service Unavailable), STREAMING-FAST:FAIL(HTTP Error 504: Gateway Timeout), WARM-UP:62ms]",
-      "[OK] STREAMING -> WARM-UP",
-      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:67ms]",
-      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:62ms]",
-      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:54ms]",
-      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:74ms]",
-      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:75ms]",
-      "[STREAMING] current=WARM-UP selected=WARM-UP checks=[WARM-UP-CF:FAIL(HTTP Error 503: Service Unavailable), STREAMING-FAST:FAIL(HTTP Error 503: Service Unavailable), WARM-UP:63ms]",
-      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:63ms]",
-      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:93ms]",
-      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:66ms]",
-      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:73ms]",
-      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:62ms]",
-      "[STREAMING] current=WARM-UP selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 780s), STREAMING-FAST:FAIL(cooldown 780s), WARM-UP:64ms]",
-      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:69ms]",
+      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:71ms]",
+      "[STREAMING] current=WARM-UP selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 420s), STREAMING-FAST:FAIL(cooldown 420s), WARM-UP:61ms]",
+      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:54ms]",
       "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:63ms]",
-      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:61ms]"
+      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:56ms]",
+      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:166ms]",
+      "[PROXY] current=GLOBAL selected=WARM-UP checks=[WARM-UP:156ms]",
+      "[OK] PROXY -> WARM-UP",
+      "[STREAMING] current=WARM-UP-CF selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 298s), STREAMING-FAST:FAIL(cooldown 298s), WARM-UP:71ms]",
+      "[OK] STREAMING -> WARM-UP",
+      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:69ms]",
+      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:68ms]",
+      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:79ms]"
     ],
-    "lines_checked": 124,
+    "lines_checked": 150,
     "recent_switches": [
       {
         "group": "STREAMING",
@@ -163,11 +163,21 @@
         "group": "STREAMING",
         "line": "[OK] STREAMING -> WARM-UP",
         "selected": "WARM-UP"
+      },
+      {
+        "group": "PROXY",
+        "line": "[OK] PROXY -> WARM-UP",
+        "selected": "WARM-UP"
+      },
+      {
+        "group": "STREAMING",
+        "line": "[OK] STREAMING -> WARM-UP",
+        "selected": "WARM-UP"
       }
     ],
     "unauthorized_401_count": 11
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-06-17T13:20:09.325263+00:00"
+  "timestamp_utc": "2026-06-17T13:30:01.532905+00:00"
 }
