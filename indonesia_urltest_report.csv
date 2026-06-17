@@ -1,11 +1,14 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-293MS,vless,ws,love.ns.cloudflare.com,pon.antalmani.mm.am,293,,10399,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-003-AMAZON-TROJAN-WS-122MS,trojan,ws,43.218.77.16,store.timimi.dpdns.org,122,,10285,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-004-UNKNOWN-TROJAN-WS-229MS,trojan,ws,27.50.48.49,www.calmloud.com,229,,10710,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-005-UNKNOWN-TROJAN-WS-242MS,trojan,ws,165.215.250.14,www.calmlunch.com,242,,10443,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-006-CLOUDFLARE-TROJAN-WS-239MS,trojan,ws,104.19.2.175,www.calmloud.com,239,,10644,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-007-UNKNOWN-TROJAN-WS-294MS,trojan,ws,104.18.12.149,www.ignitelimit.com,294,,10689,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-008-ZENFO-1-TROJAN-WS-318MS,trojan,ws,199.181.197.235,uk1.test3.net,318,,462,"SSLError: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLError(1",no
-AKUN-009-UNKNOWN-TROJAN-WS-614MS,trojan,ws,188.114.96.3,www.creationlong.org,614,,11144,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
-AKUN-010-CLOUDFLARE-VMESS-WS-275MS,vmess,ws,104.18.42.54,vienna-bread-threats-amendment.trycloudflare.com,275,,6516,pass 4/4 required 2; www.tokopedia.com:HTTP 403/1058ms; www.bca.co.id:HTTP 200/1860ms; www.detik.com:HTTP 200/1586ms; www.gstatic.com:HTTP 204/1883ms,yes
-AKUN-011-UNKNOWN-VMESS-WS-378MS,vmess,ws,188.114.97.6,vyvzyhgz.com,378,,10662,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-001-RS-1125-VLESS-WS-263MS,vless,ws,216.24.57.1,picassooo.info,263,,655,"SSLError: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFErro",no
+AKUN-002-CLOUDFLARE-VLESS-WS-416MS,vless,ws,love.ns.cloudflare.com,pon.antalmani.mm.am,416,,10509,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-003-CLOUDFLARE-VLESS-WS-545MS,vless,ws,empty-water-a05b.gfbghfbfngbdgbghngf.workers.dev,empty-water-a05b.gfbghfbfngbdgbghngf.workers.dev,545,,10686,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-004-CLOUDFLARE-TROJAN-WS-74MS,trojan,ws,www.speedtest.net,027.ELeCTroCelLco-CF-027.wORkERS.dEv,74,,10206,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-005-NET-89-116-46-0-24-TROJAN-WS-347MS,trojan,ws,89.116.46.8,www.calmloud.com,347,,10837,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-006-CLOUDFLARE-TROJAN-WS-358MS,trojan,ws,104.18.12.149,www.ignitelimit.com,358,,10680,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-007-UNKNOWN-TROJAN-WS-352MS,trojan,ws,45.80.111.7,www.calmlunch.com,352,,10590,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-008-CLOUDFLARE-TROJAN-WS-345MS,trojan,ws,104.19.2.175,www.calmloud.com,345,,10598,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-009-PROQUEST-NET-TROJAN-WS-358MS,trojan,ws,165.215.250.14,www.calmlunch.com,358,,10819,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-010-CLOUDFLARE-TROJAN-WS-381MS,trojan,ws,104.20.6.134,www.multiplydose.com,381,,10643,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-011-CLOUDFLARE-TROJAN-WS-419MS,trojan,ws,188.114.96.3,www.creationlong.org,419,,10705,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-012-AMAZON-TROJAN-WS-114MS,trojan,ws,43.218.77.16,store.timimi.dpdns.org,114,,10501,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
+AKUN-013-UNKNOWN-VMESS-WS-571MS,vmess,ws,104.18.19.99,vyvzyhgz.com,571,,10866,"ReadTimeout: HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=10.0)",no
