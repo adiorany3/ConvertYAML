@@ -47,21 +47,21 @@
     "STREAMING": {
       "all_count": 16,
       "history_last_delay": null,
-      "now": "WARM-UP",
+      "now": "STREAMING-FAST",
       "type": "Selector",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 0,
+      "history_last_delay": 68,
       "now": "AKUN-004-CLOUDFLARE-VLESS-WS-115MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 56,
-      "now": "AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-81MS",
+      "history_last_delay": 52,
+      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-117MS",
       "type": "URLTest",
       "udp": true
     },
@@ -83,79 +83,64 @@
   "log_summary": {
     "delay_summary": {
       "STREAMING-FAST": {
-        "avg": 131.8,
+        "avg": 113.4,
         "max": 334,
-        "min": 68,
-        "samples": 5
+        "min": 67,
+        "samples": 7
       },
       "WARM-UP": {
-        "avg": 69.9,
+        "avg": 70.3,
         "max": 396,
         "min": 47,
-        "samples": 268
+        "samples": 261
       },
       "WARM-UP-CF": {
-        "avg": 89.1,
+        "avg": 86.7,
         "max": 156,
         "min": 66,
-        "samples": 11
+        "samples": 13
       }
     },
     "exists": true,
     "fail_counts": {
-      "STREAMING-FAST": 31,
-      "WARM-UP-CF": 36
+      "STREAMING-FAST": 27,
+      "WARM-UP-CF": 34
     },
     "gateway_503_504_count": 14,
     "group_log_counts": {
-      "EDUKASI": 48,
-      "GLOBAL": 47,
+      "EDUKASI": 47,
+      "GLOBAL": 46,
       "PROXY": 47,
       "SOCIAL-MEDIA": 47,
       "STREAMING": 47,
-      "YOUTUBE": 48
+      "YOUTUBE": 47
     },
     "last_lines": [
-      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:86ms]",
-      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:61ms]",
-      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:68ms]",
-      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:81ms]",
-      "[STREAMING] current=WARM-UP selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 780s), STREAMING-FAST:FAIL(cooldown 780s), WARM-UP:56ms]",
-      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:58ms]",
-      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:62ms]",
-      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:61ms]",
-      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:72ms]",
-      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:74ms]",
-      "[STREAMING] current=WARM-UP selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 660s), STREAMING-FAST:FAIL(cooldown 660s), WARM-UP:66ms]",
-      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:59ms]",
-      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:76ms]",
-      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:58ms]",
-      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:59ms]",
-      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:61ms]",
-      "[STREAMING] current=WARM-UP selected=WARM-UP checks=[WARM-UP-CF:FAIL(cooldown 540s), STREAMING-FAST:FAIL(cooldown 540s), WARM-UP:66ms]",
-      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:61ms]",
+      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:55ms]",
+      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:79ms]",
+      "[STREAMING] current=STREAMING-FAST selected=WARM-UP-CF checks=[WARM-UP-CF:79ms]",
+      "[OK] STREAMING -> WARM-UP-CF",
+      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:56ms]",
+      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:72ms]",
+      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:60ms]",
+      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:62ms]",
+      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:150ms]",
+      "[STREAMING] current=WARM-UP-CF selected=WARM-UP-CF checks=[WARM-UP-CF:68ms]",
+      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:68ms]",
       "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:65ms]",
-      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:56ms]"
+      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:59ms]",
+      "[GLOBAL] current=WARM-UP selected=WARM-UP checks=[WARM-UP:62ms]",
+      "[PROXY] current=WARM-UP selected=WARM-UP checks=[WARM-UP:58ms]",
+      "[STREAMING] current=WARM-UP-CF selected=STREAMING-FAST checks=[WARM-UP-CF:FAIL(HTTP Error 504: Gateway Timeout), STREAMING-FAST:68ms]",
+      "[OK] STREAMING -> STREAMING-FAST",
+      "[SOCIAL-MEDIA] current=WARM-UP selected=WARM-UP checks=[WARM-UP:64ms]",
+      "[YOUTUBE] current=WARM-UP selected=WARM-UP checks=[WARM-UP:83ms]",
+      "[EDUKASI] current=WARM-UP selected=WARM-UP checks=[WARM-UP:52ms]"
     ],
     "lines_checked": 300,
     "recent_switches": [
       {
         "group": "STREAMING",
-        "line": "[OK] STREAMING -> WARM-UP",
-        "selected": "WARM-UP"
-      },
-      {
-        "group": "STREAMING",
-        "line": "[OK] STREAMING -> WARM-UP-CF",
-        "selected": "WARM-UP-CF"
-      },
-      {
-        "group": "STREAMING",
-        "line": "[OK] STREAMING -> STREAMING-FAST",
-        "selected": "STREAMING-FAST"
-      },
-      {
-        "group": "STREAMING",
         "line": "[OK] STREAMING -> WARM-UP-CF",
         "selected": "WARM-UP-CF"
       },
@@ -188,11 +173,26 @@
         "group": "STREAMING",
         "line": "[OK] STREAMING -> WARM-UP",
         "selected": "WARM-UP"
+      },
+      {
+        "group": "STREAMING",
+        "line": "[OK] STREAMING -> STREAMING-FAST",
+        "selected": "STREAMING-FAST"
+      },
+      {
+        "group": "STREAMING",
+        "line": "[OK] STREAMING -> WARM-UP-CF",
+        "selected": "WARM-UP-CF"
+      },
+      {
+        "group": "STREAMING",
+        "line": "[OK] STREAMING -> STREAMING-FAST",
+        "selected": "STREAMING-FAST"
       }
     ],
     "unauthorized_401_count": 0
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-06-17T14:30:01.265577+00:00"
+  "timestamp_utc": "2026-06-17T14:45:01.315289+00:00"
 }
