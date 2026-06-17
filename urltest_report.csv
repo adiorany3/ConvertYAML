@@ -1,31 +1,35 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-86MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,86,,218,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-97MS,vless,ws,198.41.223.229,accv9.mmhz9.workers.dev,97,,229,HTTP 204,yes
-AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-92MS,vless,ws,69.63.212.251,t1s1.rittbo.kdns.fr,92,,216,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-100MS,vless,ws,104.18.95.26,hhlfy.twiladaphne.ndjp.net,100,,275,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-125MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,125,,220,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-95MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,95,,200,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-128MS,vless,ws,188.114.97.6,FrEe.SeRVEr14peekCoNfIG.WoRKErS.dEV,128,,195,HTTP 204,yes
-AKUN-008-DEV-VLESS-WS-126MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,126,,205,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-82MS,vless,ws,172.64.53.74,fgnix832fx.fx6hsv0.ccwu.cc,82,,215,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-128MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,128,,197,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-92MS,vless,ws,silent-thunder-8469.shsfhhdfh.workers.dev,SiLeNt-tHUNdEr-8469.sHSFHhdfh.WOrkERS.dev,92,,216,HTTP 204,yes
-AKUN-012-UNKNOWN-VLESS-WS-97MS,vless,ws,188.114.96.1,24VvD-4imRvfaQv7hQxYbU9WzJv378Qi.v2Raygulf.WorkeRS.DeV,97,,231,HTTP 204,yes
-AKUN-013-CLOUDFLARE-VLESS-WS-238MS,vless,ws,betty.ns.cloudflare.com,octopusss.net,238,,511,HTTP 204,yes
-AKUN-014-CLOUDFLARE-VLESS-WS-243MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,243,,497,HTTP 204,yes
-AKUN-015-UNKNOWN-VLESS-WS-276MS,vless,ws,172.64.146.138,octopusss4.com,276,,589,HTTP 204,yes
-AKUN-016-CLOUDFLARE-VLESS-WS-283MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,283,,583,HTTP 204,yes
-AKUN-017-CLOUDFLARE-VLESS-WS-220MS,vless,ws,162.159.38.119,pon.antalmani.mm.am,220,,2753,HTTP 204,yes
-AKUN-018-RS-RAPIDSEEDBOX-20190717-VLESS-WS-284MS,vless,ws,45.130.125.229,octopusss5.info,284,,575,HTTP 204,yes
-AKUN-019-CLOUDFLARE-VLESS-WS-268MS,vless,ws,betty.ns.cloudflare.com,amoosamiii.net,268,,587,HTTP 204,yes
-AKUN-020-CLOUDFLARE-VLESS-WS-272MS,vless,ws,betty.ns.cloudflare.com,vangoghhh.info,272,,582,HTTP 204,yes
-AKUN-021-CLOUDFLARE-VLESS-WS-290MS,vless,ws,betty.ns.cloudflare.com,terazhediii.info,290,,723,HTTP 204,yes
-AKUN-022-CLOUDFLARE-VLESS-WS-354MS,vless,ws,108.162.195.45,picassooo.info,354,,659,HTTP 204,yes
-AKUN-023-RU-ZAYMER-20221025-VLESS-WS-437MS,vless,ws,erosan.appleseraj.ir,falkinichlol.appleseraj.ir,437,,535,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-024-APNIC-AP-VLESS-WS-484MS,vless,ws,103.160.204.239,testing.bo2tabere30.ir,484,,582,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-025-APNIC-AP-VLESS-WS-487MS,vless,ws,103.160.204.239,testing.bo2tabere30.ir,487,,605,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-026-CLOUDFLARE-VLESS-WS-447MS,vless,ws,172.67.158.125,PrO.nImBaHa.InFo,447,,633,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-027-BIGCOMMERCE-VLESS-WS-457MS,vless,ws,63.141.128.205,sync.amordad.xyz,457,,742,HTTP 204,yes
-AKUN-028-CLOUDFLARE-VLESS-WS-497MS,vless,ws,104.16.72.139,cdn-pro4.postshup.ir.,497,,965,HTTP 204,yes
-AKUN-029-CHATGPT-VLESS-WS-400MS,vless,ws,www.chatgpt.com,download.myvipnet.com,400,,556,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-030-CLOUDFLARE-VLESS-WS-450MS,vless,ws,elma.ns.cloudflare.com,as2.fanosorang.com,450,,762,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-79MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,79,,230,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-69MS,vless,ws,cdn.9889888.xyz,t1s1.rittbo.kdns.fr,69,,248,HTTP 204,yes
+AKUN-003-RS-RAPIDSEEDBOX-20190717-VLESS-WS-92MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,92,,211,HTTP 204,yes
+AKUN-004-RS-RAPIDSEEDBOX-20190717-VLESS-WS-78MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,78,,204,HTTP 204,yes
+AKUN-005-FMN5-RENTED-NET2-VLESS-WS-97MS,vless,ws,185.193.30.94,kakoolnews.7kakoolnews.workers.dev,97,,217,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-101MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,101,,209,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-87MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,87,,201,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-78MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,78,,232,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-113MS,vless,ws,188.114.96.3,LWa4Jxf1sx58NnL51K0Ugg8U3xBSubxl.PAGes.Dev,113,,218,HTTP 204,yes
+AKUN-010-RS-RAPIDSEEDBOX-20190717-VLESS-WS-73MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,73,,213,HTTP 204,yes
+AKUN-011-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-86MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,86,,203,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-133MS,vless,ws,www.speedtest.net,nameless-sun-fd68.karimhaji.workers.dev,133,,209,HTTP 204,yes
+AKUN-013-CONFLU-VLESS-WS-375MS,vless,ws,159.112.235.52,octopusss.net,375,,784,HTTP 204,yes
+AKUN-014-CLOUDFLARE-VLESS-WS-378MS,vless,ws,172.64.33.162,octopusss5.info,378,,854,HTTP 204,yes
+AKUN-015-CLOUDFLARE-VLESS-WS-385MS,vless,ws,betty.ns.cloudflare.com,amoosamiii.net,385,,864,HTTP 204,yes
+AKUN-016-UNKNOWN-VLESS-WS-380MS,vless,ws,185.18.250.252,crm.lotussec.com,380,,675,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-017-CLOUDFLARE-VLESS-WS-407MS,vless,ws,108.162.194.119,pon.antalmani.mm.am,407,,2853,HTTP 204,yes
+AKUN-018-CLOUDFLARE-VLESS-WS-416MS,vless,ws,betty.ns.cloudflare.com,vangoghhh.info,416,,839,HTTP 204,yes
+AKUN-019-CLOUDFLARE-VLESS-WS-374MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,374,,851,HTTP 204,yes
+AKUN-020-CLOUDFLARE-VLESS-WS-524MS,vless,ws,client.jison.ir,fty.jison.ir,524,,757,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-021-UNKNOWN-VLESS-WS-659MS,vless,ws,104.16.6.70,cd2.rfiksma.top,659,,883,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-022-CLOUDFLARE-VLESS-WS-657MS,vless,ws,104.17.79.104,tinypiing.caffebazar.qzz.io,657,,982,HTTP 204,yes
+AKUN-023-APNIC-AP-VLESS-WS-708MS,vless,ws,103.160.204.239,testing.bo2tabere30.ir,708,,804,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-024-CHATGPT-VLESS-WS-663MS,vless,ws,www.chatgpt.com,upload.myvipnet.com,663,,794,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-025-CLOUDFLARE-VLESS-WS-694MS,vless,ws,172.67.158.125,PrO.nImBaHa.InFo,694,,970,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-026-A1TA-PORSCHE-AT-VLESS-WS-711MS,vless,ws,212.183.88.136,testing.bo2tabere30.ir,711,,790,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-027-CLOUDFLARE-VLESS-WS-734MS,vless,ws,104.16.0.0,tr-cd.sublink-vip2.com,734,,1001,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-028-CLOUDFLARE-VLESS-WS-735MS,vless,ws,188.114.97.6,global.arshia-nova.ir,735,,1179,HTTP 204,yes
+AKUN-029-UNKNOWN-VLESS-WS-725MS,vless,ws,45.130.125.126,cdn-pro3.postshup.ir.,725,,959,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-030-WPENG-VLESS-WS-758MS,vless,ws,vip11.mongral.ir,tell-zimoon909.mongral.ir,758,,958,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-031-CLOUDFLARE-VLESS-WS-864MS,vless,ws,188.114.97.6,alphacdn.alphashops.shop,864,,2609,HTTP 204,yes
+AKUN-032-RU-ZAYMER-20221025-VLESS-WS-865MS,vless,ws,erosan.appleseraj.ir,falkinichlol.appleseraj.ir,865,,910,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-033-RS-RAPIDSEEDBOX-20190717-VLESS-WS-794MS,vless,ws,45.130.125.162,ssd.mojaz-persian-music.ir,794,,828,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-034-CLOUDFLARE-VLESS-WS-807MS,vless,ws,www.speedtest.net,cdn-pro1.postshup.ir.,807,,1095,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
