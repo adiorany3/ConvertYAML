@@ -1,13 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-68MS,vless,ws,youxuan.cf.090227.xyz,t1s1.rittbo.kdns.fr,HTTP 204,208,254,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-80MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,227,284,HTTP 204,yes
-AKUN-003-RS-RAPIDSEEDBOX-20190717-VLESS-WS-79MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,223,244,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-93MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,207,291,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-78MS,vless,ws,biyapain.biyapainbache.workers.dev,bIyapain.bIYApaiNbAcHe.WoRkers.DeV,HTTP 204,218,206,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-006-RS-RAPIDSEEDBOX-20190717-VLESS-WS-60MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,225,256,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-81MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,230,254,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-118MS,vless,ws,o.server5peekconfig.workers.dev,O.seRVer5peEKCOnFIG.WOrKers.dEV,HTTP 204,210,185,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-009-UNKNOWN-VLESS-WS-83MS,vless,ws,103.160.204.34,kakoolnews.254yurerhhhh.workers.dev,HTTP 204,223,230,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-86MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,196,237,HTTP 204,yes
-AKUN-011-SPEEDTEST-VLESS-WS-131MS,vless,ws,www.speedtest.net,nameless-sun-fd68.karimhaji.workers.dev,HTTP 204,225,235,HTTP 204,yes
-AKUN-012-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-153MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,223,313,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-85MS,vless,ws,cloudflare.czkcdn.cn,t1s1.rittbo.kdns.fr,HTTP 204,206,262,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-86MS,vless,ws,162.159.60.231,hhlfy.twiladaphne.ndjp.net,HTTP 204,205,237,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-94MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,330,237,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-99MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,206,237,HTTP 204,yes
+AKUN-005-RS-RAPIDSEEDBOX-20190717-VLESS-WS-99MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,200,262,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-98MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,209,237,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-125MS,vless,ws,173.245.59.109,mknulgfkydfkmdg.manmanbbvv.workers.dev,HTTP 204,222,244,HTTP 204,yes
+AKUN-008-RS-RAPIDSEEDBOX-20190717-VLESS-WS-119MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,236,263,HTTP 204,yes
+AKUN-009-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-126MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,245,256,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-108MS,vless,ws,www.speedtest.net,silent-field-bcda.eshtaiger.workers.dev,HTTP 204,246,272,HTTP 204,yes
