@@ -1,7 +1,7 @@
 # Domain yang ingin DIPAKSA lewat group MANUAL.
 # Satu domain per baris. Kosongkan/comment kalau tidak dipakai.
 # Contoh:
-# reddit.com
-# DOMAIN-SUFFIX,reddit.com
-# DOMAIN,old.reddit.com
-# DOMAIN-KEYWORD,reddit
+reddit.com
+DOMAIN-SUFFIX,reddit.com
+DOMAIN,old.reddit.com
+DOMAIN-KEYWORD,reddit
