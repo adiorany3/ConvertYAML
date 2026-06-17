@@ -46,8 +46,14 @@ Versi ini menambahkan tuning agar node lebih cepat bangun dan tidak terlalu lama
 ```yaml
 URLTEST_INTERVAL: "30"
 ANDROID_URLTEST_INTERVAL: "30"
+WARMUP_INTERVAL: "15"
+WARMUP_TIMEOUT_MS: "3000"
+FAST_HEALTH_TIMEOUT_MS: "3000"
+FALLBACK_INTERVAL: "60"
+WARMUP_NODE_LIMIT: "7"
+WARMUP_MAX_DELAY_MS: "180"
 WAKEUP_INTERVAL: "30"
-BALANCE_INTERVAL: "60"
+BALANCE_INTERVAL: "90"
 KEEP_ALIVE_INTERVAL: "15"
 KEEP_ALIVE_IDLE: "600"
 HEALTH_TIMEOUT_MS: "5000"
@@ -55,11 +61,14 @@ HEALTH_TIMEOUT_MS: "5000"
 
 Perubahan penting:
 
-- `AUTO-FAST` dan `FALLBACK` dicek setiap 30 detik.
-- `LOAD-BALANCE` dicek setiap 60 detik agar tidak terlalu berat.
+- `WARM-UP` dibuat sebagai pool kecil berisi 7 node terbaik dengan interval 15 detik agar node utama selalu siap.
+- `GLOBAL`, `PROXY`, kategori sosial, YouTube, edukasi, dan streaming menaruh `WARM-UP` di pilihan awal.
+- `AUTO-FAST` tetap mengecek semua node otomatis setiap 30 detik, tetapi timeout dipangkas ke 3000 ms agar node mati tidak menahan koneksi terlalu lama.
+- `FALLBACK` menjadi cadangan aman dengan interval 60 detik dan timeout 5000 ms.
+- `LOAD-BALANCE` diperlambat ke 90 detik dan hanya memakai pool cepat agar router tidak terlalu berat.
 - `lazy: false` tetap dipertahankan supaya health-check tetap berjalan walau group belum dipilih.
 - TCP keep-alive global diaktifkan agar koneksi idle tidak cepat mati.
-- Manual node dimasukkan langsung ke `FALLBACK` supaya ikut diuji aktif, bukan hanya lewat group `MANUAL`.
+- Manual node dimasukkan langsung ke `FALLBACK` supaya ikut diuji aktif, tetapi tidak lagi dipaksa masuk `STREAMING-FAST` agar health-check tetap ringan.
 - Workflow GitHub berjalan setiap 3 jam untuk refresh kandidat lebih sering.
 
 ## File Android
@@ -157,6 +166,6 @@ NEKOBOX_POOL_NODES: "35"
 CANDIDATE_MIN: "900"
 ```
 
-## Patch STREAMING-FAST
+## Patch STREAMING-FAST + WARM-UP
 
-Versi ini menambahkan grup `STREAMING-FAST` bertipe `url-test` agar menu streaming punya health-check langsung dan lebih sering muncul ping hijau di OpenClash. Grup `STREAMING` sekarang otomatis memilih `STREAMING-FAST` di urutan pertama. `STREAMING-FAST` memakai `lazy: false`, `interval: 30`, `timeout: 5000`, dan `tolerance: 50`, serta memasukkan node manual dan node otomatis yang sudah tersedia.
+Versi ini mempertahankan `STREAMING-FAST` bertipe `url-test`, lalu menambahkan `WARM-UP` sebagai pool kecil anti-hibernasi. `STREAMING` sekarang mengutamakan `WARM-UP`, lalu `STREAMING-FAST`, `AUTO-FAST`, dan `FALLBACK`. `STREAMING-FAST` tidak lagi berisi semua node/manual; isinya dibuat lebih kecil agar health-check ringan dan ping hijau lebih stabil.

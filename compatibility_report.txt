@@ -2,6 +2,9 @@ Compatibility check: OK
 - YAML parse: OK
 - Python compile: OK
 - Missing proxy-group references: 0
-- openclash_auto.yaml: STREAMING-FAST url-test added and linked to STREAMING/GLOBAL/PROXY
-- openclash_android.yaml: STREAMING-FAST url-test added to GLOBAL
+- openclash_auto.yaml: WARM-UP url-test added and set as first practical selector
+- openclash_auto.yaml: STREAMING-FAST reduced to warm fast pool
+- openclash_auto.yaml: AUTO-FAST timeout 3000 ms, FALLBACK interval 60 s, LOAD-BALANCE interval 90 s
+- openclash_android.yaml: WARM-UP + STREAMING-FAST added to GLOBAL
+- openclash_safe_names_rule_split.yaml: WARM-UP + STREAMING-FAST synchronized
 - Android lite config still omits rule-providers, redir-port, and tproxy-port

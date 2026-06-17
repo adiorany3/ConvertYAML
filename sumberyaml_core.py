@@ -52,6 +52,24 @@ def _active_health_interval(interval: int) -> int:
     """Use a shorter active health-check interval without allowing extreme values."""
     return _env_int_range("WAKEUP_INTERVAL", max(20, min(int(interval), 30)), 15, 300)
 
+
+def _delay_from_proxy_name(name: str) -> int:
+    """Extract delay suffix from names like AKUN-001-...-86MS for warm-up ranking."""
+    match = re.search(r"(\d+)MS\b", str(name).upper())
+    return int(match.group(1)) if match else 999999
+
+
+def _select_warmup_names(names: list[str]) -> list[str]:
+    """Pick a small, low-latency warm pool so the router does not health-check every node too often."""
+    clean_names = [str(n) for n in names if str(n) and str(n) != "DIRECT"]
+    if not clean_names:
+        return []
+    limit = _env_int_range("WARMUP_NODE_LIMIT", 7, 3, 12)
+    max_delay = _env_int_range("WARMUP_MAX_DELAY_MS", 180, 80, 1000)
+    original_index = {name: idx for idx, name in enumerate(clean_names)}
+    ranked = sorted(clean_names, key=lambda n: (_delay_from_proxy_name(n) > max_delay, _delay_from_proxy_name(n), original_index[n]))
+    return ranked[: min(limit, len(ranked))]
+
 DEFAULT_LINKS = [
     "https://raw.githubusercontent.com/itsyebekhe/PSG/main/lite/subscriptions/xray/normal/mix",
     "https://raw.githubusercontent.com/arshiacomplus/v2rayExtractor/refs/heads/main/mix/sub.html",
@@ -1466,11 +1484,18 @@ def check_node_bug_compat(node: ProxyNode, timeout: float, attempts: int, requir
 def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, test_url: str, health_timeout: int = DEFAULT_HEALTH_TIMEOUT_MS, rule_mode: str = "Lengkap") -> str:
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
+    warmup_names = _select_warmup_names(names)
+    warmup_or_direct = warmup_names or direct_or_names
     active_interval = _active_health_interval(interval)
-    balance_interval = max(active_interval, _env_int_range("BALANCE_INTERVAL", 60, 30, 600))
+    warmup_interval = _env_int_range("WARMUP_INTERVAL", 15, 10, 120)
+    fallback_interval = max(active_interval, _env_int_range("FALLBACK_INTERVAL", 60, 30, 600))
+    balance_interval = max(fallback_interval, _env_int_range("BALANCE_INTERVAL", 90, 60, 600))
+    base_timeout = int(health_timeout)
+    warmup_timeout = _env_int_range("WARMUP_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
+    fast_timeout = _env_int_range("FAST_HEALTH_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
 
     def selector(defaults: list[str] | None = None) -> list[str]:
-        defaults = defaults or ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]
+        defaults = defaults or ["WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT"]
         return defaults + names
 
     domain_provider = {
@@ -1598,51 +1623,64 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
         {
             "name": "GLOBAL",
             "type": "select",
-            # AUTO-FAST tetap di pilihan pertama agar fresh import langsung otomatis cepat.
-            "proxies": ["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN"] + names,
+            # WARM-UP dibuat paling depan supaya fresh import langsung memakai pool kecil yang sudah dipanaskan.
+            "proxies": ["WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "LOAD-BALANCE"] + names,
         },
         {
             "name": "PROXY",
             "type": "select",
-            "proxies": ["GLOBAL", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "FALLBACK", "LOAD-BALANCE", "DIRECT"] + names,
+            "proxies": ["GLOBAL", "WARM-UP", "AUTO-FAST", "SOCIAL-MEDIA", "YOUTUBE", "EDUKASI", "STREAMING-FAST", "STREAMING", "CLEAN", "FALLBACK", "DIRECT", "LOAD-BALANCE"] + names,
         },
         {
             "name": "SOCIAL-MEDIA",
             "type": "select",
-            "proxies": selector(["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]),
+            "proxies": selector(["WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT"]),
         },
         {
             "name": "YOUTUBE",
             "type": "select",
-            "proxies": selector(["AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]),
+            "proxies": selector(["WARM-UP", "AUTO-FAST", "FALLBACK", "DIRECT"]),
         },
         {
             "name": "EDUKASI",
             "type": "select",
-            "proxies": selector(["AUTO-FAST", "DIRECT", "FALLBACK", "LOAD-BALANCE"]),
+            "proxies": selector(["WARM-UP", "AUTO-FAST", "DIRECT", "FALLBACK"]),
         },
         {
             "name": "STREAMING",
             "type": "select",
             # STREAMING-FAST dibuat url-test khusus agar panel OpenClash punya delay hijau
             # sendiri, bukan hanya delay dari nested select group.
-            "proxies": selector(["STREAMING-FAST", "AUTO-FAST", "FALLBACK", "LOAD-BALANCE", "DIRECT"]),
+            "proxies": selector(["WARM-UP", "STREAMING-FAST", "AUTO-FAST", "FALLBACK", "DIRECT"]),
+        },
+        {
+            "name": "WARM-UP",
+            "type": "url-test",
+            "proxies": warmup_or_direct,
+            "url": test_url,
+            "interval": warmup_interval,
+            "tolerance": min(tolerance, 30),
+            "lazy": False,
+            "timeout": warmup_timeout,
+            "expected-status": "200/204/301/302",
+            "max-failed-times": 2,
         },
         {
             "name": "STREAMING-FAST",
             "type": "url-test",
-            "proxies": direct_or_names,
+            "proxies": warmup_or_direct,
             "url": test_url,
             "interval": active_interval,
             "tolerance": max(tolerance, 50),
             "lazy": False,
-            "timeout": health_timeout,
+            "timeout": fast_timeout,
             "expected-status": "200/204/301/302",
+            "max-failed-times": 2,
         },
         {
             "name": "CLEAN",
             "type": "select",
-            "proxies": ["AUTO-FAST", "DIRECT", "FALLBACK"],
+            "proxies": ["DIRECT", "WARM-UP", "AUTO-FAST", "FALLBACK"],
         },
         {
             "name": "AUTO-FAST",
@@ -1652,29 +1690,32 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             "interval": active_interval,
             "tolerance": tolerance,
             "lazy": False,
-            "timeout": health_timeout,
+            "timeout": fast_timeout,
             "expected-status": "200/204/301/302",
+            "max-failed-times": 2,
         },
         {
             "name": "FALLBACK",
             "type": "fallback",
             "proxies": direct_or_names,
             "url": test_url,
-            "interval": active_interval,
+            "interval": fallback_interval,
             "lazy": False,
             "timeout": health_timeout,
             "expected-status": "200/204/301/302",
+            "max-failed-times": 3,
         },
         {
             "name": "LOAD-BALANCE",
             "type": "load-balance",
             "strategy": "consistent-hashing",
-            "proxies": direct_or_names,
+            "proxies": warmup_or_direct,
             "url": test_url,
             "interval": balance_interval,
             "lazy": False,
             "timeout": health_timeout,
             "expected-status": "200/204/301/302",
+            "max-failed-times": 3,
         },
     ]
 
@@ -1883,24 +1924,44 @@ def build_openclash_android_yaml(
     """
     names = [node.clash["name"] for node in nodes]
     direct_or_names = names or ["DIRECT"]
+    warmup_names = _select_warmup_names(names)
+    warmup_or_direct = warmup_names or direct_or_names
     active_interval = _active_health_interval(interval)
+    warmup_interval = _env_int_range("WARMUP_INTERVAL", 15, 10, 120)
+    fallback_interval = max(active_interval, _env_int_range("FALLBACK_INTERVAL", 60, 30, 600))
+    base_timeout = int(health_timeout)
+    warmup_timeout = _env_int_range("WARMUP_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
+    fast_timeout = _env_int_range("FAST_HEALTH_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
 
     proxy_groups: list[dict[str, Any]] = [
         {
             "name": "GLOBAL",
             "type": "select",
-            "proxies": ["STREAMING-FAST", "AUTO-FAST", "FALLBACK", "DIRECT"] + names,
+            "proxies": ["WARM-UP", "STREAMING-FAST", "AUTO-FAST", "FALLBACK", "DIRECT"] + names,
+        },
+        {
+            "name": "WARM-UP",
+            "type": "url-test",
+            "proxies": warmup_or_direct,
+            "url": test_url,
+            "interval": warmup_interval,
+            "tolerance": min(tolerance, 30),
+            "lazy": False,
+            "timeout": warmup_timeout,
+            "expected-status": "200/204/301/302",
+            "max-failed-times": 2,
         },
         {
             "name": "STREAMING-FAST",
             "type": "url-test",
-            "proxies": direct_or_names,
+            "proxies": warmup_or_direct,
             "url": test_url,
             "interval": active_interval,
             "tolerance": max(tolerance, 50),
             "lazy": False,
-            "timeout": health_timeout,
+            "timeout": fast_timeout,
             "expected-status": "200/204/301/302",
+            "max-failed-times": 2,
         },
         {
             "name": "AUTO-FAST",
@@ -1910,18 +1971,20 @@ def build_openclash_android_yaml(
             "interval": active_interval,
             "tolerance": tolerance,
             "lazy": False,
-            "timeout": health_timeout,
+            "timeout": fast_timeout,
             "expected-status": "200/204/301/302",
+            "max-failed-times": 2,
         },
         {
             "name": "FALLBACK",
             "type": "fallback",
             "proxies": direct_or_names,
             "url": test_url,
-            "interval": active_interval,
+            "interval": fallback_interval,
             "lazy": False,
             "timeout": health_timeout,
             "expected-status": "200/204/301/302",
+            "max-failed-times": 3,
         },
     ]
 

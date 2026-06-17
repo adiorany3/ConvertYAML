@@ -401,15 +401,17 @@ proxy-groups:
 - name: GLOBAL
   type: select
   proxies:
+  - WARM-UP
   - AUTO-FAST
   - FALLBACK
-  - LOAD-BALANCE
   - DIRECT
   - SOCIAL-MEDIA
   - YOUTUBE
   - EDUKASI
+  - STREAMING-FAST
   - STREAMING
   - CLEAN
+  - LOAD-BALANCE
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
   - AKUN-003-VLESS-91MS
@@ -434,15 +436,17 @@ proxy-groups:
   type: select
   proxies:
   - GLOBAL
+  - WARM-UP
   - AUTO-FAST
   - SOCIAL-MEDIA
   - YOUTUBE
   - EDUKASI
+  - STREAMING-FAST
   - STREAMING
   - CLEAN
   - FALLBACK
-  - LOAD-BALANCE
   - DIRECT
+  - LOAD-BALANCE
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
   - AKUN-003-VLESS-91MS
@@ -466,9 +470,9 @@ proxy-groups:
 - name: SOCIAL-MEDIA
   type: select
   proxies:
+  - WARM-UP
   - AUTO-FAST
   - FALLBACK
-  - LOAD-BALANCE
   - DIRECT
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
@@ -493,9 +497,9 @@ proxy-groups:
 - name: YOUTUBE
   type: select
   proxies:
+  - WARM-UP
   - AUTO-FAST
   - FALLBACK
-  - LOAD-BALANCE
   - DIRECT
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
@@ -520,10 +524,10 @@ proxy-groups:
 - name: EDUKASI
   type: select
   proxies:
+  - WARM-UP
   - AUTO-FAST
   - DIRECT
   - FALLBACK
-  - LOAD-BALANCE
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
   - AKUN-003-VLESS-91MS
@@ -547,9 +551,10 @@ proxy-groups:
 - name: STREAMING
   type: select
   proxies:
+  - WARM-UP
+  - STREAMING-FAST
   - AUTO-FAST
   - FALLBACK
-  - LOAD-BALANCE
   - DIRECT
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
@@ -574,12 +579,77 @@ proxy-groups:
 - name: CLEAN
   type: select
   proxies:
-  - AUTO-FAST
   - DIRECT
+  - WARM-UP
+  - AUTO-FAST
   - FALLBACK
+- name: WARM-UP
+  type: url-test
+  proxies:
+  - AKUN-009-VLESS-81MS
+  - AKUN-012-VLESS-82MS
+  - AKUN-002-VLESS-85MS
+  - AKUN-003-VLESS-91MS
+  - AKUN-001-VLESS-93MS
+  - AKUN-006-VLESS-94MS
+  - AKUN-007-VLESS-95MS
+  url: http://www.gstatic.com/generate_204
+  interval: 15
+  tolerance: 30
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
+- name: STREAMING-FAST
+  type: url-test
+  proxies:
+  - AKUN-009-VLESS-81MS
+  - AKUN-012-VLESS-82MS
+  - AKUN-002-VLESS-85MS
+  - AKUN-003-VLESS-91MS
+  - AKUN-001-VLESS-93MS
+  - AKUN-006-VLESS-94MS
+  - AKUN-007-VLESS-95MS
+  url: http://www.gstatic.com/generate_204
+  interval: 30
+  tolerance: 50
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
 - name: AUTO-FAST
   type: url-test
-  proxies: &id001
+  proxies:
+  - AKUN-001-VLESS-93MS
+  - AKUN-002-VLESS-85MS
+  - AKUN-003-VLESS-91MS
+  - AKUN-004-VLESS-97MS
+  - AKUN-005-VLESS-98MS
+  - AKUN-006-VLESS-94MS
+  - AKUN-007-VLESS-95MS
+  - AKUN-008-VLESS-96MS
+  - AKUN-009-VLESS-81MS
+  - AKUN-010-VLESS-95MS
+  - AKUN-011-VLESS-103MS
+  - AKUN-012-VLESS-82MS
+  - AKUN-013-VLESS-110MS
+  - AKUN-014-VLESS-106MS
+  - AKUN-015-VLESS-99MS
+  - AKUN-016-VLESS-104MS
+  - AKUN-017-VLESS-100MS
+  - AKUN-018-VLESS-120MS
+  - AKUN-019-VLESS-103MS
+  - AKUN-020-VLESS-104MS
+  url: http://www.gstatic.com/generate_204
+  interval: 30
+  tolerance: 40
+  lazy: false
+  timeout: 3000
+  expected-status: 200/204/301/302
+  max-failed-times: 2
+- name: FALLBACK
+  type: fallback
+  proxies:
   - AKUN-001-VLESS-93MS
   - AKUN-002-VLESS-85MS
   - AKUN-003-VLESS-91MS
@@ -602,27 +672,27 @@ proxy-groups:
   - AKUN-020-VLESS-104MS
   url: http://www.gstatic.com/generate_204
   interval: 60
-  tolerance: 80
   lazy: false
-  timeout: 6000
-  expected-status: 204
-- name: FALLBACK
-  type: fallback
-  proxies: *id001
-  url: http://www.gstatic.com/generate_204
-  interval: 60
-  lazy: false
-  timeout: 6000
-  expected-status: 204
+  timeout: 5000
+  expected-status: 200/204/301/302
+  max-failed-times: 3
 - name: LOAD-BALANCE
   type: load-balance
   strategy: consistent-hashing
-  proxies: *id001
+  proxies:
+  - AKUN-009-VLESS-81MS
+  - AKUN-012-VLESS-82MS
+  - AKUN-002-VLESS-85MS
+  - AKUN-003-VLESS-91MS
+  - AKUN-001-VLESS-93MS
+  - AKUN-006-VLESS-94MS
+  - AKUN-007-VLESS-95MS
   url: http://www.gstatic.com/generate_204
-  interval: 120
+  interval: 90
   lazy: false
-  timeout: 6000
-  expected-status: 204
+  timeout: 5000
+  expected-status: 200/204/301/302
+  max-failed-times: 3
 rule-providers:
   ads_domain:
     type: http
@@ -671,3 +741,6 @@ rules:
 - DOMAIN-SUFFIX,t.me,SOCIAL-MEDIA
 - DOMAIN-SUFFIX,telegram.org,SOCIAL-MEDIA
 - MATCH,GLOBAL
+keep-alive-interval: 15
+keep-alive-idle: 600
+disable-keep-alive: false
