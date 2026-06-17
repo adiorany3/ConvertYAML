@@ -11,21 +11,21 @@
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 63,
+      "history_last_delay": 66,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 16,
-      "history_last_delay": 51,
+      "history_last_delay": 61,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-142MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 70,
+      "history_last_delay": 66,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
@@ -39,42 +39,42 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 60,
+      "history_last_delay": 57,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 67,
+      "history_last_delay": 63,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 57,
+      "history_last_delay": 65,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-142MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 68,
+      "history_last_delay": 61,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-142MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 66,
+      "history_last_delay": 61,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-142MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 72,
+      "history_last_delay": 63,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
@@ -203,5 +203,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-06-17T23:45:12.420336+00:00"
+  "timestamp_utc": "2026-06-17T23:56:49.307723+00:00"
 }
