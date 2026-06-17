@@ -56,6 +56,7 @@ def _enforce_no_selector_no_direct_config(config: dict[str, Any]) -> dict[str, A
         "STREAMING-FAST",
         "FALLBACK",
         "LOAD-BALANCE",
+        "PING-CHECK",
     ]
 
     def dedupe(values: list[str]) -> list[str]:
@@ -1802,6 +1803,9 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
     fast_timeout = _env_int_range("FAST_HEALTH_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
     cf_test_url = os.getenv("CF_TEST_URL", "https://cp.cloudflare.com").strip() or "https://cp.cloudflare.com"
     streaming_test_url = os.getenv("STREAMING_TEST_URL", cf_test_url).strip() or cf_test_url
+    ping_check_url = os.getenv("PING_CHECK_URL", test_url).strip() or test_url
+    ping_check_interval = _env_int_range("PING_CHECK_INTERVAL", 60, 45, 600)
+    ping_check_timeout = _env_int_range("PING_CHECK_TIMEOUT_MS", max(5000, base_timeout), 2000, 15000)
 
     def selector(defaults: list[str] | None = None) -> list[str]:
         defaults = defaults or ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "FALLBACK"]
@@ -1961,6 +1965,20 @@ def build_openclash_yaml(nodes: list[ProxyNode], interval: int, tolerance: int, 
             # STREAMING-FAST dibuat url-test khusus agar panel OpenClash punya delay hijau
             # sendiri, bukan hanya delay dari nested select group.
             "proxies": selector(["WARM-UP-CF", "STREAMING-FAST", "WARM-UP", "AUTO-FAST", "FALLBACK"]),
+        },
+        {
+            "name": "PING-CHECK",
+            "type": "url-test",
+            # Probe semua akun agar panel OpenClash/Mihomo segera punya delay/ping.
+            # Group ini bukan jalur utama; dipakai sebagai health probe pasca import/reload.
+            "proxies": direct_or_names,
+            "url": ping_check_url,
+            "interval": ping_check_interval,
+            "tolerance": max(tolerance, 100),
+            "lazy": False,
+            "timeout": ping_check_timeout,
+            "expected-status": "200/204/301/302",
+            "max-failed-times": 2,
         },
         {
             "name": "WARM-UP",
@@ -2269,12 +2287,29 @@ def build_openclash_android_yaml(
     fast_timeout = _env_int_range("FAST_HEALTH_TIMEOUT_MS", min(3000, base_timeout), 1000, 10000)
     cf_test_url = os.getenv("CF_TEST_URL", "https://cp.cloudflare.com").strip() or "https://cp.cloudflare.com"
     streaming_test_url = os.getenv("STREAMING_TEST_URL", cf_test_url).strip() or cf_test_url
+    ping_check_url = os.getenv("PING_CHECK_URL", test_url).strip() or test_url
+    ping_check_interval = _env_int_range("PING_CHECK_INTERVAL", 60, 45, 600)
+    ping_check_timeout = _env_int_range("PING_CHECK_TIMEOUT_MS", max(5000, base_timeout), 2000, 15000)
 
     proxy_groups: list[dict[str, Any]] = [
         {
             "name": "GLOBAL",
             "type": "select",
             "proxies": ["WARM-UP-CF", "STREAMING-FAST", "WARM-UP", "AUTO-FAST", "FALLBACK"] + names,
+        },
+        {
+            "name": "PING-CHECK",
+            "type": "url-test",
+            # Probe semua akun agar panel OpenClash/Mihomo segera punya delay/ping.
+            # Group ini bukan jalur utama; dipakai sebagai health probe pasca import/reload.
+            "proxies": direct_or_names,
+            "url": ping_check_url,
+            "interval": ping_check_interval,
+            "tolerance": max(tolerance, 100),
+            "lazy": False,
+            "timeout": ping_check_timeout,
+            "expected-status": "200/204/301/302",
+            "max-failed-times": 2,
         },
         {
             "name": "WARM-UP",

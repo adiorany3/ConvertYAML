@@ -971,7 +971,7 @@ def _enforce_no_selector_no_direct_yaml_text(yaml_text: str) -> str:
         return yaml_text
     proxy_names = [str(p.get("name")) for p in config.get("proxies", []) if isinstance(p, dict) and p.get("name")]
     group_names = [str(g.get("name")) for g in groups if isinstance(g, dict) and g.get("name")]
-    defaults = ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "STREAMING-FAST", "FALLBACK", "LOAD-BALANCE"]
+    defaults = ["WARM-UP", "WARM-UP-CF", "AUTO-FAST", "STREAMING-FAST", "FALLBACK", "LOAD-BALANCE", "PING-CHECK"]
 
     def dedupe(values: list[str]) -> list[str]:
         out: list[str] = []
@@ -1005,6 +1005,53 @@ def _enforce_no_selector_no_direct_yaml_text(yaml_text: str) -> str:
             if not refs:
                 refs = dedupe([x for x in defaults if x in group_names and x != name] + [x for x in proxy_names if x != name]) or ["REJECT"]
             group["proxies"] = refs
+    return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
+
+
+
+def _ensure_ping_check_group_yaml_text(yaml_text: str) -> str:
+    """Add a lazy=false url-test group that probes every node so OpenClash shows delay/ping.
+
+    This group is not meant as the main traffic route. It is a health-probe group
+    so freshly generated accounts get checked by Mihomo/OpenClash immediately
+    after import/reload, instead of staying grey/no-ping in the UI.
+    """
+    try:
+        config = yaml.safe_load(yaml_text) or {}
+    except Exception:
+        return yaml_text
+    if not isinstance(config, dict):
+        return yaml_text
+    proxies = [p for p in config.get("proxies", []) if isinstance(p, dict) and p.get("name")]
+    proxy_names = _dedupe_values([str(p.get("name")) for p in proxies])
+    if not proxy_names:
+        return yaml_text
+    groups = config.setdefault("proxy-groups", [])
+    if not isinstance(groups, list):
+        config["proxy-groups"] = groups = []
+    existing = {str(g.get("name")): g for g in groups if isinstance(g, dict)}
+    ping_group = {
+        "name": "PING-CHECK",
+        "type": "url-test",
+        "proxies": proxy_names,
+        "url": os.getenv("PING_CHECK_URL", os.getenv("TEST_URL", "https://www.gstatic.com/generate_204")),
+        "interval": max(45, _env_int("PING_CHECK_INTERVAL", 60)),
+        "tolerance": _env_int("PING_CHECK_TOLERANCE", 100),
+        "lazy": False,
+        "timeout": _env_int("PING_CHECK_TIMEOUT_MS", 5000),
+        "expected-status": "200/204/301/302",
+        "max-failed-times": 2,
+    }
+    if "PING-CHECK" in existing:
+        existing["PING-CHECK"].update(ping_group)
+    else:
+        # Let OpenClash display the probe group near other automatic health groups.
+        insert_at = 0
+        for i, g in enumerate(groups):
+            if isinstance(g, dict) and str(g.get("name")) in ("WARM-UP", "AUTO-FAST", "FALLBACK"):
+                insert_at = i
+                break
+        groups.insert(insert_at, ping_group)
     return yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=140)
 
 def _group_map(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -1127,6 +1174,122 @@ def _build_node_quality_report(yaml_text: str, urltest_rows: list[dict[str, Any]
     return "\n".join(lines) + "\n"
 
 
+def _node_names_from_yaml_text(yaml_text: str) -> list[str]:
+    try:
+        config = yaml.safe_load(yaml_text) or {}
+    except Exception:
+        return []
+    if not isinstance(config, dict):
+        return []
+    return [str(p.get("name")) for p in config.get("proxies", []) if isinstance(p, dict) and p.get("name")]
+
+
+def _build_fresh_pool_report(
+    fresh_nodes: list[Any],
+    strict_nodes: list[Any],
+    urltest_rows: list[dict[str, Any]],
+    nekobox_rows: list[dict[str, Any]],
+    fresh_yaml_text: str,
+) -> str:
+    url_map = {str(r.get("name") or ""): r for r in urltest_rows}
+    neko_map = {str(r.get("name") or ""): r for r in nekobox_rows}
+    fresh_names = [str(getattr(n, "name", "") or "") for n in fresh_nodes]
+    strict_names = [str(getattr(n, "name", "") or "") for n in strict_nodes]
+    yaml_names = _node_names_from_yaml_text(fresh_yaml_text)
+
+    def row_for(name: str) -> tuple[str, str, str]:
+        u = url_map.get(name, {})
+        n = neko_map.get(name, {})
+        url_ms = str(u.get("url_test_ms") or u.get("delay_ms") or "")
+        neko_ms = str(n.get("nekobox_test_ms") or "")
+        status = str(n.get("nekobox_ready") or u.get("url_test_status") or u.get("status") or "")
+        return url_ms, neko_ms, status
+
+    lines = [
+        "# Fresh Candidate Pool",
+        "",
+        "File ini dibuat otomatis oleh GitHub Actions setelah node diuji.",
+        "Tujuannya: OpenWrt punya cadangan config/node fresh sebelum semua node utama mati.",
+        "",
+        "## Output Fresh Pool",
+        "- `openclash_fresh_pool.yaml`: config darurat berisi kandidat fresh yang sudah lolos test GitHub.",
+        "- `fresh_pool/fresh_candidates.txt`: link akun kandidat fresh hasil URL test Mihomo.",
+        "- `fresh_pool/fresh_candidates_strict.txt`: link akun yang lolos sampai test NekoBox/sing-box.",
+        "- `fresh_pool/fresh_candidates.json`: metadata ringkas fresh pool.",
+        "",
+        "## Ringkasan",
+        f"- Kandidat fresh URL-tested: {len(fresh_names)}",
+        f"- Kandidat strict NekoBox-tested: {len(strict_names)}",
+        f"- Proxy di openclash_fresh_pool.yaml: {len(yaml_names)}",
+        "",
+        "## Cara Pakai di OpenWrt",
+        "Jalankan manual saat node mulai mati:",
+        "",
+        "```sh",
+        "sh /etc/mihomo-autopilot/openwrt_pull_fresh_pool.sh",
+        "```",
+        "",
+        "Atau aktifkan guard otomatis:",
+        "",
+        "```sh",
+        "sh /etc/mihomo-autopilot/openwrt_fresh_guard.sh",
+        "```",
+        "",
+        "## Kandidat Fresh Teratas",
+    ]
+    for idx, name in enumerate(fresh_names[:30], start=1):
+        url_ms, neko_ms, status = row_for(name)
+        extra = []
+        if url_ms:
+            extra.append(f"url={url_ms}ms")
+        if neko_ms:
+            extra.append(f"nekobox={neko_ms}ms")
+        if status:
+            extra.append(f"status={status}")
+        suffix = f" ({', '.join(extra)})" if extra else ""
+        lines.append(f"{idx}. `{name}`{suffix}")
+    if not fresh_names:
+        lines.append("- Tidak ada kandidat fresh pada run terakhir.")
+
+    lines += [
+        "",
+        "## Catatan",
+        "Fresh pool bukan pengganti AutoPilot. AutoPilot tetap memilih jalur sehat di router.",
+        "Fresh pool adalah cadangan siap-download ketika semua group utama mulai gagal berulang.",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def _build_fresh_pool_json(fresh_nodes: list[Any], strict_nodes: list[Any], urltest_rows: list[dict[str, Any]], nekobox_rows: list[dict[str, Any]]) -> str:
+    url_map = {str(r.get("name") or ""): r for r in urltest_rows}
+    neko_map = {str(r.get("name") or ""): r for r in nekobox_rows}
+
+    def item(node: Any) -> dict[str, Any]:
+        name = str(getattr(node, "name", "") or "")
+        u = url_map.get(name, {})
+        n = neko_map.get(name, {})
+        return {
+            "name": name,
+            "type": str(getattr(node, "type", "") or ""),
+            "network": str(getattr(node, "network", "") or ""),
+            "server": str(getattr(node, "server", "") or ""),
+            "port": int(getattr(node, "port", 0) or 0),
+            "url_test_ms": u.get("url_test_ms") or u.get("delay_ms"),
+            "url_test_status": u.get("url_test_status") or u.get("status"),
+            "nekobox_test_ms": n.get("nekobox_test_ms"),
+            "nekobox_ready": n.get("nekobox_ready"),
+        }
+
+    payload = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "fresh_count": len(fresh_nodes),
+        "strict_count": len(strict_nodes),
+        "fresh": [item(n) for n in fresh_nodes],
+        "strict": [item(n) for n in strict_nodes],
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+
+
 def main() -> int:
     output_yaml = os.getenv("OUTPUT_YAML", "openclash_auto.yaml")
     output_csv = os.getenv("OUTPUT_CSV", "openclash_auto_report.csv")
@@ -1138,6 +1301,8 @@ def main() -> int:
     output_android_yaml = os.getenv("OUTPUT_ANDROID_YAML", "openclash_android.yaml")
     output_lite_yaml = os.getenv("OUTPUT_LITE_YAML", "openclash_lite.yaml")
     output_node_quality_report = os.getenv("OUTPUT_NODE_QUALITY_REPORT", "node_quality_report.md")
+    output_fresh_yaml = os.getenv("OUTPUT_FRESH_YAML", "openclash_fresh_pool.yaml")
+    output_fresh_dir = os.getenv("OUTPUT_FRESH_DIR", "fresh_pool")
     output_stamp = os.getenv("OUTPUT_STAMP", "last_update.txt")
     manual_file = os.getenv("MANUAL_NODES_FILE", "manual_nodes.txt")
 
@@ -1222,6 +1387,7 @@ def main() -> int:
     )
     yaml_text = add_manual_group_to_yaml_text(yaml_text, manual_nodes, android=False)
     yaml_text = _enforce_no_selector_no_direct_yaml_text(yaml_text)
+    yaml_text = _ensure_ping_check_group_yaml_text(yaml_text)
 
     android_yaml_text = build_openclash_android_yaml(
         alive_nodes,
@@ -1232,10 +1398,28 @@ def main() -> int:
     )
     android_yaml_text = add_manual_group_to_yaml_text(android_yaml_text, manual_nodes, android=True)
     android_yaml_text = _enforce_no_selector_no_direct_yaml_text(android_yaml_text)
+    android_yaml_text = _ensure_ping_check_group_yaml_text(android_yaml_text)
 
     lite_yaml_text = _build_lite_yaml_from_text(yaml_text)
     lite_yaml_text = _enforce_no_selector_no_direct_yaml_text(lite_yaml_text)
+    lite_yaml_text = _ensure_ping_check_group_yaml_text(lite_yaml_text)
     node_quality_text = _build_node_quality_report(yaml_text, urltest_rows, nekobox_rows)
+
+    fresh_pool_count = max(max_nodes, _env_int("FRESH_POOL_NODES", _env_int("NEKOBOX_POOL_NODES", max(25, max_nodes * 3))))
+    fresh_nodes = mihomo_pass_nodes[:fresh_pool_count]
+    fresh_yaml_text = build_openclash_yaml(
+        fresh_nodes,
+        interval=max(_env_int("URLTEST_INTERVAL", 30), 30),
+        tolerance=_env_int("TOLERANCE", 40),
+        test_url=os.getenv("TEST_URL", ALT_TEST_URL),
+        health_timeout=_env_int("HEALTH_TIMEOUT_MS", 5000),
+        rule_mode=os.getenv("RULE_MODE", "Lite"),
+    )
+    fresh_yaml_text = add_manual_group_to_yaml_text(fresh_yaml_text, manual_nodes, android=False)
+    fresh_yaml_text = _enforce_no_selector_no_direct_yaml_text(fresh_yaml_text)
+    fresh_yaml_text = _ensure_ping_check_group_yaml_text(fresh_yaml_text)
+    fresh_report_text = _build_fresh_pool_report(fresh_nodes, alive_nodes, urltest_rows, nekobox_rows, fresh_yaml_text)
+    fresh_json_text = _build_fresh_pool_json(fresh_nodes, alive_nodes, urltest_rows, nekobox_rows)
 
     csv_text = build_csv(all_nodes + manual_nodes)
     akun_text = build_akun_txt(alive_nodes)
@@ -1245,7 +1429,14 @@ def main() -> int:
     Path(output_yaml).write_text(yaml_text, encoding="utf-8")
     Path(output_android_yaml).write_text(android_yaml_text, encoding="utf-8")
     Path(output_lite_yaml).write_text(lite_yaml_text, encoding="utf-8")
+    Path(output_fresh_yaml).write_text(fresh_yaml_text, encoding="utf-8")
+    fresh_dir = Path(output_fresh_dir)
+    fresh_dir.mkdir(parents=True, exist_ok=True)
     Path(output_node_quality_report).write_text(node_quality_text, encoding="utf-8")
+    (fresh_dir / "fresh_candidates.txt").write_text(build_akun_txt(fresh_nodes), encoding="utf-8")
+    (fresh_dir / "fresh_candidates_strict.txt").write_text(build_akun_txt(alive_nodes), encoding="utf-8")
+    (fresh_dir / "fresh_candidates.json").write_text(fresh_json_text, encoding="utf-8")
+    (fresh_dir / "fresh_candidates_report.md").write_text(fresh_report_text, encoding="utf-8")
     Path(output_csv).write_text(csv_text, encoding="utf-8")
     Path(output_akun).write_text(akun_text, encoding="utf-8")
     Path(output_manual_akun).write_text(manual_akun_text, encoding="utf-8")
@@ -1260,6 +1451,8 @@ def main() -> int:
         f"OpenClash YAML: {output_yaml}\n"
         f"Android YAML: {output_android_yaml}\n"
         f"Lite router YAML: {output_lite_yaml}\n"
+        f"Fresh pool YAML: {output_fresh_yaml}\n"
+        f"Fresh pool candidates: {len(fresh_nodes)}\n"
         f"Node quality report: {output_node_quality_report}\n"
         f"Automatic YAML nodes after NekoBox test: {len(alive_nodes)}\n"
         f"Automatic strict pool before URL test: {len(auto_pool_nodes)}\n"

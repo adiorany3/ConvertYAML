@@ -1140,3 +1140,49 @@ DIRECT di rules LAN/private = tetap ada
 `DIRECT` tetap dipakai hanya untuk rule lokal seperti `192.168.0.0/16`, `10.0.0.0/8`, `localhost`, `.lan`, dan `.local`, supaya akses router/perangkat lokal tidak rusak. Untuk internet umum, jalur otomatis akan memilih node dari `WARM-UP`, `WARM-UP-CF`, `AUTO-FAST`, `STREAMING-FAST`, atau `FALLBACK`.
 
 Domain yang ada di `manual_unblock_domains.txt` tetap diarahkan ke group `MANUAL`. Pada versi ini `MANUAL` juga otomatis, bukan selector, dan tidak memiliki pilihan `DIRECT`.
+
+
+## Fresh Candidate Pool
+
+GitHub sekarang menyiapkan cadangan node fresh secara otomatis lewat file:
+
+- `openclash_fresh_pool.yaml`
+- `fresh_pool/fresh_candidates.txt`
+- `fresh_pool/fresh_candidates_strict.txt`
+- `fresh_pool/fresh_candidates.json`
+- `fresh_pool/fresh_candidates_report.md`
+
+OpenWrt dapat mengambil cadangan ini sebelum semua node utama mati:
+
+```sh
+. /etc/mihomo-autopilot/github.env
+sh /etc/mihomo-autopilot/openwrt_pull_fresh_pool.sh
+```
+
+Guard otomatis tersedia:
+
+```sh
+sh /etc/mihomo-autopilot/openwrt_fresh_guard.sh
+```
+
+Jika AutoPilot log menunjukkan banyak `FAIL`, `timeout`, `503`, atau `504`, guard akan menarik `openclash_fresh_pool.yaml`, memasangnya dengan backup/rollback, lalu menjalankan force-after-reload agar koneksi tidak jatuh ke DIRECT.
+
+
+## PING-CHECK / Force Delay Akun
+
+Jika akun yang didapat terlihat abu-abu atau tidak memiliki ping di OpenClash, gunakan patch ini. Config otomatis menambahkan group `PING-CHECK` bertipe `url-test` dengan `lazy: false`. Group ini bertugas memaksa semua node dites delay, bukan sebagai jalur utama traffic.
+
+Tes manual di OpenWrt:
+
+```sh
+MIHOMO_SECRET='reyre' python3 /etc/mihomo-autopilot/mihomo_force_ping_all.py
+```
+
+Setelah reload OpenClash, script `force_after_openclash_reload.sh` akan menjalankan delay-check semua akun, lalu menjalankan AutoPilot.
+
+```sh
+openclash-reload-autopilot restart
+tail -f /tmp/mihomo_force_after_reload.log
+```
+
+Jika masih no-ping, kemungkinan penyebabnya: node benar-benar mati, endpoint test diblokir, IP bug sedang tidak cocok, atau config OpenClash belum memakai `secret` yang sama.

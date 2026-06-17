@@ -30,6 +30,7 @@ need_file() {
 need_file "force_after_openclash_reload.sh"
 need_file "openclash_reload_guard.sh"
 need_file "mihomo_autopilot.py"
+need_file "mihomo_force_ping_all.py"
 
 if ! command -v python3 >/dev/null 2>&1; then
   echo "python3 belum ada. Install dulu: opkg update && opkg install python3"
@@ -38,9 +39,10 @@ fi
 
 mkdir -p "$DEST"
 cp "$SRC_DIR/mihomo_autopilot.py" "$DEST/mihomo_autopilot.py"
+cp "$SRC_DIR/mihomo_force_ping_all.py" "$DEST/mihomo_force_ping_all.py"
 cp "$SRC_DIR/force_after_openclash_reload.sh" "$DEST/force_after_openclash_reload.sh"
 cp "$SRC_DIR/openclash_reload_guard.sh" "$DEST/openclash_reload_guard.sh"
-chmod +x "$DEST/mihomo_autopilot.py" "$DEST/force_after_openclash_reload.sh" "$DEST/openclash_reload_guard.sh"
+chmod +x "$DEST/mihomo_autopilot.py" "$DEST/mihomo_force_ping_all.py" "$DEST/force_after_openclash_reload.sh" "$DEST/openclash_reload_guard.sh"
 
 # Simpan env lokal kalau belum ada. Kalau sudah ada, jangan overwrite token GitHub/user setting lain.
 ENV_FILE="$DEST/github.env"

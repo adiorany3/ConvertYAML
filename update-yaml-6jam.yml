@@ -2,14 +2,12 @@ name: Update OpenClash YAML responsif setiap 3 jam
 
 on:
   schedule:
-    # GitHub Actions memakai UTC. Jadwal ini berjalan tiap 3 jam agar kandidat node lebih sering direfresh.
     - cron: "0 */3 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
-# Mencegah dua workflow update berjalan bersamaan dan saling rebut push.
 concurrency:
   group: update-openclash-yaml-${{ github.ref }}
   cancel-in-progress: true
@@ -17,20 +15,13 @@ concurrency:
 jobs:
   update-yaml:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Sync latest branch before generate
-        run: |
-          BRANCH="${GITHUB_REF_NAME:-main}"
-          git fetch origin "$BRANCH"
-          git checkout "$BRANCH"
-          git pull --rebase --autostash origin "$BRANCH"
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -43,17 +34,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Download Mihomo core for real proxy check
+      - name: Sync branch before generate
+        shell: bash
         run: |
-          python - <<'PY'
+          BRANCH="${GITHUB_REF_NAME}"
+          git fetch origin "$BRANCH"
+          git checkout "$BRANCH"
+          git pull --rebase --autostash origin "$BRANCH"
+
+      - name: Download Mihomo core for OpenClash URL test
+        shell: bash
+        run: |
+          MIHOMO_URL=$(python - <<'PY'
           import json
           import urllib.request
 
-          api = "https://api.github.com/repos/MetaCubeX/mihomo/releases/latest"
-          data = json.load(urllib.request.urlopen(api, timeout=30))
-          assets = data.get("assets", [])
+          data = json.load(urllib.request.urlopen("https://api.github.com/repos/MetaCubeX/mihomo/releases/latest", timeout=30))
           candidates = []
-          for asset in assets:
+          for asset in data.get("assets", []):
               name = asset.get("name", "")
               url = asset.get("browser_download_url", "")
               low = name.lower()
@@ -64,52 +62,76 @@ jobs:
           candidates.sort()
           print(candidates[0][2])
           PY
-          MIHOMO_URL=$(python - <<'PY'
-          import json
-          import urllib.request
-          data = json.load(urllib.request.urlopen("https://api.github.com/repos/MetaCubeX/mihomo/releases/latest", timeout=30))
-          candidates = []
-          for asset in data.get("assets", []):
-              name = asset.get("name", "")
-              url = asset.get("browser_download_url", "")
-              low = name.lower()
-              if ("linux-amd64-compatible" in low or "linux-amd64" in low) and low.endswith(".gz") and "debug" not in low:
-                  candidates.append((0 if "compatible" in low else 1, name, url))
-          candidates.sort()
-          print(candidates[0][2])
-          PY
           )
+          echo "Download Mihomo: $MIHOMO_URL"
           curl -L "$MIHOMO_URL" -o mihomo.gz
           gunzip -f mihomo.gz
           chmod +x mihomo
           ./mihomo -v || true
 
-      - name: Generate YAML
+      - name: Download sing-box core for NekoBox compatibility test
+        shell: bash
+        run: |
+          SINGBOX_URL=$(python - <<'PY'
+          import json
+          import urllib.request
+
+          data = json.load(urllib.request.urlopen("https://api.github.com/repos/SagerNet/sing-box/releases/latest", timeout=30))
+          candidates = []
+          for asset in data.get("assets", []):
+              name = asset.get("name", "")
+              url = asset.get("browser_download_url", "")
+              low = name.lower()
+              if "linux-amd64" in low and low.endswith(".tar.gz") and all(x not in low for x in ["debug", ".deb", ".rpm"]):
+                  candidates.append((name, url))
+          if not candidates:
+              raise SystemExit("No linux-amd64 sing-box tar.gz asset found")
+          candidates.sort()
+          print(candidates[0][1])
+          PY
+          )
+          echo "Download sing-box: $SINGBOX_URL"
+          curl -L "$SINGBOX_URL" -o sing-box.tar.gz
+          tar -xzf sing-box.tar.gz
+          SINGBOX_BIN=$(find . -type f -name sing-box -perm -111 | head -n 1)
+          if [ -z "$SINGBOX_BIN" ]; then
+            echo "sing-box binary not found"
+            exit 1
+          fi
+          cp "$SINGBOX_BIN" ./sing-box
+          chmod +x ./sing-box
+          ./sing-box version || true
+
+      - name: Generate YAML with Mihomo and NekoBox tests
         env:
-          MAX_NODES: "20"
-          MIN_OUTPUT_NODES: "20"
-          VALIDATION_POOL_NODES: "120"
-          REAL_CHECK: "true"
+          MAX_NODES: "10"
+          MIN_OUTPUT_NODES: "10"
+          URLTEST_POOL_NODES: "35"
+          NEKOBOX_POOL_NODES: "25"
+          REQUIRE_URL_TEST: "true"
+          REQUIRE_NEKOBOX_TEST: "true"
           MIHOMO_PATH: "./mihomo"
-          REAL_CHECK_TIMEOUT_MS: "7000"
-          REAL_CHECK_EXPECTED_STATUS: "204,200,301,302"
-          REAL_CHECK_ATTEMPTS: "3"
-          REAL_CHECK_REQUIRE_SUCCESSES: "2"
-          REAL_CHECK_GAP_SECONDS: "0.25"
+          SINGBOX_PATH: "./sing-box"
+          URL_TEST_URL: "https://www.gstatic.com/generate_204"
+          NEKOBOX_TEST_URL: "https://www.gstatic.com/generate_204"
+          URL_TEST_EXPECTED_STATUS: "204,200,301,302"
+          URL_TEST_TIMEOUT_MS: "5000"
+          NEKOBOX_TEST_TIMEOUT_MS: "7000"
           FORCE_WS_ONLY: "true"
           REQUIRE_WS_UPGRADE: "true"
           PREFER_WS: "true"
-          CANDIDATE_MULTIPLIER: "100"
-          CANDIDATE_MIN: "4000"
-          RESERVE_POOL_NODES: "180"
-          ATTEMPTS: "5"
-          REQUIRE_SUCCESSES: "4"
-          # Filter low handshake: hanya akun otomatis dengan handshake best <= 250ms yang masuk kandidat.
-          # Manual nodes tidak disaring. Ubah ke 0 untuk mematikan filter.
-          MAX_HANDSHAKE_MS: "250"
-          MAX_AVG_HANDSHAKE_MS: "350"
-          MAX_JITTER_MS: "120"
-          TCP_TIMEOUT: "4.0"
+          EARLY_STOP_GOOD_NODES: "true"
+          TEST_BATCH_SIZE: "80"
+          CANDIDATE_MULTIPLIER: "35"
+          CANDIDATE_MIN: "600"
+          RESERVE_POOL_NODES: "35"
+          ATTEMPTS: "2"
+          REQUIRE_SUCCESSES: "1"
+          TCP_TIMEOUT: "2.0"
+          FETCH_TIMEOUT: "12"
+          MAX_WORKERS: "64"
+          FAST_TARGET_MS: "180"
+          FILL_DELAY_MS: "900"
           URLTEST_INTERVAL: "30"
           ANDROID_URLTEST_INTERVAL: "30"
           WARMUP_INTERVAL: "15"
@@ -133,34 +155,68 @@ jobs:
           WAKEUP_INTERVAL: "30"
           BALANCE_INTERVAL: "90"
           RULE_MODE: "Lite"
+          TEST_URL: "https://www.gstatic.com/generate_204"
           OUTPUT_ANDROID_YAML: "openclash_android.yaml"
           OUTPUT_LITE_YAML: "openclash_lite.yaml"
+          OUTPUT_FRESH_YAML: "openclash_fresh_pool.yaml"
+          OUTPUT_FRESH_DIR: "fresh_pool"
+          FRESH_POOL_NODES: "25"
           OUTPUT_NODE_QUALITY_REPORT: "node_quality_report.md"
           ANDROID_HEALTH_TIMEOUT_MS: "5000"
-          TEST_URL: "https://www.gstatic.com/generate_204"
-          REAL_CHECK_TEST_URL: "https://www.gstatic.com/generate_204"
-          ANDROID_TEST_URL: "https://www.gstatic.com/generate_204"
           OUTPUT_YAML: "openclash_auto.yaml"
           MIHOMO_SECRET: "reyre"
           OUTPUT_CSV: "openclash_auto_report.csv"
+          OUTPUT_URLTEST_REPORT: "urltest_report.csv"
+          OUTPUT_NEKOBOX_REPORT: "nekobox_test_report.csv"
           OUTPUT_AKUN: "akun.txt"
           OUTPUT_MANUAL_AKUN: "akun_manual.txt"
           OUTPUT_MANUAL_SKIPPED: "manual_nodes_skipped.txt"
           OUTPUT_STAMP: "last_update.txt"
-          OUTPUT_COMPAT_REPORT: "compatibility_report.txt"
           MANUAL_NODES_FILE: "manual_nodes.txt"
           MANUAL_UNBLOCK_DOMAINS_FILE: "manual_unblock_domains.txt"
         run: python generate_yaml.py
 
-      - name: Validate generated YAML with Mihomo/OpenClash core
+      - name: Validate AutoPilot script
+        shell: bash
         run: |
-          set -e
-          echo "Validate OpenClash router YAML"
+          python -m py_compile scripts/mihomo_autopilot.py
+          sh -n scripts/install_autopilot_openwrt.sh
+          sh -n scripts/run_autopilot_once.sh
+          sh -n scripts/openwrt_pull_fresh_pool.sh
+          sh -n scripts/openwrt_fresh_guard.sh
+          sh -n scripts/openwrt_download_fresh_candidates.sh
+
+      - name: Validate generated YAML
+        shell: bash
+        run: |
+          python - <<'PY'
+          import yaml
+          for path in ["openclash_auto.yaml", "openclash_android.yaml", "openclash_lite.yaml", "openclash_fresh_pool.yaml"]:
+              with open(path, "r", encoding="utf-8") as f:
+                  data = yaml.safe_load(f)
+              if not isinstance(data, dict):
+                  raise SystemExit(f"{path}: bukan YAML config dict")
+              proxy_items = [p for p in data.get("proxies", []) if isinstance(p, dict)]
+              names = [p.get("name") for p in proxy_items]
+              if len(set(names)) != len(names):
+                  raise SystemExit(f"{path}: nama proxy duplikat")
+              groups = {g.get("name") for g in data.get("proxy-groups", []) if isinstance(g, dict)}
+              refs = set(names) | groups | {"DIRECT", "REJECT", "GLOBAL"}
+              for g in data.get("proxy-groups", []) or []:
+                  if not isinstance(g, dict):
+                      continue
+                  for ref in g.get("proxies", []) or []:
+                      if ref not in refs:
+                          raise SystemExit(f"{path}: proxy-group {g.get('name')} referensi hilang: {ref}")
+              if path == "openclash_android.yaml":
+                  for forbidden in ["rule-providers", "redir-port", "tproxy-port"]:
+                      if forbidden in data:
+                          raise SystemExit(f"{path}: tidak boleh punya {forbidden}")
+          print("YAML reference compatibility check OK")
+          PY
           ./mihomo -t -d . -f openclash_auto.yaml
-          echo "Validate Android/global YAML"
           ./mihomo -t -d . -f openclash_android.yaml
           ./mihomo -t -d . -f openclash_lite.yaml
-          echo "YAML validated by Mihomo."
 
       - name: Commit updated YAML
         shell: bash
@@ -174,6 +230,10 @@ jobs:
             openclash_auto.yaml
             openclash_android.yaml
             openclash_lite.yaml
+            fresh_pool/fresh_candidates_report.md
+            fresh_pool/fresh_candidates.json
+            fresh_pool/fresh_candidates_strict.txt
+            fresh_pool/fresh_candidates.txt
             node_quality_report.md
             scripts/mihomo_autopilot.py
             scripts/install_autopilot_openwrt.sh
@@ -184,6 +244,8 @@ jobs:
             scripts/rollback_openclash_config.sh
             scripts/install_router_github_sync_openwrt.sh
             README_ROUTER_GITHUB_SYNC.md
+            PATCH_NOTES_FRESH_CANDIDATE_POOL.md
+            README_FRESH_CANDIDATE_POOL.md
             PATCH_NOTES_ROUTER_GITHUB_SYNC.md
             openwrt_github.env.example
             .github/workflows/router-feedback.yml

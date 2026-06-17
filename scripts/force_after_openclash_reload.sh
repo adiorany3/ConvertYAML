@@ -10,6 +10,7 @@ DEST="/etc/mihomo-autopilot"
 MIHOMO_API="${MIHOMO_API:-http://127.0.0.1:9090}"
 MIHOMO_SECRET="${MIHOMO_SECRET:-reyre}"
 AUTOPILOT_SCRIPT="${AUTOPILOT_SCRIPT:-$DEST/mihomo_autopilot.py}"
+FORCE_PING_SCRIPT="${FORCE_PING_SCRIPT:-$DEST/mihomo_force_ping_all.py}"
 WAIT_SECONDS="${FORCE_WAIT_SECONDS:-90}"
 PASSES="${FORCE_PASSES:-3}"
 SLEEP_BETWEEN="${FORCE_SLEEP_BETWEEN:-5}"
@@ -99,7 +100,13 @@ main() {
     exit 2
   fi
 
-  log "[OK] Mihomo API siap. Memaksa selector masuk jalur sehat."
+  log "[OK] Mihomo API siap. Memaksa ping node dan selector masuk jalur sehat."
+
+  if [ -f "$FORCE_PING_SCRIPT" ] && has_cmd python3; then
+    log "[FORCE] Memaksa delay-check semua akun agar tidak grey/no-ping"
+    MIHOMO_API="$MIHOMO_API" MIHOMO_SECRET="$MIHOMO_SECRET" \
+      python3 "$FORCE_PING_SCRIPT" >> "$LOG_FILE" 2>&1 || true
+  fi
 
   p=1
   while [ "$p" -le "$PASSES" ]; do
@@ -107,6 +114,12 @@ main() {
     [ "$p" -lt "$PASSES" ] && sleep "$SLEEP_BETWEEN"
     p=$((p + 1))
   done
+
+  if [ -f "$FORCE_PING_SCRIPT" ] && has_cmd python3; then
+    log "[FORCE] Refresh delay-check akhir"
+    MIHOMO_API="$MIHOMO_API" MIHOMO_SECRET="$MIHOMO_SECRET" \
+      python3 "$FORCE_PING_SCRIPT" >> "$LOG_FILE" 2>&1 || true
+  fi
 
   log "[DONE] force-after-reload selesai"
 }
