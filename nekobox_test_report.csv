@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-090227-VLESS-WS-65MS,vless,ws,cf.090227.xyz,t1s1.rittbo.kdns.fr,HTTP 204,234,264,HTTP 204,yes
-AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-58MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,222,305,HTTP 204,yes
-AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-79MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,217,255,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-86MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,241,232,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-74MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,246,260,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-78MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,215,258,HTTP 204,yes
-AKUN-007-RS-RAPIDSEEDBOX-20190717-VLESS-WS-76MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,222,259,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-84MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,215,287,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-96MS,vless,ws,45.130.125.126,amirsa.pages.dev,HTTP 204,228,289,HTTP 204,yes
-AKUN-010-CONFLU-VLESS-WS-365MS,vless,ws,159.112.235.52,octopusss.net,HTTP 204,736,781,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-76MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,232,257,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-78MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,248,264,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-95MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,217,259,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-342MS,vless,ws,www.speedtest.net,octopusss.net,HTTP 204,787,779,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-372MS,vless,ws,173.245.58.75,terazhediii.info,HTTP 204,754,737,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-365MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,HTTP 204,963,785,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-391MS,vless,ws,173.245.58.75,amoosamiii.net,HTTP 204,820,890,HTTP 204,yes
+AKUN-010-RS-RAPIDSEEDBOX-20190717-VLESS-WS-410MS,vless,ws,45.130.125.229,octopusss5.info,HTTP 204,797,837,HTTP 204,yes
+AKUN-011-SPEEDTEST-VLESS-WS-376MS,vless,ws,www.speedtest.org,shegeftihaaa.net,HTTP 204,832,875,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-389MS,vless,ws,betty.ns.cloudflare.com,vangoghhh.info,HTTP 204,803,847,HTTP 204,yes
