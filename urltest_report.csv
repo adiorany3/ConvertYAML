@@ -1,30 +1,36 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-77MS,vless,ws,o.server5peekconfig.workers.dev,O.seRVer5peEKCOnFIG.WOrKers.dEV,77,,222,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-86MS,vless,ws,172.67.213.15,EzaCcESS-pROJEcT-d193BB.eZ-8Deb91.WORKeRS.DEv,86,,215,HTTP 204,yes
-AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-75MS,vless,ws,69.63.222.124,t1s1.rittbo.kdns.fr,75,,221,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-84MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,84,,237,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-91MS,vless,ws,162.159.60.231,hhlfy.twiladaphne.ndjp.net,91,,219,HTTP 204,yes
-AKUN-006-DIGITALOCEAN-VLESS-WS-78MS,vless,ws,95.85.39.45,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,78,,208,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-67MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,67,,204,HTTP 204,yes
-AKUN-008-U1HOST-FRA-VLESS-WS-74MS,vless,ws,144.31.120.120,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,74,,219,HTTP 204,yes
-AKUN-009-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-76MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,76,,205,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-93MS,vless,ws,198.41.219.218,zyzzzoao.xn--fiqv8j.eu.org,93,,216,HTTP 204,yes
-AKUN-011-1PASSWORD-VLESS-WS-107MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,107,,203,HTTP 204,yes
-AKUN-012-UNKNOWN-VLESS-WS-85MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,85,,215,HTTP 204,yes
-AKUN-013-EU-VLESS-WS-94MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,94,,228,HTTP 204,yes
-AKUN-014-UNKNOWN-VLESS-WS-68MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,68,,198,HTTP 204,yes
-AKUN-015-UNKNOWN-VLESS-WS-117MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,117,,229,HTTP 204,yes
-AKUN-016-MEDIUM-VLESS-WS-133MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,133,,203,HTTP 204,yes
-AKUN-017-MYBB-VLESS-WS-124MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,124,,226,HTTP 204,yes
-AKUN-018-OPENAI-VLESS-WS-82MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,82,,234,HTTP 204,yes
-AKUN-019-UNKNOWN-VLESS-WS-251MS,vless,ws,188.114.97.6,octopusss5.info,251,,577,HTTP 204,yes
-AKUN-020-MICROSOFT-VLESS-WS-265MS,vless,ws,news.microsoft.com,amoosamiii.net,265,,552,HTTP 204,yes
-AKUN-021-CLOUDFLARE-VLESS-WS-233MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,233,,506,HTTP 204,yes
-AKUN-022-SPEEDTEST-VLESS-WS-301MS,vless,ws,www.speedtest.net,pon.antalmani.mm.am,301,,4259,HTTP 204,yes
-AKUN-023-UNKNOWN-VLESS-WS-279MS,vless,ws,185.18.250.252,crm.lotussec.com,279,,449,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-024-US-VLESS-WS-97MS,vless,ws,nuclear.us.kg,nuclear.us.kg,97,,218,HTTP 204,yes
-AKUN-025-JISON-VLESS-WS-355MS,vless,ws,client.jison.ir,fty.jison.ir,355,,550,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-026-ONRENDER-VLESS-WS-369MS,vless,ws,shrkh.onrender.com,shrkh.onrender.com,369,,5148,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-027-JISON-VLESS-WS-395MS,vless,ws,client.jison.ir,fty.jison.ir,395,,602,HTTP 204,yes
-AKUN-028-UNKNOWN-VLESS-WS-444MS,vless,ws,103.160.204.239,testing.bo2tabere30.ir,444,,540,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-029-UNKNOWN-VLESS-WS-466MS,vless,ws,8.6.112.232,website.yaroo383mardak.online,466,,857,HTTP 204,yes
+AKUN-001-877774-VLESS-WS-68MS,vless,ws,cf.877774.xyz,t1s1.rittbo.kdns.fr,68,,206,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-76MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,76,,222,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-76MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,76,,221,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-81MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,81,,212,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-79MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,79,,212,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-77MS,vless,ws,www.speedtest.net,dAyijOoN.MBS-SatEHi.woRkerS.dEv,77,,203,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-84MS,vless,ws,188.114.97.6,small-voice-c4c5.itsnewrzan.workers.dev,84,,246,HTTP 204,yes
+AKUN-008-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-67MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,67,,215,HTTP 204,yes
+AKUN-009-HOSTOFF-NET-VLESS-WS-74MS,vless,ws,144.31.102.181,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,74,,230,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-98MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,98,,209,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-105MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,105,,213,HTTP 204,yes
+AKUN-012-UNKNOWN-VLESS-WS-79MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,79,,217,HTTP 204,yes
+AKUN-013-US-VLESS-WS-93MS,vless,ws,nuclear.us.kg,nuclear.us.kg,93,,224,HTTP 204,yes
+AKUN-014-1PASSWORD-VLESS-WS-107MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,107,,233,HTTP 204,yes
+AKUN-015-UNKNOWN-VLESS-WS-127MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,127,,222,HTTP 204,yes
+AKUN-016-UNKNOWN-VLESS-WS-123MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,123,,207,HTTP 204,yes
+AKUN-017-MEDIUM-VLESS-WS-102MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,102,,218,HTTP 204,yes
+AKUN-018-CLOUDFLARE-VLESS-WS-247MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,247,,505,HTTP 204,yes
+AKUN-019-UNKNOWN-VLESS-WS-263MS,vless,ws,108.162.193.162,octopusss5.info,263,,545,HTTP 204,yes
+AKUN-020-CLOUDFLARE-VLESS-WS-276MS,vless,ws,gerardo.ns.cloudflare.com,pon.antalmani.mm.am,276,,4020,HTTP 204,yes
+AKUN-021-UNKNOWN-VLESS-WS-267MS,vless,ws,185.18.250.252,crm.lotussec.com,267,,451,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-022-MICROSOFT-VLESS-WS-277MS,vless,ws,news.microsoft.com,amoosamiii.net,277,,545,HTTP 204,yes
+AKUN-023-ADF-VLESS-WS-85MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,85,,230,HTTP 204,yes
+AKUN-024-COIXCONQWE1-VLESS-WS-264MS,vless,ws,cf-mtn.coixconqwe1.ir,cdn-gr.hardwarenew.ir.,264,,444,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-025-JISON-VLESS-WS-340MS,vless,ws,client.jison.ir,fty.jison.ir,340,,527,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-026-JISON-VLESS-WS-368MS,vless,ws,client.jison.ir,fty.jison.ir,368,,768,HTTP 204,yes
+AKUN-027-ONRENDER-VLESS-WS-408MS,vless,ws,shrkh.onrender.com,shrkh.onrender.com,408,,5146,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-028-JISON-VLESS-WS-375MS,vless,ws,client.jison.ir,fty.jison.ir,375,,524,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-029-UNKNOWN-VLESS-WS-416MS,vless,ws,172.67.158.125,PrO.nImBaHa.InFo,416,,614,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-030-UNKNOWN-VLESS-WS-430MS,vless,ws,8.6.112.34,website.yaroo383mardak.online,430,,943,HTTP 204,yes
+AKUN-031-UNKNOWN-VLESS-WS-461MS,vless,ws,212.183.88.136,testing.bo2tabere30.ir,461,,576,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-032-UNKNOWN-VLESS-WS-450MS,vless,ws,103.160.204.239,testing.bo2tabere30.ir,450,,540,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-033-CLOUDFLARE-VLESS-WS-488MS,vless,ws,www.speedtest.net,nazan.2gharibe2tadust.ir,488,,539,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-034-UNKNOWN-VLESS-WS-446MS,vless,ws,45.130.125.126,cdn-pro3.postshup.ir.,446,,607,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-035-POSTSHUP-VLESS-WS-438MS,vless,ws,cd1.postshup.ir,cdn-pro2.postshup.ir.,438,,598,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
