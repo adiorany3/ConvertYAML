@@ -4,28 +4,28 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 71,
-      "now": "AKUN-008-CLOUDFLARE-VLESS-WS-83MS",
+      "history_last_delay": 73,
+      "now": "AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-81MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 71,
+      "history_last_delay": 62,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 16,
-      "history_last_delay": 66,
+      "history_last_delay": 62,
       "now": "AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-74MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 77,
+      "history_last_delay": 75,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -39,42 +39,42 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 68,
+      "history_last_delay": 74,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 56,
+      "history_last_delay": 65,
       "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 56,
-      "now": "AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-74MS",
+      "history_last_delay": 77,
+      "now": "AKUN-008-CLOUDFLARE-VLESS-WS-83MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 64,
-      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-87MS",
+      "history_last_delay": 72,
+      "now": "AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-81MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 62,
-      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-87MS",
+      "history_last_delay": 76,
+      "now": "AKUN-008-CLOUDFLARE-VLESS-WS-83MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 60,
+      "history_last_delay": 66,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -203,5 +203,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-06-18T10:15:12.205025+00:00"
+  "timestamp_utc": "2026-06-18T10:30:12.112081+00:00"
 }
