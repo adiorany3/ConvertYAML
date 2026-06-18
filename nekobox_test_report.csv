@@ -1,16 +1,15 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-090227-VLESS-WS-136MS,vless,ws,cf.090227.xyz,t1s1.rittbo.kdns.fr,HTTP 204,302,293,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-143MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,252,232,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-003-RS-RAPIDSEEDBOX-20190717-VLESS-WS-138MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,271,296,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-147MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,275,309,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-138MS,vless,ws,172.64.34.205,BItter-CreDIT-61b8.b76EbA0aBb.wORkerS.dEv,HTTP 204,245,227,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-006-CLOUDFLARE-VLESS-WS-150MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,HTTP 204,254,233,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-007-CLOUDFLARE-VLESS-WS-138MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,299,294,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-149MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,286,337,HTTP 204,yes
-AKUN-009-DEV-VLESS-WS-161MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,273,234,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-010-OPENAI-VLESS-WS-163MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,296,301,HTTP 204,yes
-AKUN-011-UNKNOWN-VLESS-WS-164MS,vless,ws,154.83.95.129,t1s1.rittbo.kdns.fr,HTTP 204,268,308,HTTP 204,yes
-AKUN-012-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-167MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,267,292,HTTP 204,yes
-AKUN-015-CLOUDFLARE-VLESS-WS-401MS,vless,ws,104.18.38.202,pon.antalmani.mm.am,HTTP 204,3320,503,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-017-RS-RAPIDSEEDBOX-20190717-VLESS-WS-393MS,vless,ws,45.130.125.229,octopusss5.info,HTTP 204,793,793,HTTP 204,yes
-AKUN-018-CLOUDFLARE-VLESS-WS-423MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,HTTP 204,793,789,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-85MS,vless,ws,yx.cloudflare.182682.xyz,t1s1.rittbo.kdns.fr,HTTP 204,201,228,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-100MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,221,237,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-103MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,219,250,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-136MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,232,250,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-149MS,vless,ws,flat-night-edd0.hosein9saleazhuongooyeh87.workers.dev,FLAT-night-EDD0.hOsEin9saLEAZhuongOoYeH87.wOrkerS.DeV,HTTP 204,199,201,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-006-CLOUDFLARE-VLESS-WS-85MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,HTTP 204,238,194,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-007-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-150MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,213,255,HTTP 204,yes
+AKUN-008-RS-RAPIDSEEDBOX-20190717-VLESS-WS-73MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,239,238,HTTP 204,yes
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-68MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,223,239,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-86MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,198,260,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-272MS,vless,ws,172.64.33.162,octopusss5.info,HTTP 204,577,616,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-287MS,vless,ws,love.ns.cloudflare.com,pon.antalmani.mm.am,HTTP 204,4538,423,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-013-CLOUDFLARE-VLESS-WS-299MS,vless,ws,104.18.38.202,pon.antalmani.mm.am,HTTP 204,2490,405,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-014-CLOUDFLARE-VLESS-WS-291MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,HTTP 204,614,619,HTTP 204,yes
