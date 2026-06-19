@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-81MS,vless,ws,172.64.145.202,t1s1.rittbo.kdns.fr,HTTP 204,207,246,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-88MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,206,235,HTTP 204,yes
-AKUN-003-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-75MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,230,258,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-105MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,228,247,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-104MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,229,235,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,231,238,HTTP 204,yes
-AKUN-007-RS-RAPIDSEEDBOX-20190717-VLESS-WS-83MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,226,260,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-94MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,235,234,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-246MS,vless,ws,188.114.97.6,terazhediii.info,HTTP 204,528,588,HTTP 204,yes
-AKUN-010-CONFLU-VLESS-WS-255MS,vless,ws,159.112.235.52,octopusss.net,HTTP 204,522,570,HTTP 204,yes
+AKUN-002-104-253-175-0-1-VLESS-WS-86MS,vless,ws,104.253.175.16,t1s1.rittbo.kdns.fr,HTTP 204,215,275,HTTP 204,yes
+AKUN-003-RS-RAPIDSEEDBOX-20190717-VLESS-WS-85MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,206,234,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-105MS,vless,ws,172.67.185.178,hhlfy.twiladaphne.ndjp.net,HTTP 204,201,266,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-85MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,237,275,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-87MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,230,262,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-109MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,225,278,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-71MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,249,256,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-360MS,vless,ws,www.speedtest.net,octopusss.net,HTTP 204,772,795,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-350MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,HTTP 204,745,758,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-385MS,vless,ws,172.64.32.75,amoosamiii.net,HTTP 204,807,897,HTTP 204,yes
