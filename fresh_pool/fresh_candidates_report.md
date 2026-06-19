@@ -10,9 +10,9 @@ Tujuannya: OpenWrt punya cadangan config/node fresh sebelum semua node utama mat
 - `fresh_pool/fresh_candidates.json`: metadata ringkas fresh pool.
 
 ## Ringkasan
-- Kandidat fresh URL-tested: 23
+- Kandidat fresh URL-tested: 24
 - Kandidat strict NekoBox-tested: 10
-- Proxy di openclash_fresh_pool.yaml: 29
+- Proxy di openclash_fresh_pool.yaml: 30
 
 ## Cara Pakai di OpenWrt
 Jalankan manual saat node mulai mati:
@@ -28,29 +28,30 @@ sh /etc/mihomo-autopilot/openwrt_fresh_guard.sh
 ```
 
 ## Kandidat Fresh Teratas
-1. `AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-70MS` (url=248ms, nekobox=268ms, status=yes)
-2. `AKUN-002-UNKNOWN-VLESS-WS-87MS` (url=256ms, nekobox=296ms, status=yes)
-3. `AKUN-003-RS-RAPIDSEEDBOX-20190717-VLESS-WS-78MS` (url=239ms, nekobox=263ms, status=yes)
-4. `AKUN-004-CLOUDFLARE-VLESS-WS-101MS` (url=258ms, nekobox=303ms, status=yes)
-5. `AKUN-005-UNKNOWN-VLESS-WS-105MS` (url=249ms, nekobox=278ms, status=yes)
-6. `AKUN-006-CLOUDFLARE-VLESS-WS-87MS` (url=253ms, nekobox=306ms, status=yes)
-7. `AKUN-007-UNKNOWN-VLESS-WS-103MS` (url=310ms, nekobox=386ms, status=yes)
-8. `AKUN-008-CLOUDFLARE-VLESS-WS-97MS` (url=252ms, nekobox=185ms, status=no)
-9. `AKUN-009-CLOUDFLARE-VLESS-WS-106MS` (url=254ms, nekobox=183ms, status=no)
-10. `AKUN-008-CLOUDFLARE-VLESS-WS-115MS`
-11. `AKUN-009-OPENAI-VLESS-WS-98MS`
-12. `AKUN-010-CLOUDFLARE-VLESS-WS-286MS`
-13. `AKUN-013-CLOUDFLARE-VLESS-WS-300MS` (url=630ms, status=HTTP 204)
-14. `AKUN-014-CLOUDFLARE-VLESS-WS-321MS` (url=2486ms, status=HTTP 204)
-15. `AKUN-018-CLOUDFLARE-VLESS-WS-483MS` (url=734ms, status=HTTP 204)
-16. `AKUN-020-CLOUDFLARE-VLESS-WS-104MS` (url=302ms, status=HTTP 204)
-17. `AKUN-021-CLOUDFLARE-VLESS-WS-314MS` (url=653ms, status=HTTP 204)
-18. `AKUN-022-UNKNOWN-VLESS-WS-489MS` (url=644ms, status=HTTP 204)
-19. `AKUN-023-UNKNOWN-VLESS-WS-494MS` (url=801ms, status=HTTP 204)
-20. `AKUN-026-CLOUDFLARE-VLESS-WS-312MS` (url=623ms, status=HTTP 204)
-21. `AKUN-028-UNKNOWN-VLESS-WS-564MS` (url=843ms, status=HTTP 204)
-22. `AKUN-033-CLOUDFLARE-VLESS-WS-311MS` (url=4668ms, status=HTTP 204)
-23. `AKUN-035-CLOUDFLARE-VLESS-WS-718MS` (url=2611ms, status=HTTP 204)
+1. `AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-65MS` (url=207ms, nekobox=269ms, status=yes)
+2. `AKUN-002-CLOUDFLARE-VLESS-WS-81MS` (url=208ms, nekobox=256ms, status=yes)
+3. `AKUN-003-UNKNOWN-VLESS-WS-81MS` (url=225ms, nekobox=249ms, status=yes)
+4. `AKUN-004-CLOUDFLARE-VLESS-WS-71MS` (url=207ms, nekobox=264ms, status=yes)
+5. `AKUN-005-RS-RAPIDSEEDBOX-20190717-VLESS-WS-84MS` (url=207ms, nekobox=249ms, status=yes)
+6. `AKUN-006-UNKNOWN-VLESS-WS-74MS` (url=242ms, nekobox=245ms, status=yes)
+7. `AKUN-007-CLOUDFLARE-VLESS-WS-120MS` (url=202ms, nekobox=270ms, status=yes)
+8. `AKUN-008-CLOUDFLARE-VLESS-WS-134MS` (url=231ms, nekobox=239ms, status=yes)
+9. `AKUN-009-UNKNOWN-VLESS-WS-113MS` (url=265ms, nekobox=235ms, status=yes)
+10. `AKUN-010-CLOUDFLARE-VLESS-WS-149MS` (url=236ms, nekobox=278ms, status=yes)
+11. `AKUN-011-CLOUDFLARE-VLESS-WS-400MS` (url=805ms, status=HTTP 204)
+12. `AKUN-012-CLOUDFLARE-VLESS-WS-402MS` (url=888ms, status=HTTP 204)
+13. `AKUN-013-CLOUDFLARE-VLESS-WS-342MS` (url=777ms, status=HTTP 204)
+14. `AKUN-014-UNKNOWN-VLESS-WS-408MS` (url=2878ms, status=HTTP 204)
+15. `AKUN-015-CLOUDFLARE-VLESS-WS-414MS` (url=819ms, status=HTTP 204)
+16. `AKUN-016-CLOUDFLARE-VLESS-WS-432MS` (url=2855ms, status=HTTP 204)
+17. `AKUN-017-CLOUDFLARE-VLESS-WS-412MS` (url=887ms, status=HTTP 204)
+18. `AKUN-022-CLOUDFLARE-VLESS-WS-644MS` (url=1046ms, status=HTTP 204)
+19. `AKUN-023-CLOUDFLARE-VLESS-WS-655MS` (url=873ms, status=HTTP 204)
+20. `AKUN-024-CLOUDFLARE-VLESS-WS-647MS` (url=934ms, status=HTTP 204)
+21. `AKUN-029-CLOUDFLARE-VLESS-WS-715MS` (url=1064ms, status=HTTP 204)
+22. `AKUN-030-CLOUDFLARE-VLESS-WS-790MS` (url=735ms, status=HTTP 204)
+23. `AKUN-032-RS-RAPIDSEEDBOX-20190717-VLESS-WS-769MS` (url=1393ms, status=HTTP 204)
+24. `AKUN-033-RS-RAPIDSEEDBOX-20190717-VLESS-WS-810MS` (url=1609ms, status=HTTP 204)
 
 ## Catatan
 Fresh pool bukan pengganti AutoPilot. AutoPilot tetap memilih jalur sehat di router.
