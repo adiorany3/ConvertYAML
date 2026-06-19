@@ -1,34 +1,36 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-UNKNOWN-VLESS-WS-63MS,vless,ws,217.142.254.144,t1s1.rittbo.kdns.fr,63,,208,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-62MS,vless,ws,172.64.145.202,t1s1.rittbo.kdns.fr,62,,209,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-87MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,87,,220,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-89MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,89,,228,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-82MS,vless,ws,172.64.145.202,t1s1.rittbo.kdns.fr,82,,226,HTTP 204,yes
-AKUN-006-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-87MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,87,,197,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-125MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,125,,216,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-123MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,123,,224,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-121MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,121,,232,HTTP 204,yes
-AKUN-010-RU-ZAYMER-20221025-VLESS-WS-183MS,vless,ws,erosan.appleseraj.ir,falkinichlol.appleseraj.ir,183,,321,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-011-UNKNOWN-VLESS-WS-233MS,vless,ws,173.245.58.75,terazhediii.info,233,,495,HTTP 204,yes
-AKUN-012-UNKNOWN-VLESS-WS-267MS,vless,ws,108.162.193.162,octopusss5.info,267,,552,HTTP 204,yes
-AKUN-013-UNKNOWN-VLESS-WS-269MS,vless,ws,162.159.38.119,pon.antalmani.mm.am,269,,2872,HTTP 204,yes
-AKUN-014-UNKNOWN-VLESS-WS-255MS,vless,ws,188.114.97.6,vangoghhh.info,255,,564,HTTP 204,yes
-AKUN-015-UNKNOWN-VLESS-WS-270MS,vless,ws,172.64.32.75,amoosamiii.net,270,,548,HTTP 204,yes
-AKUN-016-CLOUDFLARE-VLESS-WS-311MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,311,,565,HTTP 204,yes
-AKUN-017-IRATOM-VLESS-WS-352MS,vless,ws,mci.iratom.com,d2.iratom.com,352,,483,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-018-MIKROHOST-VLESS-WS-409MS,vless,ws,fr1-global.mikro-host.com,fr1-global.mikro-host.com,409,,610,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-019-UNKNOWN-VLESS-WS-415MS,vless,ws,172.67.158.125,PrO.nImBaHa.InFo,415,,608,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-020-UNKNOWN-VLESS-WS-340MS,vless,ws,104.18.29.234,node-8733566702-89c0b6.s-vpnsub.workers.dev,340,,563,HTTP 204,yes
-AKUN-021-JISON-VLESS-WS-386MS,vless,ws,client.jison.ir,fty.jison.ir,386,,532,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-022-SPEEDTEST-VLESS-WS-433MS,vless,ws,www.speedtest.net,nazan.2gharibe2tadust.ir,433,,542,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-023-UNKNOWN-VLESS-WS-455MS,vless,ws,104.19.250.20,bahari.kiamobilepart.com,455,,623,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-024-SOLTANKABOS-VLESS-WS-431MS,vless,ws,gerlight.soltankabos.ir,amtal8.soltankabos.ir,431,,545,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-025-MIKROHOST-VLESS-WS-441MS,vless,ws,nl1-global.mikro-host.com,nl1-global.mikro-host.com,441,,639,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-026-UNKNOWN-VLESS-WS-461MS,vless,ws,103.160.204.239,testing.bo2tabere30.ir,461,,559,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-027-UNKNOWN-VLESS-WS-267MS,vless,ws,159.112.235.52,octopusss.net,267,,505,HTTP 204,yes
-AKUN-028-UNKNOWN-VLESS-WS-484MS,vless,ws,188.114.97.6,t02.tzteam.online,484,,848,HTTP 204,yes
-AKUN-029-UNKNOWN-VLESS-WS-490MS,vless,ws,212.183.88.136,testing.bo2tabere30.ir,490,,578,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-030-IRATOM-VLESS-WS-529MS,vless,ws,em.iratom.com,atom1.appleidcity.com,529,,684,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-031-UNKNOWN-VLESS-WS-489MS,vless,ws,45.130.125.162,ssd.mojaz-persian-music.ir,489,,1069,HTTP 204,yes
-AKUN-032-UNKNOWN-VLESS-WS-485MS,vless,ws,188.114.97.6,t05.tzteam.online,485,,574,HTTP 204,yes
-AKUN-033-UNKNOWN-VLESS-WS-705MS,vless,ws,45.130.125.162,ssd.mojaz-persian-music.ir,705,,1643,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-78MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,78,,266,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-85MS,vless,ws,da.mfa.gov.ua,t1s1.rittbo.kdns.fr,85,,235,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-75MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,75,,244,HTTP 204,yes
+AKUN-004-RS-RAPIDSEEDBOX-20190717-VLESS-WS-90MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,90,,250,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-110MS,vless,ws,104.18.95.26,hhlfy.twiladaphne.ndjp.net,110,,239,HTTP 204,yes
+AKUN-006-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-90MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,90,,237,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-104MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,104,,258,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-135MS,vless,ws,172.64.145.202,t1s1.rittbo.kdns.fr,135,,227,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-114MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,114,,301,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-184MS,vless,ws,erosan.appleseraj.ir,falkinichlol.appleseraj.ir,184,,334,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-011-CLOUDFLARE-VLESS-WS-282MS,vless,ws,www.speedtest.net,pon.antalmani.mm.am,282,,2510,HTTP 204,yes
+AKUN-012-RS-RAPIDSEEDBOX-20190717-VLESS-WS-294MS,vless,ws,45.130.125.229,octopusss5.info,294,,625,HTTP 204,yes
+AKUN-013-CLOUDFLARE-VLESS-WS-305MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,305,,648,HTTP 204,yes
+AKUN-014-CLOUDFLARE-VLESS-WS-333MS,vless,ws,betty.ns.cloudflare.com,amoosamiii.net,333,,656,HTTP 204,yes
+AKUN-015-UNKNOWN-VLESS-WS-334MS,vless,ws,188.114.97.6,vangoghhh.info,334,,633,HTTP 204,yes
+AKUN-016-UNKNOWN-VLESS-WS-276MS,vless,ws,188.114.97.6,terazhediii.info,276,,589,HTTP 204,yes
+AKUN-017-UNKNOWN-VLESS-WS-288MS,vless,ws,159.112.235.52,octopusss.net,288,,575,HTTP 204,yes
+AKUN-018-CLOUDFLARE-VLESS-WS-384MS,vless,ws,104.16.72.70,x.gamingdll.ir,384,,598,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-019-UNKNOWN-VLESS-WS-413MS,vless,ws,188.114.97.6,mikasavpn2.mikasavpn2.workers.dev,413,,5147,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-020-IRATOM-VLESS-WS-419MS,vless,ws,mci.iratom.com,d2.iratom.com,419,,489,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-021-UNKNOWN-VLESS-WS-318MS,vless,ws,103.160.204.239,site.iotem.workers.dev,318,,540,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-022-MIKROHOST-VLESS-WS-478MS,vless,ws,fr1-global.mikro-host.com,fr1-global.mikro-host.com,478,,635,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-023-SOLTANKABOS-VLESS-WS-493MS,vless,ws,gerlight.soltankabos.ir,amtal8.soltankabos.ir,493,,5145,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-024-JISON-VLESS-WS-402MS,vless,ws,client.jison.ir,fty.jison.ir,402,,603,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-025-UNKNOWN-VLESS-WS-496MS,vless,ws,172.67.158.125,PrO.nImBaHa.InFo,496,,671,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-026-UNKNOWN-VLESS-WS-500MS,vless,ws,104.19.250.20,bahari.kiamobilepart.com,500,,695,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-027-UNKNOWN-VLESS-WS-511MS,vless,ws,212.183.88.136,testing.bo2tabere30.ir,511,,622,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-028-CLOUDFLARE-VLESS-WS-529MS,vless,ws,www.speedtest.net,nazan.2gharibe2tadust.ir,529,,607,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-029-UNKNOWN-VLESS-WS-487MS,vless,ws,63.141.128.205,sync.amordad.xyz,487,,657,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-030-UNKNOWN-VLESS-WS-517MS,vless,ws,103.160.204.239,testing.bo2tabere30.ir,517,,612,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-031-UNKNOWN-VLESS-WS-502MS,vless,ws,94.140.0.100,DEY.iraniranshopdashnoard.ir,502,,756,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-032-UNKNOWN-VLESS-WS-544MS,vless,ws,188.114.97.6,t02.tzteam.online,544,,1305,HTTP 204,yes
+AKUN-033-UNKNOWN-VLESS-WS-528MS,vless,ws,104.16.0.0,tr-cd.sublink-vip2.com,528,,710,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-034-UNKNOWN-VLESS-WS-637MS,vless,ws,104.16.75.216,server-ir-2.ariyuz.org,637,,5145,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-035-UNKNOWN-VLESS-WS-603MS,vless,ws,188.114.97.6,t05.tzteam.online,603,,712,HTTP 204,yes
