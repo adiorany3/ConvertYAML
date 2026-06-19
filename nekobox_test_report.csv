@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-002-104-253-175-0-1-VLESS-WS-86MS,vless,ws,104.253.175.16,t1s1.rittbo.kdns.fr,HTTP 204,215,275,HTTP 204,yes
-AKUN-003-RS-RAPIDSEEDBOX-20190717-VLESS-WS-85MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,206,234,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-105MS,vless,ws,172.67.185.178,hhlfy.twiladaphne.ndjp.net,HTTP 204,201,266,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-85MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,237,275,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-87MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,230,262,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-109MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,225,278,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-71MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,249,256,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-360MS,vless,ws,www.speedtest.net,octopusss.net,HTTP 204,772,795,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-350MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,HTTP 204,745,758,HTTP 204,yes
-AKUN-012-CLOUDFLARE-VLESS-WS-385MS,vless,ws,172.64.32.75,amoosamiii.net,HTTP 204,807,897,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-92MS,vless,ws,172.64.144.82,t1s1.rittbo.kdns.fr,HTTP 204,214,278,HTTP 204,yes
+AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-98MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,214,229,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-107MS,vless,ws,104.18.95.26,hhlfy.twiladaphne.ndjp.net,HTTP 204,241,248,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-121MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,222,264,HTTP 204,yes
+AKUN-005-OPENAI-VLESS-WS-112MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,212,338,HTTP 204,yes
+AKUN-006-UNKNOWN-VLESS-WS-119MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,222,244,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-385MS,vless,ws,188.114.97.6,terazhediii.info,HTTP 204,766,857,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-391MS,vless,ws,betty.ns.cloudflare.com,octopusss.net,HTTP 204,803,832,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-420MS,vless,ws,188.114.97.6,octopusss5.info,HTTP 204,942,866,HTTP 204,yes
+AKUN-010-WPENG-VLESS-WS-419MS,vless,ws,141.193.213.20,amoosamiii.net,HTTP 204,892,954,HTTP 204,yes
