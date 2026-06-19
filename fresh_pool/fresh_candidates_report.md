@@ -10,9 +10,9 @@ Tujuannya: OpenWrt punya cadangan config/node fresh sebelum semua node utama mat
 - `fresh_pool/fresh_candidates.json`: metadata ringkas fresh pool.
 
 ## Ringkasan
-- Kandidat fresh URL-tested: 20
+- Kandidat fresh URL-tested: 21
 - Kandidat strict NekoBox-tested: 10
-- Proxy di openclash_fresh_pool.yaml: 26
+- Proxy di openclash_fresh_pool.yaml: 27
 
 ## Cara Pakai di OpenWrt
 Jalankan manual saat node mulai mati:
@@ -28,26 +28,27 @@ sh /etc/mihomo-autopilot/openwrt_fresh_guard.sh
 ```
 
 ## Kandidat Fresh Teratas
-1. `AKUN-001-CLOUDFLARE-VLESS-WS-68MS` (url=200ms, nekobox=245ms, status=yes)
-2. `AKUN-002-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-79MS` (url=206ms, nekobox=242ms, status=yes)
-3. `AKUN-003-CLOUDFLARE-VLESS-WS-87MS` (url=213ms, nekobox=247ms, status=yes)
-4. `AKUN-004-CLOUDFLARE-VLESS-WS-83MS` (url=215ms, nekobox=247ms, status=yes)
-5. `AKUN-005-CLOUDFLARE-VLESS-WS-103MS` (url=212ms, nekobox=254ms, status=yes)
-6. `AKUN-006-CLOUDFLARE-VLESS-WS-112MS` (url=211ms, nekobox=253ms, status=yes)
-7. `AKUN-007-CLOUDFLARE-VLESS-WS-99MS` (url=223ms, nekobox=248ms, status=yes)
-8. `AKUN-008-RS-RAPIDSEEDBOX-20190717-VLESS-WS-115MS` (url=213ms, nekobox=235ms, status=yes)
-9. `AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-115MS` (url=218ms, nekobox=239ms, status=yes)
-10. `AKUN-010-CLOUDFLARE-VLESS-WS-232MS`
-11. `AKUN-014-RS-RAPIDSEEDBOX-20190717-VLESS-WS-248MS` (url=553ms, status=HTTP 204)
-12. `AKUN-015-CLOUDFLARE-VLESS-WS-254MS` (url=578ms, status=HTTP 204)
-13. `AKUN-016-CLOUDFLARE-VLESS-WS-264MS` (url=599ms, status=HTTP 204)
-14. `AKUN-017-CLOUDFLARE-VLESS-WS-269MS` (url=2474ms, status=HTTP 204)
-15. `AKUN-018-UNKNOWN-VLESS-WS-279MS` (url=512ms, status=HTTP 204)
-16. `AKUN-020-CLOUDFLARE-VLESS-WS-259MS` (url=1389ms, status=HTTP 204)
-17. `AKUN-021-CLOUDFLARE-VLESS-WS-263MS` (url=560ms, status=HTTP 204)
-18. `AKUN-025-CLOUDFLARE-VLESS-WS-369MS` (url=566ms, status=HTTP 204)
-19. `AKUN-026-CLOUDFLARE-VLESS-WS-405MS` (url=558ms, status=HTTP 204)
-20. `AKUN-027-CLOUDFLARE-VLESS-WS-370MS` (url=564ms, status=HTTP 204)
+1. `AKUN-001-UNKNOWN-VLESS-WS-63MS` (url=208ms, nekobox=258ms, status=yes)
+2. `AKUN-002-CLOUDFLARE-VLESS-WS-62MS` (url=209ms, nekobox=256ms, status=yes)
+3. `AKUN-003-CLOUDFLARE-VLESS-WS-87MS` (url=220ms, nekobox=247ms, status=yes)
+4. `AKUN-004-CLOUDFLARE-VLESS-WS-89MS` (url=228ms, nekobox=250ms, status=yes)
+5. `AKUN-005-CLOUDFLARE-VLESS-WS-82MS` (url=226ms, nekobox=245ms, status=yes)
+6. `AKUN-006-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-87MS` (url=197ms, nekobox=233ms, status=yes)
+7. `AKUN-007-CLOUDFLARE-VLESS-WS-125MS` (url=216ms, nekobox=245ms, status=yes)
+8. `AKUN-008-CLOUDFLARE-VLESS-WS-123MS` (url=224ms, nekobox=270ms, status=yes)
+9. `AKUN-009-CLOUDFLARE-VLESS-WS-121MS` (url=232ms, nekobox=224ms, status=yes)
+10. `AKUN-010-UNKNOWN-VLESS-WS-233MS`
+11. `AKUN-012-UNKNOWN-VLESS-WS-267MS` (url=552ms, status=HTTP 204)
+12. `AKUN-013-UNKNOWN-VLESS-WS-269MS` (url=2872ms, status=HTTP 204)
+13. `AKUN-014-UNKNOWN-VLESS-WS-255MS` (url=564ms, status=HTTP 204)
+14. `AKUN-015-UNKNOWN-VLESS-WS-270MS` (url=548ms, status=HTTP 204)
+15. `AKUN-016-CLOUDFLARE-VLESS-WS-311MS` (url=565ms, status=HTTP 204)
+16. `AKUN-020-UNKNOWN-VLESS-WS-340MS` (url=563ms, status=HTTP 204)
+17. `AKUN-027-UNKNOWN-VLESS-WS-267MS` (url=505ms, status=HTTP 204)
+18. `AKUN-028-UNKNOWN-VLESS-WS-484MS` (url=848ms, status=HTTP 204)
+19. `AKUN-031-UNKNOWN-VLESS-WS-489MS` (url=1069ms, status=HTTP 204)
+20. `AKUN-032-UNKNOWN-VLESS-WS-485MS` (url=574ms, status=HTTP 204)
+21. `AKUN-033-UNKNOWN-VLESS-WS-705MS` (url=1643ms, status=HTTP 204)
 
 ## Catatan
 Fresh pool bukan pengganti AutoPilot. AutoPilot tetap memilih jalur sehat di router.
