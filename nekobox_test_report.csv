@@ -1,14 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-67MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,214,241,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-89MS,vless,ws,flat-night-edd0.hosein9saleazhuongooyeh87.workers.dev,FLAT-night-EDD0.hOsEin9saLEAZhuongOoYeH87.wOrkerS.DeV,HTTP 204,194,178,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-004-SPEEDTEST-VLESS-WS-119MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,HTTP 204,228,173,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-006-CLOUDFLARE-VLESS-WS-334MS,vless,ws,betty.ns.cloudflare.com,octopusss.net,HTTP 204,779,757,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-373MS,vless,ws,172.64.32.75,amoosamiii.net,HTTP 204,850,873,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-388MS,vless,ws,betty.ns.cloudflare.com,vangoghhh.info,HTTP 204,805,842,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-353MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,HTTP 204,742,808,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-434MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,HTTP 204,880,942,HTTP 204,yes
-AKUN-016-UNKNOWN-VLESS-WS-640MS,vless,ws,188.114.97.6,t06.tzteam.online,HTTP 204,932,725,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-023-UNKNOWN-VLESS-WS-625MS,vless,ws,188.114.97.6,t01.tzteam.online,HTTP 204,865,750,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-026-UNKNOWN-VLESS-WS-611MS,vless,ws,188.114.97.6,t04.tzteam.online,HTTP 204,877,728,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-027-UNKNOWN-VLESS-WS-619MS,vless,ws,188.114.97.6,t05.tzteam.online,HTTP 204,860,766,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-028-UNKNOWN-VLESS-WS-663MS,vless,ws,188.114.97.6,t03.tzteam.online,HTTP 204,915,726,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-001-CLOUDFLARE-VLESS-WS-87MS,vless,ws,162.159.60.231,hhlfy.twiladaphne.ndjp.net,HTTP 204,227,255,HTTP 204,yes
+AKUN-002-OPENAI-VLESS-WS-88MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,223,238,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-90MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,229,250,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-91MS,vless,ws,nuclear.us.kg,nuclear.us.kg,HTTP 204,214,258,HTTP 204,yes
+AKUN-005-008500-VLESS-WS-85MS,vless,ws,cf.008500.xyz,t1s1.rittbo.kdns.fr,HTTP 204,205,253,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-87MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,HTTP 204,230,197,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-007-DEV-VLESS-WS-79MS,vless,ws,old-dust-2bd3.shaghayeghghasemii82.workers.dev,old-dust-2bd3.shaghayeghghasemii82.workers.dev,HTTP 204,216,255,HTTP 204,yes
+AKUN-008-RS-RAPIDSEEDBOX-20190717-VLESS-WS-114MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,222,259,HTTP 204,yes
+AKUN-009-U1HOST-FRA-VLESS-WS-121MS,vless,ws,144.31.120.120,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,209,264,HTTP 204,yes
+AKUN-010-HOSTOFF-NET-VLESS-WS-122MS,vless,ws,144.31.102.181,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,207,257,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-138MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,227,256,HTTP 204,yes
