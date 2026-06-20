@@ -317,3 +317,13 @@ DOMAIN-SUFFIX,reddit.com
 DOMAIN-SUFFIX,redd.it
 DOMAIN,old.reddit.com
 DOMAIN-KEYWORD,reddit
+
+# ==========================================================
+# TAMBAHAN
+# ==========================================================
+DOMAIN-SUFFIX,satuin.tech
+DOMAIN-KEYWORD,pulsa
+DOMAIN-KEYWORD,kuota
+DOMAIN-KEYWORD,reload
+DOMAIN-KEYWORD,kios
+DOMAIN-KEYWORD,agen
