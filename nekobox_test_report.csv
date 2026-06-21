@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-64MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,210,231,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-68MS,vless,ws,47.80.60.254,t1s1.rittbo.kdns.fr,HTTP 204,215,241,HTTP 204,yes
-AKUN-003-SPACECORE-VLESS-WS-70MS,vless,ws,94.156.117.125,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,225,263,HTTP 204,yes
-AKUN-004-U1HOST-FRA-VLESS-WS-72MS,vless,ws,144.31.120.120,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,222,238,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-74MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,226,249,HTTP 204,yes
-AKUN-006-DIGITALOCEAN-VLESS-WS-75MS,vless,ws,95.85.39.45,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,283,249,HTTP 204,yes
-AKUN-007-HOSTOFF-NET-VLESS-WS-76MS,vless,ws,144.31.102.181,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,209,250,HTTP 204,yes
-AKUN-008-NETCUP-VLESS-WS-75MS,vless,ws,152.53.236.205,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,202,244,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-79MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,200,244,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-79MS,vless,ws,198.41.223.119,licfgytggv.esmalkjj.workers.dev,HTTP 204,223,229,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-68MS,vless,ws,104.26.5.60,t1s1.rittbo.kdns.fr,HTTP 204,205,237,HTTP 204,yes
+AKUN-002-MYBB-VLESS-WS-82MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,226,243,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-82MS,vless,ws,www.speedtest.net,V2NgNET.baGHAEi0025.WoRKeRS.DeV,HTTP 204,225,194,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-004-CLOUDFLARE-VLESS-WS-86MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,226,237,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-90MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,223,237,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-87MS,vless,ws,198.41.223.119,licfgytggv.esmalkjj.workers.dev,HTTP 204,225,240,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-79MS,vless,ws,104.17.163.129,damp-math-0a33.amirmuhamad.workers.dev,HTTP 204,198,241,HTTP 204,yes
+AKUN-008-ADF-VLESS-WS-81MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,221,239,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-165MS,vless,ws,172.67.157.237,ez-9ef1b7.ezaccess1ad2f86.workers.dev,HTTP 204,384,407,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-99MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,213,240,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-81MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,214,242,HTTP 204,yes
