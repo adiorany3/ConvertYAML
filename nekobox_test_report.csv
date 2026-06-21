@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-68MS,vless,ws,104.26.5.60,t1s1.rittbo.kdns.fr,HTTP 204,205,237,HTTP 204,yes
-AKUN-002-MYBB-VLESS-WS-82MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,226,243,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-82MS,vless,ws,www.speedtest.net,V2NgNET.baGHAEi0025.WoRKeRS.DeV,HTTP 204,225,194,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-004-CLOUDFLARE-VLESS-WS-86MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,226,237,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-90MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,223,237,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-87MS,vless,ws,198.41.223.119,licfgytggv.esmalkjj.workers.dev,HTTP 204,225,240,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-79MS,vless,ws,104.17.163.129,damp-math-0a33.amirmuhamad.workers.dev,HTTP 204,198,241,HTTP 204,yes
-AKUN-008-ADF-VLESS-WS-81MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,221,239,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-165MS,vless,ws,172.67.157.237,ez-9ef1b7.ezaccess1ad2f86.workers.dev,HTTP 204,384,407,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-99MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,213,240,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-81MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,214,242,HTTP 204,yes
+AKUN-001-NET-NL-VLESS-WS-67MS,vless,ws,185.199.158.58,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,200,255,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-69MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,206,234,HTTP 204,yes
+AKUN-003-NETCUP-VLESS-WS-65MS,vless,ws,152.53.236.205,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,230,250,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-67MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,224,224,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-71MS,vless,ws,144.31.120.120,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,200,239,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-76MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,231,247,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-78MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,224,257,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-64MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,230,248,HTTP 204,yes
+AKUN-009-VULTR-VLESS-WS-86MS,vless,ws,149.28.159.222,t1s1.rittbo.kdns.fr,HTTP 204,216,247,HTTP 204,yes
+AKUN-010-HOSTOFF-NET-VLESS-WS-71MS,vless,ws,144.31.102.181,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,200,230,HTTP 204,yes
