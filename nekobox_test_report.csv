@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-62MS,vless,ws,69.63.222.124,t1s1.rittbo.kdns.fr,HTTP 204,217,257,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-82MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,224,254,HTTP 204,yes
-AKUN-003-RS-RAPIDSEEDBOX-20190717-VLESS-WS-75MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,214,232,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-76MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,221,239,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-83MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,221,244,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-93MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,223,253,HTTP 204,yes
-AKUN-007-NET-NL-VLESS-WS-104MS,vless,ws,185.199.158.58,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,205,241,HTTP 204,yes
-AKUN-008-HOSTOFF-NET-VLESS-WS-115MS,vless,ws,144.31.102.181,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,203,246,HTTP 204,yes
-AKUN-009-SPACECORE-VLESS-WS-94MS,vless,ws,94.156.117.125,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,231,260,HTTP 204,yes
-AKUN-010-U1HOST-FRA-VLESS-WS-81MS,vless,ws,144.31.120.120,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,232,251,HTTP 204,yes
+AKUN-001-US-VLESS-WS-76MS,vless,ws,nuclear.us.kg,nuclear.us.kg,HTTP 204,235,280,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-76MS,vless,ws,94.156.117.125,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,265,272,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-72MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,243,264,HTTP 204,yes
+AKUN-004-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-79MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,230,260,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-73MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,249,272,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-72MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,248,266,HTTP 204,yes
+AKUN-007-DIGITALOCEAN-VLESS-WS-74MS,vless,ws,95.85.39.45,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,257,269,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-75MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,244,278,HTTP 204,yes
+AKUN-009-U1HOST-FRA-VLESS-WS-76MS,vless,ws,144.31.120.120,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,247,265,HTTP 204,yes
+AKUN-010-1PASSWORD-VLESS-WS-86MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,259,267,HTTP 204,yes
