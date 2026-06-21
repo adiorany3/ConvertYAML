@@ -1,12 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-120MS,vless,ws,69.63.222.124,t1s1.rittbo.kdns.fr,HTTP 204,245,277,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-117MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,283,271,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-114MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,274,295,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-118MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,251,310,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-113MS,vless,ws,162.159.60.231,hhlfy.twiladaphne.ndjp.net,HTTP 204,246,276,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-120MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,241,282,HTTP 204,yes
-AKUN-007-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-120MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,273,321,HTTP 204,yes
-AKUN-008-UNKNOWN-VLESS-WS-154MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,282,289,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-106MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,297,275,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-129MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,HTTP 204,238,221,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-011-CLOUDFLARE-VLESS-WS-135MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,282,272,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,HTTP 204,223,179,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-002-CLOUDFLARE-VLESS-WS-71MS,vless,ws,172.64.145.202,t1s1.rittbo.kdns.fr,HTTP 204,207,250,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-65MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,216,242,HTTP 204,yes
+AKUN-004-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-74MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,202,236,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-77MS,vless,ws,69.63.212.251,t1s1.rittbo.kdns.fr,HTTP 204,209,232,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,216,259,HTTP 204,yes
+AKUN-007-VULTR-VLESS-WS-87MS,vless,ws,108.160.132.178,t1s1.rittbo.kdns.fr,HTTP 204,212,239,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-75MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,228,256,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-96MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,209,247,HTTP 204,yes
+AKUN-010-VULTR-VLESS-WS-108MS,vless,ws,108.160.132.178,t1s1.rittbo.kdns.fr,HTTP 204,206,248,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-102MS,vless,ws,162.159.60.231,hhlfy.twiladaphne.ndjp.net,HTTP 204,222,241,HTTP 204,yes
