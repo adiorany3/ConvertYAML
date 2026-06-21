@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-66MS,vless,ws,104.18.42.54,t1s1.rittbo.kdns.fr,HTTP 204,205,248,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-100MS,vless,ws,172.67.185.178,hhlfy.twiladaphne.ndjp.net,HTTP 204,231,248,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-101MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,221,259,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-105MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,237,260,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-98MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,225,238,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-102MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,203,246,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-104MS,vless,ws,198.41.223.229,accv9.mmhz9.workers.dev,HTTP 204,233,235,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-150MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,218,259,HTTP 204,yes
-AKUN-009-INTERNETWORKS-45-131-208-VLESS-WS-69MS,vless,ws,45.131.208.240,opu-ao6.pages.dev,HTTP 204,236,248,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-105MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,211,243,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-73MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,238,274,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,240,262,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-73MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,257,265,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-76MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,268,265,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-95MS,vless,ws,us2-239.466688.xyz,opu-ao6.pages.dev,HTTP 204,245,272,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-80MS,vless,ws,172.64.149.209,t1s1.rittbo.kdns.fr,HTTP 204,230,272,HTTP 204,yes
+AKUN-007-VULTR-VLESS-WS-81MS,vless,ws,108.160.132.178,t1s1.rittbo.kdns.fr,HTTP 204,241,271,HTTP 204,yes
+AKUN-008-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-74MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,275,268,HTTP 204,yes
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-121MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,244,257,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-78MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,307,278,HTTP 204,yes
