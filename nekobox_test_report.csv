@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CNAE-VLESS-WS-98MS,vless,ws,www.cnae.top,t1s1.rittbo.kdns.fr,HTTP 204,243,306,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-130MS,vless,ws,162.159.60.231,hhlfy.twiladaphne.ndjp.net,HTTP 204,287,306,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-112MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,275,283,HTTP 204,yes
-AKUN-004-OPENAI-VLESS-WS-146MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,291,338,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-121MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,257,310,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-147MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,314,316,HTTP 204,yes
-AKUN-007-RS-RAPIDSEEDBOX-20190717-VLESS-WS-122MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,448,329,HTTP 204,yes
-AKUN-008-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-133MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,264,292,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-105MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,291,287,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-349MS,vless,ws,108.162.192.75,amoosamiii.net,HTTP 204,763,797,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-99MS,vless,ws,172.64.144.82,t1s1.rittbo.kdns.fr,HTTP 204,233,256,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-113MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,217,247,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-124MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,222,241,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-109MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,201,273,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-113MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,246,245,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-119MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,226,245,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-113MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,232,258,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-130MS,vless,ws,www.speedtest.net,odd-shape-5c25.terdioplll.workers.dev,HTTP 204,259,247,HTTP 204,yes
+AKUN-009-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-114MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,207,277,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-133MS,vless,ws,198.41.223.229,accv9.mmhz9.workers.dev,HTTP 204,230,275,HTTP 204,yes
