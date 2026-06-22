@@ -4,8 +4,8 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 58,
-      "now": "AKUN-007-UNKNOWN-VLESS-WS-164MS",
+      "history_last_delay": 59,
+      "now": "AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-138MS",
       "type": "URLTest",
       "udp": true
     },
@@ -18,14 +18,14 @@
     },
     "FALLBACK": {
       "all_count": 16,
-      "history_last_delay": 64,
+      "history_last_delay": 60,
       "now": "AKUN-001-090227-VLESS-WS-136MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 87,
+      "history_last_delay": 68,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -39,29 +39,29 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 58,
+      "history_last_delay": 56,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 220,
+      "history_last_delay": 233,
       "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 62,
-      "now": "AKUN-007-UNKNOWN-VLESS-WS-164MS",
+      "history_last_delay": 61,
+      "now": "AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-138MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
       "history_last_delay": 63,
-      "now": "AKUN-007-UNKNOWN-VLESS-WS-164MS",
+      "now": "AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-138MS",
       "type": "URLTest",
       "udp": true
     },
@@ -74,7 +74,7 @@
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 63,
+      "history_last_delay": 60,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-06-22T14:30:33.332392+00:00"
+  "timestamp_utc": "2026-06-22T14:45:32.916485+00:00"
 }
