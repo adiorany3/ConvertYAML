@@ -10,9 +10,9 @@ Tujuannya: OpenWrt punya cadangan config/node fresh sebelum semua node utama mat
 - `fresh_pool/fresh_candidates.json`: metadata ringkas fresh pool.
 
 ## Ringkasan
-- Kandidat fresh URL-tested: 25
+- Kandidat fresh URL-tested: 24
 - Kandidat strict NekoBox-tested: 10
-- Proxy di openclash_fresh_pool.yaml: 31
+- Proxy di openclash_fresh_pool.yaml: 30
 
 ## Cara Pakai di OpenWrt
 Jalankan manual saat node mulai mati:
@@ -28,31 +28,30 @@ sh /etc/mihomo-autopilot/openwrt_fresh_guard.sh
 ```
 
 ## Kandidat Fresh Teratas
-1. `AKUN-001-CLOUDFLARE-VLESS-WS-91MS` (url=210ms, nekobox=235ms, status=yes)
-2. `AKUN-002-CLOUDFLARE-VLESS-WS-95MS` (url=225ms, nekobox=249ms, status=yes)
-3. `AKUN-003-008500-VLESS-WS-91MS` (url=205ms, nekobox=241ms, status=yes)
-4. `AKUN-004-CLOUDFLARE-VLESS-WS-102MS` (url=214ms, nekobox=249ms, status=yes)
-5. `AKUN-005-UNKNOWN-VLESS-WS-101MS` (url=233ms, nekobox=294ms, status=yes)
-6. `AKUN-006-RS-RAPIDSEEDBOX-20190717-VLESS-WS-93MS` (url=220ms, nekobox=246ms, status=yes)
-7. `AKUN-007-CLOUDFLARE-VLESS-WS-119MS` (url=205ms, nekobox=263ms, status=yes)
-8. `AKUN-008-UNKNOWN-VLESS-WS-100MS` (url=242ms, nekobox=311ms, status=yes)
-9. `AKUN-009-CLOUDFLARE-VLESS-WS-100MS` (url=228ms, nekobox=233ms, status=yes)
-10. `AKUN-010-CLOUDFLARE-VLESS-WS-121MS` (url=220ms, nekobox=262ms, status=yes)
-11. `AKUN-011-CLOUDFLARE-VLESS-WS-112MS` (url=220ms, status=HTTP 204)
-12. `AKUN-012-CLOUDFLARE-VLESS-WS-105MS` (url=249ms, status=HTTP 204)
-13. `AKUN-013-RS-RAPIDSEEDBOX-20190717-VLESS-WS-124MS` (url=223ms, status=HTTP 204)
-14. `AKUN-014-CLOUDFLARE-VLESS-WS-108MS` (url=235ms, status=HTTP 204)
-15. `AKUN-015-RS-RAPIDSEEDBOX-20190717-VLESS-WS-99MS` (url=233ms, status=HTTP 204)
-16. `AKUN-016-CLOUDFLARE-VLESS-WS-97MS` (url=220ms, status=HTTP 204)
-17. `AKUN-017-CLOUDFLARE-VLESS-WS-141MS` (url=205ms, status=HTTP 204)
-18. `AKUN-018-CLOUDFLARE-VLESS-WS-151MS` (url=227ms, status=HTTP 204)
-19. `AKUN-019-UNKNOWN-VLESS-WS-223MS` (url=503ms, status=HTTP 204)
-20. `AKUN-020-UNKNOWN-VLESS-WS-232MS` (url=512ms, status=HTTP 204)
-21. `AKUN-021-UNKNOWN-VLESS-WS-269MS` (url=539ms, status=HTTP 204)
-22. `AKUN-022-UNKNOWN-VLESS-WS-267MS` (url=551ms, status=HTTP 204)
-23. `AKUN-023-UNKNOWN-VLESS-WS-290MS` (url=602ms, status=HTTP 204)
-24. `AKUN-024-UNKNOWN-VLESS-WS-258MS` (url=559ms, status=HTTP 204)
-25. `AKUN-025-UNKNOWN-VLESS-WS-294MS` (url=549ms, status=HTTP 204)
+1. `AKUN-001-UNKNOWN-VLESS-WS-57MS` (url=436ms, nekobox=257ms, status=yes)
+2. `AKUN-002-CLOUDFLARE-VLESS-WS-71MS` (url=236ms, nekobox=246ms, status=yes)
+3. `AKUN-003-UNKNOWN-VLESS-WS-69MS` (url=213ms, nekobox=262ms, status=yes)
+4. `AKUN-004-RS-RAPIDSEEDBOX-20190717-VLESS-WS-63MS` (url=218ms, nekobox=249ms, status=yes)
+5. `AKUN-005-RS-RAPIDSEEDBOX-20190717-VLESS-WS-69MS` (url=219ms, nekobox=266ms, status=yes)
+6. `AKUN-006-CLOUDFLARE-VLESS-WS-78MS`
+7. `AKUN-007-CLOUDFLARE-VLESS-WS-65MS`
+8. `AKUN-008-AMAZON-VLESS-WS-118MS`
+9. `AKUN-009-CLOUDFLARE-VLESS-WS-73MS`
+10. `AKUN-010-CLOUDFLARE-VLESS-WS-341MS`
+11. `AKUN-013-RS-RAPIDSEEDBOX-20190717-VLESS-WS-381MS` (url=848ms, status=HTTP 204)
+12. `AKUN-014-CLOUDFLARE-VLESS-WS-369MS` (url=951ms, status=HTTP 204)
+13. `AKUN-015-RS-RAPIDSEEDBOX-20190717-VLESS-WS-389MS` (url=835ms, status=HTTP 204)
+14. `AKUN-016-CLOUDFLARE-VLESS-WS-384MS` (url=766ms, status=HTTP 204)
+15. `AKUN-017-UNKNOWN-VLESS-WS-419MS` (url=842ms, status=HTTP 204)
+16. `AKUN-018-CLOUDFLARE-VLESS-WS-391MS` (url=870ms, status=HTTP 204)
+17. `AKUN-019-BROADNNET-KR-VLESS-WS-68MS` (url=1025ms, status=HTTP 204)
+18. `AKUN-021-ORG-VLESS-WS-557MS` (url=1040ms, status=HTTP 204)
+19. `AKUN-024-KAWAII520-VLESS-WS-641MS` (url=1236ms, status=HTTP 204)
+20. `AKUN-025-RS-RAPIDSEEDBOX-20190717-VLESS-WS-707MS` (url=914ms, status=HTTP 204)
+21. `AKUN-026-RS-RAPIDSEEDBOX-20190717-VLESS-WS-730MS` (url=1203ms, status=HTTP 204)
+22. `AKUN-031-CLOUDFLARE-VLESS-WS-786MS` (url=1265ms, status=HTTP 204)
+23. `AKUN-032-CLOUDFLARE-VLESS-WS-841MS` (url=1394ms, status=HTTP 204)
+24. `AKUN-034-CLOUDFLARE-VLESS-WS-793MS` (url=1292ms, status=HTTP 204)
 
 ## Catatan
 Fresh pool bukan pengganti AutoPilot. AutoPilot tetap memilih jalur sehat di router.
