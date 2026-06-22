@@ -1,15 +1,13 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-58MS,vless,ws,172.64.145.202,t1s1.rittbo.kdns.fr,HTTP 204,218,253,HTTP 204,yes
-AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-61MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,225,245,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-71MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,221,234,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-80MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,HTTP 204,207,182,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-005-RS-RAPIDSEEDBOX-20190717-VLESS-WS-97MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,198,250,HTTP 204,yes
-AKUN-006-GO-DADDY-COM-LLC-VLESS-WS-112MS,vless,ws,104.238.68.240,opu-ao6.pages.dev,HTTP 204,211,257,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-83MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,221,7178,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-008-RS-RAPIDSEEDBOX-20190717-VLESS-WS-108MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,234,233,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-99MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,227,252,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-77MS,vless,ws,188.114.98.217,LivELY-BREEZe-04C6.AlI-eBRAaHyMy.WOrKeRs.DEv,HTTP 204,257,195,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-011-RS-RAPIDSEEDBOX-20190717-VLESS-WS-72MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,244,230,HTTP 204,yes
-AKUN-012-CLOUDFLARE-VLESS-WS-111MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,212,254,HTTP 204,yes
-AKUN-013-CLOUDFLARE-VLESS-WS-76MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,HTTP 204,230,182,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-014-UNKNOWN-VLESS-WS-77MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,223,251,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-59MS,vless,ws,nexusmods.com,t1s1.rittbo.kdns.fr,HTTP 204,229,253,HTTP 204,yes
+AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-62MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,219,271,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-84MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,232,257,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-87MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,217,247,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-80MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,232,238,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-80MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,HTTP 204,203,179,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-007-RS-RAPIDSEEDBOX-20190717-VLESS-WS-80MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,203,242,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-105MS,vless,ws,188.114.98.217,LivELY-BREEZe-04C6.AlI-eBRAaHyMy.WOrKeRs.DEv,HTTP 204,207,190,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-009-GO-DADDY-COM-LLC-VLESS-WS-110MS,vless,ws,104.238.68.240,opu-ao6.pages.dev,HTTP 204,207,248,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-104MS,vless,ws,172.64.145.202,t1s1.rittbo.kdns.fr,HTTP 204,216,242,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-78MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,198,249,HTTP 204,yes
+AKUN-012-VULTR-VLESS-WS-132MS,vless,ws,108.160.132.178,t1s1.rittbo.kdns.fr,HTTP 204,228,248,HTTP 204,yes
