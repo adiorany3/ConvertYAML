@@ -1,13 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-75MS,vless,ws,104.18.42.54,t1s1.rittbo.kdns.fr,HTTP 204,332,314,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-78MS,vless,ws,172.64.145.202,t1s1.rittbo.kdns.fr,HTTP 204,288,339,HTTP 204,yes
-AKUN-004-VULTR-VLESS-WS-79MS,vless,ws,108.160.132.178,t1s1.rittbo.kdns.fr,HTTP 204,276,307,HTTP 204,yes
-AKUN-005-GO-DADDY-COM-LLC-VLESS-WS-79MS,vless,ws,104.238.68.240,opu-ao6.pages.dev,HTTP 204,283,395,HTTP 204,yes
-AKUN-006-RS-RAPIDSEEDBOX-20190717-VLESS-WS-79MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,309,317,HTTP 204,yes
-AKUN-007-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-101MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,313,358,HTTP 204,yes
-AKUN-008-DEV-VLESS-WS-83MS,vless,ws,flat-night-edd0.hosein9saleazhuongooyeh87.workers.dev,FLAT-night-EDD0.hOsEin9saLEAZhuongOoYeH87.wOrkerS.DeV,HTTP 204,299,192,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-009-UNKNOWN-VLESS-WS-84MS,vless,ws,91.193.58.77,unnes.ac.id.yxls.eu.cc,HTTP 204,291,306,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-117MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,279,7172,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-011-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,279,332,HTTP 204,yes
-AKUN-012-RS-RAPIDSEEDBOX-20190717-VLESS-WS-85MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,342,339,HTTP 204,yes
-AKUN-013-CLOUDFLARE-VLESS-WS-104MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,321,337,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-59MS,vless,ws,nexusmods.com,t1s1.rittbo.kdns.fr,HTTP 204,228,228,HTTP 204,yes
+AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-69MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,220,233,HTTP 204,yes
+AKUN-003-RS-RAPIDSEEDBOX-20190717-VLESS-WS-88MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,202,252,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.60.231,hhlfy.twiladaphne.ndjp.net,HTTP 204,200,233,HTTP 204,yes
+AKUN-005-GO-DADDY-COM-LLC-VLESS-WS-85MS,vless,ws,104.238.68.240,opu-ao6.pages.dev,HTTP 204,237,249,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-92MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,234,264,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-86MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,237,7178,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-008-CLOUDFLARE-VLESS-WS-88MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,227,460,HTTP 204,yes
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-75MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,224,270,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-85MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,242,265,HTTP 204,yes
+AKUN-011-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-137MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,223,265,HTTP 204,yes
