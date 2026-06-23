@@ -1,11 +1,14 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-95MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,HTTP 204,258,345,HTTP 204,yes
-AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-102MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,319,359,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-98MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,318,296,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-123MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,242,350,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-123MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,271,354,HTTP 204,yes
-AKUN-006-RS-RAPIDSEEDBOX-20190717-VLESS-WS-128MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,245,271,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-138MS,vless,ws,104.16.72.251,hhlfy.twiladaphne.ndjp.net,HTTP 204,313,272,HTTP 204,yes
-AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-129MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,321,345,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-146MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,339,371,HTTP 204,yes
-AKUN-011-VULTR-VLESS-WS-140MS,vless,ws,108.160.132.178,t1s1.rittbo.kdns.fr,HTTP 204,305,336,HTTP 204,yes
+AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-69MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,211,237,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-80MS,vless,ws,104.18.38.47,t1s1.rittbo.kdns.fr,HTTP 204,209,227,HTTP 204,yes
+AKUN-004-RS-RAPIDSEEDBOX-20190717-VLESS-WS-70MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,217,251,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-85MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,214,239,HTTP 204,yes
+AKUN-006-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-85MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,212,231,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-89MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,215,247,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-96MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,216,254,HTTP 204,yes
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-69MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,210,234,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-116MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,214,247,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-119MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,HTTP 204,226,177,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-012-CLOUDFLARE-VLESS-WS-131MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,HTTP 204,221,205,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-013-CLOUDFLARE-VLESS-WS-160MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,219,7175,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-014-CLOUDFLARE-VLESS-WS-231MS,vless,ws,188.114.97.6,terazhediii.info,HTTP 204,502,534,HTTP 204,yes
