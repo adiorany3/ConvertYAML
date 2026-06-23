@@ -1,13 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-74MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,HTTP 204,227,190,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-002-CLOUDFLARE-VLESS-WS-72MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,211,238,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-86MS,vless,ws,172.64.144.82,t1s1.rittbo.kdns.fr,HTTP 204,210,227,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-90MS,vless,ws,104.21.52.77,deliCaTe-graSS-7a09.hSueGdbxJDiRfh.WORKeRS.DEV,HTTP 204,228,195,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-005-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,224,248,HTTP 204,yes
-AKUN-006-RS-RAPIDSEEDBOX-20190717-VLESS-WS-83MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,213,235,HTTP 204,yes
-AKUN-007-VULTR-VLESS-WS-81MS,vless,ws,108.160.132.178,t1s1.rittbo.kdns.fr,HTTP 204,201,232,HTTP 204,yes
-AKUN-008-DIGITALOCEAN-VLESS-WS-70MS,vless,ws,188.166.81.124,0gnoyqei.muzxslk2hja4hbyckl6p.workers.dev,HTTP 204,222,258,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-99MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,210,239,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-89MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,221,245,HTTP 204,yes
-AKUN-011-ADF-VLESS-WS-102MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,217,245,HTTP 204,yes
-AKUN-012-UNKNOWN-VLESS-WS-81MS,vless,ws,104.16.72.251,hhlfy.twiladaphne.ndjp.net,HTTP 204,226,255,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-87MS,vless,ws,172.64.149.209,t1s1.rittbo.kdns.fr,HTTP 204,235,251,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-113MS,vless,ws,172.67.185.178,hhlfy.twiladaphne.ndjp.net,HTTP 204,249,255,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-105MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,257,264,HTTP 204,yes
+AKUN-004-RS-RAPIDSEEDBOX-20190717-VLESS-WS-106MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,233,273,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-135MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,242,265,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-127MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,235,284,HTTP 204,yes
+AKUN-008-RS-RAPIDSEEDBOX-20190717-VLESS-WS-116MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,212,242,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-128MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,HTTP 204,292,212,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-010-CLOUDFLARE-VLESS-WS-129MS,vless,ws,188.114.97.6,small-voice-c4c5.itsnewrzan.workers.dev,HTTP 204,308,290,HTTP 204,yes
+AKUN-013-UNKNOWN-VLESS-WS-102MS,vless,ws,188.166.81.124,0gnoyqei.muzxslk2hja4hbyckl6p.workers.dev,HTTP 204,245,278,HTTP 204,yes
+AKUN-014-UNKNOWN-VLESS-WS-121MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,268,296,HTTP 204,yes

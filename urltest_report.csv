@@ -1,26 +1,29 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-74MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,74,,227,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-72MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,72,,211,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-86MS,vless,ws,172.64.144.82,t1s1.rittbo.kdns.fr,86,,210,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-90MS,vless,ws,104.21.52.77,deliCaTe-graSS-7a09.hSueGdbxJDiRfh.WORKeRS.DEV,90,,228,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,88,,224,HTTP 204,yes
-AKUN-006-RS-RAPIDSEEDBOX-20190717-VLESS-WS-83MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,83,,213,HTTP 204,yes
-AKUN-007-VULTR-VLESS-WS-81MS,vless,ws,108.160.132.178,t1s1.rittbo.kdns.fr,81,,201,HTTP 204,yes
-AKUN-008-DIGITALOCEAN-VLESS-WS-70MS,vless,ws,188.166.81.124,0gnoyqei.muzxslk2hja4hbyckl6p.workers.dev,70,,222,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-99MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,99,,210,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-89MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,89,,221,HTTP 204,yes
-AKUN-011-ADF-VLESS-WS-102MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,102,,217,HTTP 204,yes
-AKUN-012-UNKNOWN-VLESS-WS-81MS,vless,ws,104.16.72.251,hhlfy.twiladaphne.ndjp.net,81,,226,HTTP 204,yes
-AKUN-013-UNKNOWN-VLESS-WS-138MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,138,,215,HTTP 204,yes
-AKUN-014-UNKNOWN-VLESS-WS-88MS,vless,ws,45.147.248.115,coNFIghayE.moKhaBeraTebInZON.workErS.deV,88,,212,HTTP 204,yes
-AKUN-015-US-VLESS-WS-96MS,vless,ws,nuclear.us.kg,nuclear.us.kg,96,,204,HTTP 204,yes
-AKUN-016-UNKNOWN-VLESS-WS-164MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,164,,210,HTTP 204,yes
-AKUN-017-OPENAI-VLESS-WS-147MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,147,,215,HTTP 204,yes
-AKUN-018-UNKNOWN-VLESS-WS-77MS,vless,ws,198.41.223.229,accv9.mmhz9.workers.dev,77,,208,HTTP 204,yes
-AKUN-019-UNKNOWN-VLESS-WS-246MS,vless,ws,172.67.71.247,octopusss5.info,246,,551,HTTP 204,yes
-AKUN-020-RS-RAPIDSEEDBOX-20190717-VLESS-WS-82MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,82,,211,HTTP 204,yes
-AKUN-021-CLOUDFLARE-VLESS-WS-258MS,vless,ws,betty.ns.cloudflare.com,octopusss.net,258,,493,HTTP 204,yes
-AKUN-022-CLOUDFLARE-VLESS-WS-260MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,260,,556,HTTP 204,yes
-AKUN-023-RS-RAPIDSEEDBOX-20190717-VLESS-WS-262MS,vless,ws,45.130.125.158,vangoghhh.info,262,,544,HTTP 204,yes
-AKUN-024-MICROSOFT-VLESS-WS-280MS,vless,ws,news.microsoft.com,amoosamiii.net,280,,570,HTTP 204,yes
-AKUN-025-UNKNOWN-VLESS-WS-85MS,vless,ws,188.114.97.6,small-voice-c4c5.itsnewrzan.workers.dev,85,,217,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-87MS,vless,ws,172.64.149.209,t1s1.rittbo.kdns.fr,87,,235,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-113MS,vless,ws,172.67.185.178,hhlfy.twiladaphne.ndjp.net,113,,249,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-105MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,105,,257,HTTP 204,yes
+AKUN-004-RS-RAPIDSEEDBOX-20190717-VLESS-WS-106MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,106,,233,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-135MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,135,,242,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-118MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,118,,5125,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-007-CLOUDFLARE-VLESS-WS-127MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,127,,235,HTTP 204,yes
+AKUN-008-RS-RAPIDSEEDBOX-20190717-VLESS-WS-116MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,116,,212,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-128MS,vless,ws,104.27.14.95,DaYiJoon.mbs-SAteHi.WorkeRs.DeV,128,,292,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-129MS,vless,ws,188.114.97.6,small-voice-c4c5.itsnewrzan.workers.dev,129,,308,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-145MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,145,,5124,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-012-UNKNOWN-VLESS-WS-157MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,157,,5127,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-013-UNKNOWN-VLESS-WS-102MS,vless,ws,188.166.81.124,0gnoyqei.muzxslk2hja4hbyckl6p.workers.dev,102,,245,HTTP 204,yes
+AKUN-014-UNKNOWN-VLESS-WS-121MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,121,,268,HTTP 204,yes
+AKUN-015-CLOUDWEBMANAGE-EU-FR-VLESS-WS-140MS,vless,ws,45.147.248.115,coNFIghayE.moKhaBeraTebInZON.workErS.deV,140,,257,HTTP 204,yes
+AKUN-016-CLOUDFLARE-VLESS-WS-126MS,vless,ws,nuclear.us.kg,nuclear.us.kg,126,,261,HTTP 204,yes
+AKUN-017-CLOUDFLARE-VLESS-WS-126MS,vless,ws,104.21.52.77,deliCaTe-graSS-7a09.hSueGdbxJDiRfh.WORKeRS.DEV,126,,213,HTTP 204,yes
+AKUN-018-CLOUDFLARE-VLESS-WS-127MS,vless,ws,198.41.223.229,accv9.mmhz9.workers.dev,127,,247,HTTP 204,yes
+AKUN-019-CLOUDFLARE-VLESS-WS-383MS,vless,ws,188.114.97.6,terazhediii.info,383,,742,HTTP 204,yes
+AKUN-020-RS-RAPIDSEEDBOX-20190717-VLESS-WS-388MS,vless,ws,45.130.125.158,vangoghhh.info,388,,869,HTTP 204,yes
+AKUN-021-CLOUDFLARE-VLESS-WS-438MS,vless,ws,104.26.12.222,octopusss5.info,438,,848,HTTP 204,yes
+AKUN-022-CLOUDFLARE-VLESS-WS-126MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,126,,240,HTTP 204,yes
+AKUN-023-CLOUDFLARE-VLESS-WS-441MS,vless,ws,www.speedtest.org,shegeftihaaa.net,441,,871,HTTP 204,yes
+AKUN-024-CLOUDFLARE-VLESS-WS-115MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,115,,230,HTTP 204,yes
+AKUN-025-CLOUDFLARE-VLESS-WS-417MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,417,,757,HTTP 204,yes
+AKUN-026-CLOUDFLARE-VLESS-WS-450MS,vless,ws,108.162.192.75,amoosamiii.net,450,,849,HTTP 204,yes
+AKUN-027-CLOUDFLARE-VLESS-WS-173MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,173,,237,HTTP 204,yes
+AKUN-028-UNKNOWN-VLESS-WS-467MS,vless,ws,172.64.32.75,octopusss.net,467,,800,HTTP 204,yes
