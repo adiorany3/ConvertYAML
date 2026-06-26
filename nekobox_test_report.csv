@@ -1,12 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-DIGITALOCEAN-VLESS-WS-73MS,vless,ws,188.166.81.124,0gnoyqei.muzxslk2hja4hbyckl6p.workers.dev,HTTP 204,248,275,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-72MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,232,264,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-66MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,290,264,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-73MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,241,267,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-69MS,vless,ws,104.21.52.77,deliCaTe-graSS-7a09.hSueGdbxJDiRfh.WORKeRS.DEV,HTTP 204,274,183,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-006-156-246-89-0-156-246-89-VLESS-WS-71MS,vless,ws,156.246.89.197,t1s1.rittbo.kdns.fr,HTTP 204,235,268,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-80MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,264,269,HTTP 204,yes
-AKUN-008-UNKNOWN-VLESS-WS-88MS,vless,ws,172.64.152.241,t1s1.rittbo.kdns.fr,HTTP 204,233,301,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-72MS,vless,ws,188.114.97.6,small-voice-c4c5.itsnewrzan.workers.dev,HTTP 204,298,279,HTTP 204,yes
-AKUN-010-US-VLESS-WS-73MS,vless,ws,nuclear.us.kg,nuclear.us.kg,HTTP 204,266,288,HTTP 204,yes
-AKUN-011-UNKNOWN-VLESS-WS-78MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,242,283,HTTP 204,yes
+AKUN-001-VULTR-VLESS-WS-133MS,vless,ws,167.179.84.175,t1s1.rittbo.kdns.fr,HTTP 204,291,291,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-138MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,249,297,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-136MS,vless,ws,104.18.38.47,t1s1.rittbo.kdns.fr,HTTP 204,281,291,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-135MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,243,310,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-146MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,305,305,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-139MS,vless,ws,104.21.52.77,deliCaTe-graSS-7a09.hSueGdbxJDiRfh.WORKeRS.DEV,HTTP 204,245,238,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-007-CLOUDWEBMANAGE-EU-FR-VLESS-WS-142MS,vless,ws,45.147.248.115,coNFIghayE.moKhaBeraTebInZON.workErS.deV,HTTP 204,269,303,HTTP 204,yes
+AKUN-008-DIGITALOCEAN-VLESS-WS-157MS,vless,ws,188.166.81.124,0gnoyqei.muzxslk2hja4hbyckl6p.workers.dev,HTTP 204,292,310,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-146MS,vless,ws,nuclear.us.kg,nuclear.us.kg,HTTP 204,262,311,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-154MS,vless,ws,173.245.59.35,ld.235231.xyz,HTTP 204,267,407,HTTP 204,yes
+AKUN-011-UNKNOWN-VLESS-WS-165MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,270,317,HTTP 204,yes
