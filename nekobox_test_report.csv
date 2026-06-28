@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-99MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,270,255,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-103MS,vless,ws,178.22.26.54,nbhhh.mrcool.kdns.fr,HTTP 204,267,240,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-105MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,282,257,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-103MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,223,258,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-100MS,vless,ws,172.64.53.65,t1s1.rittbo.kdns.fr,HTTP 204,217,262,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-108MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,263,315,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-112MS,vless,ws,104.21.75.46,bold-term-2b48.stary3989.workers.dev,HTTP 204,307,280,HTTP 204,yes
-AKUN-008-US-VLESS-WS-111MS,vless,ws,nuclear.us.kg,nuclear.us.kg,HTTP 204,262,219,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-009-466688-VLESS-WS-110MS,vless,ws,cf8.466688.xyz,zdy.hhhdl.kdns.fr,HTTP 204,246,291,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-138MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,223,245,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-133MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,246,259,HTTP 204,yes
+AKUN-001-VULTR-VLESS-WS-65MS,vless,ws,139.180.220.7,t1s1.rittbo.kdns.fr,HTTP 204,246,257,HTTP 204,yes
+AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-74MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,258,258,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-79MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,256,257,HTTP 204,yes
+AKUN-004-MYBB-VLESS-WS-82MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,273,275,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-101MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,241,260,HTTP 204,yes
+AKUN-006-466688-VLESS-WS-84MS,vless,ws,cf6.466688.xyz,cfoo-146.pages.dev,HTTP 204,250,267,HTTP 204,yes
+AKUN-007-RS-RAPIDSEEDBOX-20190717-VLESS-WS-106MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,238,256,HTTP 204,yes
+AKUN-008-1PASSWORD-VLESS-WS-82MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,240,257,HTTP 204,yes
+AKUN-009-VULTR-VLESS-WS-78MS,vless,ws,108.160.132.178,t1s1.rittbo.kdns.fr,HTTP 204,223,256,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-121MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,228,257,HTTP 204,yes
