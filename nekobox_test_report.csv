@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-66MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,228,237,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-78MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,211,245,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-64MS,vless,ws,172.64.145.202,t1s1.rittbo.kdns.fr,HTTP 204,202,235,HTTP 204,yes
-AKUN-004-CLOUDWEBMANAGE-EU-FR-VLESS-WS-71MS,vless,ws,45.147.248.115,coNFIghayE.moKhaBeraTebInZON.workErS.deV,HTTP 204,226,249,HTTP 204,yes
-AKUN-005-DE-XTOM-20210903-VLESS-WS-78MS,vless,ws,178.22.26.54,nbhhh.mrcool.kdns.fr,HTTP 204,215,241,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-83MS,vless,ws,104.21.75.46,bold-term-2b48.stary3989.workers.dev,HTTP 204,216,248,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-81MS,vless,ws,nuclear.us.kg,nuclear.us.kg,HTTP 204,225,233,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-98MS,vless,ws,173.245.59.35,ld.235231.xyz,HTTP 204,206,251,HTTP 204,yes
-AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-90MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,204,234,HTTP 204,yes
-AKUN-010-RS-RAPIDSEEDBOX-20190717-VLESS-WS-69MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,210,245,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-99MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,270,255,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-103MS,vless,ws,178.22.26.54,nbhhh.mrcool.kdns.fr,HTTP 204,267,240,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-105MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,282,257,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-103MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,223,258,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-100MS,vless,ws,172.64.53.65,t1s1.rittbo.kdns.fr,HTTP 204,217,262,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-108MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,263,315,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-112MS,vless,ws,104.21.75.46,bold-term-2b48.stary3989.workers.dev,HTTP 204,307,280,HTTP 204,yes
+AKUN-008-US-VLESS-WS-111MS,vless,ws,nuclear.us.kg,nuclear.us.kg,HTTP 204,262,219,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-009-466688-VLESS-WS-110MS,vless,ws,cf8.466688.xyz,zdy.hhhdl.kdns.fr,HTTP 204,246,291,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-138MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,223,245,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-133MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,246,259,HTTP 204,yes
