@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-82MS,vless,ws,104.16.72.70,unnes.ac.id.yxls.eu.cc,HTTP 204,210,247,HTTP 204,yes
-AKUN-002-VULTR-VLESS-WS-72MS,vless,ws,149.28.142.169,t1s1.rittbo.kdns.fr,HTTP 204,217,246,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-75MS,vless,ws,cloudflare.182682.xyz,wz1.fum.ccwu.cc,HTTP 204,232,282,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-69MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,HTTP 204,211,248,HTTP 204,yes
-AKUN-005-RS-RAPIDSEEDBOX-20190717-VLESS-WS-93MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,198,240,HTTP 204,yes
-AKUN-006-US-VLESS-WS-103MS,vless,ws,nuclear.us.kg,nuclear.us.kg,HTTP 204,309,252,HTTP 204,yes
-AKUN-007-COMPREND-NET-VLESS-WS-76MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,195,244,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-83MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,216,240,HTTP 204,yes
-AKUN-009-COMPREND-NET-VLESS-WS-121MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,215,243,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-83MS,vless,ws,173.245.59.35,ld.235231.xyz,HTTP 204,226,237,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-81MS,vless,ws,store.ubi.com,t1s1.rittbo.kdns.fr,HTTP 204,230,227,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-83MS,vless,ws,172.64.53.65,t1s1.rittbo.kdns.fr,HTTP 204,232,255,HTTP 204,yes
+AKUN-003-RS-RAPIDSEEDBOX-20190717-VLESS-WS-85MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,227,253,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-78MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,HTTP 204,210,258,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-100MS,vless,ws,104.16.72.70,unnes.ac.id.yxls.eu.cc,HTTP 204,249,253,HTTP 204,yes
+AKUN-006-COMPREND-NET-VLESS-WS-95MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,223,251,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-96MS,vless,ws,162.159.18.241,wz1.fum.ccwu.cc,HTTP 204,226,251,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-102MS,vless,ws,nodejs.org,Ez-16D6b5.AliAlO87.wORKErS.DEv,HTTP 204,199,200,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-009-US-VLESS-WS-84MS,vless,ws,nuclear.us.kg,nuclear.us.kg,HTTP 204,231,260,HTTP 204,yes
+AKUN-010-AEZA-NETWORK-VLESS-WS-96MS,vless,ws,109.120.176.17,kingcloud.biack.ir,HTTP 204,225,243,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-134MS,vless,ws,104.21.75.46,bold-term-2b48.stary3989.workers.dev,HTTP 204,241,233,HTTP 204,yes
