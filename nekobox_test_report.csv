@@ -1,11 +1,13 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-63MS,vless,ws,152.70.239.74,t1s1.rittbo.kdns.fr,HTTP 204,202,233,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-68MS,vless,ws,108.162.196.3,t1s1.rittbo.kdns.fr,HTTP 204,199,240,HTTP 204,yes
-AKUN-003-COMPREND-NET-VLESS-WS-80MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,202,249,HTTP 204,yes
-AKUN-004-COMPREND-NET-VLESS-WS-96MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,201,247,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-94MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,214,255,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-87MS,vless,ws,173.245.59.35,ld.235231.xyz,HTTP 204,202,244,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-97MS,vless,ws,162.159.18.241,wz1.fum.ccwu.cc,HTTP 204,211,250,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,202,242,HTTP 204,yes
-AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-110MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,202,228,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-106MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,209,246,HTTP 204,yes
+AKUN-001-ORACLE-VLESS-WS-62MS,vless,ws,138.2.87.237,t1s1.rittbo.kdns.fr,HTTP 204,213,238,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-63MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,222,246,HTTP 204,yes
+AKUN-003-COMPREND-NET-VLESS-WS-66MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,228,230,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-69MS,vless,ws,104.21.52.77,deliCaTe-graSS-7a09.hSueGdbxJDiRfh.WORKeRS.DEV,HTTP 204,255,178,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-005-CLOUDFLARE-VLESS-WS-72MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,221,261,HTTP 204,yes
+AKUN-006-COMPREND-NET-VLESS-WS-71MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,243,246,HTTP 204,yes
+AKUN-007-RS-RAPIDSEEDBOX-20190717-VLESS-WS-85MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,199,250,HTTP 204,yes
+AKUN-008-ZVC-VLESS-WS-69MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,221,238,HTTP 204,yes
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-111MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,217,259,HTTP 204,yes
+AKUN-010-COMPREND-NET-VLESS-WS-113MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,195,232,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-91MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,HTTP 204,206,180,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-012-UNKNOWN-VLESS-WS-73MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,HTTP 204,222,245,HTTP 204,yes
