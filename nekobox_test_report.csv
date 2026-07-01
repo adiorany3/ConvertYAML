@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-99MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,253,273,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-94MS,vless,ws,172.64.152.241,t1s1.rittbo.kdns.fr,HTTP 204,245,261,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-111MS,vless,ws,173.245.59.35,ld.235231.xyz,HTTP 204,257,280,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-111MS,vless,ws,104.21.75.46,bold-term-2b48.stary3989.workers.dev,HTTP 204,240,271,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-98MS,vless,ws,restless-base-fe24.alirezahabibi20009.workers.dev,restless-base-fe24.alirezahabibi20009.workers.dev,HTTP 204,234,262,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-114MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,267,281,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-112MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,236,253,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-111MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,225,256,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-120MS,vless,ws,biyapain.biyapainbache.workers.dev,bIyapain.bIYApaiNbAcHe.WoRkers.DeV,HTTP 204,238,256,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-126MS,vless,ws,104.16.72.70,unnes.ac.id.yxls.eu.cc,HTTP 204,276,257,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-61MS,vless,ws,104.18.41.190,t1s1.rittbo.kdns.fr,HTTP 204,213,217,HTTP 204,yes
+AKUN-002-ZVC-VLESS-WS-66MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,190,235,HTTP 204,yes
+AKUN-003-COMPREND-NET-VLESS-WS-65MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,221,237,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-81MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,219,256,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-83MS,vless,ws,biyapain.biyapainbache.workers.dev,bIyapain.bIYApaiNbAcHe.WoRkers.DeV,HTTP 204,202,224,HTTP 204,yes
+AKUN-006-HOSTOFF-NET-VLESS-WS-87MS,vless,ws,144.31.102.181,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,200,256,HTTP 204,yes
+AKUN-007-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-76MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,216,250,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-72MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,207,254,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-85MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,224,248,HTTP 204,yes
+AKUN-010-MYBB-VLESS-WS-77MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,193,218,HTTP 204,yes
