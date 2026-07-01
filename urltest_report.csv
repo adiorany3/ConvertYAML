@@ -1,29 +1,26 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-64MS,vless,ws,104.18.42.98,t1s1.rittbo.kdns.fr,64,,216,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.18.153.10,unnes.ac.id.yxls.eu.cc,77,,197,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-83MS,vless,ws,104.16.72.41,nbhhh.mrcool.kdns.fr,83,,210,HTTP 204,yes
-AKUN-004-COMPREND-NET-VLESS-WS-84MS,vless,ws,192.71.82.2,kingcloud.biack.ir,84,,203,HTTP 204,yes
-AKUN-005-ZVC-VLESS-WS-85MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,85,,222,HTTP 204,yes
-AKUN-006-COMPREND-NET-VLESS-WS-93MS,vless,ws,192.71.82.2,kingcloud.biack.ir,93,,215,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-90MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,90,,212,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-103MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,103,,204,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-90MS,vless,ws,108.162.196.3,t1s1.rittbo.kdns.fr,90,,246,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-100MS,vless,ws,188.114.98.130,kingcloud.biack.ir,100,,202,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-111MS,vless,ws,188.114.98.193,kingcloud.biack.ir,111,,239,HTTP 204,yes
-AKUN-012-CLOUDFLARE-VLESS-WS-98MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,98,,217,HTTP 204,yes
-AKUN-013-CLOUDFLARE-VLESS-WS-124MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,124,,223,HTTP 204,yes
-AKUN-014-UNKNOWN-VLESS-WS-96MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,96,,198,HTTP 204,yes
-AKUN-015-UNKNOWN-VLESS-WS-147MS,vless,ws,57.128.176.87,vpn47.cc.cd,147,,281,HTTP 204,yes
-AKUN-016-CLOUDFLARE-VLESS-WS-69MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,69,,229,HTTP 204,yes
-AKUN-017-COMPREND-NET-VLESS-WS-80MS,vless,ws,192.71.82.2,kingcloud.biack.ir,80,,211,HTTP 204,yes
-AKUN-018-UNKNOWN-VLESS-WS-140MS,vless,ws,104.24.16.23,dark-rain-2989.gzgshsgs.workers.dev,140,,213,HTTP 204,yes
-AKUN-019-UNKNOWN-VLESS-WS-177MS,vless,ws,103.21.244.62,ez-8e4fdf.ezaccess1435739.workers.dev,177,,370,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-020-DEV-VLESS-WS-202MS,vless,ws,zeus-panel-6vj4ds.sajadasakereh0095.workers.dev,zeus-panel-6vj4ds.sajadasakereh0095.workers.dev,202,,399,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-021-UNKNOWN-VLESS-WS-237MS,vless,ws,104.27.7.125,amooaliii.net,237,,679,HTTP 204,yes
-AKUN-022-DEV-VLESS-WS-219MS,vless,ws,zeus-panel-6vj4ds.sajadasakereh0095.workers.dev,zeus-panel-6vj4ds.sajadasakereh0095.workers.dev,219,,421,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-023-UNKNOWN-VLESS-WS-235MS,vless,ws,188.114.97.6,terazhediii.info,235,,509,HTTP 204,yes
-AKUN-024-UNKNOWN-VLESS-WS-238MS,vless,ws,172.64.32.75,octopusss.net,238,,560,HTTP 204,yes
-AKUN-025-CLOUDFLARE-VLESS-WS-263MS,vless,ws,betty.ns.cloudflare.com,vangoghhh.info,263,,577,HTTP 204,yes
-AKUN-026-CLOUDFLARE-VLESS-WS-272MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,272,,598,HTTP 204,yes
-AKUN-027-UNKNOWN-VLESS-WS-270MS,vless,ws,104.26.12.222,octopusss5.info,270,,570,HTTP 204,yes
-AKUN-028-UNKNOWN-VLESS-WS-284MS,vless,ws,108.162.192.75,amoosamiii.net,284,,584,HTTP 204,yes
+AKUN-001-ZVC-VLESS-WS-63MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,63,,216,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-65MS,vless,ws,104.18.153.10,unnes.ac.id.yxls.eu.cc,65,,224,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-68MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,68,,234,HTTP 204,yes
+AKUN-004-ALIBABA-VLESS-WS-70MS,vless,ws,47.80.60.254,t1s1.rittbo.kdns.fr,70,,213,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-73MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,73,,226,HTTP 204,yes
+AKUN-006-WEYRO-NET-VLESS-WS-85MS,vless,ws,85.155.98.34,vpn47.cc.cd,85,,222,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-67MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,67,,220,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-72MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,72,,210,HTTP 204,yes
+AKUN-009-COMPREND-NET-VLESS-WS-95MS,vless,ws,192.71.82.2,kingcloud.biack.ir,95,,196,HTTP 204,yes
+AKUN-010-COMPREND-NET-VLESS-WS-87MS,vless,ws,192.71.82.2,kingcloud.biack.ir,87,,208,HTTP 204,yes
+AKUN-011-RS-RAPIDSEEDBOX-20190717-VLESS-WS-82MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,82,,214,HTTP 204,yes
+AKUN-012-UNKNOWN-VLESS-WS-68MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,68,,221,HTTP 204,yes
+AKUN-013-UNKNOWN-VLESS-WS-119MS,vless,ws,109.120.176.37,kingcloud.biack.ir,119,,207,HTTP 204,yes
+AKUN-014-COMPREND-NET-VLESS-WS-153MS,vless,ws,192.71.82.2,kingcloud.biack.ir,153,,208,HTTP 204,yes
+AKUN-015-UNKNOWN-VLESS-WS-133MS,vless,ws,188.114.98.193,kingcloud.biack.ir,133,,209,HTTP 204,yes
+AKUN-016-UNKNOWN-VLESS-WS-128MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,128,,220,HTTP 204,yes
+AKUN-017-466688-VLESS-WS-198MS,vless,ws,cf1.466688.xyz,hhvl.hhapp.kdns.fr,198,,374,HTTP 204,yes
+AKUN-018-COMPREND-NET-VLESS-WS-129MS,vless,ws,192.71.82.2,kingcloud.biack.ir,129,,219,HTTP 204,yes
+AKUN-019-UNKNOWN-VLESS-WS-73MS,vless,ws,104.25.3.165,patient-moon-c61f.ggfsa55.workers.dev,73,,233,HTTP 204,yes
+AKUN-020-UNKNOWN-VLESS-WS-349MS,vless,ws,104.18.206.22,amooaliii.net,349,,786,HTTP 204,yes
+AKUN-021-UNKNOWN-VLESS-WS-355MS,vless,ws,108.162.192.75,octopusss.net,355,,745,HTTP 204,yes
+AKUN-022-UNKNOWN-VLESS-WS-382MS,vless,ws,5.10.214.151,octopusss5.info,382,,870,HTTP 204,yes
+AKUN-023-UNKNOWN-VLESS-WS-352MS,vless,ws,173.245.58.75,terazhediii.info,352,,707,HTTP 204,yes
+AKUN-024-MICROSOFT-VLESS-WS-373MS,vless,ws,news.microsoft.com,amoosamiii.net,373,,856,HTTP 204,yes
+AKUN-025-UNKNOWN-VLESS-WS-379MS,vless,ws,104.16.72.2,vangoghhh.info,379,,794,HTTP 204,yes
