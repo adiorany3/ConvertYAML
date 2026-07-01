@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-63MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,200,249,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-66MS,vless,ws,cdn.9889888.xyz,t1s1.rittbo.kdns.fr,HTTP 204,201,249,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-75MS,vless,ws,restless-base-fe24.alirezahabibi20009.workers.dev,restless-base-fe24.alirezahabibi20009.workers.dev,HTTP 204,225,227,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-59MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,245,250,HTTP 204,yes
-AKUN-005-WEYRO-NET-VLESS-WS-71MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,204,231,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-78MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,218,255,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-101MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,227,264,HTTP 204,yes
-AKUN-008-SPACECORE-VLESS-WS-73MS,vless,ws,94.156.117.125,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,211,249,HTTP 204,yes
-AKUN-009-U1HOST-FRA-VLESS-WS-80MS,vless,ws,144.31.120.120,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,203,256,HTTP 204,yes
-AKUN-010-NETCUP-VLESS-WS-76MS,vless,ws,152.53.236.205,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,238,233,HTTP 204,yes
+AKUN-001-104-253-175-0-1-VLESS-WS-129MS,vless,ws,104.253.175.16,t1s1.rittbo.kdns.fr,HTTP 204,260,281,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-133MS,vless,ws,restless-base-fe24.alirezahabibi20009.workers.dev,restless-base-fe24.alirezahabibi20009.workers.dev,HTTP 204,257,303,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-138MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,269,301,HTTP 204,yes
+AKUN-004-DIGITALOCEAN-VLESS-WS-143MS,vless,ws,95.85.39.45,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,250,294,HTTP 204,yes
+AKUN-005-SPACECORE-VLESS-WS-145MS,vless,ws,94.156.117.125,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,255,295,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-137MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,271,293,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-143MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,246,289,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-149MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,246,299,HTTP 204,yes
+AKUN-009-NETCUP-VLESS-WS-140MS,vless,ws,152.53.236.205,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,245,304,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-133MS,vless,ws,188.114.98.193,kingcloud.biack.ir,HTTP 204,258,289,HTTP 204,yes
