@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-64MS,vless,ws,cf.008500.xyz,t1s1.rittbo.kdns.fr,HTTP 204,211,237,HTTP 204,yes
-AKUN-002-DEV-VLESS-WS-68MS,vless,ws,restless-base-fe24.alirezahabibi20009.workers.dev,restless-base-fe24.alirezahabibi20009.workers.dev,HTTP 204,210,235,HTTP 204,yes
-AKUN-003-UK-GB-DCL-01-20191003-VLESS-WS-76MS,vless,ws,91.193.58.77,unnes.ac.id.yxls.eu.cc,HTTP 204,222,228,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-71MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,221,238,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-77MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,206,248,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-85MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,217,238,HTTP 204,yes
-AKUN-007-OVH-VLESS-WS-96MS,vless,ws,57.129.137.57,vpn47.cc.cd,HTTP 204,214,254,HTTP 204,yes
-AKUN-008-NETCUP-VLESS-WS-73MS,vless,ws,152.53.236.205,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,211,240,HTTP 204,yes
-AKUN-009-U1HOST-FRA-VLESS-WS-97MS,vless,ws,144.31.120.120,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,220,243,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-84MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,213,249,HTTP 204,yes
+AKUN-001-RS-RAPIDSEEDBOX-20190717-VLESS-WS-64MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,219,246,HTTP 204,yes
+AKUN-002-CNAE-VLESS-WS-66MS,vless,ws,www.cnae.top,t1s1.rittbo.kdns.fr,HTTP 204,216,241,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-66MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,215,242,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-59MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,212,242,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-61MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,HTTP 204,208,239,HTTP 204,yes
+AKUN-006-UK-GB-DCL-01-20191003-VLESS-WS-66MS,vless,ws,91.193.58.77,unnes.ac.id.yxls.eu.cc,HTTP 204,223,238,HTTP 204,yes
+AKUN-007-COMPREND-NET-VLESS-WS-82MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,205,232,HTTP 204,yes
+AKUN-008-DIGITALOCEAN-VLESS-WS-84MS,vless,ws,188.166.166.243,vpn47.cc.cd,HTTP 204,227,227,HTTP 204,yes
+AKUN-009-ZVC-VLESS-WS-66MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,225,241,HTTP 204,yes
+AKUN-010-COMPREND-NET-VLESS-WS-88MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,200,243,HTTP 204,yes
