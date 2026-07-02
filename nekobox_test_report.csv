@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-93MS,vless,ws,188.114.98.125,kingcloud.biack.ir,HTTP 204,272,322,HTTP 204,yes
-AKUN-002-WPENG-VLESS-WS-99MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,307,251,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-96MS,vless,ws,104.16.72.41,unnes.ac.id.yxls.eu.cc,HTTP 204,333,265,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-99MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,245,290,HTTP 204,yes
-AKUN-005-SAINT-PETERSBURG-VLESS-WS-79MS,vless,ws,193.233.251.202,vpn47.cc.cd,HTTP 204,254,289,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-88MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,244,273,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-81MS,vless,ws,104.25.3.165,patient-moon-c61f.ggfsa55.workers.dev,HTTP 204,307,305,HTTP 204,yes
-AKUN-008-WEYRO-NET-VLESS-WS-111MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,240,309,HTTP 204,yes
-AKUN-009-WPENG-VLESS-WS-116MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,284,274,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-89MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,250,281,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-67MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,200,239,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-66MS,vless,ws,104.16.72.41,unnes.ac.id.yxls.eu.cc,HTTP 204,202,250,HTTP 204,yes
+AKUN-003-AEZA-NETWORK-VLESS-WS-73MS,vless,ws,84.22.149.130,kingcloud.biack.ir,HTTP 204,221,239,HTTP 204,yes
+AKUN-004-VULTR-VLESS-WS-63MS,vless,ws,149.28.159.222,t1s1.rittbo.kdns.fr,HTTP 204,206,234,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-73MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,214,231,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-88MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,227,261,HTTP 204,yes
+AKUN-007-COMPREND-NET-VLESS-WS-90MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,220,319,HTTP 204,yes
+AKUN-008-COMPREND-NET-VLESS-WS-84MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,205,254,HTTP 204,yes
+AKUN-009-SAINT-PETERSBURG-VLESS-WS-88MS,vless,ws,193.233.251.202,vpn47.cc.cd,HTTP 204,212,262,HTTP 204,yes
+AKUN-010-WPENG-VLESS-WS-86MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,215,224,HTTP 204,yes
