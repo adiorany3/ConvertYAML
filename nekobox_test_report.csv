@@ -1,12 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-SIN-VLESS-WS-129MS,vless,ws,saas.sin.fan,t1s1.rittbo.kdns.fr,HTTP 204,275,299,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-139MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,HTTP 204,271,290,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-141MS,vless,ws,104.16.72.201,kingcloud.biack.ir,HTTP 204,244,299,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-142MS,vless,ws,fm3.pages.dev,fm3.pages.dev,HTTP 204,345,312,HTTP 204,yes
-AKUN-005-RS-RAPIDSEEDBOX-20190717-VLESS-WS-138MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,258,283,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-141MS,vless,ws,104.19.119.133,lInGerinG-cElL-0027.aHOOrAarmIOn.WoRkERS.DeV,HTTP 204,247,234,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-007-UNKNOWN-VLESS-WS-142MS,vless,ws,104.16.72.41,unnes.ac.id.yxls.eu.cc,HTTP 204,300,300,HTTP 204,yes
-AKUN-008-WPENG-VLESS-WS-134MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,304,299,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-148MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,268,297,HTTP 204,yes
-AKUN-010-MYBB-VLESS-WS-148MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,247,296,HTTP 204,yes
-AKUN-011-ZVC-VLESS-WS-134MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,337,322,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-66MS,vless,ws,da.mfa.gov.ua,t1s1.rittbo.kdns.fr,HTTP 204,211,238,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-74MS,vless,ws,104.19.119.133,lInGerinG-cElL-0027.aHOOrAarmIOn.WoRkERS.DeV,HTTP 204,217,176,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-003-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,209,229,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-73MS,vless,ws,104.16.72.208,kingcloud.biack.ir,HTTP 204,221,227,HTTP 204,yes
+AKUN-005-WPENG-VLESS-WS-83MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,225,236,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-64MS,vless,ws,188.114.98.193,kingcloud.biack.ir,HTTP 204,207,241,HTTP 204,yes
+AKUN-007-COMPREND-NET-VLESS-WS-75MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,220,234,HTTP 204,yes
+AKUN-008-DIGITALOCEAN-VLESS-WS-83MS,vless,ws,104.248.173.190,vpn47.cc.cd,HTTP 204,201,374,HTTP 204,yes
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-70MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,204,247,HTTP 204,yes
+AKUN-010-WPENG-VLESS-WS-85MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,211,231,HTTP 204,yes
+AKUN-011-COMPREND-NET-VLESS-WS-90MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,198,234,HTTP 204,yes

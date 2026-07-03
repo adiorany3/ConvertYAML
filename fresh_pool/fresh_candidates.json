@@ -1,76 +1,32 @@
 {
-  "generated_at": "2026-07-03T07:02:01.068855+00:00",
+  "generated_at": "2026-07-03T07:31:37.064967+00:00",
   "fresh_count": 25,
   "strict_count": 10,
   "fresh": [
     {
-      "name": "AKUN-001-SIN-VLESS-WS-129MS",
+      "name": "AKUN-001-CLOUDFLARE-VLESS-WS-66MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 275,
+      "url_test_ms": 211,
       "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 299,
+      "nekobox_test_ms": 238,
       "nekobox_ready": "yes"
     },
     {
-      "name": "AKUN-002-UNKNOWN-VLESS-WS-139MS",
+      "name": "AKUN-002-CLOUDFLARE-VLESS-WS-74MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 271,
+      "url_test_ms": 217,
       "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 290,
-      "nekobox_ready": "yes"
-    },
-    {
-      "name": "AKUN-003-UNKNOWN-VLESS-WS-141MS",
-      "type": "vless",
-      "network": "",
-      "server": "",
-      "port": 443,
-      "url_test_ms": 244,
-      "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 299,
-      "nekobox_ready": "yes"
-    },
-    {
-      "name": "AKUN-004-CLOUDFLARE-VLESS-WS-142MS",
-      "type": "vless",
-      "network": "",
-      "server": "",
-      "port": 443,
-      "url_test_ms": 345,
-      "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 312,
-      "nekobox_ready": "yes"
-    },
-    {
-      "name": "AKUN-005-RS-RAPIDSEEDBOX-20190717-VLESS-WS-138MS",
-      "type": "vless",
-      "network": "",
-      "server": "",
-      "port": 443,
-      "url_test_ms": 258,
-      "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 283,
-      "nekobox_ready": "yes"
-    },
-    {
-      "name": "AKUN-006-CLOUDFLARE-VLESS-WS-141MS",
-      "type": "vless",
-      "network": "",
-      "server": "",
-      "port": 443,
-      "url_test_ms": 247,
-      "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 234,
+      "nekobox_test_ms": 176,
       "nekobox_ready": "no"
     },
     {
-      "name": "AKUN-006-UNKNOWN-VLESS-WS-142MS",
+      "name": "AKUN-002-CLOUDFLARE-VLESS-WS-82MS",
       "type": "vless",
       "network": "",
       "server": "",
@@ -81,7 +37,7 @@
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-007-WPENG-VLESS-WS-134MS",
+      "name": "AKUN-003-CLOUDFLARE-VLESS-WS-73MS",
       "type": "vless",
       "network": "",
       "server": "",
@@ -92,7 +48,7 @@
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-008-CLOUDFLARE-VLESS-WS-148MS",
+      "name": "AKUN-004-WPENG-VLESS-WS-83MS",
       "type": "vless",
       "network": "",
       "server": "",
@@ -103,7 +59,7 @@
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-009-MYBB-VLESS-WS-148MS",
+      "name": "AKUN-005-CLOUDFLARE-VLESS-WS-64MS",
       "type": "vless",
       "network": "",
       "server": "",
@@ -114,7 +70,7 @@
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-010-ZVC-VLESS-WS-134MS",
+      "name": "AKUN-006-COMPREND-NET-VLESS-WS-75MS",
       "type": "vless",
       "network": "",
       "server": "",
@@ -125,155 +81,199 @@
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-012-CLOUDFLARE-VLESS-WS-139MS",
+      "name": "AKUN-007-DIGITALOCEAN-VLESS-WS-83MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 253,
+      "url_test_ms": null,
+      "url_test_status": null,
+      "nekobox_test_ms": null,
+      "nekobox_ready": null
+    },
+    {
+      "name": "AKUN-008-RS-RAPIDSEEDBOX-20190717-VLESS-WS-70MS",
+      "type": "vless",
+      "network": "",
+      "server": "",
+      "port": 443,
+      "url_test_ms": null,
+      "url_test_status": null,
+      "nekobox_test_ms": null,
+      "nekobox_ready": null
+    },
+    {
+      "name": "AKUN-009-WPENG-VLESS-WS-85MS",
+      "type": "vless",
+      "network": "",
+      "server": "",
+      "port": 443,
+      "url_test_ms": null,
+      "url_test_status": null,
+      "nekobox_test_ms": null,
+      "nekobox_ready": null
+    },
+    {
+      "name": "AKUN-010-COMPREND-NET-VLESS-WS-90MS",
+      "type": "vless",
+      "network": "",
+      "server": "",
+      "port": 443,
+      "url_test_ms": null,
+      "url_test_status": null,
+      "nekobox_test_ms": null,
+      "nekobox_ready": null
+    },
+    {
+      "name": "AKUN-012-UNKNOWN-VLESS-WS-74MS",
+      "type": "vless",
+      "network": "",
+      "server": "",
+      "port": 443,
+      "url_test_ms": 212,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-013-COMPREND-NET-VLESS-WS-152MS",
+      "name": "AKUN-013-CLOUDFLARE-VLESS-WS-68MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 279,
+      "url_test_ms": 198,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-014-CLOUDFLARE-VLESS-WS-155MS",
+      "name": "AKUN-014-ZVC-VLESS-WS-74MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 268,
+      "url_test_ms": 206,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-015-CLOUDFLARE-VLESS-WS-150MS",
+      "name": "AKUN-015-CLOUDFLARE-VLESS-WS-117MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 255,
+      "url_test_ms": 219,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-016-OVH-VLESS-WS-162MS",
+      "name": "AKUN-016-CLOUDFLARE-VLESS-WS-130MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 283,
+      "url_test_ms": 220,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-017-CLOUDFLARE-VLESS-WS-138MS",
+      "name": "AKUN-017-CLOUDFLARE-VLESS-WS-100MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 280,
+      "url_test_ms": 223,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-018-COMPREND-NET-VLESS-WS-150MS",
+      "name": "AKUN-018-CLOUDFLARE-VLESS-WS-112MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 274,
+      "url_test_ms": 198,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-019-CLOUDFLARE-VLESS-WS-172MS",
+      "name": "AKUN-019-UNKNOWN-VLESS-WS-78MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 249,
+      "url_test_ms": 205,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-020-WEYRO-NET-VLESS-WS-153MS",
+      "name": "AKUN-020-UNKNOWN-VLESS-WS-161MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 298,
+      "url_test_ms": 210,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-021-WPENG-VLESS-WS-144MS",
+      "name": "AKUN-021-ADF-VLESS-WS-127MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 326,
+      "url_test_ms": 217,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-022-COMPREND-NET-VLESS-WS-147MS",
+      "name": "AKUN-022-MYBB-VLESS-WS-73MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 268,
+      "url_test_ms": 228,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-023-UNKNOWN-VLESS-WS-159MS",
+      "name": "AKUN-023-UNKNOWN-VLESS-WS-104MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 282,
+      "url_test_ms": 218,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-024-1PASSWORD-VLESS-WS-157MS",
+      "name": "AKUN-024-UNKNOWN-VLESS-WS-230MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 254,
+      "url_test_ms": 494,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-025-UNKNOWN-VLESS-WS-287MS",
+      "name": "AKUN-025-UNKNOWN-VLESS-WS-234MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 487,
+      "url_test_ms": 527,
       "url_test_status": "HTTP 204",
       "nekobox_test_ms": null,
       "nekobox_ready": null
@@ -281,62 +281,18 @@
   ],
   "strict": [
     {
-      "name": "AKUN-001-SIN-VLESS-WS-129MS",
+      "name": "AKUN-001-CLOUDFLARE-VLESS-WS-66MS",
       "type": "vless",
       "network": "",
       "server": "",
       "port": 443,
-      "url_test_ms": 275,
+      "url_test_ms": 211,
       "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 299,
+      "nekobox_test_ms": 238,
       "nekobox_ready": "yes"
     },
     {
-      "name": "AKUN-002-UNKNOWN-VLESS-WS-139MS",
-      "type": "vless",
-      "network": "",
-      "server": "",
-      "port": 443,
-      "url_test_ms": 271,
-      "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 290,
-      "nekobox_ready": "yes"
-    },
-    {
-      "name": "AKUN-003-UNKNOWN-VLESS-WS-141MS",
-      "type": "vless",
-      "network": "",
-      "server": "",
-      "port": 443,
-      "url_test_ms": 244,
-      "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 299,
-      "nekobox_ready": "yes"
-    },
-    {
-      "name": "AKUN-004-CLOUDFLARE-VLESS-WS-142MS",
-      "type": "vless",
-      "network": "",
-      "server": "",
-      "port": 443,
-      "url_test_ms": 345,
-      "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 312,
-      "nekobox_ready": "yes"
-    },
-    {
-      "name": "AKUN-005-RS-RAPIDSEEDBOX-20190717-VLESS-WS-138MS",
-      "type": "vless",
-      "network": "",
-      "server": "",
-      "port": 443,
-      "url_test_ms": 258,
-      "url_test_status": "HTTP 204",
-      "nekobox_test_ms": 283,
-      "nekobox_ready": "yes"
-    },
-    {
-      "name": "AKUN-006-UNKNOWN-VLESS-WS-142MS",
+      "name": "AKUN-002-CLOUDFLARE-VLESS-WS-82MS",
       "type": "vless",
       "network": "",
       "server": "",
@@ -347,7 +303,7 @@
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-007-WPENG-VLESS-WS-134MS",
+      "name": "AKUN-003-CLOUDFLARE-VLESS-WS-73MS",
       "type": "vless",
       "network": "",
       "server": "",
@@ -358,7 +314,7 @@
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-008-CLOUDFLARE-VLESS-WS-148MS",
+      "name": "AKUN-004-WPENG-VLESS-WS-83MS",
       "type": "vless",
       "network": "",
       "server": "",
@@ -369,7 +325,7 @@
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-009-MYBB-VLESS-WS-148MS",
+      "name": "AKUN-005-CLOUDFLARE-VLESS-WS-64MS",
       "type": "vless",
       "network": "",
       "server": "",
@@ -380,7 +336,51 @@
       "nekobox_ready": null
     },
     {
-      "name": "AKUN-010-ZVC-VLESS-WS-134MS",
+      "name": "AKUN-006-COMPREND-NET-VLESS-WS-75MS",
+      "type": "vless",
+      "network": "",
+      "server": "",
+      "port": 443,
+      "url_test_ms": null,
+      "url_test_status": null,
+      "nekobox_test_ms": null,
+      "nekobox_ready": null
+    },
+    {
+      "name": "AKUN-007-DIGITALOCEAN-VLESS-WS-83MS",
+      "type": "vless",
+      "network": "",
+      "server": "",
+      "port": 443,
+      "url_test_ms": null,
+      "url_test_status": null,
+      "nekobox_test_ms": null,
+      "nekobox_ready": null
+    },
+    {
+      "name": "AKUN-008-RS-RAPIDSEEDBOX-20190717-VLESS-WS-70MS",
+      "type": "vless",
+      "network": "",
+      "server": "",
+      "port": 443,
+      "url_test_ms": null,
+      "url_test_status": null,
+      "nekobox_test_ms": null,
+      "nekobox_ready": null
+    },
+    {
+      "name": "AKUN-009-WPENG-VLESS-WS-85MS",
+      "type": "vless",
+      "network": "",
+      "server": "",
+      "port": 443,
+      "url_test_ms": null,
+      "url_test_status": null,
+      "nekobox_test_ms": null,
+      "nekobox_ready": null
+    },
+    {
+      "name": "AKUN-010-COMPREND-NET-VLESS-WS-90MS",
       "type": "vless",
       "network": "",
       "server": "",
