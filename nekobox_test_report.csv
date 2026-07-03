@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-64MS,vless,ws,188.114.98.193,kingcloud.biack.ir,HTTP 204,223,225,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-69MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,203,242,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-68MS,vless,ws,cf8.466688.xyz,cfoo-146.pages.dev,HTTP 204,223,263,HTTP 204,yes
-AKUN-004-UK-GB-DCL-01-20191003-VLESS-WS-68MS,vless,ws,91.193.58.77,unnes.ac.id.yxls.eu.cc,HTTP 204,213,248,HTTP 204,yes
-AKUN-005-COMPREND-NET-VLESS-WS-77MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,223,231,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-80MS,vless,ws,104.16.72.208,kingcloud.biack.ir,HTTP 204,229,246,HTTP 204,yes
-AKUN-007-WPENG-VLESS-WS-65MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,222,226,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-76MS,vless,ws,188.114.98.193,kingcloud.biack.ir,HTTP 204,221,248,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-100MS,vless,ws,138.199.233.214,vpn47.cc.cd,HTTP 204,213,243,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-73MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,221,249,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-76MS,vless,ws,yx.cloudflare.182682.xyz,t1s1.rittbo.kdns.fr,HTTP 204,217,231,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-93MS,vless,ws,188.114.98.169,kingcloud.biack.ir,HTTP 204,220,249,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-84MS,vless,ws,188.114.98.193,kingcloud.biack.ir,HTTP 204,203,260,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-100MS,vless,ws,104.16.72.41,unnes.ac.id.yxls.eu.cc,HTTP 204,241,236,HTTP 204,yes
+AKUN-005-COMPREND-NET-VLESS-WS-96MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,231,257,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-91MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,230,235,HTTP 204,yes
+AKUN-007-ZVC-VLESS-WS-92MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,236,263,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-115MS,vless,ws,cf8.466688.xyz,cfoo-146.pages.dev,HTTP 204,228,236,HTTP 204,yes
+AKUN-009-COMPREND-NET-VLESS-WS-93MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,217,239,HTTP 204,yes
+AKUN-010-COMPREND-NET-VLESS-WS-98MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,207,238,HTTP 204,yes
