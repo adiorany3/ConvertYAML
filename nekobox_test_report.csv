@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-ALIBABA-VLESS-WS-64MS,vless,ws,47.80.60.254,t1s1.rittbo.kdns.fr,HTTP 204,233,253,HTTP 204,yes
-AKUN-002-DIGITALOCEAN-VLESS-WS-81MS,vless,ws,46.101.238.160,vpn47.cc.cd,HTTP 204,308,338,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-80MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,251,293,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-72MS,vless,ws,104.16.72.41,unnes.ac.id.yxls.eu.cc,HTTP 204,256,265,HTTP 204,yes
-AKUN-005-WPENG-VLESS-WS-78MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,301,273,HTTP 204,yes
-AKUN-006-DIGITALOCEAN-VLESS-WS-83MS,vless,ws,37.139.24.45,etppnyfi.j84lb8cxseup4s2nb3if.workers.dev,HTTP 204,259,272,HTTP 204,yes
-AKUN-007-DIGITALOCEAN-VLESS-WS-87MS,vless,ws,188.226.146.164,v7s1e040.5qqzdipkj05g8copceva.workers.dev,HTTP 204,267,276,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-95MS,vless,ws,104.19.119.133,lInGerinG-cElL-0027.aHOOrAarmIOn.WoRkERS.DeV,HTTP 204,258,188,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-009-COMPREND-NET-VLESS-WS-83MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,269,281,HTTP 204,yes
-AKUN-010-ZVC-VLESS-WS-101MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,260,326,HTTP 204,yes
-AKUN-011-COMPREND-NET-VLESS-WS-101MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,268,298,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-66MS,vless,ws,172.64.52.240,t1s1.rittbo.kdns.fr,HTTP 204,207,234,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-69MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,213,241,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-63MS,vless,ws,104.16.72.208,kingcloud.biack.ir,HTTP 204,210,241,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-74MS,vless,ws,188.114.98.193,kingcloud.biack.ir,HTTP 204,228,233,HTTP 204,yes
+AKUN-005-COMPREND-NET-VLESS-WS-77MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,231,257,HTTP 204,yes
+AKUN-006-UK-GB-DCL-01-20191003-VLESS-WS-61MS,vless,ws,91.193.58.77,unnes.ac.id.yxls.eu.cc,HTTP 204,223,247,HTTP 204,yes
+AKUN-007-COMPREND-NET-VLESS-WS-83MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,207,239,HTTP 204,yes
+AKUN-008-OVH-VLESS-WS-76MS,vless,ws,57.128.176.87,vpn47.cc.cd,HTTP 204,204,281,HTTP 204,yes
+AKUN-009-ZVC-VLESS-WS-79MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,208,233,HTTP 204,yes
+AKUN-010-DIGITALOCEAN-VLESS-WS-85MS,vless,ws,37.139.24.45,etppnyfi.j84lb8cxseup4s2nb3if.workers.dev,HTTP 204,212,257,HTTP 204,yes
