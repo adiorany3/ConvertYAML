@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-COMPREND-NET-VLESS-WS-74MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,233,234,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-95MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,210,236,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-96MS,vless,ws,104.16.72.201,kingcloud.biack.ir,HTTP 204,237,248,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-94MS,vless,ws,biyapain.biyapainbache.workers.dev,bIyapain.bIYApaiNbAcHe.WoRkers.DeV,HTTP 204,240,251,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-90MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,243,243,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-87MS,vless,ws,104.16.72.41,unnes.ac.id.yxls.eu.cc,HTTP 204,223,228,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-101MS,vless,ws,172.67.170.11,t1s1.rittbo.kdns.fr,HTTP 204,207,240,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-102MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,233,234,HTTP 204,yes
-AKUN-009-ZVC-VLESS-WS-101MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,229,255,HTTP 204,yes
-AKUN-010-WPENG-VLESS-WS-85MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,204,255,HTTP 204,yes
+AKUN-001-RS-RAPIDSEEDBOX-20190717-VLESS-WS-101MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,260,295,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-91MS,vless,ws,198.41.223.238,t1s1.rittbo.kdns.fr,HTTP 204,257,314,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-103MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,315,281,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-105MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,270,292,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-97MS,vless,ws,108.162.196.3,t1s1.rittbo.kdns.fr,HTTP 204,252,298,HTTP 204,yes
+AKUN-006-WEBEX-VLESS-WS-129MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,314,314,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-128MS,vless,ws,198.211.121.165,vpn47.cc.cd,HTTP 204,289,329,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-123MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,291,292,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-131MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,264,301,HTTP 204,yes
+AKUN-010-466688-VLESS-WS-115MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,286,282,HTTP 204,yes
