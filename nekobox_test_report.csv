@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-92MS,vless,ws,172.66.46.250,t1s1.rittbo.kdns.fr,HTTP 204,207,253,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-92MS,vless,ws,104.16.72.41,unnes.ac.id.yxls.eu.cc,HTTP 204,219,270,HTTP 204,yes
-AKUN-003-COMPREND-NET-VLESS-WS-90MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,205,246,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-94MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,204,234,HTTP 204,yes
-AKUN-005-COMPREND-NET-VLESS-WS-96MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,227,265,HTTP 204,yes
-AKUN-006-DIGITALOCEAN-VLESS-WS-110MS,vless,ws,104.248.23.56,vpn47.cc.cd,HTTP 204,222,260,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-116MS,vless,ws,188.114.98.193,kingcloud.biack.ir,HTTP 204,220,246,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-123MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,231,267,HTTP 204,yes
-AKUN-009-COMPREND-NET-VLESS-WS-114MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,204,266,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-114MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,219,262,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-72MS,vless,ws,youxuan.cf.090227.xyz,t1s1.rittbo.kdns.fr,HTTP 204,233,260,HTTP 204,yes
+AKUN-002-WPENG-VLESS-WS-78MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,206,260,HTTP 204,yes
+AKUN-004-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-75MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,233,262,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.17.121.98,unnes.ac.id.yxls.eu.cc,HTTP 204,240,246,HTTP 204,yes
+AKUN-006-WEYRO-NET-VLESS-WS-78MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,209,251,HTTP 204,yes
+AKUN-007-WPENG-VLESS-WS-106MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,250,236,HTTP 204,yes
+AKUN-008-COMPREND-NET-VLESS-WS-100MS,vless,ws,192.71.82.2,kingcloud.biack.ir,HTTP 204,202,258,HTTP 204,yes
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-79MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,228,259,HTTP 204,yes
+AKUN-010-ZOOM-VLESS-WS-88MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,209,245,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-104MS,vless,ws,188.114.98.130,kingcloud.biack.ir,HTTP 204,196,241,HTTP 204,yes
