@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-141MS,vless,ws,104.26.5.60,t1s1.rittbo.kdns.fr,HTTP 204,274,295,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-144MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,265,295,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-141MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,288,324,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-141MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,291,297,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-149MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,267,311,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-152MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,248,321,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-152MS,vless,ws,104.17.223.103,support.zoom.us.yxls.eu.cc,HTTP 204,313,305,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-137MS,vless,ws,104.18.155.229,www.genflix.co.id.r3xxe.eu.cc,HTTP 204,282,306,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-143MS,vless,ws,104.16.72.41,nbhhh.mrcool.kdns.fr,HTTP 204,305,309,HTTP 204,yes
-AKUN-010-WPENG-VLESS-WS-153MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,309,301,HTTP 204,yes
+AKUN-001-RS-RAPIDSEEDBOX-20190717-VLESS-WS-87MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,219,283,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-88MS,vless,ws,172.67.170.11,t1s1.rittbo.kdns.fr,HTTP 204,224,249,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-93MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,213,240,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-98MS,vless,ws,104.16.72.41,unnes.ac.id.yxls.eu.cc,HTTP 204,264,255,HTTP 204,yes
+AKUN-005-WPENG-VLESS-WS-103MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,272,235,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-97MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,254,271,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-117MS,vless,ws,104.18.0.1,all.speedtest03.ccwu.cc,HTTP 204,237,283,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-95MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,214,241,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-118MS,vless,ws,cf8.466688.xyz,cfoo-146.pages.dev,HTTP 204,250,252,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-117MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,270,276,HTTP 204,yes
