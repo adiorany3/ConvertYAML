@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-74MS,vless,ws,172.66.46.250,t1s1.rittbo.kdns.fr,HTTP 204,242,261,HTTP 204,yes
-AKUN-002-WPENG-VLESS-WS-76MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,240,284,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-67MS,vless,ws,104.17.223.103,support.zoom.us.yxls.eu.cc,HTTP 204,233,256,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-72MS,vless,ws,162.159.45.15,t1s1.rittbo.kdns.fr,HTTP 204,235,261,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-66MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,258,273,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-77MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,235,265,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-80MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,HTTP 204,225,281,HTTP 204,yes
-AKUN-008-WEYRO-NET-VLESS-WS-77MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,253,262,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-88MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,239,264,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-76MS,vless,ws,fm3.pages.dev,fm3.pages.dev,HTTP 204,240,281,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-59MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,HTTP 204,202,226,HTTP 204,yes
+AKUN-002-VULTR-VLESS-WS-60MS,vless,ws,149.28.159.222,t1s1.rittbo.kdns.fr,HTTP 204,209,244,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-71MS,vless,ws,104.16.72.41,unnes.ac.id.yxls.eu.cc,HTTP 204,207,241,HTTP 204,yes
+AKUN-004-WPENG-VLESS-WS-71MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,218,225,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-74MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,209,229,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-87MS,vless,ws,104.16.72.41,nbhhh.mrcool.kdns.fr,HTTP 204,226,224,HTTP 204,yes
+AKUN-007-DIGITALOCEAN-VLESS-WS-82MS,vless,ws,64.227.64.52,vpn47.cc.cd,HTTP 204,247,231,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-74MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,217,251,HTTP 204,yes
+AKUN-009-WPENG-VLESS-WS-78MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,207,234,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-70MS,vless,ws,198.41.223.1,proxy.nyarvex.kdns.fr,HTTP 204,218,238,HTTP 204,yes
