@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-62MS,vless,ws,162.159.36.73,t1s1.rittbo.kdns.fr,HTTP 204,212,238,HTTP 204,yes
-AKUN-002-WPENG-VLESS-WS-60MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,209,247,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-68MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,HTTP 204,219,235,HTTP 204,yes
-AKUN-004-466688-VLESS-WS-69MS,vless,ws,cf8.466688.xyz,cfoo-146.pages.dev,HTTP 204,213,259,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-67MS,vless,ws,104.17.223.103,support.zoom.us.yxls.eu.cc,HTTP 204,218,230,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,196,243,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.16.72.41,unnes.ac.id.yxls.eu.cc,HTTP 204,213,230,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-81MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,231,243,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-78MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,227,261,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-92MS,vless,ws,173.245.59.35,ld.235231.xyz,HTTP 204,301,238,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-76MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,260,270,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-85MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,241,276,HTTP 204,yes
+AKUN-003-WPENG-VLESS-WS-84MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,230,272,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-94MS,vless,ws,yx.cloudflare.182682.xyz,t1s1.rittbo.kdns.fr,HTTP 204,232,264,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-89MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,232,257,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-86MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,254,263,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-103MS,vless,ws,104.18.153.10,unnes.ac.id.yxls.eu.cc,HTTP 204,275,289,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-107MS,vless,ws,fm3.pages.dev,fm3.pages.dev,HTTP 204,237,284,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-98MS,vless,ws,162.159.45.15,t1s1.rittbo.kdns.fr,HTTP 204,225,260,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-96MS,vless,ws,cf8.466688.xyz,cfoo-146.pages.dev,HTTP 204,250,274,HTTP 204,yes
