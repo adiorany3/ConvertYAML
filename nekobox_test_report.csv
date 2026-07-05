@@ -1,12 +1,13 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-62MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,208,238,HTTP 204,yes
-AKUN-002-ORACLE-VLESS-WS-67MS,vless,ws,193.123.232.91,t1s1.rittbo.kdns.fr,HTTP 204,206,250,HTTP 204,yes
-AKUN-003-INTERNETWORKS-45-131-6-0-VLESS-WS-72MS,vless,ws,45.131.7.215,vpn47.cc.cd,HTTP 204,228,254,HTTP 204,yes
-AKUN-004-RS-RAPIDSEEDBOX-20190717-VLESS-WS-71MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,210,239,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-80MS,vless,ws,nodejs.org,Ez-FB84e1.HandeLMN.Workers.DEv,HTTP 204,230,190,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-006-CLOUDFLARE-VLESS-WS-64MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,201,238,HTTP 204,yes
-AKUN-007-OVH-VLESS-WS-69MS,vless,ws,57.128.181.26,support.zoom.us.yxls.eu.cc,HTTP 204,217,228,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-73MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,208,242,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-67MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,208,258,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-94MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,211,238,HTTP 204,yes
-AKUN-011-WEBEX-VLESS-WS-79MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,233,249,HTTP 204,yes
+AKUN-001-OVH-VLESS-WS-56MS,vless,ws,37.59.96.25,support.zoom.us.yxls.eu.cc,HTTP 204,228,236,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-62MS,vless,ws,youxuan.cf.090227.xyz,t1s1.rittbo.kdns.fr,HTTP 204,216,240,HTTP 204,yes
+AKUN-003-CHSL-HEL-VLESS-WS-64MS,vless,ws,2.27.50.53,vpn47.cc.cd,HTTP 204,227,234,"ProxyError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by ProxyError('Unable to connect",no
+AKUN-004-CLOUDFLARE-VLESS-WS-75MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,278,235,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-77MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,213,250,HTTP 204,yes
+AKUN-006-ZVC-VLESS-WS-68MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,224,245,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-61MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,211,252,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-72MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,249,240,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-65MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,221,242,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-109MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,224,230,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-89MS,vless,ws,fm3.pages.dev,fm3.pages.dev,HTTP 204,255,204,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(SSLEOFError(8, '[SSL",no
+AKUN-012-UNKNOWN-VLESS-WS-69MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,218,235,HTTP 204,yes
