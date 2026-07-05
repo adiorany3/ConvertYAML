@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-68MS,vless,ws,104.18.42.98,t1s1.rittbo.kdns.fr,HTTP 204,208,239,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-70MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,HTTP 204,213,243,HTTP 204,yes
-AKUN-003-DIGITALOCEAN-VLESS-WS-87MS,vless,ws,188.226.149.72,vpn47.cc.cd,HTTP 204,213,257,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-83MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,212,246,HTTP 204,yes
-AKUN-005-WEYRO-NET-VLESS-WS-95MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,213,236,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-70MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,209,231,HTTP 204,yes
-AKUN-007-WPENG-VLESS-WS-79MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,210,250,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-97MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,206,257,HTTP 204,yes
-AKUN-009-VULTR-VLESS-WS-75MS,vless,ws,198.13.60.163,t1s1.rittbo.kdns.fr,HTTP 204,225,255,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-119MS,vless,ws,104.17.223.103,support.zoom.us.yxls.eu.cc,HTTP 204,214,238,HTTP 204,yes
+AKUN-001-WPENG-VLESS-WS-63MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,229,262,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-70MS,vless,ws,198.41.223.238,t1s1.rittbo.kdns.fr,HTTP 204,237,268,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-74MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,406,273,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-72MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,229,279,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-75MS,vless,ws,162.159.8.123,t1s1.rittbo.kdns.fr,HTTP 204,251,268,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-85MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,258,273,HTTP 204,yes
+AKUN-007-WPENG-VLESS-WS-68MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,244,255,HTTP 204,yes
+AKUN-008-ZVC-VLESS-WS-69MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,238,254,HTTP 204,yes
+AKUN-009-SSL-1134-VLESS-WS-81MS,vless,ws,156.154.245.83,vpn47.cc.cd,HTTP 204,230,299,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-88MS,vless,ws,www.speedtest.net,EZ-6485fD.MinaBchr.wOrKeRS.DEv,HTTP 204,248,197,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-011-WEYRO-NET-VLESS-WS-82MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,247,276,HTTP 204,yes
