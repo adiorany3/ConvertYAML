@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CNAE-VLESS-WS-101MS,vless,ws,www.cnae.top,t1s1.rittbo.kdns.fr,HTTP 204,273,296,HTTP 204,yes
-AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-103MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,241,319,HTTP 204,yes
-AKUN-003-WEBEX-VLESS-WS-88MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,294,298,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-104MS,vless,ws,104.18.44.198,t1s1.rittbo.kdns.fr,HTTP 204,224,278,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-103MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,232,265,HTTP 204,yes
-AKUN-006-INTERNETWORKS-45-131-208-VLESS-WS-114MS,vless,ws,45.131.208.61,vpn47.cc.cd,HTTP 204,274,307,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-89MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,245,314,HTTP 204,yes
-AKUN-008-ZVC-VLESS-WS-105MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,267,316,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-119MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,256,281,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-121MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,HTTP 204,262,277,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-61MS,vless,ws,store.ubi.com,t1s1.rittbo.kdns.fr,HTTP 204,217,237,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-65MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,227,238,HTTP 204,yes
+AKUN-003-ZVC-VLESS-WS-67MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,230,245,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-73MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,220,243,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-76MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,213,242,HTTP 204,yes
+AKUN-006-WPENG-VLESS-WS-64MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,224,236,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-59MS,vless,ws,104.17.223.103,support.zoom.us.yxls.eu.cc,HTTP 204,216,248,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-67MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,210,237,HTTP 204,yes
+AKUN-009-WEYRO-NET-VLESS-WS-72MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,215,254,HTTP 204,yes
+AKUN-010-INTERNETWORKS-45-131-6-0-VLESS-WS-101MS,vless,ws,45.131.6.211,vpn47.cc.cd,HTTP 204,225,229,HTTP 204,yes
