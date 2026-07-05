@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-61MS,vless,ws,172.64.53.34,t1s1.rittbo.kdns.fr,HTTP 204,245,248,HTTP 204,yes
-AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-73MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,231,265,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-63MS,vless,ws,198.13.60.163,t1s1.rittbo.kdns.fr,HTTP 204,259,261,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-66MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,230,260,HTTP 204,yes
-AKUN-005-OVH-VLESS-WS-75MS,vless,ws,57.128.181.26,support.zoom.us.yxls.eu.cc,HTTP 204,256,248,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-85MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,233,279,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-74MS,vless,ws,162.159.36.73,t1s1.rittbo.kdns.fr,HTTP 204,223,259,HTTP 204,yes
-AKUN-008-DIGITALOCEAN-VLESS-WS-85MS,vless,ws,198.211.121.165,vpn47.cc.cd,HTTP 204,243,276,HTTP 204,yes
-AKUN-009-WPENG-VLESS-WS-68MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,232,253,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-98MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,247,265,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-127MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,HTTP 204,259,293,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-136MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,HTTP 204,270,304,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-137MS,vless,ws,108.162.196.3,t1s1.rittbo.kdns.fr,HTTP 204,265,306,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-135MS,vless,ws,45.131.209.212,vpn47.cc.cd,HTTP 204,286,342,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-148MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,284,320,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-153MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,275,298,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-142MS,vless,ws,cf.tencentapp.cn,tianshu13.pages.dev,HTTP 204,270,7172,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-008-WEYRO-NET-VLESS-WS-153MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,285,390,HTTP 204,yes
+AKUN-009-OVH-VLESS-WS-131MS,vless,ws,57.128.181.26,support.zoom.us.yxls.eu.cc,HTTP 204,285,297,HTTP 204,yes
+AKUN-010-WPENG-VLESS-WS-156MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,326,308,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-150MS,vless,ws,104.17.223.103,support.zoom.us.yxls.eu.cc,HTTP 204,334,282,HTTP 204,yes
