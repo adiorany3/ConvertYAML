@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-WPENG-VLESS-WS-59MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,222,242,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-55MS,vless,ws,104.16.72.41,nbhhh.mrcool.kdns.fr,HTTP 204,212,238,HTTP 204,yes
-AKUN-003-WPENG-VLESS-WS-65MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,225,245,HTTP 204,yes
-AKUN-004-ZVC-VLESS-WS-67MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,215,243,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-61MS,vless,ws,172.66.46.250,t1s1.rittbo.kdns.fr,HTTP 204,206,236,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-63MS,vless,ws,104.16.72.41,NBHhh.MRCooL.KDNs.Fr,HTTP 204,210,239,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-66MS,vless,ws,104.18.0.1,all.speedtest03.ccwu.cc,HTTP 204,223,251,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-62MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,221,247,HTTP 204,yes
-AKUN-009-SSL-1134-VLESS-WS-87MS,vless,ws,156.154.245.83,vpn47.cc.cd,HTTP 204,233,241,HTTP 204,yes
-AKUN-010-WEYRO-NET-VLESS-WS-81MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,229,227,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-64MS,vless,ws,saas.sin.fan,t1s1.rittbo.kdns.fr,HTTP 204,196,231,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-76MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,200,242,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-80MS,vless,ws,cf8.466688.xyz,cfoo-146.pages.dev,HTTP 204,212,243,HTTP 204,yes
+AKUN-004-CHSL-HEL-VLESS-WS-81MS,vless,ws,2.27.50.53,vpn47.cc.cd,HTTP 204,230,230,HTTP 204,yes
+AKUN-005-WPENG-VLESS-WS-106MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,211,243,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-103MS,vless,ws,173.245.59.35,ld.235231.xyz,HTTP 204,212,255,HTTP 204,yes
+AKUN-007-WEYRO-NET-VLESS-WS-111MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,228,257,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-86MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,198,236,HTTP 204,yes
+AKUN-009-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-67MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,196,227,HTTP 204,yes
+AKUN-010-WPENG-VLESS-WS-73MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,222,245,HTTP 204,yes
