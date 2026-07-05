@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-58MS,vless,ws,104.18.38.47,t1s1.rittbo.kdns.fr,HTTP 204,209,243,HTTP 204,yes
-AKUN-002-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-58MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,213,243,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-67MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,212,250,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-67MS,vless,ws,104.16.72.41,nbhhh.mrcool.kdns.fr,HTTP 204,195,244,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-69MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,230,257,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-70MS,vless,ws,188.226.149.72,vpn47.cc.cd,HTTP 204,204,260,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-80MS,vless,ws,cf8.466688.xyz,cfoo-146.pages.dev,HTTP 204,231,240,HTTP 204,yes
-AKUN-008-WEBEX-VLESS-WS-64MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,219,227,HTTP 204,yes
-AKUN-009-ZVC-VLESS-WS-67MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,219,244,HTTP 204,yes
-AKUN-010-WEYRO-NET-VLESS-WS-88MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,219,262,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-77MS,vless,ws,www.ntu.edu.sg,t1s1.rittbo.kdns.fr,HTTP 204,218,249,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-77MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,228,254,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-84MS,vless,ws,www.speedtest.net,ez-5FAAFb.EsmAoi.wORKeRs.DEv,HTTP 204,211,204,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-004-CLOUDFLARE-VLESS-WS-81MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,226,256,HTTP 204,yes
+AKUN-005-ZVC-VLESS-WS-89MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,230,229,HTTP 204,yes
+AKUN-006-OVH-VLESS-WS-89MS,vless,ws,57.128.176.87,vpn47.cc.cd,HTTP 204,216,236,HTTP 204,yes
+AKUN-007-ZVC-VLESS-WS-96MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,231,254,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-95MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,213,238,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-108MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,211,259,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-88MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,205,263,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-99MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,212,266,HTTP 204,yes
