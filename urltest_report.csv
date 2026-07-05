@@ -1,28 +1,29 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-61MS,vless,ws,store.ubi.com,t1s1.rittbo.kdns.fr,61,,217,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-65MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,65,,227,HTTP 204,yes
-AKUN-003-ZVC-VLESS-WS-67MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,67,,230,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-73MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,73,,220,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-76MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,76,,213,HTTP 204,yes
-AKUN-006-WPENG-VLESS-WS-64MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,64,,224,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-59MS,vless,ws,104.17.223.103,support.zoom.us.yxls.eu.cc,59,,216,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-67MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,67,,210,HTTP 204,yes
-AKUN-009-WEYRO-NET-VLESS-WS-72MS,vless,ws,85.155.98.34,vpn47.cc.cd,72,,215,HTTP 204,yes
-AKUN-010-INTERNETWORKS-45-131-6-0-VLESS-WS-101MS,vless,ws,45.131.6.211,vpn47.cc.cd,101,,225,HTTP 204,yes
-AKUN-011-WPENG-VLESS-WS-90MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,90,,228,HTTP 204,yes
-AKUN-012-TENCENT-VLESS-WS-111MS,vless,ws,cf.tencentapp.cn,tianshu13.pages.dev,111,,227,HTTP 204,yes
-AKUN-013-PAGES-VLESS-WS-70MS,vless,ws,fm3.pages.dev,fm3.pages.dev,70,,304,HTTP 204,yes
-AKUN-014-466688-VLESS-WS-82MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,82,,220,HTTP 204,yes
-AKUN-015-UNKNOWN-VLESS-WS-91MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,91,,210,HTTP 204,yes
-AKUN-016-UNKNOWN-VLESS-WS-264MS,vless,ws,104.27.72.231,zeus-panel-8v7tpq.mp3295939.workers.dev,264,,497,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-017-UNKNOWN-VLESS-WS-358MS,vless,ws,172.64.32.75,amooaliii.net,358,,847,HTTP 204,yes
-AKUN-018-UNKNOWN-VLESS-WS-364MS,vless,ws,188.114.97.6,terazhediii.info,364,,729,HTTP 204,yes
-AKUN-019-UNKNOWN-VLESS-WS-370MS,vless,ws,104.16.72.101,shegeftihaaa.net,370,,831,HTTP 204,yes
-AKUN-020-UNKNOWN-VLESS-WS-373MS,vless,ws,104.16.72.41,amoosamiii.net,373,,792,HTTP 204,yes
-AKUN-021-CLOUDFLARE-VLESS-WS-385MS,vless,ws,elliot.ns.cloudflare.com,octopusss5.info,385,,826,HTTP 204,yes
-AKUN-022-UNKNOWN-VLESS-WS-397MS,vless,ws,45.131.209.42,vangoghhh.info,397,,867,HTTP 204,yes
-AKUN-023-UNKNOWN-VLESS-WS-435MS,vless,ws,104.16.75.234,server-ir-4.ariyuz.org,435,,4207,HTTP 204,yes
-AKUN-024-IRATOM-VLESS-WS-527MS,vless,ws,mci.iratom.com,d2.iratom.com,527,,627,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-025-UNKNOWN-VLESS-WS-350MS,vless,ws,159.112.235.52,octopusss.net,350,,744,HTTP 204,yes
-AKUN-026-UNKNOWN-VLESS-WS-670MS,vless,ws,104.16.75.226,server-ir-3.ariyuz.org,670,,1092,HTTP 204,yes
-AKUN-027-CLOUDFLARE-VLESS-WS-656MS,vless,ws,love.ns.cloudflare.com,deicl.redstone-vex.sbs,656,,1132,HTTP 204,yes
+AKUN-001-UBI-VLESS-WS-87MS,vless,ws,store.ubi.com,t1s1.rittbo.kdns.fr,87,,205,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-99MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,99,,205,HTTP 204,yes
+AKUN-003-RS-RAPIDSEEDBOX-20190717-VLESS-WS-90MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,90,,236,HTTP 204,yes
+AKUN-004-OVH-VLESS-WS-101MS,vless,ws,37.59.96.25,support.zoom.us.yxls.eu.cc,101,,211,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-98MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,98,,211,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-102MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,102,,210,HTTP 204,yes
+AKUN-007-CHSL-HEL-VLESS-WS-111MS,vless,ws,2.27.50.53,vpn47.cc.cd,111,,232,HTTP 204,yes
+AKUN-008-TENCENT-VLESS-WS-104MS,vless,ws,cf.tencentapp.cn,tianshu13.pages.dev,104,,209,HTTP 204,yes
+AKUN-009-WPENG-VLESS-WS-113MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,113,,214,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-120MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,120,,201,HTTP 204,yes
+AKUN-011-WPENG-VLESS-WS-95MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,95,,220,HTTP 204,yes
+AKUN-012-WEYRO-NET-VLESS-WS-111MS,vless,ws,85.155.98.34,vpn47.cc.cd,111,,231,HTTP 204,yes
+AKUN-013-CLOUDFLARE-VLESS-WS-111MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,111,,206,HTTP 204,yes
+AKUN-014-CLOUDFLARE-VLESS-WS-105MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,105,,205,HTTP 204,yes
+AKUN-015-CLOUDFLARE-VLESS-WS-99MS,vless,ws,fm3.pages.dev,fm3.pages.dev,99,,212,HTTP 204,yes
+AKUN-016-CLOUDFLARE-VLESS-WS-112MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,112,,217,HTTP 204,yes
+AKUN-017-CLOUDFLARE-VLESS-WS-262MS,vless,ws,172.66.142.92,zeus-panel-8v7tpq.mp3295939.workers.dev,262,,2446,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-018-UNKNOWN-VLESS-WS-372MS,vless,ws,104.19.134.235,amooaliii.net,372,,777,HTTP 204,yes
+AKUN-019-UNKNOWN-VLESS-WS-403MS,vless,ws,104.26.15.137,shegeftihaaa.net,403,,841,HTTP 204,yes
+AKUN-020-UNKNOWN-VLESS-WS-384MS,vless,ws,188.114.97.6,terazhediii.info,384,,757,HTTP 204,yes
+AKUN-021-UNKNOWN-VLESS-WS-404MS,vless,ws,108.162.192.75,amoosamiii.net,404,,863,HTTP 204,yes
+AKUN-022-UNKNOWN-VLESS-WS-402MS,vless,ws,66.81.247.91,vangoghhh.info,402,,810,HTTP 204,yes
+AKUN-023-SPEEDTEST-VLESS-WS-380MS,vless,ws,www.speedtest.net,octopusss.net,380,,758,HTTP 204,yes
+AKUN-024-UNKNOWN-VLESS-WS-401MS,vless,ws,148.253.210.248,octopusss5.info,401,,837,HTTP 204,yes
+AKUN-025-UNKNOWN-VLESS-WS-447MS,vless,ws,104.16.75.234,server-ir-4.ariyuz.org,447,,5144,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-026-SOLTANKABOS-VLESS-WS-694MS,vless,ws,gerlight.soltankabos.ir,amtal9.soltankabos.ir,694,,917,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-027-CLOUDFLARE-VLESS-WS-701MS,vless,ws,love.ns.cloudflare.com,deicl.redstone-vex.sbs,701,,1116,HTTP 204,yes
+AKUN-028-UNKNOWN-VLESS-WS-709MS,vless,ws,114.129.43.130,wa1.mhrnet.com,709,,1157,HTTP 204,yes
