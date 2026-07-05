@@ -1,32 +1,30 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-127MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,127,,259,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-136MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,136,,270,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-137MS,vless,ws,108.162.196.3,t1s1.rittbo.kdns.fr,137,,265,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-135MS,vless,ws,45.131.209.212,vpn47.cc.cd,135,,286,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-148MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,148,,284,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-153MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,153,,275,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-142MS,vless,ws,cf.tencentapp.cn,tianshu13.pages.dev,142,,270,HTTP 204,yes
-AKUN-008-WEYRO-NET-VLESS-WS-153MS,vless,ws,85.155.98.34,vpn47.cc.cd,153,,285,HTTP 204,yes
-AKUN-009-OVH-VLESS-WS-131MS,vless,ws,57.128.181.26,support.zoom.us.yxls.eu.cc,131,,285,HTTP 204,yes
-AKUN-010-WPENG-VLESS-WS-156MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,156,,326,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-150MS,vless,ws,104.17.223.103,support.zoom.us.yxls.eu.cc,150,,334,HTTP 204,yes
-AKUN-012-466688-VLESS-WS-150MS,vless,ws,cf8.466688.xyz,cfoo-146.pages.dev,150,,266,HTTP 204,yes
-AKUN-013-CLOUDFLARE-VLESS-WS-157MS,vless,ws,104.16.72.41,NBHhh.MRCooL.KDNs.Fr,157,,280,HTTP 204,yes
-AKUN-014-ZENFO-1-VLESS-WS-268MS,vless,ws,199.181.197.215,zeus-panel-9bnrhq.zeus-9hjofa.workers.dev,268,,515,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-015-CLOUDFLARE-VLESS-WS-295MS,vless,ws,104.21.48.80,zeus-panel-sbls78.amirhexorrrrr16441.workers.dev,295,,539,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-016-CLOUDFLARE-VLESS-WS-347MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,347,,686,HTTP 204,yes
-AKUN-017-CONFLU-VLESS-WS-347MS,vless,ws,159.112.235.52,octopusss.net,347,,661,HTTP 204,yes
-AKUN-018-CLOUDFLARE-VLESS-WS-357MS,vless,ws,188.114.97.6,terazhediii.info,357,,706,HTTP 204,yes
-AKUN-019-CLOUDFLARE-VLESS-WS-367MS,vless,ws,173.245.58.75,vangoghhh.info,367,,817,HTTP 204,yes
-AKUN-020-CLOUDFLARE-VLESS-WS-378MS,vless,ws,173.245.58.75,amoosamiii.net,378,,755,HTTP 204,yes
-AKUN-021-CLOUDFLARE-VLESS-WS-365MS,vless,ws,172.64.32.75,shegeftihaaa.net,365,,767,HTTP 204,yes
-AKUN-022-ARAD-VLESS-WS-515MS,vless,ws,mci.iratom.com,d2.iratom.com,515,,576,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-023-CLOUDFLARE-VLESS-WS-578MS,vless,ws,love.ns.cloudflare.com,deicl.redstone-vex.sbs,578,,958,HTTP 204,yes
-AKUN-024-SOLTANKABOS-VLESS-WS-601MS,vless,ws,gerlight.soltankabos.ir,amtal9.soltankabos.ir,601,,670,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-025-UNKNOWN-VLESS-WS-629MS,vless,ws,209.46.30.56,wa1.mhrnet.com,629,,1000,HTTP 204,yes
-AKUN-026-RC-PRO-5-VLESS-WS-618MS,vless,ws,support.fastcmd.top,pass.pccmd.ir,618,,863,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-027-CLOUDFLARE-VLESS-WS-338MS,vless,ws,104.27.72.231,zeus-panel-8v7tpq.mp3295939.workers.dev,338,,507,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-028-CLOUDFLARE-VLESS-WS-724MS,vless,ws,104.16.75.223,server-ir-7.ariyuz.org,724,,1231,HTTP 204,yes
-AKUN-029-CLOUDFLARE-VLESS-WS-731MS,vless,ws,104.16.174.78,alfi.yas-nowin.ir,731,,1290,HTTP 204,yes
-AKUN-030-SOLTANKABOS-VLESS-WS-795MS,vless,ws,turklight.soltankabos.ir,amtal7.soltankabos.ir,795,,828,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-031-CLOUDFLARE-VLESS-WS-674MS,vless,ws,104.16.75.234,server-ir-4.ariyuz.org,674,,3461,HTTP 204,yes
+AKUN-001-WPENG-VLESS-WS-61MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,61,,217,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-62MS,vless,ws,cloudflare-ip.mofashi.ltd,t1s1.rittbo.kdns.fr,62,,211,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-65MS,vless,ws,104.16.72.41,nbhhh.mrcool.kdns.fr,65,,226,HTTP 204,yes
+AKUN-004-WPENG-VLESS-WS-61MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,61,,218,HTTP 204,yes
+AKUN-005-WEYRO-NET-VLESS-WS-69MS,vless,ws,85.155.98.34,vpn47.cc.cd,69,,226,HTTP 204,yes
+AKUN-006-UNKNOWN-VLESS-WS-62MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,62,,209,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-71MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,71,,209,HTTP 204,yes
+AKUN-008-SSL-1134-VLESS-WS-77MS,vless,ws,156.154.245.83,vpn47.cc.cd,77,,228,HTTP 204,yes
+AKUN-009-OVH-VLESS-WS-70MS,vless,ws,57.128.181.26,support.zoom.us.yxls.eu.cc,70,,224,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-71MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,71,,208,HTTP 204,yes
+AKUN-011-ZVC-VLESS-WS-66MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,66,,225,HTTP 204,yes
+AKUN-012-466688-VLESS-WS-67MS,vless,ws,cf5.466688.xyz,cfoo-146.pages.dev,67,,229,HTTP 204,yes
+AKUN-013-CLOUDFLARE-VLESS-WS-91MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,91,,221,HTTP 204,yes
+AKUN-014-CLOUDFLARE-VLESS-WS-152MS,vless,ws,fm3.pages.dev,fm3.pages.dev,152,,225,HTTP 204,yes
+AKUN-015-CLOUDFLARE-VLESS-WS-232MS,vless,ws,172.67.190.227,zeus-panel-1efyui.zeus-cvo7f1.workers.dev,232,,489,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-016-ZENFO-1-VLESS-WS-282MS,vless,ws,199.181.197.215,zeus-panel-9bnrhq.zeus-9hjofa.workers.dev,282,,666,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-017-CLOUDFLARE-VLESS-WS-343MS,vless,ws,104.21.74.63,amooaliii.net,343,,744,HTTP 204,yes
+AKUN-018-SPEEDTEST-VLESS-WS-347MS,vless,ws,www.speedtest.net,octopusss.net,347,,769,HTTP 204,yes
+AKUN-019-UNKNOWN-VLESS-WS-369MS,vless,ws,104.26.12.222,octopusss5.info,369,,818,HTTP 204,yes
+AKUN-020-CLOUDFLARE-VLESS-WS-389MS,vless,ws,104.16.72.41,amoosamiii.net,389,,853,HTTP 204,yes
+AKUN-021-UNKNOWN-VLESS-WS-372MS,vless,ws,104.26.14.137,shegeftihaaa.net,372,,883,HTTP 204,yes
+AKUN-022-UNKNOWN-VLESS-WS-393MS,vless,ws,89.116.250.135,vangoghhh.info,393,,871,HTTP 204,yes
+AKUN-023-UNKNOWN-VLESS-WS-348MS,vless,ws,173.245.58.75,terazhediii.info,348,,734,HTTP 204,yes
+AKUN-024-UNKNOWN-VLESS-WS-666MS,vless,ws,104.16.75.226,server-ir-3.ariyuz.org,666,,1089,HTTP 204,yes
+AKUN-025-UNKNOWN-VLESS-WS-697MS,vless,ws,188.114.98.193,nEtrINo-geRMn-1RWefmvF.DoMnEwcoNFSOb1.orG,697,,1119,HTTP 204,yes
+AKUN-026-UNKNOWN-VLESS-WS-678MS,vless,ws,162.159.38.119,deicl.redstone-vex.sbs,678,,1077,HTTP 204,yes
+AKUN-027-UNKNOWN-VLESS-WS-713MS,vless,ws,185.135.9.146,mAhaNrEaliteAm.MaHkHan.iR,713,,782,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-028-SOLTANKABOS-VLESS-WS-666MS,vless,ws,gerlight.soltankabos.ir,amtal9.soltankabos.ir,666,,766,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-029-UNKNOWN-VLESS-WS-700MS,vless,ws,209.46.30.56,wa1.mhrnet.com,700,,1163,HTTP 204,yes
