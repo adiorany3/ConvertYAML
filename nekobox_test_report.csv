@@ -1,12 +1,13 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-68MS,vless,ws,cloudflare-ip.mofashi.ltd,t1s1.rittbo.kdns.fr,HTTP 204,223,251,HTTP 204,yes
-AKUN-002-ZVC-VLESS-WS-69MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,251,243,HTTP 204,yes
-AKUN-003-WEYRO-NET-VLESS-WS-79MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,236,263,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-89MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,230,245,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-91MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,235,234,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-69MS,vless,ws,youxuan.cf.090227.xyz,t1s1.rittbo.kdns.fr,HTTP 204,314,263,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-94MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,291,263,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,214,251,HTTP 204,yes
-AKUN-009-DIGITALOCEAN-VLESS-WS-97MS,vless,ws,188.166.166.243,vpn47.cc.cd,HTTP 204,227,302,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-82MS,vless,ws,nodejs.org,Ez-16D6b5.AliAlO87.wORKErS.DEv,HTTP 204,242,195,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-011-WPENG-VLESS-WS-73MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,295,230,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-66MS,vless,ws,104.16.72.41,nbhhh.mrcool.kdns.fr,HTTP 204,237,253,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-73MS,vless,ws,free.server7peekconfig.workers.dev,FrEE.sErVeR7PeEKcONfig.WoRKErS.deV,HTTP 204,271,199,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-003-CLOUDFLARE-VLESS-WS-74MS,vless,ws,www.ntu.edu.sg,t1s1.rittbo.kdns.fr,HTTP 204,223,264,HTTP 204,yes
+AKUN-004-OVH-VLESS-WS-74MS,vless,ws,57.128.181.26,support.zoom.us.yxls.eu.cc,HTTP 204,250,250,HTTP 204,yes
+AKUN-005-WPENG-VLESS-WS-71MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,234,271,HTTP 204,yes
+AKUN-006-INTERNETWORKS-45-131-6-0-VLESS-WS-74MS,vless,ws,45.131.6.211,vpn47.cc.cd,HTTP 204,369,246,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-83MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,262,185,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-008-CLOUDFLARE-VLESS-WS-90MS,vless,ws,fm3.pages.dev,fm3.pages.dev,HTTP 204,204,259,HTTP 204,yes
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-64MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,225,269,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-75MS,vless,ws,188.114.97.6,057.ElecTRocElLco-Cf-057.wOrKeRs.dEv,HTTP 204,221,269,HTTP 204,yes
+AKUN-011-WEYRO-NET-VLESS-WS-69MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,207,255,HTTP 204,yes
+AKUN-012-ZVC-VLESS-WS-84MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,208,269,HTTP 204,yes
