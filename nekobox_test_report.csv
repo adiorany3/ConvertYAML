@@ -1,11 +1,13 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-142MS,vless,ws,172.64.145.202,t1s1.rittbo.kdns.fr,HTTP 204,279,315,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-148MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,HTTP 204,302,342,HTTP 204,yes
-AKUN-003-090227-VLESS-WS-137MS,vless,ws,youxuan.cf.090227.xyz,t1s1.rittbo.kdns.fr,HTTP 204,287,302,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-142MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,297,307,HTTP 204,yes
-AKUN-005-WEBEX-VLESS-WS-152MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,397,313,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-159MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,278,330,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-131MS,vless,ws,104.17.25.173,t1s1.rittbo.kdns.fr,HTTP 204,277,322,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-150MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,312,338,HTTP 204,yes
-AKUN-009-466688-VLESS-WS-154MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,289,305,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-173MS,vless,ws,188.166.69.138,vpn47.cc.cd,HTTP 204,330,345,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-90MS,vless,ws,57.128.181.26,support.zoom.us.yxls.eu.cc,HTTP 204,238,255,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-93MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,209,240,HTTP 204,yes
+AKUN-003-ZVC-VLESS-WS-103MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,271,282,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-116MS,vless,ws,45.131.208.61,vpn47.cc.cd,HTTP 204,237,264,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-111MS,vless,ws,nodejs.org,Ez-16D6b5.AliAlO87.wORKErS.DEv,HTTP 204,204,184,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-006-CLOUDFLARE-VLESS-WS-100MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,208,240,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-89MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,221,270,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-76MS,vless,ws,104.16.72.41,NBHhh.MRCooL.KDNs.Fr,HTTP 204,224,242,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-126MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,257,263,HTTP 204,yes
+AKUN-011-WPENG-VLESS-WS-69MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,239,251,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-222MS,vless,ws,104.16.75.234,server-ir-4.ariyuz.org,HTTP 204,3535,7176,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-015-CLOUDFLARE-VLESS-WS-249MS,vless,ws,104.21.74.63,amooaliii.net,HTTP 204,556,550,HTTP 204,yes
