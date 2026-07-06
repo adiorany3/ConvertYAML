@@ -4,28 +4,28 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 99,
+      "history_last_delay": 73,
       "now": "AKUN-009-CLOUDFLARE-VLESS-WS-143MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 86,
+      "history_last_delay": 69,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 16,
-      "history_last_delay": 57,
+      "history_last_delay": 63,
       "now": "AKUN-001-CLOUDFLARE-VLESS-WS-141MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 81,
+      "history_last_delay": 76,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -39,14 +39,14 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 80,
+      "history_last_delay": 69,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 80,
+      "history_last_delay": 56,
       "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
@@ -60,21 +60,21 @@
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 80,
+      "history_last_delay": 65,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-152MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 80,
+      "history_last_delay": 73,
       "now": "AKUN-001-CLOUDFLARE-VLESS-WS-141MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 70,
+      "history_last_delay": 61,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-07-06T19:45:11.592249+00:00"
+  "timestamp_utc": "2026-07-06T20:00:09.386633+00:00"
 }
