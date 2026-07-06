@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-OVH-VLESS-WS-64MS,vless,ws,37.59.96.25,support.zoom.us.yxls.eu.cc,HTTP 204,239,253,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-61MS,vless,ws,162.159.48.245,t1s1.rittbo.kdns.fr,HTTP 204,228,250,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-74MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,236,260,HTTP 204,yes
-AKUN-004-WPENG-VLESS-WS-83MS,vless,ws,141.193.213.190,vpn47.cc.cd,HTTP 204,234,278,HTTP 204,yes
-AKUN-005-WPENG-VLESS-WS-64MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,231,260,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-97MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,245,263,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-101MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,274,275,HTTP 204,yes
-AKUN-008-SPACECORE-VLESS-WS-103MS,vless,ws,94.156.117.125,nrfiqiut.vmimv9k58ynejo2errhz.workers.dev,HTTP 204,253,269,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-90MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,259,290,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-81MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,251,258,HTTP 204,yes
+AKUN-001-WPENG-VLESS-WS-94MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,267,295,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-102MS,vless,ws,172.64.40.49,t1s1.rittbo.kdns.fr,HTTP 204,250,308,HTTP 204,yes
+AKUN-003-WPENG-VLESS-WS-97MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,295,284,HTTP 204,yes
+AKUN-004-WEYRO-NET-VLESS-WS-114MS,vless,ws,85.155.98.34,vpn47.cc.cd,HTTP 204,317,309,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-97MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,244,276,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-110MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,245,325,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-121MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,239,272,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-108MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,283,327,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-123MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,281,328,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-118MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,244,312,HTTP 204,yes
