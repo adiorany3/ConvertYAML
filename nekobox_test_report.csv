@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-69MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,HTTP 204,237,244,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-70MS,vless,ws,162.159.2.87,support.zoom.us.yxls.eu.cc,HTTP 204,213,242,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-67MS,vless,ws,172.64.53.65,t1s1.rittbo.kdns.fr,HTTP 204,224,251,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-75MS,vless,ws,154.17.233.100,t1s1.rittbo.kdns.fr,HTTP 204,208,247,HTTP 204,yes
-AKUN-005-ZVC-VLESS-WS-70MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,220,229,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-75MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,231,234,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,218,254,HTTP 204,yes
-AKUN-008-WPENG-VLESS-WS-77MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,197,237,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-92MS,vless,ws,162.159.38.119,unnes.ac.id.yxls.eu.cc,HTTP 204,227,235,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-97MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,HTTP 204,205,240,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,226,251,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-82MS,vless,ws,37.59.96.25,support.zoom.us.yxls.eu.cc,HTTP 204,225,232,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-92MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,242,259,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-80MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,224,241,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-94MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,271,254,HTTP 204,yes
+AKUN-006-ZVC-VLESS-WS-94MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,207,249,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-90MS,vless,ws,youxuan.cf.090227.xyz,t1s1.rittbo.kdns.fr,HTTP 204,226,231,HTTP 204,yes
+AKUN-008-RS-RAPIDSEEDBOX-20190717-VLESS-WS-91MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,205,242,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-94MS,vless,ws,162.159.38.119,unnes.ac.id.yxls.eu.cc,HTTP 204,217,263,HTTP 204,yes
+AKUN-010-WPENG-VLESS-WS-105MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,213,246,HTTP 204,yes
