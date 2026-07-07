@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-ZVC-VLESS-WS-113MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,319,310,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-113MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,253,315,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-111MS,vless,ws,172.64.53.65,t1s1.rittbo.kdns.fr,HTTP 204,312,317,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-122MS,vless,ws,104.18.42.54,t1s1.rittbo.kdns.fr,HTTP 204,304,287,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-121MS,vless,ws,162.159.38.119,support.zoom.us.yxls.eu.cc,HTTP 204,325,313,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-134MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,336,324,HTTP 204,yes
-AKUN-007-ZVC-VLESS-WS-101MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,288,261,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-146MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,281,294,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-148MS,vless,ws,104.17.25.173,t1s1.rittbo.kdns.fr,HTTP 204,294,314,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-119MS,vless,ws,162.159.38.119,unnes.ac.id.yxls.eu.cc,HTTP 204,273,300,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-68MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,213,256,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-66MS,vless,ws,162.159.38.119,blog.webex.com.yxls.eu.cc,HTTP 204,237,244,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-73MS,vless,ws,162.159.38.119,unnes.ac.id.yxls.eu.cc,HTTP 204,230,271,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-86MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,216,280,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-84MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,237,243,HTTP 204,yes
+AKUN-006-OVH-VLESS-WS-96MS,vless,ws,37.59.96.25,support.zoom.us.yxls.eu.cc,HTTP 204,224,251,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-75MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,216,258,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-94MS,vless,ws,198.41.209.43,support.zoom.us.yxls.eu.cc,HTTP 204,342,302,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-87MS,vless,ws,162.159.38.119,support.zoom.us.yxls.eu.cc,HTTP 204,237,251,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-84MS,vless,ws,104.16.72.41,NBHhh.MRCooL.KDNs.Fr,HTTP 204,229,261,HTTP 204,yes
