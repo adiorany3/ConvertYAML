@@ -1,14 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-70MS,vless,ws,104.21.227.134,t1s1.rittbo.kdns.fr,HTTP 204,215,252,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-67MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,HTTP 204,209,241,HTTP 204,yes
-AKUN-003-LT-LRTC-20060503-VLESS-WS-74MS,vless,ws,89.116.250.135,vpn47.cc.cd,HTTP 204,215,234,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-61MS,vless,ws,198.41.209.43,support.zoom.us.yxls.eu.cc,HTTP 204,210,227,HTTP 204,yes
-AKUN-005-DEV-VLESS-WS-79MS,vless,ws,ezaccess-project-afaa32.ez-1d31ab.workers.dev,ezACCEsS-projeCt-AFaA32.ez-1D31aB.wOrkers.deV,HTTP 204,203,196,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-006-ZVC-VLESS-WS-90MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,216,238,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,214,246,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-68MS,vless,ws,o.server3peekconfig.workers.dev,o.SERVeR3PeEkConFIG.WOrKerS.dEv,HTTP 204,222,199,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-009-CLOUDFLARE-VLESS-WS-84MS,vless,ws,cgxgqcheiamna-jks01fidlsnqojwf-s.aliama.workers.dev,CgxGqchEiAMnA-jkS01FiDlsnqOjwF-S.ALIAmA.WOrKErS.DeV,HTTP 204,224,207,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-010-CLOUDFLARE-VLESS-WS-72MS,vless,ws,162.159.38.119,support.zoom.us.yxls.eu.cc,HTTP 204,215,230,HTTP 204,yes
-AKUN-011-WPENG-VLESS-WS-88MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,211,223,HTTP 204,yes
-AKUN-012-GALAKTIKA-20201015-VLESS-WS-76MS,vless,ws,45.85.119.205,old-surf-e922.v2raynplus.workers.dev,HTTP 204,218,260,HTTP 204,yes
-AKUN-013-CLOUDFLARE-VLESS-WS-103MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,201,272,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-59MS,vless,ws,198.41.209.43,support.zoom.us.yxls.eu.cc,HTTP 204,223,260,HTTP 204,yes
+AKUN-002-ORACLE-VLESS-WS-59MS,vless,ws,138.2.87.237,t1s1.rittbo.kdns.fr,HTTP 204,210,253,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-61MS,vless,ws,172.64.53.65,t1s1.rittbo.kdns.fr,HTTP 204,230,235,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-61MS,vless,ws,162.159.14.252,t1s1.rittbo.kdns.fr,HTTP 204,208,240,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-66MS,vless,ws,162.159.2.87,support.zoom.us.yxls.eu.cc,HTTP 204,223,241,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-67MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,211,242,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-63MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,214,272,HTTP 204,yes
+AKUN-008-UNKNOWN-VLESS-WS-63MS,vless,ws,104.17.25.173,t1s1.rittbo.kdns.fr,HTTP 204,208,240,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-59MS,vless,ws,104.16.72.41,nbhhh.mrcool.kdns.fr,HTTP 204,218,252,HTTP 204,yes
+AKUN-010-DIGITALOCEAN-VLESS-WS-73MS,vless,ws,188.166.69.138,vpn47.cc.cd,HTTP 204,244,256,HTTP 204,yes
