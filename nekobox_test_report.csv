@@ -1,11 +1,13 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-WPENG-VLESS-WS-68MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,226,242,HTTP 204,yes
-AKUN-002-104-253-175-0-1-VLESS-WS-78MS,vless,ws,104.253.175.16,t1s1.rittbo.kdns.fr,HTTP 204,210,254,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-87MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,217,236,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-73MS,vless,ws,104.16.72.101,NBHhh.MRCooL.KDNs.Fr,HTTP 204,213,256,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.16.72.2,nbhhh.mrcool.kdns.fr,HTTP 204,219,270,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-93MS,vless,ws,162.159.2.87,support.zoom.us.yxls.eu.cc,HTTP 204,221,252,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-90MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,225,232,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-77MS,vless,ws,198.41.209.43,support.zoom.us.yxls.eu.cc,HTTP 204,225,240,HTTP 204,yes
-AKUN-009-WPENG-VLESS-WS-86MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,245,247,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-83MS,vless,ws,162.159.38.119,unnes.ac.id.yxls.eu.cc,HTTP 204,196,287,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-133MS,vless,ws,104.253.175.16,t1s1.rittbo.kdns.fr,HTTP 204,284,318,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-144MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,349,312,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-143MS,vless,ws,162.159.45.15,t1s1.rittbo.kdns.fr,HTTP 204,288,327,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-143MS,vless,ws,104.17.149.233,support.zoom.us.yxls.eu.cc,HTTP 204,310,321,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-142MS,vless,ws,youxuan.cf.090227.xyz,t1s1.rittbo.kdns.fr,HTTP 204,291,294,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-159MS,vless,ws,172.66.171.48,support.zoom.us.yxls.eu.cc,HTTP 204,355,332,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-157MS,vless,ws,162.159.14.252,t1s1.rittbo.kdns.fr,HTTP 204,293,301,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-155MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,HTTP 204,275,262,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-009-UNKNOWN-VLESS-WS-150MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,297,342,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-165MS,vless,ws,104.16.72.101,nbhhh.mrcool.kdns.fr,HTTP 204,271,317,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-144MS,vless,ws,free.server14peekconfig.workers.dev,FrEe.SeRVEr14peekCoNfIG.WoRKErS.dEV,HTTP 204,281,250,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-012-CLOUDFLARE-VLESS-WS-155MS,vless,ws,104.16.72.50,fm3.pages.dev,HTTP 204,286,343,HTTP 204,yes
