@@ -1,11 +1,13 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-107MS,vless,ws,172.64.146.66,t1s1.rittbo.kdns.fr,HTTP 204,278,288,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-118MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,278,328,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-105MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,294,297,HTTP 204,yes
-AKUN-004-WPENG-VLESS-WS-117MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,281,294,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-124MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,265,314,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-111MS,vless,ws,198.41.209.43,support.zoom.us.yxls.eu.cc,HTTP 204,306,327,HTTP 204,yes
-AKUN-007-WPENG-VLESS-WS-103MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,347,339,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-133MS,vless,ws,162.159.38.119,support.zoom.us.yxls.eu.cc,HTTP 204,283,320,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-124MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,257,335,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-142MS,vless,ws,162.159.38.119,unnes.ac.id.yxls.eu.cc,HTTP 204,302,300,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-74MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,259,260,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-79MS,vless,ws,104.16.72.70,nbhhh.mrcool.kdns.fr,HTTP 204,231,276,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-64MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,238,279,HTTP 204,yes
+AKUN-004-ZVC-VLESS-WS-61MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,228,247,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-90MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,HTTP 204,236,187,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-006-CLOUDFLARE-VLESS-WS-99MS,vless,ws,104.21.37.62,nODE-lInk-81AEFc-EDg.saMYARHashm8.WorkERs.DEv,HTTP 204,249,260,HTTP 204,yes
+AKUN-007-ZVC-VLESS-WS-107MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,267,250,HTTP 204,yes
+AKUN-008-ES-FORNEX-20160629-VLESS-WS-74MS,vless,ws,103.228.168.182,4qrnyf6s.5e6pmte8uw52n5ymvwx8.workers.dev,HTTP 204,277,263,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-80MS,vless,ws,162.159.38.119,unnes.ac.id.yxls.eu.cc,HTTP 204,258,255,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-107MS,vless,ws,nodejs.org,Ez-16D6b5.AliAlO87.wORKErS.DEv,HTTP 204,252,178,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-011-CLOUDFLARE-VLESS-WS-85MS,vless,ws,172.67.160.192,nuclear.us.kg,HTTP 204,228,256,HTTP 204,yes
+AKUN-012-ZVC-VLESS-WS-67MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,222,244,HTTP 204,yes
