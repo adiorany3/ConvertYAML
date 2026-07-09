@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-ZOOM-VLESS-WS-61MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,226,254,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-68MS,vless,ws,162.159.38.119,support.zoom.us.yxls.eu.cc,HTTP 204,267,259,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-88MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,HTTP 204,265,274,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-89MS,vless,ws,162.159.19.67,nbhhh.mrcool.kdns.fr,HTTP 204,262,308,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-76MS,vless,ws,108.162.194.135,nbhhh.mrcool.kdns.fr,HTTP 204,235,276,HTTP 204,yes
-AKUN-006-466688-VLESS-WS-85MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,240,262,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-80MS,vless,ws,104.16.72.2,nbhhh.mrcool.kdns.fr,HTTP 204,284,267,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-88MS,vless,ws,162.159.13.71,nbhhh.mrcool.kdns.fr,HTTP 204,290,271,HTTP 204,yes
-AKUN-009-WPENG-VLESS-WS-80MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,229,269,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-112MS,vless,ws,104.17.223.103,support.zoom.us.yxls.eu.cc,HTTP 204,241,256,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-64MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,HTTP 204,227,250,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-65MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,222,244,HTTP 204,yes
+AKUN-003-ADF-VLESS-WS-69MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,201,244,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-72MS,vless,ws,162.159.38.119,blog.webex.com.yxls.eu.cc,HTTP 204,221,225,HTTP 204,yes
+AKUN-005-WPENG-VLESS-WS-79MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,216,227,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,221,247,HTTP 204,yes
+AKUN-007-MEDIUM-VLESS-WS-69MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,201,249,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-73MS,vless,ws,104.17.28.104,support.zoom.us.yxls.eu.cc,HTTP 204,230,225,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-78MS,vless,ws,104.16.72.2,nbhhh.mrcool.kdns.fr,HTTP 204,218,239,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-72MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,232,265,HTTP 204,yes
