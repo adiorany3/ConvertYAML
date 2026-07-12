@@ -1,30 +1,26 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-67MS,vless,ws,104.18.35.13,t1s1.rittbo.kdns.fr,67,,244,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-74MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,74,,237,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-68MS,vless,ws,173.245.58.87,t1s1.rittbo.kdns.fr,68,,216,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-68MS,vless,ws,104.18.155.229,t1s1.rittbo.kdns.fr,68,,220,HTTP 204,yes
-AKUN-005-VULTR-VLESS-WS-73MS,vless,ws,198.13.60.163,t1s1.rittbo.kdns.fr,73,,230,HTTP 204,yes
-AKUN-006-HETZNER-VLESS-WS-70MS,vless,ws,5.223.77.219,ww1.aniuge.qzz.io,70,,268,HTTP 204,yes
-AKUN-007-OVH-VLESS-WS-83MS,vless,ws,57.128.181.26,support.zoom.us.yxls.eu.cc,83,,290,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-85MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,85,,237,HTTP 204,yes
-AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-79MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,79,,219,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-105MS,vless,ws,172.64.145.158,t1s1.rittbo.kdns.fr,105,,234,HTTP 204,yes
-AKUN-011-ZOOM-VLESS-WS-90MS,vless,ws,soskeynets.zoom.us,support.zoom.us.yxls.eu.cc,90,,285,HTTP 204,yes
-AKUN-012-466688-VLESS-WS-85MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,85,,236,HTTP 204,yes
-AKUN-013-UNKNOWN-VLESS-WS-84MS,vless,ws,104.16.72.50,fm3.pages.dev,84,,166,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-014-US-VLESS-WS-106MS,vless,ws,yx.l110.us.ci,edt2.yfqh08811.ccwu.cc,106,,264,HTTP 204,yes
-AKUN-015-UNKNOWN-VLESS-WS-91MS,vless,ws,172.64.145.2,t1s1.rittbo.kdns.fr,91,,227,HTTP 204,yes
-AKUN-016-466688-VLESS-WS-118MS,vless,ws,cf6.466688.xyz,cfoo-146.pages.dev,118,,239,HTTP 204,yes
-AKUN-017-UNKNOWN-VLESS-WS-89MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,89,,244,HTTP 204,yes
-AKUN-018-DEV-VLESS-WS-212MS,vless,ws,ez-b1d73d.ezaccess1894e02.workers.dev,ez-b1d73d.ezaccess1894e02.workers.dev,212,,411,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-019-UNKNOWN-VLESS-WS-278MS,vless,ws,104.17.148.22,octopusss.net,278,,632,HTTP 204,yes
-AKUN-020-UNKNOWN-VLESS-WS-294MS,vless,ws,104.18.45.137,amooaliii.net,294,,3177,HTTP 204,yes
-AKUN-021-CLOUDFLARE-VLESS-WS-270MS,vless,ws,betty.ns.cloudflare.com,terazhediii.info,270,,691,HTTP 204,yes
-AKUN-022-UNKNOWN-VLESS-WS-292MS,vless,ws,172.67.71.247,octopusss5.info,292,,671,HTTP 204,yes
-AKUN-023-UNKNOWN-VLESS-WS-294MS,vless,ws,45.130.125.207,shegeftihaaa.net,294,,2016,HTTP 204,yes
-AKUN-024-UNKNOWN-VLESS-WS-277MS,vless,ws,104.16.72.70,vangoghhh.info,277,,5146,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-025-AZINSARACO-VLESS-WS-327MS,vless,ws,webmail.azinsaraco.ir,zeus-panel-cxyca3.zeus-butoun.workers.dev,327,,529,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-026-QZZ-VLESS-WS-220MS,vless,ws,api.amirv2yats.qzz.io,api.amirv2yats.qzz.io,220,,704,HTTP 204,yes
-AKUN-027-CLOUDFLARE-VLESS-WS-461MS,vless,ws,love.ns.cloudflare.com,gioub.moonleafbox-kilo.info,461,,778,HTTP 204,yes
-AKUN-028-UNKNOWN-VLESS-WS-529MS,vless,ws,104.16.75.226,server-ir-3.ariyuz.org,529,,877,HTTP 204,yes
-AKUN-029-GAMEFICTOINSPEED-VLESS-WS-516MS,vless,ws,gamefictoinspeed.info,MorI2.gAMEOfBoxS.CoM,516,,919,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-77MS,vless,ws,162.159.8.123,t1s1.rittbo.kdns.fr,77,,201,HTTP 204,yes
+AKUN-002-ALIBABA-VLESS-WS-82MS,vless,ws,120.55.183.176,support.zoom.us.yxls.eu.cc,82,,212,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-80MS,vless,ws,37.59.96.25,support.zoom.us.yxls.eu.cc,80,,202,HTTP 204,yes
+AKUN-004-466688-VLESS-WS-85MS,vless,ws,cfd6.466688.xyz,edge-4cb23bf6.pages.dev,85,,200,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-91MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,91,,224,HTTP 204,yes
+AKUN-006-UNKNOWN-VLESS-WS-93MS,vless,ws,108.162.198.249,edge-267487d0.pages.dev,93,,223,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-101MS,vless,ws,108.162.196.3,t1s1.rittbo.kdns.fr,101,,230,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-81MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,81,,204,HTTP 204,yes
+AKUN-009-466688-VLESS-WS-103MS,vless,ws,cfd4.466688.xyz,edge-4cb23bf6.pages.dev,103,,206,HTTP 204,yes
+AKUN-010-877774-VLESS-WS-115MS,vless,ws,cf.877774.xyz,zdy.vavava.kdns.fr,115,,231,HTTP 204,yes
+AKUN-011-NET-82-21-84-0-24-VLESS-WS-116MS,vless,ws,82.21.84.72,ww1.aniuge.qzz.io,116,,226,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-85MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,85,,208,HTTP 204,yes
+AKUN-013-CLOUDFLARE-VLESS-WS-101MS,vless,ws,cucc.cloudflare.seeck.cn,zdy.vavava.kdns.fr,101,,215,HTTP 204,yes
+AKUN-014-466688-VLESS-WS-119MS,vless,ws,cfd7.466688.xyz,edge-e47d0df3.pages.dev,119,,239,HTTP 204,yes
+AKUN-015-UNKNOWN-VLESS-WS-81MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,81,,222,HTTP 204,yes
+AKUN-016-UNKNOWN-VLESS-WS-83MS,vless,ws,108.162.198.136,edge-4cb23bf6.pages.dev,83,,230,HTTP 204,yes
+AKUN-017-CLOUDFLARE-VLESS-WS-129MS,vless,ws,www.speedtest.net,Sj-9PRbDKxJ6iW3NZi101xQfpSL3n5M5.SALaMAtiiWANa.woRkeRs.DeV,129,,216,HTTP 204,yes
+AKUN-018-US-VLESS-WS-96MS,vless,ws,yx.l110.us.ci,edt2.yfqh08811.ccwu.cc,96,,220,HTTP 204,yes
+AKUN-019-NOTION-WEB-VLESS-WS-106MS,vless,ws,208.103.161.5,dry-butterfly-8eb9.tmpgnacio83.workers.dev,106,,240,HTTP 204,yes
+AKUN-020-CLOUDFLARE-VLESS-WS-129MS,vless,ws,188.114.97.6,24VvD-4imRvfaQv7hQxYbU9WzJv378Qi.v2Raygulf.WorkeRS.DeV,129,,265,HTTP 204,yes
+AKUN-021-PUBLICDOMAINREGISTRY-NET-VLESS-WS-73MS,vless,ws,162.251.82.2,support.zoom.us.yxls.eu.cc,73,,200,HTTP 204,yes
+AKUN-022-CLOUDFLARE-VLESS-WS-161MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,161,,238,HTTP 204,yes
+AKUN-023-CLOUDFLARE-VLESS-WS-118MS,vless,ws,162.159.36.53,bbc.zjxc.de5.net,118,,237,HTTP 204,yes
+AKUN-024-CLOUDFLARE-VLESS-WS-368MS,vless,ws,162.159.38.119,vangoghhh.info,368,,1477,HTTP 204,yes
+AKUN-025-CLOUDFLARE-VLESS-WS-370MS,vless,ws,betty.ns.cloudflare.com,amooaliii.net,370,,4786,HTTP 204,yes
