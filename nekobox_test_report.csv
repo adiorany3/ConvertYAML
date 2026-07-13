@@ -1,23 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-112MS,vless,ws,104.17.147.22,blacKNet0.blACkNet89.WOrKErS.dev,HTTP 204,343,220,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-002-CLOUDFLARE-VLESS-WS-93MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,308,5159,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-003-CLOUDFLARE-VLESS-WS-113MS,vless,ws,188.114.97.6,FrEe.SeRVEr14peekCoNfIG.WoRKErS.dEV,HTTP 204,274,231,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-004-CLOUDFLARE-VLESS-WS-113MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,HTTP 204,275,5153,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-005-CLOUDFLARE-VLESS-WS-113MS,vless,ws,104.19.119.133,lingering-cell-0027.ahooraarmion.workers.dev,HTTP 204,299,333,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-123MS,vless,ws,172.64.42.44,t1s1.rittbo.kdns.fr,HTTP 204,280,348,HTTP 204,yes
-AKUN-007-DEV-VLESS-WS-127MS,vless,ws,ezaccess-project-afaa32.ez-1d31ab.workers.dev,ezaccess-project-afaa32.ez-1d31ab.workers.dev,HTTP 204,289,320,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-127MS,vless,ws,104.16.7.70,09OSerT5Ts9U9wgB4X-u45B-h5u8w275.yzDaN2879.WOrKERS.DEV,HTTP 204,319,5156,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-009-DEV-VLESS-WS-125MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,297,224,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-010-CLOUDFLARE-VLESS-WS-131MS,vless,ws,104.25.220.68,1.hshs8227shhshs.workers.dev,HTTP 204,334,424,HTTP 204,yes
-AKUN-011-UNKNOWN-VLESS-WS-121MS,vless,ws,104.25.3.165,patient-moon-c61f.ggfsa55.workers.dev,HTTP 204,422,5156,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-012-UNKNOWN-VLESS-WS-128MS,vless,ws,162.159.36.53,bbc.zjxc.de5.net,HTTP 204,330,331,HTTP 204,yes
-AKUN-013-CLOUDFLARE-VLESS-WS-125MS,vless,ws,cfd4.466688.xyz,edge-e47d0df3.pages.dev,HTTP 204,348,5156,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-014-UNKNOWN-VLESS-WS-128MS,vless,ws,120.55.183.176,support.zoom.us.yxls.eu.cc,HTTP 204,501,314,HTTP 204,yes
-AKUN-015-UNKNOWN-VLESS-WS-125MS,vless,ws,172.64.147.227,cfoo-146.pages.dev,HTTP 204,390,326,HTTP 204,yes
-AKUN-016-CLOUDFLARE-VLESS-WS-120MS,vless,ws,162.159.0.3,soucuovls.pages.dev,HTTP 204,455,5155,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-017-UNKNOWN-VLESS-WS-123MS,vless,ws,104.18.0.1,all.speedtest03.ccwu.cc,HTTP 204,277,5156,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-018-NODEHOST-VLESS-WS-156MS,vless,ws,94.125.102.52,ww1.aniuge.qzz.io,HTTP 204,349,345,HTTP 204,yes
-AKUN-019-UNKNOWN-VLESS-WS-141MS,vless,ws,172.64.153.139,edge-4cb23bf6.pages.dev,HTTP 204,299,342,HTTP 204,yes
-AKUN-020-ZVC-VLESS-WS-141MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,317,5156,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-021-CLOUDFLARE-VLESS-WS-128MS,vless,ws,yx.cloudflare.182682.xyz,t1s1.rittbo.kdns.fr,HTTP 204,346,5157,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-022-CLOUDFLARE-VLESS-WS-119MS,vless,ws,162.159.4.13,edt2.yfqh08811.ccwu.cc,HTTP 204,303,332,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-66MS,vless,ws,162.159.10.87,t1s1.rittbo.kdns.fr,HTTP 204,246,263,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-68MS,vless,ws,173.245.58.87,t1s1.rittbo.kdns.fr,HTTP 204,218,261,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-65MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,224,268,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-73MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,235,278,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-75MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,235,269,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-74MS,vless,ws,162.159.10.87,t1s1.rittbo.kdns.fr,HTTP 204,246,274,HTTP 204,yes
+AKUN-007-OVH-VLESS-WS-81MS,vless,ws,51.91.251.198,support.zoom.us.yxls.eu.cc,HTTP 204,301,277,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-93MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,275,271,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-85MS,vless,ws,208.103.161.5,dry-butterfly-8eb9.tmpgnacio83.workers.dev,HTTP 204,196,7173,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-010-UNKNOWN-VLESS-WS-94MS,vless,ws,82.21.84.99,ww1.aniuge.qzz.io,HTTP 204,231,266,HTTP 204,yes
+AKUN-011-UNKNOWN-VLESS-WS-104MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,233,251,HTTP 204,yes
