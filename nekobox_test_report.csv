@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-87MS,vless,ws,cloudflare-ip.mofashi.ltd,t1s1.rittbo.kdns.fr,HTTP 204,496,342,HTTP 204,yes
-AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-98MS,vless,ws,45.130.125.207,support.zoom.us.yxls.eu.cc,HTTP 204,454,399,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-98MS,vless,ws,104.19.119.133,lInGerinG-cElL-0027.aHOOrAarmIOn.WoRkERS.DeV,HTTP 204,406,407,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-83MS,vless,ws,173.245.58.87,t1s1.rittbo.kdns.fr,HTTP 204,334,369,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-102MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,287,370,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-106MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,364,436,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-101MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,392,366,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-112MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,348,389,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-103MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,330,381,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-100MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,HTTP 204,347,371,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-89MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,HTTP 204,349,414,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-93MS,vless,ws,162.159.38.101,t1s1.rittbo.kdns.fr,HTTP 204,443,362,HTTP 204,yes
+AKUN-003-ALIBABA-VLESS-WS-86MS,vless,ws,47.80.60.254,t1s1.rittbo.kdns.fr,HTTP 204,293,402,HTTP 204,yes
+AKUN-004-ZVC-VLESS-WS-90MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,348,388,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-95MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,501,388,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-89MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,358,403,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-108MS,vless,ws,104.16.73.137,t1s1.rittbo.kdns.fr,HTTP 204,551,328,HTTP 204,yes
+AKUN-008-ZVC-VLESS-WS-98MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,399,380,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-121MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,HTTP 204,408,390,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-121MS,vless,ws,mohamad.fantomgavi.workers.dev,mohamad.fantomgavi.workers.dev,HTTP 204,422,383,HTTP 204,yes
