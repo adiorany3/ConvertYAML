@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-74MS,vless,ws,104.18.42.54,t1s1.rittbo.kdns.fr,HTTP 204,209,224,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-74MS,vless,ws,172.64.53.65,t1s1.rittbo.kdns.fr,HTTP 204,213,255,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-72MS,vless,ws,167.179.82.79,t1s1.rittbo.kdns.fr,HTTP 204,197,228,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-80MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,220,248,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-75MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,217,235,HTTP 204,yes
-AKUN-006-466688-VLESS-WS-76MS,vless,ws,cfd7.466688.xyz,edge-4cb23bf6.pages.dev,HTTP 204,216,240,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-79MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,226,235,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-109MS,vless,ws,172.64.32.6,soucuovls.pages.dev,HTTP 204,203,253,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-94MS,vless,ws,104.25.220.68,1.hshs8227shhshs.workers.dev,HTTP 204,215,256,HTTP 204,yes
-AKUN-010-WPENG-VLESS-WS-73MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,228,226,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-68MS,vless,ws,104.19.145.11,t1s1.rittbo.kdns.fr,HTTP 204,243,273,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-83MS,vless,ws,104.18.41.190,t1s1.rittbo.kdns.fr,HTTP 204,232,307,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-93MS,vless,ws,104.18.185.26,t1s1.rittbo.kdns.fr,HTTP 204,235,269,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-92MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,272,302,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-91MS,vless,ws,108.162.198.249,edge-267487d0.pages.dev,HTTP 204,271,317,HTTP 204,yes
+AKUN-006-CZ-LOTUNA-19970206-VLESS-WS-75MS,vless,ws,195.85.23.13,edge-4cb23bf6.pages.dev,HTTP 204,264,297,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-89MS,vless,ws,cfd7.466688.xyz,edge-4cb23bf6.pages.dev,HTTP 204,269,287,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-109MS,vless,ws,www.leics.police.uk,vp1.cc.cd,HTTP 204,287,345,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-103MS,vless,ws,xn--b6gac.eu.org,edt2.yfqh08811.ccwu.cc,HTTP 204,327,298,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-122MS,vless,ws,www.udacity.com,ww1.aniuge.qzz.io,HTTP 204,285,295,HTTP 204,yes
