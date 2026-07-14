@@ -1,12 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-65MS,vless,ws,172.64.144.82,t1s1.rittbo.kdns.fr,HTTP 204,240,256,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-72MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,227,276,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-81MS,vless,ws,104.25.123.12,alireza10.karamzade546alireza.workers.dev,HTTP 204,261,288,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,234,249,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-82MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,228,7178,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-006-CLOUDFLARE-VLESS-WS-71MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,223,263,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-77MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,241,269,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,228,259,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-75MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,HTTP 204,264,289,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-97MS,vless,ws,104.19.119.133,lInGerinG-cElL-0027.aHOOrAarmIOn.WoRkERS.DeV,HTTP 204,272,300,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-73MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,286,269,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-62MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,213,226,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-62MS,vless,ws,yx.cloudflare.182682.xyz,t1s1.rittbo.kdns.fr,HTTP 204,211,230,HTTP 204,yes
+AKUN-003-1PASSWORD-VLESS-WS-76MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,302,249,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-75MS,vless,ws,104.19.119.133,lInGerinG-cElL-0027.aHOOrAarmIOn.WoRkERS.DeV,HTTP 204,217,239,HTTP 204,yes
+AKUN-005-MYBB-VLESS-WS-77MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,210,243,HTTP 204,yes
+AKUN-006-NET-82-21-84-0-24-VLESS-WS-78MS,vless,ws,82.21.84.97,ww1.aniuge.qzz.io,HTTP 204,197,229,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-82MS,vless,ws,141.101.114.8,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,236,273,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-83MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,200,7177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-84MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,216,238,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-87MS,vless,ws,event-bus-c22219-edg.staging-api-5de174.workers.dev,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,225,245,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-80MS,vless,ws,104.21.90.210,cfoo-146.pages.dev,HTTP 204,212,228,HTTP 204,yes
