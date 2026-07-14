@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-63MS,vless,ws,172.64.53.65,t1s1.rittbo.kdns.fr,HTTP 204,206,230,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-59MS,vless,ws,104.16.72.2,support.zoom.us.yxls.eu.cc,HTTP 204,212,225,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-71MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,204,237,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-68MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,211,7178,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-005-CLOUDFLARE-VLESS-WS-69MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,211,238,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-86MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,198,235,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-97MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,207,235,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-89MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,208,249,HTTP 204,yes
-AKUN-009-HETZNER-VLESS-WS-100MS,vless,ws,5.223.59.9,ww1.aniuge.qzz.io,HTTP 204,209,225,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-76MS,vless,ws,yx.l110.us.ci,edt2.yfqh08811.ccwu.cc,HTTP 204,217,244,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-78MS,vless,ws,104.25.123.12,alireza10.karamzade546alireza.workers.dev,HTTP 204,226,242,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-80MS,vless,ws,104.21.94.161,t1s1.rittbo.kdns.fr,HTTP 204,293,361,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-86MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,331,410,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-99MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,311,359,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-109MS,vless,ws,104.17.20.214,refighehosein.salamdadash123.workers.dev,HTTP 204,296,340,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-114MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,350,390,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-113MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,329,367,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-116MS,vless,ws,104.19.119.133,lInGerinG-cElL-0027.aHOOrAarmIOn.WoRkERS.DeV,HTTP 204,380,406,HTTP 204,yes
+AKUN-008-UDACITY-VLESS-WS-102MS,vless,ws,www.udacity.com,ww1.aniuge.qzz.io,HTTP 204,300,347,HTTP 204,yes
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-117MS,vless,ws,45.130.125.207,support.zoom.us.yxls.eu.cc,HTTP 204,416,403,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-124MS,vless,ws,104.25.123.12,alireza10.karamzade546alireza.workers.dev,HTTP 204,385,406,HTTP 204,yes
