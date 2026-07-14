@@ -1,28 +1,29 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-RU-BEGET-VLESS-WS-83MS,vless,ws,159.194.200.159,t1s1.rittbo.kdns.fr,83,,210,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,88,,220,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-91MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,91,,215,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-96MS,vless,ws,104.16.72.110,support.zoom.us.yxls.eu.cc,96,,254,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-94MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,94,,217,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-93MS,vless,ws,cf.090227.xyz,t1s1.rittbo.kdns.fr,93,,228,HTTP 204,yes
-AKUN-007-WEBEX-VLESS-WS-85MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,85,,200,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-96MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,96,,201,HTTP 204,yes
-AKUN-009-PUBLICDOMAINREGISTRY-NET-VLESS-WS-96MS,vless,ws,162.251.82.2,support.zoom.us.yxls.eu.cc,96,,244,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-97MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,97,,226,HTTP 204,yes
-AKUN-011-HETZNER-VLESS-WS-105MS,vless,ws,5.223.77.219,ww1.aniuge.qzz.io,105,,235,HTTP 204,yes
-AKUN-012-CLOUDFLARE-VLESS-WS-122MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,122,,224,HTTP 204,yes
-AKUN-013-CLOUDFLARE-VLESS-WS-124MS,vless,ws,www.leics.police.uk,vp1.cc.cd,124,,315,HTTP 204,yes
-AKUN-014-US-VLESS-WS-103MS,vless,ws,yx.l110.us.ci,edt2.yfqh08811.ccwu.cc,103,,221,HTTP 204,yes
-AKUN-015-CLOUDFLARE-VLESS-WS-120MS,vless,ws,www.leics.police.uk,vp1.cc.cd,120,,255,HTTP 204,yes
-AKUN-016-466688-VLESS-WS-149MS,vless,ws,cfd7.466688.xyz,edge-4cb23bf6.pages.dev,149,,207,HTTP 204,yes
-AKUN-017-UNKNOWN-VLESS-WS-98MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,98,,207,HTTP 204,yes
-AKUN-018-UNKNOWN-VLESS-WS-132MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,132,,228,HTTP 204,yes
-AKUN-019-PAGES-VLESS-WS-119MS,vless,ws,ldgb.pages.dev,ldgb.pages.dev,119,,230,HTTP 204,yes
-AKUN-020-UNKNOWN-VLESS-WS-91MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,91,,223,HTTP 204,yes
-AKUN-021-APPLESERAJ-VLESS-WS-220MS,vless,ws,erosan.appleseraj.ir,freednz.Mastermarly.IR.,220,,301,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-022-CLOUDFLARE-VLESS-WS-243MS,vless,ws,162.159.38.119,terazhediii.info,243,,552,HTTP 204,yes
-AKUN-023-UNKNOWN-VLESS-WS-245MS,vless,ws,104.26.15.137,shegeftihaaa.net,245,,609,HTTP 204,yes
-AKUN-024-UNKNOWN-VLESS-WS-280MS,vless,ws,45.131.211.136,vangoghhh.info,280,,573,HTTP 204,yes
-AKUN-025-UNKNOWN-VLESS-WS-274MS,vless,ws,104.16.174.3,JoinProxyVPN11.amooaliii.net,274,,5146,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-026-UNKNOWN-VLESS-WS-288MS,vless,ws,159.112.235.52,octopusss.net,288,,529,HTTP 204,yes
-AKUN-027-UNKNOWN-VLESS-WS-143MS,vless,ws,8.47.69.6,ww1.aniuge.qzz.io,143,,223,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-62MS,vless,ws,104.18.42.54,t1s1.rittbo.kdns.fr,62,,201,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-70MS,vless,ws,104.16.243.164,t1s1.rittbo.kdns.fr,70,,211,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-70MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,70,,220,HTTP 204,yes
+AKUN-004-ZVC-VLESS-WS-70MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,70,,222,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-75MS,vless,ws,www.speedtest.net,netlivpn6982.bshsb72772.workers.dev,75,,394,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-67MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,67,,209,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-67MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,67,,218,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-95MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,95,,196,HTTP 204,yes
+AKUN-009-PUBLICDOMAINREGISTRY-NET-VLESS-WS-77MS,vless,ws,162.251.82.2,support.zoom.us.yxls.eu.cc,77,,213,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-89MS,vless,ws,108.162.198.249,edge-267487d0.pages.dev,89,,222,HTTP 204,yes
+AKUN-011-UNKNOWN-VLESS-WS-87MS,vless,ws,166.62.114.13,edge-4cb23bf6.pages.dev,87,,234,HTTP 204,yes
+AKUN-012-UNKNOWN-VLESS-WS-101MS,vless,ws,8.47.69.6,ww1.aniuge.qzz.io,101,,349,HTTP 204,yes
+AKUN-013-UNKNOWN-VLESS-WS-87MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,87,,214,HTTP 204,yes
+AKUN-014-UNKNOWN-VLESS-WS-94MS,vless,ws,172.64.32.6,soucuovls.pages.dev,94,,221,HTTP 204,yes
+AKUN-015-UDACITY-VLESS-WS-91MS,vless,ws,www.udacity.com,ww1.aniuge.qzz.io,91,,212,HTTP 204,yes
+AKUN-016-UNKNOWN-VLESS-WS-82MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,82,,220,HTTP 204,yes
+AKUN-017-NEXUSMODS-VLESS-WS-115MS,vless,ws,staticdelivery.nexusmods.com,vp1.cc.cd,115,,218,HTTP 204,yes
+AKUN-018-UNKNOWN-VLESS-WS-82MS,vless,ws,104.21.90.210,cfoo-146.pages.dev,82,,221,HTTP 204,yes
+AKUN-019-466688-VLESS-WS-119MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,119,,218,HTTP 204,yes
+AKUN-020-WEBEX-VLESS-WS-95MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,95,,206,HTTP 204,yes
+AKUN-021-PAGES-VLESS-WS-108MS,vless,ws,ldgb.pages.dev,ldgb.pages.dev,108,,202,HTTP 204,yes
+AKUN-022-466688-VLESS-WS-105MS,vless,ws,cfd7.466688.xyz,edge-4cb23bf6.pages.dev,105,,211,HTTP 204,yes
+AKUN-023-CLOUDFLARE-VLESS-WS-133MS,vless,ws,www.speedtest.net,netlivpn5639.dhslaph2727.workers.dev,133,,5146,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-024-ORG-VLESS-WS-105MS,vless,ws,xn--b6gac.eu.org,edt2.yfqh08811.ccwu.cc,105,,221,HTTP 204,yes
+AKUN-025-CLOUDFLARE-VLESS-WS-157MS,vless,ws,www.speedtest.net,netlivpn5639.dhslaph2727.workers.dev,157,,5146,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-026-CLOUDFLARE-VLESS-WS-84MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,84,,209,HTTP 204,yes
+AKUN-027-CLOUDFLARE-VLESS-WS-137MS,vless,ws,www.speedtest.net,netlivpn5639.dhslaph2727.workers.dev,137,,5145,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-028-UNKNOWN-VLESS-WS-230MS,vless,ws,188.114.97.6,terazhediii.info,230,,622,HTTP 204,yes
