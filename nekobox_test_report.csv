@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-94MS,vless,ws,162.159.42.182,t1s1.rittbo.kdns.fr,HTTP 204,232,259,HTTP 204,yes
-AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-89MS,vless,ws,45.130.125.207,support.zoom.us.yxls.eu.cc,HTTP 204,223,236,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-98MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,215,7172,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-004-CLOUDFLARE-VLESS-WS-91MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,203,234,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-90MS,vless,ws,172.67.167.207,edt2.yfqh08811.ccwu.cc,HTTP 204,237,241,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-113MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,HTTP 204,268,238,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-115MS,vless,ws,104.25.123.12,alireza10.karamzade546alireza.workers.dev,HTTP 204,225,254,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-114MS,vless,ws,icy-morning-df86.alisooltaniiii2024ali.workers.dev,icy-morning-df86.alisooltaniiii2024ali.workers.dev,HTTP 204,232,273,HTTP 204,yes
-AKUN-009-ES-FORNEX-20160629-VLESS-WS-99MS,vless,ws,103.228.168.182,4qrnyf6s.5e6pmte8uw52n5ymvwx8.workers.dev,HTTP 204,228,251,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-102MS,vless,ws,server3.pegibol940.workers.dev,server3.pegibol940.workers.dev,HTTP 204,231,244,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-112MS,vless,ws,mohamad.fantomgavi.workers.dev,mohamad.fantomgavi.workers.dev,HTTP 204,225,249,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-64MS,vless,ws,162.159.38.101,t1s1.rittbo.kdns.fr,HTTP 204,198,234,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-62MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,204,246,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-70MS,vless,ws,162.159.14.252,t1s1.rittbo.kdns.fr,HTTP 204,215,236,HTTP 204,yes
+AKUN-004-IONOS-VLESS-WS-64MS,vless,ws,217.154.94.41,support.zoom.us.yxls.eu.cc,HTTP 204,227,233,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-94MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,193,246,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-66MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,195,253,HTTP 204,yes
+AKUN-007-ES-FORNEX-20160629-VLESS-WS-75MS,vless,ws,103.228.168.182,4qrnyf6s.5e6pmte8uw52n5ymvwx8.workers.dev,HTTP 204,225,234,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-92MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,208,231,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-83MS,vless,ws,108.162.198.249,edge-267487d0.pages.dev,HTTP 204,224,251,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-85MS,vless,ws,166.62.114.13,edge-4cb23bf6.pages.dev,HTTP 204,207,245,HTTP 204,yes
