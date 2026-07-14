@@ -1,27 +1,28 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-59MS,vless,ws,104.18.38.47,t1s1.rittbo.kdns.fr,59,,213,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-63MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,63,,211,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-66MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,66,,209,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-73MS,vless,ws,104.18.155.229,t1s1.rittbo.kdns.fr,73,,216,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-64MS,vless,ws,www.udacity.com,ww1.aniuge.qzz.io,64,,204,HTTP 204,yes
-AKUN-006-RS-RAPIDSEEDBOX-20190717-VLESS-WS-77MS,vless,ws,45.130.125.207,support.zoom.us.yxls.eu.cc,77,,220,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-84MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,84,,206,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-89MS,vless,ws,www.leics.police.uk,vp1.cc.cd,89,,244,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-93MS,vless,ws,172.64.32.6,soucuovls.pages.dev,93,,227,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-85MS,vless,ws,104.25.220.68,1.hshs8227shhshs.workers.dev,85,,206,HTTP 204,yes
-AKUN-011-UNKNOWN-VLESS-WS-93MS,vless,ws,104.18.0.1,all.speedtest03.ccwu.cc,93,,222,HTTP 204,yes
-AKUN-012-VOV-VLESS-WS-102MS,vless,ws,cf-ip-node.vov.moe,vp1.cc.cd,102,,215,HTTP 204,yes
-AKUN-013-SPEEDTEST-VLESS-WS-105MS,vless,ws,www.speedtest.net,Sj-9PRbDKxJ6iW3NZi101xQfpSL3n5M5.SALaMAtiiWANa.woRkeRs.DeV,105,,225,HTTP 204,yes
-AKUN-014-UNKNOWN-VLESS-WS-110MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,110,,214,HTTP 204,yes
-AKUN-015-DEV-VLESS-WS-95MS,vless,ws,flat-night-edd0.hosein9saleazhuongooyeh87.workers.dev,FLAT-night-EDD0.hOsEin9saLEAZhuongOoYeH87.wOrkerS.DeV,95,,211,HTTP 204,yes
-AKUN-016-UNKNOWN-VLESS-WS-76MS,vless,ws,63.141.128.22,MiSty-tooth-78cA.FoboGAH414-e7B.WoRKERs.DEv,76,,200,HTTP 204,yes
-AKUN-017-SPEEDTEST-VLESS-WS-93MS,vless,ws,www.speedtest.net,luCky-LAB-AC6D.CAveyi8071.WoRkeRS.DEV,93,,3065,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-018-SPEEDTEST-VLESS-WS-100MS,vless,ws,www.speedtest.net,ez-5FAAFb.EsmAoi.wORKeRs.DEv,100,,212,HTTP 204,yes
-AKUN-019-UNKNOWN-VLESS-WS-78MS,vless,ws,104.21.37.62,NoDe-LINk-81aEfC-EdG.SAmyArhashM8.woRKers.dEv,78,,210,HTTP 204,yes
-AKUN-020-UNKNOWN-VLESS-WS-114MS,vless,ws,162.159.36.53,bbc.zjxc.de5.net,114,,208,HTTP 204,yes
-AKUN-021-UNKNOWN-VLESS-WS-104MS,vless,ws,104.21.69.130,bIyapain.bIYApaiNbAcHe.WoRkers.DeV,104,,220,HTTP 204,yes
-AKUN-022-UNKNOWN-VLESS-WS-113MS,vless,ws,162.251.82.2,support.zoom.us.yxls.eu.cc,113,,228,HTTP 204,yes
-AKUN-023-UNKNOWN-VLESS-WS-64MS,vless,ws,108.162.198.249,edge-267487d0.pages.dev,64,,237,HTTP 204,yes
-AKUN-024-UNKNOWN-VLESS-WS-72MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,72,,223,HTTP 204,yes
-AKUN-025-WEBEX-VLESS-WS-92MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,92,,226,HTTP 204,yes
-AKUN-026-UNKNOWN-VLESS-WS-85MS,vless,ws,172.67.167.207,edt2.yfqh08811.ccwu.cc,85,,222,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-76MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,76,,203,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-81MS,vless,ws,173.245.58.3,t1s1.rittbo.kdns.fr,81,,229,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-80MS,vless,ws,162.159.38.25,t1s1.rittbo.kdns.fr,80,,207,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-89MS,vless,ws,104.21.90.210,cfoo-146.pages.dev,89,,234,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-95MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,95,,216,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-85MS,vless,ws,162.159.8.123,t1s1.rittbo.kdns.fr,85,,227,HTTP 204,yes
+AKUN-007-RS-RAPIDSEEDBOX-20190717-VLESS-WS-82MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,82,,204,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-94MS,vless,ws,www.udacity.com,ww1.aniuge.qzz.io,94,,231,HTTP 204,yes
+AKUN-009-DEV-VLESS-WS-102MS,vless,ws,ezaccess-project-afaa32.ez-1d31ab.workers.dev,ezaccess-project-afaa32.ez-1d31ab.workers.dev,102,,232,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-104MS,vless,ws,104.16.72.2,support.zoom.us.yxls.eu.cc,104,,227,HTTP 204,yes
+AKUN-011-PUBLICDOMAINREGISTRY-NET-VLESS-WS-74MS,vless,ws,162.251.82.2,support.zoom.us.yxls.eu.cc,74,,254,HTTP 204,yes
+AKUN-012-SPEEDTEST-VLESS-WS-91MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,91,,205,HTTP 204,yes
+AKUN-013-466688-VLESS-WS-105MS,vless,ws,cfd7.466688.xyz,edge-e47d0df3.pages.dev,105,,247,HTTP 204,yes
+AKUN-014-466688-VLESS-WS-99MS,vless,ws,cf5.466688.xyz,cfoo-146.pages.dev,99,,220,HTTP 204,yes
+AKUN-015-CLOUDFLARE-VLESS-WS-111MS,vless,ws,172.64.146.127,tianshu13.pages.dev,111,,247,HTTP 204,yes
+AKUN-016-DEV-VLESS-WS-101MS,vless,ws,o.server5peekconfig.workers.dev,O.seRVer5peEKCOnFIG.WOrKers.dEV,101,,208,HTTP 204,yes
+AKUN-017-CLOUDFLARE-VLESS-WS-118MS,vless,ws,172.64.32.6,soucuovls.pages.dev,118,,201,HTTP 204,yes
+AKUN-018-SPEEDTEST-VLESS-WS-102MS,vless,ws,www.speedtest.net,luCky-LAB-AC6D.CAveyi8071.WoRkeRS.DEV,102,,3871,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-019-CLOUDFLARE-VLESS-WS-116MS,vless,ws,2.cf.3666888.xyz,vp1.cc.cd,116,,266,HTTP 204,yes
+AKUN-020-WEBEX-VLESS-WS-137MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,137,,227,HTTP 204,yes
+AKUN-021-CLOUDFLARE-VLESS-WS-108MS,vless,ws,104.18.0.1,all.speedtest03.ccwu.cc,108,,216,HTTP 204,yes
+AKUN-022-CLOUDFLARE-VLESS-WS-143MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,143,,237,HTTP 204,yes
+AKUN-023-UNKNOWN-VLESS-WS-136MS,vless,ws,162.159.36.53,bbc.zjxc.de5.net,136,,213,HTTP 204,yes
+AKUN-024-CLOUDFLARE-VLESS-WS-186MS,vless,ws,yx.l110.us.ci,edt2.yfqh08811.ccwu.cc,186,,212,HTTP 204,yes
+AKUN-025-CLOUDFLARE-VLESS-WS-233MS,vless,ws,162.159.38.119,terazhediii.info,233,,530,HTTP 204,yes
+AKUN-026-CLOUDFLARE-VLESS-WS-253MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,253,,5147,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-027-POLICE-VLESS-WS-169MS,vless,ws,www.leics.police.uk,vp1.cc.cd,169,,227,HTTP 204,yes
