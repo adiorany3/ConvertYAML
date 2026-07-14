@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-94MS,vless,ws,162.159.38.101,t1s1.rittbo.kdns.fr,HTTP 204,234,246,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-97MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,332,246,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-99MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,212,295,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-104MS,vless,ws,104.25.123.12,alireza10.karamzade546alireza.workers.dev,HTTP 204,230,271,HTTP 204,yes
-AKUN-005-SHOPIFY-VLESS-WS-107MS,vless,ws,www.shopify.com,gddy.hhlfy.de5.net,HTTP 204,252,270,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-117MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,217,244,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-118MS,vless,ws,104.17.20.214,refighehosein.salamdadash123.workers.dev,HTTP 204,248,256,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-113MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,251,7177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-009-UNKNOWN-VLESS-WS-96MS,vless,ws,217.154.94.41,support.zoom.us.yxls.eu.cc,HTTP 204,248,232,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-118MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,HTTP 204,240,255,HTTP 204,yes
-AKUN-011-HETZNER-VLESS-WS-120MS,vless,ws,5.223.77.219,ww1.aniuge.qzz.io,HTTP 204,283,303,HTTP 204,yes
+AKUN-001-VULTR-VLESS-WS-83MS,vless,ws,108.160.131.197,t1s1.rittbo.kdns.fr,HTTP 204,220,227,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-88MS,vless,ws,104.18.38.47,t1s1.rittbo.kdns.fr,HTTP 204,228,256,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.21.90.210,cfoo-146.pages.dev,HTTP 204,238,233,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-91MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,216,259,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-95MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,HTTP 204,217,240,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-92MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,214,247,HTTP 204,yes
+AKUN-007-PUBLICDOMAINREGISTRY-NET-VLESS-WS-77MS,vless,ws,162.251.82.2,support.zoom.us.yxls.eu.cc,HTTP 204,228,254,HTTP 204,yes
+AKUN-008-UNKNOWN-VLESS-WS-84MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,221,234,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-107MS,vless,ws,104.19.119.133,lInGerinG-cElL-0027.aHOOrAarmIOn.WoRkERS.DeV,HTTP 204,233,233,HTTP 204,yes
+AKUN-010-1PASSWORD-VLESS-WS-109MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,203,259,HTTP 204,yes
