@@ -1,13 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-85MS,vless,ws,162.159.60.167,t1s1.rittbo.kdns.fr,HTTP 204,353,370,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-101MS,vless,ws,172.67.135.69,v2ngfast-v2ngfast-v2ngfast-v2ngfast.jovego2551.workers.dev,HTTP 204,327,7171,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-003-CLOUDFLARE-VLESS-WS-96MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,310,363,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-94MS,vless,ws,164.38.155.13,edge-4cb23bf6.pages.dev,HTTP 204,309,343,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-105MS,vless,ws,104.19.145.11,t1s1.rittbo.kdns.fr,HTTP 204,329,348,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-114MS,vless,ws,server15.peekconf1-741.workers.dev,sErVER15.PEeKCOnF1-741.wOrkErs.Dev,HTTP 204,296,374,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-120MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,HTTP 204,350,358,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-96MS,vless,ws,purple-butterfly-8496.erfannull36.workers.dev,purple-butterfly-8496.erfannull36.workers.dev,HTTP 204,314,357,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-104MS,vless,ws,104.17.20.214,refighehosein.salamdadash123.workers.dev,HTTP 204,322,364,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-98MS,vless,ws,57.128.181.26,support.zoom.us.yxls.eu.cc,HTTP 204,431,376,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-105MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,HTTP 204,362,210,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-012-UNKNOWN-VLESS-WS-126MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,403,400,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-127MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,273,285,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-130MS,vless,ws,104.21.94.161,t1s1.rittbo.kdns.fr,HTTP 204,262,300,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-137MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,267,283,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-137MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,261,309,HTTP 204,yes
+AKUN-005-ZVC-VLESS-WS-123MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,283,298,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-138MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,HTTP 204,280,296,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-141MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,HTTP 204,269,305,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-146MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,263,302,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-138MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,267,290,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-144MS,vless,ws,104.21.90.210,cfoo-146.pages.dev,HTTP 204,279,303,HTTP 204,yes
