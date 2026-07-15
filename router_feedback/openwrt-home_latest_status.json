@@ -4,28 +4,28 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 151,
-      "now": "AKUN-002-ZVC-VLESS-WS-71MS",
+      "history_last_delay": 254,
+      "now": "AKUN-005-CLOUDFLARE-VLESS-WS-67MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 224,
+      "history_last_delay": 207,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 16,
-      "history_last_delay": 89,
-      "now": "AKUN-002-ZVC-VLESS-WS-71MS",
+      "history_last_delay": 110,
+      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-62MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 200,
+      "history_last_delay": 125,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -39,42 +39,42 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 118,
+      "history_last_delay": 111,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 116,
+      "history_last_delay": 113,
       "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 217,
-      "now": "AKUN-005-CLOUDFLARE-VLESS-WS-67MS",
+      "history_last_delay": 64,
+      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-79MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 97,
-      "now": "AKUN-002-ZVC-VLESS-WS-71MS",
+      "history_last_delay": 275,
+      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-79MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 86,
-      "now": "AKUN-005-CLOUDFLARE-VLESS-WS-67MS",
+      "history_last_delay": 199,
+      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-62MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 157,
+      "history_last_delay": 116,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-07-15T15:15:11.850399+00:00"
+  "timestamp_utc": "2026-07-15T15:24:20.067165+00:00"
 }
