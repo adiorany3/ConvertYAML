@@ -4,14 +4,14 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 219,
-      "now": "AKUN-009-UNKNOWN-VLESS-WS-81MS",
+      "history_last_delay": 134,
+      "now": "AKUN-008-090227-VLESS-WS-74MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 113,
+      "history_last_delay": 94,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -25,7 +25,7 @@
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 203,
+      "history_last_delay": 72,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -46,35 +46,35 @@
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 106,
+      "history_last_delay": 100,
       "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 82,
-      "now": "AKUN-007-DEV-VLESS-WS-75MS",
+      "history_last_delay": 98,
+      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-79MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 122,
-      "now": "AKUN-002-ZVC-VLESS-WS-71MS",
+      "history_last_delay": 99,
+      "now": "AKUN-003-CLOUDFLARE-VLESS-WS-73MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 252,
-      "now": "AKUN-007-DEV-VLESS-WS-75MS",
+      "history_last_delay": 99,
+      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-79MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 100,
+      "history_last_delay": 280,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-07-16T02:00:13.654174+00:00"
+  "timestamp_utc": "2026-07-16T02:15:13.113678+00:00"
 }
