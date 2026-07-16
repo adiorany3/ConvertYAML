@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-RS-RAPIDSEEDBOX-20190717-VLESS-WS-59MS,vless,ws,45.130.125.207,t1s1.rittbo.kdns.fr,HTTP 204,216,253,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-63MS,vless,ws,172.67.170.11,t1s1.rittbo.kdns.fr,HTTP 204,227,239,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-67MS,vless,ws,event-bus-c22219-edg.staging-api-5de174.workers.dev,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,208,253,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-65MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,224,226,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-67MS,vless,ws,server3.pegibol940.workers.dev,server3.pegibol940.workers.dev,HTTP 204,224,257,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-76MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,215,244,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-87MS,vless,ws,37.59.96.25,support.zoom.us.yxls.eu.cc,HTTP 204,197,258,HTTP 204,yes
-AKUN-008-DIXONS-VLESS-WS-69MS,vless,ws,164.38.155.13,edge-4cb23bf6.pages.dev,HTTP 204,211,248,HTTP 204,yes
-AKUN-009-DEV-VLESS-WS-100MS,vless,ws,server15.peekconf1-741.workers.dev,sErVER15.PEeKCOnF1-741.wOrkErs.Dev,HTTP 204,209,253,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-109MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,216,237,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-81MS,vless,ws,104.21.47.19,t1s1.rittbo.kdns.fr,HTTP 204,224,247,HTTP 204,yes
+AKUN-002-DIXONS-VLESS-WS-84MS,vless,ws,164.38.155.13,edge-4cb23bf6.pages.dev,HTTP 204,230,232,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-79MS,vless,ws,104.21.227.134,t1s1.rittbo.kdns.fr,HTTP 204,220,247,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-89MS,vless,ws,104.19.145.11,t1s1.rittbo.kdns.fr,HTTP 204,224,252,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-90MS,vless,ws,icy-morning-df86.alisooltaniiii2024ali.workers.dev,icy-morning-df86.alisooltaniiii2024ali.workers.dev,HTTP 204,212,260,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-89MS,vless,ws,104.18.44.198,t1s1.rittbo.kdns.fr,HTTP 204,232,228,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-108MS,vless,ws,104.16.73.137,t1s1.rittbo.kdns.fr,HTTP 204,365,247,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-109MS,vless,ws,8.47.69.9,ancIEnt-HeaRt-60c5.dPccgIzieB.WoRKers.dEV,HTTP 204,227,258,HTTP 204,yes
+AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-110MS,vless,ws,45.130.125.207,support.zoom.us.yxls.eu.cc,HTTP 204,269,253,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-93MS,vless,ws,185.193.30.94,kakoolnews.whattodowhatnottodo.workers.dev,HTTP 204,212,241,HTTP 204,yes
