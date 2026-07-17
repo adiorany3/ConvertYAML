@@ -4,28 +4,28 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 132,
-      "now": "AKUN-008-090227-VLESS-WS-74MS",
+      "history_last_delay": 58,
+      "now": "AKUN-010-UNKNOWN-VLESS-WS-86MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 63,
+      "history_last_delay": 59,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 16,
-      "history_last_delay": 57,
+      "history_last_delay": 62,
       "now": "AKUN-004-CLOUDFLARE-VLESS-WS-79MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 217,
+      "history_last_delay": 66,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -39,35 +39,35 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 79,
+      "history_last_delay": 64,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 67,
-      "now": "STREAMING-FAST",
+      "history_last_delay": 66,
+      "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 59,
+      "history_last_delay": 66,
       "now": "AKUN-006-ES-FORNEX-20160629-VLESS-WS-76MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 65,
-      "now": "AKUN-005-CLOUDFLARE-VLESS-WS-67MS",
+      "history_last_delay": 59,
+      "now": "AKUN-006-ES-FORNEX-20160629-VLESS-WS-76MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 0,
+      "history_last_delay": 60,
       "now": "AKUN-001-CLOUDFLARE-VLESS-WS-62MS",
       "type": "URLTest",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-07-17T09:30:16.909155+00:00"
+  "timestamp_utc": "2026-07-17T09:45:12.913767+00:00"
 }
