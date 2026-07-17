@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-66MS,vless,ws,172.64.53.65,t1s1.rittbo.kdns.fr,HTTP 204,221,243,HTTP 204,yes
-AKUN-002-DEV-VLESS-WS-66MS,vless,ws,event-bus-c22219-edg.staging-api-5de174.workers.dev,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,223,259,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-61MS,vless,ws,173.245.58.87,t1s1.rittbo.kdns.fr,HTTP 204,212,258,HTTP 204,yes
-AKUN-004-DEV-VLESS-WS-75MS,vless,ws,server15.peekconf1-741.workers.dev,sErVER15.PEeKCOnF1-741.wOrkErs.Dev,HTTP 204,207,250,HTTP 204,yes
-AKUN-005-RS-RAPIDSEEDBOX-20190717-VLESS-WS-76MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,HTTP 204,225,248,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-80MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,230,242,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-66MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,222,244,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-72MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,217,255,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-80MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,HTTP 204,226,249,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-95MS,vless,ws,141.101.114.8,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,229,230,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-62MS,vless,ws,162.159.34.23,t1s1.rittbo.kdns.fr,HTTP 204,210,234,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-72MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,201,252,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-74MS,vless,ws,172.67.135.69,v2ngfast-v2ngfast-v2ngfast-v2ngfast.jovego2551.workers.dev,HTTP 204,217,7177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-004-CLOUDFLARE-VLESS-WS-77MS,vless,ws,www.shopify.com,gddy.hhlfy.de5.net,HTTP 204,213,245,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-75MS,vless,ws,server3.pegibol940.workers.dev,server3.pegibol940.workers.dev,HTTP 204,213,246,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-74MS,vless,ws,104.25.123.12,alireza10.karamzade546alireza.workers.dev,HTTP 204,211,254,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-76MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,204,224,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-79MS,vless,ws,141.101.114.8,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,223,273,HTTP 204,yes
+AKUN-009-DIXONS-VLESS-WS-70MS,vless,ws,164.38.155.13,edge-4cb23bf6.pages.dev,HTTP 204,215,246,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-79MS,vless,ws,104.18.45.104,t1s1.rittbo.kdns.fr,HTTP 204,208,235,HTTP 204,yes
+AKUN-011-1PASSWORD-VLESS-WS-77MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,206,250,HTTP 204,yes
