@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.25.12,t1s1.rittbo.kdns.fr,HTTP 204,274,311,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-83MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,277,311,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-86MS,vless,ws,162.159.38.101,t1s1.rittbo.kdns.fr,HTTP 204,371,396,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-84MS,vless,ws,162.159.3.48,t1s1.rittbo.kdns.fr,HTTP 204,272,303,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-99MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,274,315,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-103MS,vless,ws,icy-morning-df86.alisooltaniiii2024ali.workers.dev,icy-morning-df86.alisooltaniiii2024ali.workers.dev,HTTP 204,365,410,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-113MS,vless,ws,cf10.466688.xyz,cfoo-146.pages.dev,HTTP 204,370,328,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-114MS,vless,ws,8.47.69.9,ancIEnt-HeaRt-60c5.dPccgIzieB.WoRKers.dEV,HTTP 204,317,305,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-115MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,288,310,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-100MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,323,306,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-137MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,283,301,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-137MS,vless,ws,162.159.45.15,t1s1.rittbo.kdns.fr,HTTP 204,262,299,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-142MS,vless,ws,8.47.69.9,ancIEnt-HeaRt-60c5.dPccgIzieB.WoRKers.dEV,HTTP 204,274,306,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-142MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,272,280,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-142MS,vless,ws,141.101.114.8,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,303,308,HTTP 204,yes
+AKUN-006-DEV-VLESS-WS-143MS,vless,ws,server3.pegibol940.workers.dev,server3.pegibol940.workers.dev,HTTP 204,269,295,HTTP 204,yes
+AKUN-007-DEV-VLESS-WS-145MS,vless,ws,server15.peekconf1-741.workers.dev,sErVER15.PEeKCOnF1-741.wOrkErs.Dev,HTTP 204,270,297,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-140MS,vless,ws,yx.l110.us.ci,edt2.yfqh08811.ccwu.cc,HTTP 204,282,319,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-144MS,vless,ws,youxuan.cf.090227.xyz,t1s1.rittbo.kdns.fr,HTTP 204,271,306,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-135MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,246,300,HTTP 204,yes
