@@ -5,27 +5,27 @@
     "AUTO-FAST": {
       "all_count": 10,
       "history_last_delay": 0,
-      "now": "AKUN-003-UNKNOWN-VLESS-WS-62MS",
+      "now": "AKUN-010-CLOUDFLARE-VLESS-WS-64MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 0,
-      "now": "AKUN-003-UNKNOWN-VLESS-WS-62MS",
+      "history_last_delay": 41,
+      "now": "AKUN-002-SAVVY-7-VLESS-WS-64MS",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 15,
       "history_last_delay": 0,
-      "now": "AKUN-003-UNKNOWN-VLESS-WS-62MS",
+      "now": "AKUN-002-SAVVY-7-VLESS-WS-64MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 94,
+      "history_last_delay": 41,
       "now": "MANUAL",
       "type": "Fallback",
       "udp": true
@@ -39,15 +39,15 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 97,
-      "now": "AKUN-003-UNKNOWN-VLESS-WS-62MS",
+      "history_last_delay": 41,
+      "now": "AKUN-002-SAVVY-7-VLESS-WS-64MS",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
       "history_last_delay": 0,
-      "now": "AKUN-003-UNKNOWN-VLESS-WS-62MS",
+      "now": "AKUN-002-SAVVY-7-VLESS-WS-64MS",
       "type": "Fallback",
       "udp": true
     },
@@ -61,7 +61,7 @@
     "WARM-UP": {
       "all_count": 7,
       "history_last_delay": 0,
-      "now": "AKUN-003-UNKNOWN-VLESS-WS-62MS",
+      "now": "AKUN-002-SAVVY-7-VLESS-WS-64MS",
       "type": "URLTest",
       "udp": true
     },
@@ -75,7 +75,7 @@
     "YOUTUBE": {
       "all_count": 14,
       "history_last_delay": 0,
-      "now": "AKUN-003-UNKNOWN-VLESS-WS-62MS",
+      "now": "AKUN-002-SAVVY-7-VLESS-WS-64MS",
       "type": "Fallback",
       "udp": true
     }
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-07-19T12:45:37.192270+00:00"
+  "timestamp_utc": "2026-07-19T13:00:08.253366+00:00"
 }
