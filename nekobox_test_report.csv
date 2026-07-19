@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-97MS,vless,ws,173.245.58.121,node-1156018316-84eadd.silimem566.workers.dev,HTTP 204,308,351,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-99MS,vless,ws,91.193.59.120,cf11.evan00.dpdns.org,HTTP 204,318,338,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-120MS,vless,ws,flat-night-edd0.hosein9saleazhuongooyeh87.workers.dev,FLAT-night-EDD0.hOsEin9saLEAZhuongOoYeH87.wOrkerS.DeV,HTTP 204,280,321,HTTP 204,yes
-AKUN-004-BGP48-HK-VLESS-WS-128MS,vless,ws,27.50.49.20,cf11.evan00.dpdns.org,HTTP 204,333,352,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-131MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,HTTP 204,259,222,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-006-DEV-VLESS-WS-123MS,vless,ws,icy-morning-df86.alisooltaniiii2024ali.workers.dev,icy-morning-df86.alisooltaniiii2024ali.workers.dev,HTTP 204,372,320,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-136MS,vless,ws,172.67.167.207,edt2.yfqh08811.ccwu.cc,HTTP 204,326,360,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-137MS,vless,ws,108.162.198.136,edge-4cb23bf6.pages.dev,HTTP 204,406,349,HTTP 204,yes
-AKUN-009-466688-VLESS-WS-100MS,vless,ws,cfd5.466688.xyz,edge-4cb23bf6.pages.dev,HTTP 204,296,382,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-129MS,vless,ws,www.speedtest.net,netlivpn4020.bssbh262627.workers.dev,HTTP 204,613,617,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-148MS,vless,ws,www.leics.police.uk,vp1.cc.cd,HTTP 204,336,352,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-63MS,vless,ws,104.16.72.100,t1s1.rittbo.kdns.fr,HTTP 204,218,238,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-73MS,vless,ws,108.162.196.3,t1s1.rittbo.kdns.fr,HTTP 204,206,227,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-77MS,vless,ws,server15.peekconf1-741.workers.dev,sErVER15.PEeKCOnF1-741.wOrkErs.Dev,HTTP 204,213,259,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-65MS,vless,ws,162.159.44.180,t1s1.rittbo.kdns.fr,HTTP 204,203,242,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-75MS,vless,ws,172.67.167.207,edt2.yfqh08811.ccwu.cc,HTTP 204,219,253,HTTP 204,yes
+AKUN-006-DEV-VLESS-WS-71MS,vless,ws,server3.pegibol940.workers.dev,server3.pegibol940.workers.dev,HTTP 204,213,251,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-87MS,vless,ws,cfd7.466688.xyz,edge-4cb23bf6.pages.dev,HTTP 204,214,244,HTTP 204,yes
+AKUN-008-UNKNOWN-VLESS-WS-74MS,vless,ws,141.101.114.8,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,220,252,HTTP 204,yes
+AKUN-009-CZ-LOTUNA-19970206-VLESS-WS-88MS,vless,ws,195.85.23.13,edge-4cb23bf6.pages.dev,HTTP 204,225,258,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-75MS,vless,ws,8.47.69.9,ancIEnt-HeaRt-60c5.dPccgIzieB.WoRKers.dEV,HTTP 204,207,241,HTTP 204,yes
