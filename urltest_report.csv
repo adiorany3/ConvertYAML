@@ -1,29 +1,26 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-UNKNOWN-VLESS-WS-81MS,vless,ws,104.21.227.134,t1s1.rittbo.kdns.fr,81,,363,HTTP 204,yes
-AKUN-002-154-197-64-0-154-197-64-VLESS-WS-111MS,vless,ws,154.197.64.20,cf11.evan00.dpdns.org,111,,416,HTTP 204,yes
-AKUN-003-BGP48-HK-VLESS-WS-85MS,vless,ws,27.50.49.20,cf11.evan00.dpdns.org,85,,302,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-95MS,vless,ws,104.18.45.104,t1s1.rittbo.kdns.fr,95,,290,HTTP 204,yes
-AKUN-005-BGP48-HK-VLESS-WS-112MS,vless,ws,27.50.49.20,cf11.evan00.dpdns.org,112,,339,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-104MS,vless,ws,104.18.42.54,t1s1.rittbo.kdns.fr,104,,271,HTTP 204,yes
-AKUN-007-RS-RAPIDSEEDBOX-20190717-VLESS-WS-109MS,vless,ws,45.130.125.20,cf11.evan00.dpdns.org,109,,355,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-126MS,vless,ws,cf-vless-4cf55824.aimall.fr,cf-vless-4cf55824.aimall.fr,126,,332,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-122MS,vless,ws,104.16.73.137,t1s1.rittbo.kdns.fr,122,,269,HTTP 204,yes
-AKUN-010-SERVERS-COM-CUST-7753-VLESS-WS-118MS,vless,ws,188.42.89.20,cf11.evan00.dpdns.org,118,,318,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-115MS,vless,ws,xn--b6gac.eu.org,edt2.yfqh08811.ccwu.cc,115,,370,HTTP 204,yes
-AKUN-012-CLOUDFLARE-VLESS-WS-147MS,vless,ws,icy-morning-df86.alisooltaniiii2024ali.workers.dev,icy-morning-df86.alisooltaniiii2024ali.workers.dev,147,,306,HTTP 204,yes
-AKUN-013-CLOUDFLARE-VLESS-WS-151MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,151,,291,HTTP 204,yes
-AKUN-014-CLOUDFLARE-VLESS-WS-149MS,vless,ws,cfd5.466688.xyz,edge-4cb23bf6.pages.dev,149,,303,HTTP 204,yes
-AKUN-015-UNKNOWN-VLESS-WS-165MS,vless,ws,66.45.118.13,edge-4cb23bf6.pages.dev,165,,370,HTTP 204,yes
-AKUN-016-WEBEX-VLESS-WS-104MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,104,,319,HTTP 204,yes
-AKUN-017-CLOUDFLARE-VLESS-WS-168MS,vless,ws,staticdelivery.nexusmods.com,vp1.cc.cd,168,,350,HTTP 204,yes
-AKUN-018-466688-VLESS-WS-125MS,vless,ws,cf6.466688.xyz,cfoo-146.pages.dev,125,,335,HTTP 204,yes
-AKUN-019-UNKNOWN-VLESS-WS-162MS,vless,ws,8.39.125.45,vp37.cc.cd,162,,386,HTTP 204,yes
-AKUN-020-UNKNOWN-VLESS-WS-309MS,vless,ws,173.245.58.75,terazhediii.info,309,,5149,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-021-CLOUDFLARE-VLESS-WS-319MS,vless,ws,betty.ns.cloudflare.com,shegeftihaaa.net,319,,687,HTTP 204,yes
-AKUN-022-UNKNOWN-VLESS-WS-323MS,vless,ws,159.112.235.52,octopusss.net,323,,704,HTTP 204,yes
-AKUN-023-CLOUDFLARE-VLESS-WS-355MS,vless,ws,betty.ns.cloudflare.com,vangoghhh.info,355,,715,HTTP 204,yes
-AKUN-024-UNKNOWN-VLESS-WS-373MS,vless,ws,45.130.125.51,amooaliii.net,373,,691,HTTP 204,yes
-AKUN-025-DEV-VLESS-WS-125MS,vless,ws,polished-band-c7ab.rasamwiner9090.workers.dev,polished-band-c7ab.rasamwiner9090.workers.dev,125,,5149,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-026-UNKNOWN-VLESS-WS-371MS,vless,ws,104.16.72.101,vangoghhh.info,371,,746,HTTP 204,yes
-AKUN-027-DEV-VLESS-WS-116MS,vless,ws,nameless-moon-7c4d.shafmrhjlos23.workers.dev,nameless-moon-7c4d.shafmrhjlos23.workers.dev,116,,5149,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-028-CLOUDFLARE-VLESS-WS-539MS,vless,ws,love.ns.cloudflare.com,gioub.moonleafbox-kilo.info,539,,844,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-81MS,vless,ws,198.41.223.238,t1s1.rittbo.kdns.fr,81,,219,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-76MS,vless,ws,198.41.201.19,t1s1.rittbo.kdns.fr,76,,227,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-86MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,86,,225,HTTP 204,yes
+AKUN-004-ZOOM-VLESS-WS-97MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,97,,226,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-98MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,98,,223,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-88MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,88,,214,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-103MS,vless,ws,8.39.125.45,vp37.cc.cd,103,,238,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-91MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,91,,201,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-82MS,vless,ws,108.162.198.136,edge-4cb23bf6.pages.dev,82,,234,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-106MS,vless,ws,yx.l110.us.ci,edt2.yfqh08811.ccwu.cc,106,,215,HTTP 204,yes
+AKUN-011-SAVVY-7-VLESS-WS-98MS,vless,ws,66.45.118.13,edge-4cb23bf6.pages.dev,98,,236,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-108MS,vless,ws,staticdelivery.nexusmods.com,vp1.cc.cd,108,,208,HTTP 204,yes
+AKUN-013-CLOUDFLARE-VLESS-WS-120MS,vless,ws,cfd7.466688.xyz,edge-4cb23bf6.pages.dev,120,,233,HTTP 204,yes
+AKUN-014-CLOUDFLARE-VLESS-WS-124MS,vless,ws,8.35.211.140,vp2.cc.cd,124,,256,HTTP 204,yes
+AKUN-015-CLOUDFLARE-VLESS-WS-104MS,vless,ws,www.leics.police.uk,vp1.cc.cd,104,,212,HTTP 204,yes
+AKUN-016-UNKNOWN-VLESS-WS-127MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,127,,432,HTTP 204,yes
+AKUN-017-WEBEX-VLESS-WS-107MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,107,,211,HTTP 204,yes
+AKUN-018-UNKNOWN-VLESS-WS-106MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,106,,223,HTTP 204,yes
+AKUN-019-UNKNOWN-VLESS-WS-132MS,vless,ws,8.39.125.59,vp9.cc.cd,132,,213,HTTP 204,yes
+AKUN-020-UNKNOWN-VLESS-WS-95MS,vless,ws,91.193.58.178,3da0360c.myblog-2hd.pages.dev,95,,203,HTTP 204,yes
+AKUN-021-UNKNOWN-VLESS-WS-91MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,91,,224,HTTP 204,yes
+AKUN-022-DEV-VLESS-WS-139MS,vless,ws,ezaccess-project-4c7950.ez-dc9bbb.workers.dev,eZaCCesS-proJEcT-4C7950.Ez-dC9bBB.WorKErs.dEV,139,,237,HTTP 204,yes
+AKUN-023-UNKNOWN-VLESS-WS-109MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,109,,208,HTTP 204,yes
+AKUN-024-UNKNOWN-VLESS-WS-142MS,vless,ws,104.20.13.116,ourfast.ccwu.cc,142,,240,HTTP 204,yes
+AKUN-025-UNKNOWN-VLESS-WS-232MS,vless,ws,152.228.135.5,s5gydl.936.us.ci,232,,362,HTTP 204,yes
