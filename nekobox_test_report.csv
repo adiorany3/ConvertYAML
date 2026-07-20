@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-135MS,vless,ws,195.85.23.13,edge-4cb23bf6.pages.dev,HTTP 204,269,316,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-140MS,vless,ws,172.64.41.202,t1s1.rittbo.kdns.fr,HTTP 204,263,315,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-135MS,vless,ws,icy-morning-df86.alisooltaniiii2024ali.workers.dev,icy-morning-df86.alisooltaniiii2024ali.workers.dev,HTTP 204,291,309,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-145MS,vless,ws,66.45.118.13,edge-4cb23bf6.pages.dev,HTTP 204,275,303,HTTP 204,yes
-AKUN-005-SPEEDTEST-VLESS-WS-162MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,HTTP 204,247,232,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-006-UNKNOWN-VLESS-WS-140MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,275,301,HTTP 204,yes
-AKUN-007-466688-VLESS-WS-143MS,vless,ws,cf6.466688.xyz,cfoo-146.pages.dev,HTTP 204,277,305,HTTP 204,yes
-AKUN-008-DE5-VLESS-WS-164MS,vless,ws,d.lma.de5.net,vp1.cc.cd,HTTP 204,289,321,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-137MS,vless,ws,172.64.147.79,cfoo-146.pages.dev,HTTP 204,271,316,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-159MS,vless,ws,173.245.58.121,node-1156018316-84eadd.silimem566.workers.dev,HTTP 204,274,317,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-186MS,vless,ws,172.67.167.207,edt2.yfqh08811.ccwu.cc,HTTP 204,273,325,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-64MS,vless,ws,172.64.152.241,t1s1.rittbo.kdns.fr,HTTP 204,228,250,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-67MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,230,259,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-73MS,vless,ws,108.162.198.136,edge-4cb23bf6.pages.dev,HTTP 204,266,288,HTTP 204,yes
+AKUN-004-DEV-VLESS-WS-72MS,vless,ws,flat-night-edd0.hosein9saleazhuongooyeh87.workers.dev,FLAT-night-EDD0.hOsEin9saLEAZhuongOoYeH87.wOrkerS.DeV,HTTP 204,233,253,HTTP 204,yes
+AKUN-005-DEV-VLESS-WS-78MS,vless,ws,ez-041a82.ezaccess1225a0b.workers.dev,ez-041a82.ezaccess1225a0b.workers.dev,HTTP 204,234,275,HTTP 204,yes
+AKUN-006-DEV-VLESS-WS-77MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,224,259,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-75MS,vless,ws,cfd7.466688.xyz,edge-4cb23bf6.pages.dev,HTTP 204,248,279,HTTP 204,yes
+AKUN-008-CZ-LOTUNA-19970206-VLESS-WS-73MS,vless,ws,195.85.23.13,edge-4cb23bf6.pages.dev,HTTP 204,238,272,HTTP 204,yes
+AKUN-009-DE5-VLESS-WS-87MS,vless,ws,d.lma.de5.net,vp1.cc.cd,HTTP 204,255,303,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-91MS,vless,ws,162.159.3.141,t1s1.rittbo.kdns.fr,HTTP 204,225,252,HTTP 204,yes
