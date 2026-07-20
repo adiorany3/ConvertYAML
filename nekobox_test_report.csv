@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-77MS,vless,ws,172.64.52.240,t1s1.rittbo.kdns.fr,HTTP 204,220,248,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-82MS,vless,ws,198.41.201.19,t1s1.rittbo.kdns.fr,HTTP 204,229,241,HTTP 204,yes
-AKUN-003-GO-DADDY-COM-LLC-VLESS-WS-89MS,vless,ws,166.62.114.13,edge-4cb23bf6.pages.dev,HTTP 204,203,255,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-92MS,vless,ws,yx.l110.us.ci,edt2.yfqh08811.ccwu.cc,HTTP 204,228,258,HTTP 204,yes
-AKUN-005-ZVC-VLESS-WS-78MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,226,246,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-85MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,217,247,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-90MS,vless,ws,173.245.59.35,ld.235231.xyz,HTTP 204,205,262,HTTP 204,yes
-AKUN-008-ZVC-VLESS-WS-79MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,226,357,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-97MS,vless,ws,www.leics.police.uk,vp1.cc.cd,HTTP 204,219,257,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-91MS,vless,ws,172.64.40.84,t1s1.rittbo.kdns.fr,HTTP 204,220,254,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-61MS,vless,ws,104.26.5.60,t1s1.rittbo.kdns.fr,HTTP 204,217,251,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-62MS,vless,ws,104.18.45.104,t1s1.rittbo.kdns.fr,HTTP 204,215,250,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-65MS,vless,ws,cfd7.466688.xyz,edge-4cb23bf6.pages.dev,HTTP 204,274,247,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-66MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,214,252,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-68MS,vless,ws,yx.l110.us.ci,edt2.yfqh08811.ccwu.cc,HTTP 204,250,250,HTTP 204,yes
+AKUN-006-SAVVY-7-VLESS-WS-68MS,vless,ws,66.45.118.13,edge-4cb23bf6.pages.dev,HTTP 204,251,253,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-66MS,vless,ws,173.245.58.121,node-1156018316-84eadd.silimem566.workers.dev,HTTP 204,230,230,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-67MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,HTTP 204,216,250,HTTP 204,yes
+AKUN-009-DEV-VLESS-WS-72MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,224,244,HTTP 204,yes
+AKUN-010-WPENG-VLESS-WS-79MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,258,265,HTTP 204,yes
