@@ -1,28 +1,27 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-UNKNOWN-VLESS-WS-64MS,vless,ws,146.235.16.191,t1s1.rittbo.kdns.fr,64,,229,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-65MS,vless,ws,172.64.53.27,t1s1.rittbo.kdns.fr,65,,216,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-62MS,vless,ws,45.130.125.207,t1s1.rittbo.kdns.fr,62,,232,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-79MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,79,,203,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-69MS,vless,ws,172.64.149.209,t1s1.rittbo.kdns.fr,69,,206,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-87MS,vless,ws,162.159.3.141,t1s1.rittbo.kdns.fr,87,,218,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-73MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,73,,212,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-75MS,vless,ws,172.64.53.27,t1s1.rittbo.kdns.fr,75,,198,HTTP 204,yes
-AKUN-009-WPENG-VLESS-WS-75MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,75,,220,HTTP 204,yes
-AKUN-010-ZVC-VLESS-WS-76MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,76,,217,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-107MS,vless,ws,172.67.167.207,edt2.yfqh08811.ccwu.cc,107,,226,HTTP 204,yes
-AKUN-012-UNKNOWN-VLESS-WS-70MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,70,,222,HTTP 204,yes
-AKUN-013-LEVIKOGJGFDD-VLESS-WS-132MS,vless,ws,cf.levikogjgfdd.ir,bbc.zjxc.de5.net,132,,203,HTTP 204,yes
-AKUN-014-ZVC-VLESS-WS-88MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,88,,224,HTTP 204,yes
-AKUN-015-CLOUDFLARE-VLESS-WS-134MS,vless,ws,104.16.72.50,fm3.pages.dev,134,,187,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
-AKUN-016-CLOUDFLARE-VLESS-WS-142MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,142,,233,HTTP 204,yes
-AKUN-017-CLOUDFLARE-VLESS-WS-121MS,vless,ws,www.speedtest.net,blacKNet0.blACkNet89.WOrKErS.dev,121,,202,HTTP 204,yes
-AKUN-018-CLOUDFLARE-VLESS-WS-112MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,112,,205,HTTP 204,yes
-AKUN-019-CLOUDFLARE-VLESS-WS-98MS,vless,ws,172.64.32.6,soucuovls.pages.dev,98,,197,HTTP 204,yes
-AKUN-020-CLOUDFLARE-VLESS-WS-108MS,vless,ws,ldgb.pages.dev,ldgb.pages.dev,108,,201,HTTP 204,yes
-AKUN-021-CLOUDFLARE-VLESS-WS-135MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,135,,229,HTTP 204,yes
-AKUN-022-CLOUDFLARE-VLESS-WS-147MS,vless,ws,104.20.13.116,ourfast.ccwu.cc,147,,212,HTTP 204,yes
-AKUN-023-UNKNOWN-VLESS-WS-165MS,vless,ws,104.18.33.37,vp33.cc.cd,165,,235,HTTP 204,yes
-AKUN-024-CLOUDFLARE-VLESS-WS-193MS,vless,ws,104.16.72.110,hhvl.hhapp.kdns.fr,193,,412,HTTP 204,yes
-AKUN-025-CLOUDFLARE-VLESS-WS-247MS,vless,ws,108.162.192.75,shegeftihaaa.net,247,,525,HTTP 204,yes
-AKUN-026-CLOUDFLARE-VLESS-WS-257MS,vless,ws,104.16.72.50,vangoghhh.info,257,,5147,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-027-LEVIKOGJGFDD-VLESS-WS-242MS,vless,ws,cf.levikogjgfdd.ir,terazhediii.info,242,,3503,HTTP 204,yes
+AKUN-001-ORACLE-VLESS-WS-66MS,vless,ws,146.235.16.191,t1s1.rittbo.kdns.fr,66,,238,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-70MS,vless,ws,104.18.45.104,t1s1.rittbo.kdns.fr,70,,243,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-67MS,vless,ws,172.67.170.11,t1s1.rittbo.kdns.fr,67,,235,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-66MS,vless,ws,162.159.45.15,t1s1.rittbo.kdns.fr,66,,247,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-71MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,71,,236,HTTP 204,yes
+AKUN-006-UNKNOWN-VLESS-WS-86MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,86,,230,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-84MS,vless,ws,www.speedtest.net,blacKNet0.blACkNet89.WOrKErS.dev,84,,276,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-90MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,90,,230,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-99MS,vless,ws,xn--b6gac.eu.org,edt2.yfqh08811.ccwu.cc,99,,238,HTTP 204,yes
+AKUN-010-WPENG-VLESS-WS-113MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,113,,287,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-93MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,93,,3490,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-012-RS-RAPIDSEEDBOX-20190717-VLESS-WS-104MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,104,,239,HTTP 204,yes
+AKUN-013-ZVC-VLESS-WS-86MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,86,,239,HTTP 204,yes
+AKUN-014-CLOUDFLARE-VLESS-WS-127MS,vless,ws,104.18.33.37,vp33.cc.cd,127,,291,HTTP 204,yes
+AKUN-015-CLOUDFLARE-VLESS-WS-126MS,vless,ws,www.speedtest.net,luCky-LAB-AC6D.CAveyi8071.WoRkeRS.DEV,126,,247,HTTP 204,yes
+AKUN-016-UNKNOWN-VLESS-WS-133MS,vless,ws,162.159.18.122,edt2.yfqh08811.ccwu.cc,133,,234,HTTP 204,yes
+AKUN-017-UNKNOWN-VLESS-WS-117MS,vless,ws,172.64.32.6,soucuovls.pages.dev,117,,256,HTTP 204,yes
+AKUN-018-UNKNOWN-VLESS-WS-75MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,75,,256,HTTP 204,yes
+AKUN-019-DEV-VLESS-WS-128MS,vless,ws,mohamad.fantomgavi.workers.dev,mohamad.fantomgavi.workers.dev,128,,274,HTTP 204,yes
+AKUN-020-CLOUDFLARE-VLESS-WS-125MS,vless,ws,www.speedtest.net,Sj-9PRbDKxJ6iW3NZi101xQfpSL3n5M5.SALaMAtiiWANa.woRkeRs.DeV,125,,257,HTTP 204,yes
+AKUN-021-UNKNOWN-VLESS-WS-131MS,vless,ws,188.114.97.6,24VvD-4imRvfaQv7hQxYbU9WzJv378Qi.v2Raygulf.WorkeRS.DeV,131,,258,HTTP 204,yes
+AKUN-022-UNKNOWN-VLESS-WS-126MS,vless,ws,104.21.75.46,bold-term-2b48.stary3989.workers.dev,126,,269,HTTP 204,yes
+AKUN-023-UNKNOWN-VLESS-WS-137MS,vless,ws,104.18.0.1,all.speedtest03.ccwu.cc,137,,243,HTTP 204,yes
+AKUN-024-PAGES-VLESS-WS-116MS,vless,ws,ldgb.pages.dev,ldgb.pages.dev,116,,248,HTTP 204,yes
+AKUN-025-UNKNOWN-VLESS-WS-112MS,vless,ws,104.20.13.116,ourfast.ccwu.cc,112,,303,HTTP 204,yes
+AKUN-026-UNKNOWN-VLESS-WS-96MS,vless,ws,162.159.36.53,bbc.zjxc.de5.net,96,,259,HTTP 204,yes
