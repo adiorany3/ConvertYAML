@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-94MS,vless,ws,104.16.243.164,t1s1.rittbo.kdns.fr,HTTP 204,221,246,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-94MS,vless,ws,104.17.25.173,t1s1.rittbo.kdns.fr,HTTP 204,224,233,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-102MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,226,255,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-105MS,vless,ws,154.83.95.129,t1s1.rittbo.kdns.fr,HTTP 204,244,245,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-114MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,259,299,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-136MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,230,272,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-132MS,vless,ws,141.101.114.8,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,264,295,HTTP 204,yes
-AKUN-008-DEV-VLESS-WS-114MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,261,248,HTTP 204,yes
-AKUN-009-DEV-VLESS-WS-132MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,223,252,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-105MS,vless,ws,172.64.32.6,soucuovls.pages.dev,HTTP 204,229,257,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-94MS,vless,ws,172.64.149.209,t1s1.rittbo.kdns.fr,HTTP 204,227,261,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-99MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,242,243,HTTP 204,yes
+AKUN-003-ZOOM-VLESS-WS-105MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,240,244,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-107MS,vless,ws,104.16.243.164,t1s1.rittbo.kdns.fr,HTTP 204,246,243,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-106MS,vless,ws,162.159.3.141,t1s1.rittbo.kdns.fr,HTTP 204,223,245,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-103MS,vless,ws,ez-041a82.ezaccess1225a0b.workers.dev,ez-041a82.ezaccess1225a0b.workers.dev,HTTP 204,268,305,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-113MS,vless,ws,141.101.120.73,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,254,286,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-127MS,vless,ws,www.shopify.com,gddy.hhlfy.de5.net,HTTP 204,237,258,HTTP 204,yes
+AKUN-009-WPENG-VLESS-WS-134MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,227,253,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-112MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,209,237,HTTP 204,yes
