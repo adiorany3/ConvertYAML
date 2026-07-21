@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-110MS,vless,ws,saas.sin.fan,t1s1.rittbo.kdns.fr,HTTP 204,272,315,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-110MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,280,345,HTTP 204,yes
-AKUN-003-WPENG-VLESS-WS-116MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,322,320,HTTP 204,yes
-AKUN-004-RS-RAPIDSEEDBOX-20190717-VLESS-WS-128MS,vless,ws,45.130.125.207,t1s1.rittbo.kdns.fr,HTTP 204,351,312,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-128MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,283,346,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-126MS,vless,ws,172.64.53.27,t1s1.rittbo.kdns.fr,HTTP 204,299,329,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-135MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,HTTP 204,299,308,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-146MS,vless,ws,172.64.32.6,soucuovls.pages.dev,HTTP 204,311,337,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-143MS,vless,ws,xn--b6gac.eu.org,edt2.yfqh08811.ccwu.cc,HTTP 204,313,317,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-118MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,284,342,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-61MS,vless,ws,198.13.60.163,t1s1.rittbo.kdns.fr,HTTP 204,211,244,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-64MS,vless,ws,172.64.53.27,t1s1.rittbo.kdns.fr,HTTP 204,196,240,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-64MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,213,237,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-61MS,vless,ws,104.18.42.98,t1s1.rittbo.kdns.fr,HTTP 204,215,257,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-72MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,202,268,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-78MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,201,234,HTTP 204,yes
+AKUN-007-ZVC-VLESS-WS-81MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,231,237,HTTP 204,yes
+AKUN-008-WPENG-VLESS-WS-85MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,216,235,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-96MS,vless,ws,ldgb.pages.dev,ldgb.pages.dev,HTTP 204,202,257,HTTP 204,yes
+AKUN-010-CLOUDWEBMANAGE-EU-FR-VLESS-WS-80MS,vless,ws,113.30.191.181,jacbgoff.davdlpck1znnhvqh64hl.workers.dev,HTTP 204,209,257,HTTP 204,yes
