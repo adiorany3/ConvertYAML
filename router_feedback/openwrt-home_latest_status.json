@@ -5,28 +5,28 @@
     "AUTO-FAST": {
       "all_count": 10,
       "history_last_delay": 0,
-      "now": "AKUN-007-CLOUDFLARE-VLESS-WS-64MS",
+      "now": "AKUN-005-UNKNOWN-VLESS-WS-74MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 39,
-      "now": "WARM-UP",
+      "history_last_delay": 0,
+      "now": "AKUN-005-UNKNOWN-VLESS-WS-74MS",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 15,
-      "history_last_delay": 33,
-      "now": "AKUN-003-CLOUDFLARE-VLESS-WS-71MS",
+      "history_last_delay": 0,
+      "now": "AKUN-005-UNKNOWN-VLESS-WS-74MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 55,
-      "now": "WARM-UP",
+      "history_last_delay": 221,
+      "now": "MANUAL",
       "type": "Fallback",
       "udp": true
     },
@@ -39,14 +39,14 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 44,
-      "now": "WARM-UP",
+      "history_last_delay": 63,
+      "now": "AKUN-005-UNKNOWN-VLESS-WS-74MS",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 0,
+      "history_last_delay": 150,
       "now": "STREAMING-FAST",
       "type": "Fallback",
       "udp": true
@@ -54,28 +54,28 @@
     "STREAMING-FAST": {
       "all_count": 8,
       "history_last_delay": 57,
-      "now": "AKUN-009-CLOUDFLARE-VLESS-WS-77MS",
+      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-62MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 44,
-      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-62MS",
+      "history_last_delay": 0,
+      "now": "AKUN-005-UNKNOWN-VLESS-WS-74MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
       "history_last_delay": 0,
-      "now": "AKUN-009-CLOUDFLARE-VLESS-WS-77MS",
+      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-62MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 44,
-      "now": "WARM-UP",
+      "history_last_delay": 39,
+      "now": "AKUN-005-UNKNOWN-VLESS-WS-74MS",
       "type": "Fallback",
       "udp": true
     }
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-07-22T21:30:17.436702+00:00"
+  "timestamp_utc": "2026-07-22T22:00:12.760656+00:00"
 }
