@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-63MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,237,246,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-60MS,vless,ws,104.18.35.15,t1s1.rittbo.kdns.fr,HTTP 204,227,258,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-68MS,vless,ws,104.17.122.18,t1s1.rittbo.kdns.fr,HTTP 204,219,251,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-60MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,221,254,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-67MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,221,263,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-71MS,vless,ws,104.18.0.1,all.speedtest03.ccwu.cc,HTTP 204,228,251,HTTP 204,yes
-AKUN-007-WEBEX-VLESS-WS-60MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,HTTP 204,263,243,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-91MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,236,240,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-93MS,vless,ws,104.25.3.165,patient-moon-c61f.ggfsa55.workers.dev,HTTP 204,242,231,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-97MS,vless,ws,cf.levikogjgfdd.ir,bbc.zjxc.de5.net,HTTP 204,280,252,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-62MS,vless,ws,162.159.8.123,t1s1.rittbo.kdns.fr,HTTP 204,208,242,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-63MS,vless,ws,172.64.53.34,t1s1.rittbo.kdns.fr,HTTP 204,202,250,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-69MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,208,231,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-72MS,vless,ws,104.18.0.1,all.speedtest03.ccwu.cc,HTTP 204,218,260,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-67MS,vless,ws,172.67.170.11,t1s1.rittbo.kdns.fr,HTTP 204,196,251,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-65MS,vless,ws,172.64.35.206,t1s1.rittbo.kdns.fr,HTTP 204,209,232,HTTP 204,yes
+AKUN-007-ZVC-VLESS-WS-65MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,212,232,HTTP 204,yes
+AKUN-008-UNKNOWN-VLESS-WS-83MS,vless,ws,104.21.94.161,t1s1.rittbo.kdns.fr,HTTP 204,200,236,HTTP 204,yes
+AKUN-009-ZVC-VLESS-WS-70MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,222,235,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-66MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,214,257,HTTP 204,yes
