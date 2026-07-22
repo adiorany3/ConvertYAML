@@ -1,31 +1,28 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-58MS,vless,ws,104.18.43.174,t1s1.rittbo.kdns.fr,58,,230,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-61MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,61,,218,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-62MS,vless,ws,172.64.53.27,t1s1.rittbo.kdns.fr,62,,201,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-66MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,66,,223,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-68MS,vless,ws,172.64.145.2,t1s1.rittbo.kdns.fr,68,,222,HTTP 204,yes
-AKUN-006-WEBEX-VLESS-WS-64MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,64,,222,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-61MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,61,,223,HTTP 204,yes
-AKUN-008-UNKNOWN-VLESS-WS-72MS,vless,ws,172.64.32.6,soucuovls.pages.dev,72,,231,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-74MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,74,,216,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-95MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,95,,255,HTTP 204,yes
-AKUN-011-UNKNOWN-VLESS-WS-86MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,86,,235,HTTP 204,yes
-AKUN-012-UNKNOWN-VLESS-WS-92MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,92,,226,HTTP 204,yes
-AKUN-013-UNKNOWN-VLESS-WS-90MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,90,,213,HTTP 204,yes
-AKUN-014-CLOUDFLARE-VLESS-WS-117MS,vless,ws,172.64.53.27,t1s1.rittbo.kdns.fr,117,,200,HTTP 204,yes
-AKUN-015-UNKNOWN-VLESS-WS-83MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,83,,221,HTTP 204,yes
-AKUN-016-ZOOM-VLESS-WS-63MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,63,,227,HTTP 204,yes
-AKUN-017-UNKNOWN-VLESS-WS-71MS,vless,ws,108.162.198.5,support.zoom.us.yxls.eu.cc,71,,249,HTTP 204,yes
-AKUN-018-CLOUDFLARE-VLESS-WS-104MS,vless,ws,cf.levikogjgfdd.ir,bbc.zjxc.de5.net,104,,255,HTTP 204,yes
-AKUN-019-UNKNOWN-VLESS-WS-144MS,vless,ws,104.17.108.103,l-j-o-MiTiVPN---MiTiVPN-o.MAQROR.ir,144,,387,HTTP 204,yes
-AKUN-020-CLOUDFLARE-VLESS-WS-348MS,vless,ws,104.21.5.137,vangoghhh.info,348,,5705,HTTP 204,yes
-AKUN-021-CLOUDFLARE-VLESS-WS-353MS,vless,ws,cf.levikogjgfdd.ir,terazhediii.info,353,,5146,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-022-CLOUDFLARE-VLESS-WS-354MS,vless,ws,104.16.72.101,vangoghhh.info,354,,805,HTTP 204,yes
-AKUN-023-UNKNOWN-VLESS-WS-371MS,vless,ws,89.116.250.135,shegeftihaaa.net,371,,5146,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-024-CLOUDFLARE-VLESS-WS-508MS,vless,ws,104.17.148.22,octopusss.net,508,,900,HTTP 204,yes
-AKUN-025-CLOUDFLARE-VLESS-WS-570MS,vless,ws,104.17.148.22,a.testiam13.workers.dev,570,,5146,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-026-CLOUDFLARE-VLESS-WS-641MS,vless,ws,b2n.ir,mail.qbo.qzz.io,641,,1002,HTTP 204,yes
-AKUN-027-UNKNOWN-VLESS-WS-542MS,vless,ws,190.93.246.37,greenhood.greennsda12fseke122fas23131334.workers.dev,542,,5146,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-028-DEV-VLESS-WS-634MS,vless,ws,polished-band-c7ab.rasamwiner9090.workers.dev,polished-band-c7ab.rasamwiner9090.workers.dev,634,,5146,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
-AKUN-029-DEV-VLESS-WS-406MS,vless,ws,fancy-wind-799d.cloudneryacc.workers.dev,fancy-wind-799d.cloudneryacc.workers.dev,406,,900,HTTP 204,yes
-AKUN-030-CLOUDFLARE-VLESS-WS-707MS,vless,ws,1.1.1.1,de.mygoldiran.com,707,,1094,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-63MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,63,,237,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-60MS,vless,ws,104.18.35.15,t1s1.rittbo.kdns.fr,60,,227,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-68MS,vless,ws,104.17.122.18,t1s1.rittbo.kdns.fr,68,,219,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-60MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,60,,221,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-67MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,67,,221,HTTP 204,yes
+AKUN-006-UNKNOWN-VLESS-WS-71MS,vless,ws,104.18.0.1,all.speedtest03.ccwu.cc,71,,228,HTTP 204,yes
+AKUN-007-WEBEX-VLESS-WS-60MS,vless,ws,blog.webex.com,blog.webex.com.yxls.eu.cc,60,,263,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-91MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,91,,236,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-93MS,vless,ws,104.25.3.165,patient-moon-c61f.ggfsa55.workers.dev,93,,242,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-97MS,vless,ws,cf.levikogjgfdd.ir,bbc.zjxc.de5.net,97,,280,HTTP 204,yes
+AKUN-011-UNKNOWN-VLESS-WS-76MS,vless,ws,172.64.149.209,t1s1.rittbo.kdns.fr,76,,216,HTTP 204,yes
+AKUN-012-UNKNOWN-VLESS-WS-84MS,vless,ws,51.91.251.198,support.zoom.us.yxls.eu.cc,84,,203,HTTP 204,yes
+AKUN-013-CLOUDFLARE-VLESS-WS-119MS,vless,ws,162.159.39.211,vp26.cc.cd,119,,268,HTTP 204,yes
+AKUN-014-ZVC-VLESS-WS-69MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,69,,223,HTTP 204,yes
+AKUN-015-CLOUDFLARE-VLESS-WS-97MS,vless,ws,172.64.32.6,soucuovls.pages.dev,97,,222,HTTP 204,yes
+AKUN-016-CLOUDFLARE-VLESS-WS-130MS,vless,ws,104.25.220.68,1.hshs8227shhshs.workers.dev,130,,229,HTTP 204,yes
+AKUN-017-UNKNOWN-VLESS-WS-138MS,vless,ws,162.159.36.53,bbc.zjxc.de5.net,138,,251,HTTP 204,yes
+AKUN-018-UNKNOWN-VLESS-WS-167MS,vless,ws,104.16.72.50,fm3.pages.dev,167,,171,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-019-CLOUDFLARE-VLESS-WS-117MS,vless,ws,104.17.108.103,l-j-o-MiTiVPN---MiTiVPN-o.MAQROR.ir,117,,304,HTTP 204,yes
+AKUN-020-UNKNOWN-VLESS-WS-360MS,vless,ws,45.130.125.207,shegeftihaaa.net,360,,757,HTTP 204,yes
+AKUN-021-UNKNOWN-VLESS-WS-362MS,vless,ws,108.162.192.75,octopusss.net,362,,756,HTTP 204,yes
+AKUN-022-CLOUDFLARE-VLESS-WS-373MS,vless,ws,162.159.38.119,terazhediii.info,373,,5148,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-023-UNKNOWN-VLESS-WS-340MS,vless,ws,45.131.208.61,vangoghhh.info,340,,3296,HTTP 204,yes
+AKUN-024-UNKNOWN-VLESS-WS-537MS,vless,ws,104.18.1.1,DeluxHost-NL-AMS-1.sharingfreenode.cc.cd,537,,955,HTTP 204,yes
+AKUN-025-UNKNOWN-VLESS-WS-68MS,vless,ws,104.21.117.9,netlivpn2950.bbxff.workers.dev,68,,664,HTTP 204,yes
+AKUN-026-CLOUDFLARE-VLESS-WS-692MS,vless,ws,162.159.38.119,vod.ensf.top,692,,1184,HTTP 204,yes
+AKUN-027-UNKNOWN-VLESS-WS-705MS,vless,ws,104.16.73.26,parsa-panel-alypp.fafaavaf.workers.dev,705,,879,HTTP 204,yes
