@@ -1,26 +1,33 @@
 name,type,network,original_server,bug_sni,handshake_ms,ws_upgrade_ms,url_test_ms,url_test_status,url_test_success
-AKUN-001-CLOUDFLARE-VLESS-WS-62MS,vless,ws,104.18.209.251,t1s1.rittbo.kdns.fr,62,,205,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-58MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,58,,202,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-65MS,vless,ws,172.64.146.229,t1s1.rittbo.kdns.fr,65,,221,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-64MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,64,,203,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-72MS,vless,ws,188.114.97.6,ldej--MiTiVPN---MiTiVPN-o.MAQROR.ir,72,,304,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-62MS,vless,ws,45.130.125.207,t1s1.rittbo.kdns.fr,62,,214,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-74MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,74,,264,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-62MS,vless,ws,172.67.170.11,t1s1.rittbo.kdns.fr,62,,201,HTTP 204,yes
-AKUN-009-ZVC-VLESS-WS-69MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,69,,215,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-65MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,65,,210,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-66MS,vless,ws,cf.levikogjgfdd.ir,blog.webex.com.yxls.eu.cc,66,,220,HTTP 204,yes
-AKUN-012-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,82,,206,HTTP 204,yes
-AKUN-013-RS-RAPIDSEEDBOX-20190717-VLESS-WS-92MS,vless,ws,45.130.125.158,t1s1.rittbo.kdns.fr,92,,208,HTTP 204,yes
-AKUN-014-CLOUDFLARE-VLESS-WS-72MS,vless,ws,172.64.32.6,soucuovls.pages.dev,72,,222,HTTP 204,yes
-AKUN-015-CLOUDFLARE-VLESS-WS-61MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,61,,203,HTTP 204,yes
-AKUN-016-CLOUDFLARE-VLESS-WS-113MS,vless,ws,cf.levikogjgfdd.ir,bbc.zjxc.de5.net,113,,222,HTTP 204,yes
-AKUN-017-UNKNOWN-VLESS-WS-95MS,vless,ws,104.17.108.103,l-j-o-MiTiVPN---MiTiVPN-o.MAQROR.ir,95,,211,HTTP 204,yes
-AKUN-018-UNKNOWN-VLESS-WS-118MS,vless,ws,104.19.149.174,l-j--vMiTiVPN---MiTiVPN-o.MAQROR.ir,118,,240,HTTP 204,yes
-AKUN-019-ZOOM-VLESS-WS-75MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,75,,240,HTTP 204,yes
-AKUN-020-UNKNOWN-VLESS-WS-130MS,vless,ws,104.16.72.41,l-j-uu-MiTiVPN---MiTiVPN-o.MAQROR.ir,130,,253,HTTP 204,yes
-AKUN-021-UNKNOWN-VLESS-WS-126MS,vless,ws,104.17.100.120,w-inf-l-mitivpn-----mitivpn.app-cloud.ir,126,,255,HTTP 204,yes
-AKUN-022-UNKNOWN-VLESS-WS-195MS,vless,ws,45.130.125.207,hhvl.hhapp.kdns.fr,195,,374,HTTP 204,yes
-AKUN-023-CLOUDFLARE-VLESS-WS-78MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,78,,212,HTTP 204,yes
-AKUN-024-UNKNOWN-VLESS-WS-227MS,vless,ws,91.193.58.201,vangoghhh.info,227,,4766,HTTP 204,yes
-AKUN-025-SPEEDTEST-VLESS-WS-249MS,vless,ws,www.speedtest.org,shegeftihaaa.net,249,,525,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-84MS,vless,ws,104.21.94.161,t1s1.rittbo.kdns.fr,84,,217,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-86MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,86,,216,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-83MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,83,,228,HTTP 204,yes
+AKUN-004-ZVC-VLESS-WS-98MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,98,,229,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-86MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,86,,210,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-112MS,vless,ws,cf.levikogjgfdd.ir,bbc.zjxc.de5.net,112,,211,HTTP 204,yes
+AKUN-007-RS-RAPIDSEEDBOX-20190717-VLESS-WS-119MS,vless,ws,45.130.125.207,t1s1.rittbo.kdns.fr,119,,224,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-129MS,vless,ws,108.162.195.58,learn00.evany.de5.net,129,,204,HTTP 204,yes
+AKUN-009-ZVC-VLESS-WS-135MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,135,,199,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-135MS,vless,ws,104.19.149.174,l-j--vMiTiVPN---MiTiVPN-o.MAQROR.ir,135,,311,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-118MS,vless,ws,188.114.97.6,ldej--MiTiVPN---MiTiVPN-o.MAQROR.ir,118,,267,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-140MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,140,,218,HTTP 204,yes
+AKUN-013-UNKNOWN-VLESS-WS-130MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,130,,216,HTTP 204,yes
+AKUN-014-UNKNOWN-VLESS-WS-112MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,112,,218,HTTP 204,yes
+AKUN-015-CLOUDFLARE-VLESS-WS-150MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,150,,223,HTTP 204,yes
+AKUN-016-UNKNOWN-VLESS-WS-97MS,vless,ws,104.17.108.103,l-j-o-MiTiVPN---MiTiVPN-o.MAQROR.ir,97,,284,HTTP 204,yes
+AKUN-017-CLOUDFLARE-VLESS-WS-90MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,90,,215,HTTP 204,yes
+AKUN-018-CLOUDFLARE-VLESS-WS-112MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,112,,223,HTTP 204,yes
+AKUN-019-UNKNOWN-VLESS-WS-141MS,vless,ws,104.16.72.41,l-j-uu-MiTiVPN---MiTiVPN-o.MAQROR.ir,141,,245,HTTP 204,yes
+AKUN-020-RS-RAPIDSEEDBOX-20190717-VLESS-WS-209MS,vless,ws,45.130.125.207,hhvl.hhapp.kdns.fr,209,,296,HTTP 204,yes
+AKUN-021-UNKNOWN-VLESS-WS-239MS,vless,ws,104.16.72.2,vangoghhh.info,239,,5048,HTTP 204,yes
+AKUN-022-UNKNOWN-VLESS-WS-246MS,vless,ws,104.16.72.101,shegeftihaaa.net,246,,530,HTTP 204,yes
+AKUN-023-UNKNOWN-VLESS-WS-88MS,vless,ws,104.24.237.67,node-8966333989-b9acc5.dsjvhbsdcjy.workers.dev,88,,535,HTTP 204,yes
+AKUN-024-CLOUDFLARE-VLESS-WS-458MS,vless,ws,188.114.97.6,t03.tzteam.online,458,,536,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-025-DEV-VLESS-WS-355MS,vless,ws,ez-733129.nova-b6ad66.workers.dev,ez-733129.nova-b6ad66.workers.dev,355,,5147,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-026-CLOUDFLARE-VLESS-WS-494MS,vless,ws,162.159.38.119,vod.ensf.top,494,,829,HTTP 204,yes
+AKUN-027-CLOUDFLARE-VLESS-WS-487MS,vless,ws,188.114.97.6,t03.tzteam.online,487,,564,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-028-UNKNOWN-VLESS-WS-443MS,vless,ws,104.17.148.22,a.testiam13.workers.dev,443,,5141,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=5.0)",no
+AKUN-029-MYGOLDIRAN-VLESS-WS-461MS,vless,ws,d.mygoldiran.com,de.mygoldiran.com,461,,647,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-030-SPEEDTEST-VLESS-WS-534MS,vless,ws,www.speedtest.net,mAhaNrEaliteAm.MaHkHan.iR,534,,719,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-031-CLOUDFLARE-VLESS-WS-533MS,vless,ws,188.114.97.6,t04.tzteam.online,533,,600,"SSLError: HTTPSConnectionPool(host='www.gstatic.com', port=443): Max retries exceeded with url: /generate_204 (Caused by SSLError(",no
+AKUN-032-CLOUDFLARE-VLESS-WS-510MS,vless,ws,162.159.38.119,xqexv.greenwolf-ili.sbs,510,,1285,HTTP 204,yes
