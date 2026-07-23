@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-61MS,vless,ws,www.cnae.top,t1s1.rittbo.kdns.fr,HTTP 204,199,247,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-63MS,vless,ws,one-for-all.levikogjgfdd.ir,t1s1.rittbo.kdns.fr,HTTP 204,225,1030,HTTP 204,yes
-AKUN-003-ZVC-VLESS-WS-69MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,207,234,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,205,231,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-86MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,213,235,HTTP 204,yes
-AKUN-006-VULTR-VLESS-WS-70MS,vless,ws,207.148.108.85,t1s1.rittbo.kdns.fr,HTTP 204,198,231,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-69MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,223,251,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-112MS,vless,ws,cf.levikogjgfdd.ir,blog.webex.com.yxls.eu.cc,HTTP 204,225,229,HTTP 204,yes
-AKUN-009-RS-RAPIDSEEDBOX-20190717-VLESS-WS-71MS,vless,ws,45.130.125.207,t1s1.rittbo.kdns.fr,HTTP 204,209,256,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-67MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,217,227,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-116MS,vless,ws,162.159.48.245,t1s1.rittbo.kdns.fr,HTTP 204,241,273,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-120MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,254,275,HTTP 204,yes
+AKUN-003-ZVC-VLESS-WS-126MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,275,289,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-124MS,vless,ws,104.16.243.164,t1s1.rittbo.kdns.fr,HTTP 204,242,283,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-122MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,255,291,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-126MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,247,280,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-123MS,vless,ws,cf.levikogjgfdd.ir,blog.webex.com.yxls.eu.cc,HTTP 204,250,292,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-123MS,vless,ws,188.114.97.6,ldej--MiTiVPN---MiTiVPN-o.MAQROR.ir,HTTP 204,263,288,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-126MS,vless,ws,104.16.72.41,l-j-uu-MiTiVPN---MiTiVPN-o.MAQROR.ir,HTTP 204,255,295,HTTP 204,yes
+AKUN-010-DEV-VLESS-WS-135MS,vless,ws,event-bus-c22219-edg.staging-api-5de174.workers.dev,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,261,285,HTTP 204,yes
