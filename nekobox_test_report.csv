@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-77MS,vless,ws,172.64.146.66,t1s1.rittbo.kdns.fr,HTTP 204,212,230,HTTP 204,yes
-AKUN-002-ZVC-VLESS-WS-80MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,229,241,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-85MS,vless,ws,172.67.153.110,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,231,260,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-88MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,280,7178,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-005-CLOUDFLARE-VLESS-WS-96MS,vless,ws,104.18.45.104,t1s1.rittbo.kdns.fr,HTTP 204,237,257,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-87MS,vless,ws,108.162.198.5,support.zoom.us.yxls.eu.cc,HTTP 204,244,233,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-90MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,199,232,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-93MS,vless,ws,173.245.58.121,node-1156018316-84eadd.silimem566.workers.dev,HTTP 204,208,251,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-97MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,205,237,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-77MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,234,261,HTTP 204,yes
-AKUN-011-UNKNOWN-VLESS-WS-89MS,vless,ws,141.101.120.73,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,212,240,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-60MS,vless,ws,104.25.64.103,t1s1.rittbo.kdns.fr,HTTP 204,201,233,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-64MS,vless,ws,104.18.42.98,t1s1.rittbo.kdns.fr,HTTP 204,197,239,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-59MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,219,249,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-69MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,213,254,HTTP 204,yes
+AKUN-005-MEDIUM-VLESS-WS-70MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,218,233,HTTP 204,yes
+AKUN-006-DEV-VLESS-WS-73MS,vless,ws,event-bus-c22219-edg.staging-api-5de174.workers.dev,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,208,243,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-74MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,216,234,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-81MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,203,228,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-76MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,199,236,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,207,227,HTTP 204,yes
