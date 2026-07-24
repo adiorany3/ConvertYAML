@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-129MS,vless,ws,cf.877774.xyz,t1s1.rittbo.kdns.fr,HTTP 204,276,296,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-131MS,vless,ws,104.17.122.18,t1s1.rittbo.kdns.fr,HTTP 204,262,284,HTTP 204,yes
-AKUN-003-DEV-VLESS-WS-121MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,261,305,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-132MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,269,302,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-130MS,vless,ws,162.159.5.231,t1s1.rittbo.kdns.fr,HTTP 204,261,289,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-136MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,265,296,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-139MS,vless,ws,108.162.198.5,support.zoom.us.yxls.eu.cc,HTTP 204,308,296,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-127MS,vless,ws,172.64.53.27,t1s1.rittbo.kdns.fr,HTTP 204,268,292,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-136MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,270,292,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-135MS,vless,ws,event-bus-c22219-edg.staging-api-5de174.workers.dev,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,270,295,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-65MS,vless,ws,162.159.10.87,t1s1.rittbo.kdns.fr,HTTP 204,227,254,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-68MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,226,258,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-62MS,vless,ws,162.159.3.141,t1s1.rittbo.kdns.fr,HTTP 204,248,259,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-66MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,257,262,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-78MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,220,271,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-64MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,251,261,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-80MS,vless,ws,104.16.72.21,t1s1.rittbo.kdns.fr,HTTP 204,236,262,HTTP 204,yes
+AKUN-008-DEV-VLESS-WS-94MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,243,261,HTTP 204,yes
+AKUN-009-008500-VLESS-WS-76MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,229,266,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-89MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,233,270,HTTP 204,yes
