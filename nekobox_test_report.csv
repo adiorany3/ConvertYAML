@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-ZVC-VLESS-WS-59MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,212,221,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-65MS,vless,ws,104.17.184.125,gddy.hhlfy.de5.net,HTTP 204,211,236,HTTP 204,yes
-AKUN-003-3666888-VLESS-WS-66MS,vless,ws,cf.3666888.xyz,l.m.j.u.w.9.y.i.m.y.s.8.p.y.us.art-us.kdns.fr,HTTP 204,201,239,HTTP 204,yes
-AKUN-004-SPEEDTEST-VLESS-WS-69MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,HTTP 204,209,173,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-005-CLOUDFLARE-VLESS-WS-76MS,vless,ws,104.16.73.137,t1s1.rittbo.kdns.fr,HTTP 204,199,224,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-74MS,vless,ws,162.159.18.120,t1s1.rittbo.kdns.fr,HTTP 204,201,229,HTTP 204,yes
-AKUN-008-UNKNOWN-VLESS-WS-71MS,vless,ws,104.21.3.56,zeus-panel-pujg2f.zeus-c2gzhx.workers.dev,HTTP 204,429,451,HTTP 204,yes
-AKUN-009-ZVC-VLESS-WS-89MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,211,233,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-78MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,207,225,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-77MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,196,253,HTTP 204,yes
-AKUN-012-CLOUDFLARE-VLESS-WS-77MS,vless,ws,adf.ly,rAyAn-007.pArViN.DpDnS.OrG,HTTP 204,214,237,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-59MS,vless,ws,104.18.42.98,t1s1.rittbo.kdns.fr,HTTP 204,235,252,HTTP 204,yes
+AKUN-002-LEVIKOGJGFDD-VLESS-WS-60MS,vless,ws,one-for-all.levikogjgfdd.ir,t1s1.rittbo.kdns.fr,HTTP 204,222,270,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-65MS,vless,ws,172.67.153.110,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,226,268,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-67MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,230,268,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-67MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,HTTP 204,219,261,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-67MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,262,272,HTTP 204,yes
+AKUN-007-008500-VLESS-WS-65MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,229,259,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-59MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,219,264,HTTP 204,yes
+AKUN-009-EU-VLESS-WS-65MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,229,258,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-75MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,227,270,HTTP 204,yes
