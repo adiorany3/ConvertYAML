@@ -3,7 +3,7 @@
 ## Ringkasan
 - Total proxy di YAML: 15
 - WARM-UP harian: 7 node
-- WARM-UP-CF Cloudflare/Worker: 2 node
+- WARM-UP-CF Cloudflare/Worker: 4 node
 - STREAMING-FAST: 8 node
 - AUTO-FAST: 10 node
 - FALLBACK: 15 referensi, manual backup: 5 node
@@ -15,31 +15,35 @@
 - Router RAM kecil: pakai `openclash_lite.yaml`.
 
 ## Tier 1 - WARM-UP
-- AKUN-003-ZVC-VLESS-WS-77MS
-- AKUN-002-UNKNOWN-VLESS-WS-77MS
-- AKUN-001-UNKNOWN-VLESS-WS-78MS
-- AKUN-004-UNKNOWN-VLESS-WS-85MS
-- AKUN-005-3666888-VLESS-WS-95MS
-- AKUN-007-UNKNOWN-VLESS-WS-100MS
-- AKUN-006-UNKNOWN-VLESS-WS-107MS
+- AKUN-001-ZVC-VLESS-WS-76MS
+- AKUN-002-GOOGLE-VLESS-WS-84MS
+- AKUN-006-ZVC-VLESS-WS-91MS
+- AKUN-003-UNKNOWN-VLESS-WS-96MS
+- AKUN-004-3666888-VLESS-WS-97MS
+- AKUN-005-UNKNOWN-VLESS-WS-105MS
+- AKUN-007-CLOUDFLARE-VLESS-WS-140MS
 
 ## Tier 1B - WARM-UP-CF
-- AKUN-009-CLOUDFLARE-VLESS-WS-126MS
-- AKUN-010-CLOUDFLARE-VLESS-WS-179MS
+- AKUN-008-CLOUDFLARE-VLESS-WS-122MS
+- AKUN-007-CLOUDFLARE-VLESS-WS-140MS
+- AKUN-009-CLOUDFLARE-VLESS-WS-151MS
+- AKUN-010-CLOUDFLARE-VLESS-WS-184MS
 
 ## Streaming Pool
-- AKUN-003-ZVC-VLESS-WS-77MS
-- AKUN-002-UNKNOWN-VLESS-WS-77MS
-- AKUN-001-UNKNOWN-VLESS-WS-78MS
-- AKUN-004-UNKNOWN-VLESS-WS-85MS
-- AKUN-005-3666888-VLESS-WS-95MS
-- AKUN-006-UNKNOWN-VLESS-WS-107MS
-- AKUN-009-CLOUDFLARE-VLESS-WS-126MS
-- AKUN-010-CLOUDFLARE-VLESS-WS-179MS
+- AKUN-001-ZVC-VLESS-WS-76MS
+- AKUN-002-GOOGLE-VLESS-WS-84MS
+- AKUN-003-UNKNOWN-VLESS-WS-96MS
+- AKUN-004-3666888-VLESS-WS-97MS
+- AKUN-008-CLOUDFLARE-VLESS-WS-122MS
+- AKUN-007-CLOUDFLARE-VLESS-WS-140MS
+- AKUN-009-CLOUDFLARE-VLESS-WS-151MS
+- AKUN-010-CLOUDFLARE-VLESS-WS-184MS
 
 ## Node Berisiko dari NekoBox/sing-box Test
-- AKUN-004-SPEEDTEST-VLESS-WS-83MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
-- AKUN-007-SPEEDTEST-VLESS-WS-99MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+- AKUN-008-CLOUDFLARE-VLESS-WS-114MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+- AKUN-009-CLOUDFLARE-VLESS-WS-96MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+- AKUN-010-CLOUDFLARE-VLESS-WS-105MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+- AKUN-011-CLOUDFLARE-VLESS-WS-161MS: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
 
 ## Catatan Smart Mode
 - Health-check cepat hanya untuk pool kecil, bukan semua node.
