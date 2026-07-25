@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-60MS,vless,ws,104.16.243.164,t1s1.rittbo.kdns.fr,HTTP 204,226,257,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-63MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,224,249,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-69MS,vless,ws,cf.levikogjgfdd.ir,blog.webex.com.yxls.eu.cc,HTTP 204,222,248,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-63MS,vless,ws,104.18.35.15,t1s1.rittbo.kdns.fr,HTTP 204,244,263,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-69MS,vless,ws,vpn.renshengxuanze.ccwu.cc,vpn.renshengxuanze.ccwu.cc,HTTP 204,230,276,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-76MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,237,251,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-78MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,239,260,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-84MS,vless,ws,141.101.114.8,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,238,270,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-79MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,218,7177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-010-CLOUDFLARE-VLESS-WS-78MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,234,258,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-86MS,vless,ws,172.67.153.110,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,220,259,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-74MS,vless,ws,104.16.73.137,t1s1.rittbo.kdns.fr,HTTP 204,217,241,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-78MS,vless,ws,104.16.72.21,t1s1.rittbo.kdns.fr,HTTP 204,211,248,HTTP 204,yes
+AKUN-003-LEVIKOGJGFDD-VLESS-WS-74MS,vless,ws,one-for-all.levikogjgfdd.ir,blog.webex.com.yxls.eu.cc,HTTP 204,223,239,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-75MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,216,245,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-76MS,vless,ws,vpn.renshengxuanze.ccwu.cc,vpn.renshengxuanze.ccwu.cc,HTTP 204,214,248,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.21.4.230,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,226,251,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-71MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,218,245,HTTP 204,yes
+AKUN-008-UNKNOWN-VLESS-WS-74MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,228,252,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-95MS,vless,ws,188.114.97.6,ldej--MiTiVPN---MiTiVPN-o.MAQROR.ir,HTTP 204,235,258,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-78MS,vless,ws,173.245.59.35,ld.235231.xyz,HTTP 204,224,256,HTTP 204,yes
