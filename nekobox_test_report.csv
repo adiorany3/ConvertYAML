@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-125MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,248,273,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-122MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,262,276,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-126MS,vless,ws,www.speedtest.net,bpB-01c11365.HJdBcvDbKV.WORKErS.dEV,HTTP 204,231,217,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-004-3666888-VLESS-WS-134MS,vless,ws,cf.3666888.xyz,l.m.j.u.w.9.y.i.m.y.s.8.p.y.us.art-us.kdns.fr,HTTP 204,254,286,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-130MS,vless,ws,104.18.42.98,t1s1.rittbo.kdns.fr,HTTP 204,251,285,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-132MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,256,273,HTTP 204,yes
-AKUN-007-GOOGLE-VLESS-WS-134MS,vless,ws,35.241.172.224,learn00.evany.de5.net,HTTP 204,252,292,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-123MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,242,284,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-139MS,vless,ws,51.91.251.198,support.zoom.us.yxls.eu.cc,HTTP 204,255,293,HTTP 204,yes
-AKUN-010-CCWU-VLESS-WS-146MS,vless,ws,vpn.renshengxuanze.ccwu.cc,vpn.renshengxuanze.ccwu.cc,HTTP 204,255,284,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-128MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,251,282,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-71MS,vless,ws,104.18.0.0,t1s1.rittbo.kdns.fr,HTTP 204,272,307,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-78MS,vless,ws,104.17.122.18,t1s1.rittbo.kdns.fr,HTTP 204,272,338,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-75MS,vless,ws,104.18.35.15,t1s1.rittbo.kdns.fr,HTTP 204,357,304,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-76MS,vless,ws,104.21.4.230,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,276,345,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-81MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,274,307,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-82MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,315,345,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-84MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,315,374,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-80MS,vless,ws,188.114.97.6,ldej--MiTiVPN---MiTiVPN-o.MAQROR.ir,HTTP 204,478,321,HTTP 204,yes
+AKUN-009-DEV-VLESS-WS-80MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,275,305,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-75MS,vless,ws,104.19.229.21,l-j---MiTiVPN---MiTiVPN-o.App-Cloud.ir,HTTP 204,341,370,HTTP 204,yes
