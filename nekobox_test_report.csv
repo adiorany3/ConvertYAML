@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-ORACLE-VLESS-WS-55MS,vless,ws,138.2.87.237,t1s1.rittbo.kdns.fr,HTTP 204,208,237,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-56MS,vless,ws,162.159.3.141,t1s1.rittbo.kdns.fr,HTTP 204,209,240,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-59MS,vless,ws,104.25.64.103,t1s1.rittbo.kdns.fr,HTTP 204,209,237,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-59MS,vless,ws,198.41.208.112,support.zoom.us.yxls.eu.cc,HTTP 204,218,236,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-60MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,215,236,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-56MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,212,240,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-61MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,211,238,HTTP 204,yes
-AKUN-008-UNKNOWN-VLESS-WS-68MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,211,242,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-59MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,211,238,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-70MS,vless,ws,www.speedtest.net,ez-5FAAFb.EsmAoi.wORKeRs.DEv,HTTP 204,230,171,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-011-CLOUDFLARE-VLESS-WS-77MS,vless,ws,162.159.33.118,learn00.evany.de5.net,HTTP 204,204,235,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-55MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,HTTP 204,212,262,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-56MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,211,237,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-58MS,vless,ws,172.67.198.197,t1s1.rittbo.kdns.fr,HTTP 204,209,234,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-61MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,HTTP 204,211,238,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-57MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,222,235,HTTP 204,yes
+AKUN-006-ZVC-VLESS-WS-60MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,210,235,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-59MS,vless,ws,104.17.20.214,refighehosein.salamdadash123.workers.dev,HTTP 204,220,252,HTTP 204,yes
+AKUN-008-UNKNOWN-VLESS-WS-74MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,211,237,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-79MS,vless,ws,198.41.208.112,support.zoom.us.yxls.eu.cc,HTTP 204,216,234,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-94MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,209,240,HTTP 204,yes
