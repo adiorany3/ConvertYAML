@@ -1,13 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-70MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,238,260,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-71MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,231,271,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-65MS,vless,ws,flat-night-edd0.hosein9saleazhuongooyeh87.workers.dev,FLAT-night-EDD0.hOsEin9saLEAZhuongOoYeH87.wOrkerS.DeV,HTTP 204,225,266,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-71MS,vless,ws,www.speedtest.net,BPb-F23dDEdd.JCXkvlnDL.WOrkERS.deV,HTTP 204,239,185,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-005-UNKNOWN-VLESS-WS-67MS,vless,ws,104.21.4.230,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,232,273,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-75MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,233,250,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-65MS,vless,ws,141.101.120.73,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,241,310,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-64MS,vless,ws,172.67.153.110,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,251,254,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-78MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,245,276,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-68MS,vless,ws,ez-041a82.ezaccess1225a0b.workers.dev,ez-041a82.ezaccess1225a0b.workers.dev,HTTP 204,244,280,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-83MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,218,7177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-012-CLOUDFLARE-VLESS-WS-73MS,vless,ws,108.162.198.5,support.zoom.us.yxls.eu.cc,HTTP 204,247,258,HTTP 204,yes
+AKUN-001-DEV-VLESS-WS-62MS,vless,ws,to6r63-kkchighqm2.vxz0dduq7to7su0cdqf.workers.dev,To6R63-kKChiGHqm2.vxz0Dduq7to7Su0CDQf.worKERs.DEV,HTTP 204,218,231,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-62MS,vless,ws,104.21.94.161,t1s1.rittbo.kdns.fr,HTTP 204,200,226,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-64MS,vless,ws,www.speedtest.net,TO6R63-KKChIGHQM2.VxZ0DDUq7tO7su0cDqF.WoRKeRs.DeV,HTTP 204,225,229,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-67MS,vless,ws,172.67.156.87,tO6R63-kkCHIgHQM2.vXZ0dDUq7to7SU0cdQF.wOrKERS.Dev,HTTP 204,210,224,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-63MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,HTTP 204,199,231,HTTP 204,yes
+AKUN-006-UNKNOWN-VLESS-WS-62MS,vless,ws,104.21.89.41,tO6r63-kkChIGHQM2.VxZ0dDUq7To7su0cdqf.wORKeRS.dEV,HTTP 204,220,226,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-73MS,vless,ws,flat-night-edd0.hosein9saleazhuongooyeh87.workers.dev,FLAT-night-EDD0.hOsEin9saLEAZhuongOoYeH87.wOrkerS.DeV,HTTP 204,203,229,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-69MS,vless,ws,vpn.renshengxuanze.ccwu.cc,vpn.renshengxuanze.ccwu.cc,HTTP 204,209,234,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-68MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,200,232,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-85MS,vless,ws,162.159.14.252,t1s1.rittbo.kdns.fr,HTTP 204,199,227,HTTP 204,yes
