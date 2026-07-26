@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-82MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,227,258,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-78MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,215,265,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-77MS,vless,ws,198.41.208.112,support.zoom.us.yxls.eu.cc,HTTP 204,226,245,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,225,262,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-81MS,vless,ws,172.64.144.82,t1s1.rittbo.kdns.fr,HTTP 204,229,252,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-83MS,vless,ws,z-e-u-s-panel-1bojih.z-e-u-s-ukqk3o.workers.dev,z-e-u-s-panel-1bojih.z-e-u-s-ukqk3o.workers.dev,HTTP 204,899,1737,HTTP 204,yes
-AKUN-009-ZVC-VLESS-WS-82MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,227,243,HTTP 204,yes
-AKUN-010-CCWU-VLESS-WS-105MS,vless,ws,vpn.renshengxuanze.ccwu.cc,vpn.renshengxuanze.ccwu.cc,HTTP 204,224,254,HTTP 204,yes
-AKUN-011-GOOGLE-VLESS-WS-77MS,vless,ws,34.132.50.119,learn00.evany.de5.net,HTTP 204,203,246,HTTP 204,yes
-AKUN-012-CLOUDFLARE-VLESS-WS-91MS,vless,ws,162.159.8.155,learn00.evany.de5.net,HTTP 204,215,239,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-86MS,vless,ws,162.159.44.180,t1s1.rittbo.kdns.fr,HTTP 204,201,237,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-88MS,vless,ws,172.64.145.2,t1s1.rittbo.kdns.fr,HTTP 204,200,265,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-92MS,vless,ws,104.16.72.21,t1s1.rittbo.kdns.fr,HTTP 204,202,264,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-93MS,vless,ws,172.64.145.2,t1s1.rittbo.kdns.fr,HTTP 204,199,231,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-86MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,231,228,HTTP 204,yes
+AKUN-006-UNKNOWN-VLESS-WS-91MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,201,230,HTTP 204,yes
+AKUN-007-GOOGLE-VLESS-WS-93MS,vless,ws,34.132.50.119,learn00.evany.de5.net,HTTP 204,198,260,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-91MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,233,242,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-97MS,vless,ws,ez-041a82.ezaccess1225a0b.workers.dev,ez-041a82.ezaccess1225a0b.workers.dev,HTTP 204,217,243,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-85MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,198,229,HTTP 204,yes
