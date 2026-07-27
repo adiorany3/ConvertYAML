@@ -4,28 +4,28 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 30,
+      "history_last_delay": 31,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-80MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 33,
+      "history_last_delay": 31,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 29,
+      "history_last_delay": 34,
       "now": "AKUN-001-CLOUDFLARE-VLESS-WS-83MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 51,
+      "history_last_delay": 60,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -39,14 +39,14 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 33,
+      "history_last_delay": 30,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 32,
+      "history_last_delay": 31,
       "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
@@ -60,21 +60,21 @@
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 33,
+      "history_last_delay": 30,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-80MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 30,
+      "history_last_delay": 29,
       "now": "AKUN-009-CLOUDFLARE-VLESS-WS-110MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 34,
+      "history_last_delay": 30,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-07-27T09:30:08.034695+00:00"
+  "timestamp_utc": "2026-07-27T09:45:06.978074+00:00"
 }
