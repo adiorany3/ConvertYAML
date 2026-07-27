@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-71MS,vless,ws,162.159.8.123,t1s1.rittbo.kdns.fr,HTTP 204,218,251,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-71MS,vless,ws,86.107.197.239,support.zoom.us.yxls.eu.cc,HTTP 204,227,245,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-78MS,vless,ws,162.159.45.218,t1s1.rittbo.kdns.fr,HTTP 204,219,252,HTTP 204,yes
-AKUN-005-ZVC-VLESS-WS-69MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,202,253,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-91MS,vless,ws,104.17.180.39,t1s1.rittbo.kdns.fr,HTTP 204,233,257,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-81MS,vless,ws,172.64.38.215,learn00.evany.de5.net,HTTP 204,216,257,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-99MS,vless,ws,104.18.209.251,t1s1.rittbo.kdns.fr,HTTP 204,218,259,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-96MS,vless,ws,172.64.145.2,t1s1.rittbo.kdns.fr,HTTP 204,217,260,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-84MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,222,255,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-91MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,218,243,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-89MS,vless,ws,172.64.146.66,t1s1.rittbo.kdns.fr,HTTP 204,206,237,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-90MS,vless,ws,172.64.145.186,t1s1.rittbo.kdns.fr,HTTP 204,206,245,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-94MS,vless,ws,198.41.208.112,support.zoom.us.yxls.eu.cc,HTTP 204,219,239,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-91MS,vless,ws,172.64.145.2,t1s1.rittbo.kdns.fr,HTTP 204,223,233,HTTP 204,yes
+AKUN-005-ZVC-VLESS-WS-96MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,224,265,HTTP 204,yes
+AKUN-006-UNKNOWN-VLESS-WS-98MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,225,243,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-99MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,224,7177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-008-DEV-VLESS-WS-99MS,vless,ws,server3.pegibol940.workers.dev,server3.pegibol940.workers.dev,HTTP 204,231,244,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-102MS,vless,ws,172.67.153.110,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,224,245,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-96MS,vless,ws,104.25.64.103,t1s1.rittbo.kdns.fr,HTTP 204,214,258,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-94MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,216,263,HTTP 204,yes
