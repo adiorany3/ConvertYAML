@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-59MS,vless,ws,172.64.145.94,t1s1.rittbo.kdns.fr,HTTP 204,199,222,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-59MS,vless,ws,172.64.144.82,t1s1.rittbo.kdns.fr,HTTP 204,198,230,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-57MS,vless,ws,173.245.58.87,t1s1.rittbo.kdns.fr,HTTP 204,211,222,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-63MS,vless,ws,172.66.45.6,t1s1.rittbo.kdns.fr,HTTP 204,198,226,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-70MS,vless,ws,104.25.220.68,1.hshs8227shhshs.workers.dev,HTTP 204,223,234,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-73MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,197,225,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-72MS,vless,ws,162.159.38.119,t1s1.rittbo.kdns.fr,HTTP 204,198,225,HTTP 204,yes
-AKUN-008-UNKNOWN-VLESS-WS-85MS,vless,ws,113.30.191.181,jacbgoff.davdlpck1znnhvqh64hl.workers.dev,HTTP 204,208,242,HTTP 204,yes
-AKUN-009-BIGCOMMERCE-VLESS-WS-73MS,vless,ws,63.141.128.22,MiSty-tooth-78cA.FoboGAH414-e7B.WoRKERs.DEv,HTTP 204,204,251,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-97MS,vless,ws,104.16.72.50,t1s1.rittbo.kdns.fr,HTTP 204,198,233,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-53MS,vless,ws,162.159.24.39,t1s1.rittbo.kdns.fr,HTTP 204,211,235,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-61MS,vless,ws,141.101.120.73,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,219,260,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-61MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,216,251,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-60MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,230,7179,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-005-008500-VLESS-WS-60MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,216,249,HTTP 204,yes
+AKUN-006-ZVC-VLESS-WS-61MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,227,245,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-63MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,223,227,HTTP 204,yes
+AKUN-008-UNKNOWN-VLESS-WS-66MS,vless,ws,8.47.69.9,ancIEnt-HeaRt-60c5.dPccgIzieB.WoRKers.dEV,HTTP 204,215,243,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-59MS,vless,ws,104.26.4.60,t1s1.rittbo.kdns.fr,HTTP 204,214,238,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-57MS,vless,ws,162.159.3.141,t1s1.rittbo.kdns.fr,HTTP 204,207,239,HTTP 204,yes
+AKUN-011-DEV-VLESS-WS-61MS,vless,ws,server3.pegibol940.workers.dev,server3.pegibol940.workers.dev,HTTP 204,213,252,HTTP 204,yes
