@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-FMN5-RENTED-NET2-VLESS-WS-111MS,vless,ws,185.193.30.94,kakoolnews.whattodowhatnottodo.workers.dev,HTTP 204,411,351,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-105MS,vless,ws,104.25.220.68,1.hshs8227shhshs.workers.dev,HTTP 204,284,424,HTTP 204,yes
-AKUN-003-ZOOM-VLESS-WS-145MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,343,431,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-118MS,vless,ws,108.162.192.161,learn00.evany.de5.net,HTTP 204,289,316,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-120MS,vless,ws,104.25.3.165,patient-moon-c61f.ggfsa55.workers.dev,HTTP 204,339,325,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-173MS,vless,ws,172.67.190.141,uk.xfj123.top,HTTP 204,505,402,HTTP 204,yes
-AKUN-007-OVH-VLESS-WS-174MS,vless,ws,51.91.251.198,support.zoom.us.yxls.eu.cc,HTTP 204,336,319,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-184MS,vless,ws,104.18.13.149,ldggej--MiTiVPN---MiTiVPN-o.App-Cloud.ir,HTTP 204,443,483,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-207MS,vless,ws,104.16.72.110,hhvl.hhapp.kdns.fr,HTTP 204,397,426,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-236MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,406,341,HTTP 204,yes
+AKUN-001-ZOOM-VLESS-WS-79MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,231,257,HTTP 204,yes
+AKUN-002-ZVC-VLESS-WS-81MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,232,254,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-73MS,vless,ws,162.159.2.40,learn00.evany.de5.net,HTTP 204,230,269,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-83MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,226,262,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-86MS,vless,ws,162.159.0.3,soucuovls.pages.dev,HTTP 204,251,232,HTTP 204,yes
+AKUN-006-UNKNOWN-VLESS-WS-114MS,vless,ws,108.162.198.58,learn00.evany.de5.net,HTTP 204,227,253,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-117MS,vless,ws,104.18.16.56,l-j--vMiTiVPN---MiTiVPN-pp-o.KingCloud-1.ir,HTTP 204,210,320,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-85MS,vless,ws,172.66.40.99,l-j-o-MiTiVPN---MiTiVPN-iiio.KingCloud-1.ir,HTTP 204,226,264,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-74MS,vless,ws,108.162.192.161,learn00.evany.de5.net,HTTP 204,233,238,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-124MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,223,256,HTTP 204,yes
