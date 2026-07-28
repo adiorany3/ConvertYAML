@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-59MS,vless,ws,z-e-u-s-panel-1bojih.z-e-u-s-ukqk3o.workers.dev,z-e-u-s-panel-1bojih.z-e-u-s-ukqk3o.workers.dev,HTTP 204,915,896,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-61MS,vless,ws,188.114.97.3,MxP6JvJACYStDP-s4f.KJNnV3I410u6MQ-ITd.WorkerS.dev,HTTP 204,198,244,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-60MS,vless,ws,172.67.149.60,support.zoom.us.yxls.eu.cc,HTTP 204,215,235,HTTP 204,yes
-AKUN-004-DEV-VLESS-WS-74MS,vless,ws,event-bus-c22219-edg.staging-api-5de174.workers.dev,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,224,252,HTTP 204,yes
-AKUN-005-DEV-VLESS-WS-66MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,218,238,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-103MS,vless,ws,one-for-all.levikogjgfdd.ir,hhvl.hhapp.kdns.fr,HTTP 204,254,266,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-93MS,vless,ws,188.114.97.6,2---y-MiTiVPN---MiTiVPN-o.MAQROR.ir,HTTP 204,219,247,HTTP 204,yes
-AKUN-008-UNKNOWN-VLESS-WS-73MS,vless,ws,104.17.28.89,workspace.evan00.dpdns.org,HTTP 204,216,240,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-89MS,vless,ws,172.67.174.37,sg.xfj123.top,HTTP 204,214,241,HTTP 204,yes
-AKUN-011-UNKNOWN-VLESS-WS-97MS,vless,ws,172.66.132.196,us.xfj123.top,HTTP 204,223,243,HTTP 204,yes
+AKUN-001-ZVC-VLESS-WS-55MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,220,232,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-58MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,211,243,HTTP 204,yes
+AKUN-003-ZVC-VLESS-WS-54MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,215,241,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-59MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,210,243,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-75MS,vless,ws,188.114.97.6,2---y-MiTiVPN---MiTiVPN-o.MAQROR.ir,HTTP 204,215,246,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-61MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,217,7177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-007-UNKNOWN-VLESS-WS-62MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,219,244,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-64MS,vless,ws,108.162.192.161,learn00.evany.de5.net,HTTP 204,207,236,HTTP 204,yes
+AKUN-009-DEV-VLESS-WS-64MS,vless,ws,event-bus-c22219-edg.staging-api-5de174.workers.dev,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,215,250,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-101MS,vless,ws,104.16.72.50,hhvl.hhapp.kdns.fr,HTTP 204,214,326,HTTP 204,yes
+AKUN-011-UNKNOWN-VLESS-WS-107MS,vless,ws,104.18.34.124,hhlfy.twiladaphne.ndjp.net,HTTP 204,217,253,HTTP 204,yes
