@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-61MS,vless,ws,172.67.185.178,hhlfy.twiladaphne.ndjp.net,HTTP 204,217,232,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-64MS,vless,ws,www.speedtest.net,blacKNet0.blACkNet89.WOrKErS.dev,HTTP 204,220,177,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-003-CLOUDFLARE-VLESS-WS-60MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,204,234,HTTP 204,yes
-AKUN-004-ICOOK-VLESS-WS-67MS,vless,ws,icook.hk,learn00.evany.de5.net,HTTP 204,207,228,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-63MS,vless,ws,190.93.246.202,support.zoom.us.yxls.eu.cc,HTTP 204,208,237,HTTP 204,yes
-AKUN-006-HOSTINGER-VLESS-WS-71MS,vless,ws,31.220.31.67,l.m.j.u.w.9.y.i.m.y.s.8.p.y.us.art-us.kdns.fr,HTTP 204,205,241,HTTP 204,yes
-AKUN-007-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-75MS,vless,ws,154.17.22.207,2.r.y.a.j.7.c.z.d.z.8.f.f.r.us.art-us.kdns.fr,HTTP 204,208,236,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-74MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,210,228,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-81MS,vless,ws,172.67.149.60,support.zoom.us.yxls.eu.cc,HTTP 204,197,224,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-105MS,vless,ws,162.159.140.91,U--s--a.maqror.ir,HTTP 204,227,238,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-90MS,vless,ws,172.64.32.6,soucuovls.pages.dev,HTTP 204,226,238,HTTP 204,yes
+AKUN-001-ZVC-VLESS-WS-63MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,228,300,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-62MS,vless,ws,190.93.246.202,support.zoom.us.yxls.eu.cc,HTTP 204,268,277,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-78MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,249,310,HTTP 204,yes
+AKUN-004-LEVIKOGJGFDD-VLESS-WS-84MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,250,303,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-80MS,vless,ws,172.67.75.172,learn00.evany.de5.net,HTTP 204,261,471,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-120MS,vless,ws,104.18.152.246,ldggej--MiTiVPN---MiTiVPN-o.KingCloud-1.ir,HTTP 204,323,365,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-85MS,vless,ws,104.17.28.89,workspace.evan00.dpdns.org,HTTP 204,252,257,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-131MS,vless,ws,104.21.69.115,2.r.y.a.j.7.c.z.d.z.8.f.f.r.us.art-us.kdns.fr,HTTP 204,245,298,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-110MS,vless,ws,104.16.248.48,hhlfy.twiladaphne.ndjp.net,HTTP 204,238,293,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-130MS,vless,ws,104.25.220.68,1.hshs8227shhshs.workers.dev,HTTP 204,242,268,HTTP 204,yes
