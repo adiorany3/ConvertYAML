@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-52MS,vless,ws,104.25.244.217,support.zoom.us.yxls.eu.cc,HTTP 204,385,389,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-65MS,vless,ws,orange.seeck.cn,learn00.evany.de5.net,HTTP 204,386,410,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-68MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,371,398,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-72MS,vless,ws,104.16.248.48,hhlfy.twiladaphne.ndjp.net,HTTP 204,357,429,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-70MS,vless,ws,104.25.220.68,1.hshs8227shhshs.workers.dev,HTTP 204,359,386,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-56MS,vless,ws,millionaire.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,350,399,HTTP 204,yes
-AKUN-007-ZOOM-VLESS-WS-67MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,382,392,HTTP 204,yes
-AKUN-008-UNKNOWN-VLESS-WS-78MS,vless,ws,104.25.3.165,patient-moon-c61f.ggfsa55.workers.dev,HTTP 204,363,380,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-96MS,vless,ws,31.220.31.67,l.m.j.u.w.9.y.i.m.y.s.8.p.y.us.art-us.kdns.fr,HTTP 204,204,334,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-99MS,vless,ws,104.21.69.115,2.r.y.a.j.7.c.z.d.z.8.f.f.r.us.art-us.kdns.fr,HTTP 204,194,233,HTTP 204,yes
+AKUN-001-LEVIKOGJGFDD-VLESS-WS-54MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,217,240,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-60MS,vless,ws,104.168.146.122,support.zoom.us.yxls.eu.cc,HTTP 204,236,236,HTTP 204,yes
+AKUN-003-SHOPIFY-VLESS-WS-60MS,vless,ws,www.shopify.com,l.m.j.u.w.9.y.i.m.y.s.8.p.y.us.art-us.kdns.fr,HTTP 204,229,235,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-70MS,vless,ws,108.162.192.9,soucuovls.pages.dev,HTTP 204,209,256,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-62MS,vless,ws,104.16.251.148,hhlfy.twiladaphne.ndjp.net,HTTP 204,221,249,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-73MS,vless,ws,img.yust.eu.org,learn00.evany.de5.net,HTTP 204,223,237,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-62MS,vless,ws,108.162.193.0,learn00.evany.de5.net,HTTP 204,215,234,HTTP 204,yes
+AKUN-008-UNKNOWN-VLESS-WS-67MS,vless,ws,104.27.52.69,icy-pine-5efc.aoigjojowfie123.workers.dev,HTTP 204,205,268,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-77MS,vless,ws,162.159.8.155,learn00.evany.de5.net,HTTP 204,221,245,HTTP 204,yes
+AKUN-010-EU-VLESS-WS-74MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,211,258,HTTP 204,yes
