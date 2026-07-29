@@ -1,12 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-61MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,208,227,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-67MS,vless,ws,108.162.192.161,learn00.evany.de5.net,HTTP 204,206,247,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-59MS,vless,ws,190.93.246.202,support.zoom.us.yxls.eu.cc,HTTP 204,211,237,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-104MS,vless,ws,172.64.32.6,soucuovls.pages.dev,HTTP 204,198,230,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-109MS,vless,ws,188.114.97.6,FrEe.SeRVEr14peekCoNfIG.WoRKErS.dEV,HTTP 204,226,184,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-006-ZVC-VLESS-WS-64MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,212,227,HTTP 204,yes
-AKUN-007-HOSTINGER-VLESS-WS-124MS,vless,ws,31.220.31.67,l.m.j.u.w.9.y.i.m.y.s.8.p.y.us.art-us.kdns.fr,HTTP 204,204,231,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-67MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,205,256,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-138MS,vless,ws,104.16.194.245,l-j---MiTiVPN---MiTiVPN-o.KingCloud-1.ir,HTTP 204,230,241,HTTP 204,yes
-AKUN-011-UNKNOWN-VLESS-WS-103MS,vless,ws,199.181.197.1,kakoolnews.hellowhatnow.workers.dev,HTTP 204,211,234,HTTP 204,yes
-AKUN-012-UNKNOWN-VLESS-WS-120MS,vless,ws,172.66.40.99,l-j-o-MiTiVPN---MiTiVPN-iiio.KingCloud-1.ir,HTTP 204,225,280,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-70MS,vless,ws,198.41.208.112,support.zoom.us.yxls.eu.cc,HTTP 204,235,259,HTTP 204,yes
+AKUN-002-ZVC-VLESS-WS-74MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,225,253,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-92MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,HTTP 204,237,187,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-005-CLOUDFLARE-VLESS-WS-84MS,vless,ws,172.64.32.6,soucuovls.pages.dev,HTTP 204,237,236,HTTP 204,yes
+AKUN-006-UNKNOWN-VLESS-WS-85MS,vless,ws,104.16.248.48,hhlfy.twiladaphne.ndjp.net,HTTP 204,206,233,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-97MS,vless,ws,ip.sb,learn00.evany.de5.net,HTTP 204,207,258,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-129MS,vless,ws,104.21.69.115,2.r.y.a.j.7.c.z.d.z.8.f.f.r.us.art-us.kdns.fr,HTTP 204,232,255,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-83MS,vless,ws,104.25.3.165,patient-moon-c61f.ggfsa55.workers.dev,HTTP 204,208,261,HTTP 204,yes
+AKUN-011-UNKNOWN-VLESS-WS-84MS,vless,ws,104.25.220.68,1.hshs8227shhshs.workers.dev,HTTP 204,203,231,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-142MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,223,234,HTTP 204,yes
+AKUN-013-CLOUDFLARE-VLESS-WS-98MS,vless,ws,172.67.75.172,learn00.evany.de5.net,HTTP 204,233,233,HTTP 204,yes
