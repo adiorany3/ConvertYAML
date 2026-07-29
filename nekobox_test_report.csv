@@ -1,12 +1,13 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-113MS,vless,ws,www.speedtest.net,BPb-F23dDEdd.JCXkvlnDL.WOrkERS.deV,HTTP 204,282,230,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-002-CLOUDFLARE-VLESS-WS-102MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,299,340,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-115MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,302,288,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-125MS,vless,ws,141.101.120.73,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,331,390,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-122MS,vless,ws,event-bus-c22219-edg.staging-api-5de174.workers.dev,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,295,350,HTTP 204,yes
-AKUN-006-ZVC-VLESS-WS-139MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,336,301,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-120MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,276,293,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-116MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,350,288,HTTP 204,yes
-AKUN-009-DEV-VLESS-WS-142MS,vless,ws,to6r63-kkchighqm2.vxz0dduq7to7su0cdqf.workers.dev,To6R63-kKChiGHqm2.vxz0Dduq7to7Su0CDQf.worKERs.DEV,HTTP 204,336,363,HTTP 204,yes
-AKUN-010-CCWU-VLESS-WS-126MS,vless,ws,vpn.renshengxuanze.ccwu.cc,vpn.renshengxuanze.ccwu.cc,HTTP 204,304,297,HTTP 204,yes
-AKUN-011-UNKNOWN-VLESS-WS-110MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,403,308,HTTP 204,yes
+AKUN-001-ZVC-VLESS-WS-58MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,197,239,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-60MS,vless,ws,172.67.153.110,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,212,242,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-62MS,vless,ws,to6r63-kkchighqm2.vxz0dduq7to7su0cdqf.workers.dev,To6R63-kKChiGHqm2.vxz0Dduq7to7Su0CDQf.worKERs.DEV,HTTP 204,226,249,HTTP 204,yes
+AKUN-004-ZVC-VLESS-WS-62MS,vless,ws,170.114.45.6,support.zoom.us.yxls.eu.cc,HTTP 204,220,238,HTTP 204,yes
+AKUN-005-SPEEDTEST-VLESS-WS-59MS,vless,ws,www.speedtest.net,BPb-F23dDEdd.JCXkvlnDL.WOrkERS.deV,HTTP 204,202,173,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-006-UNKNOWN-VLESS-WS-61MS,vless,ws,172.67.156.87,tO6R63-kkCHIgHQM2.vXZ0dDUq7to7SU0cdQF.wOrKERS.Dev,HTTP 204,199,244,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-59MS,vless,ws,server3.pegibol940.workers.dev,server3.pegibol940.workers.dev,HTTP 204,219,258,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-59MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,199,248,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-67MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,196,234,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-71MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,216,7177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-011-CLOUDFLARE-VLESS-WS-60MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,201,244,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-59MS,vless,ws,flat-night-edd0.hosein9saleazhuongooyeh87.workers.dev,FLAT-night-EDD0.hOsEin9saLEAZhuongOoYeH87.wOrkerS.DeV,HTTP 204,221,253,HTTP 204,yes
