@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-70MS,vless,ws,104.155.124.198,learn00.evany.de5.net,HTTP 204,200,237,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-73MS,vless,ws,104.25.244.217,support.zoom.us.yxls.eu.cc,HTTP 204,279,271,HTTP 204,yes
-AKUN-003-ZVC-VLESS-WS-73MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,224,242,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-92MS,vless,ws,108.162.192.161,learn00.evany.de5.net,HTTP 204,214,246,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-95MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,225,264,HTTP 204,yes
-AKUN-006-AXIOMED-VLESS-WS-112MS,vless,ws,ade.axiomed.ir,y6FiA6fUKTXLXd59rwXVMJBv8a-JzP1.ade-1002.workErS.deV,HTTP 204,207,238,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-112MS,vless,ws,104.16.72.50,hhvl.hhapp.kdns.fr,HTTP 204,250,263,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-128MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,200,263,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-119MS,vless,ws,154.17.22.207,2.r.y.a.j.7.c.z.d.z.8.f.f.r.us.art-us.kdns.fr,HTTP 204,228,251,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-139MS,vless,ws,alist.sm.uy,learn00.evany.de5.net,HTTP 204,206,255,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-68MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,331,311,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-62MS,vless,ws,104.16.239.120,support.zoom.us.yxls.eu.cc,HTTP 204,311,268,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-79MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,246,289,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-77MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,242,273,HTTP 204,yes
+AKUN-005-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-88MS,vless,ws,154.17.22.207,2.r.y.a.j.7.c.z.d.z.8.f.f.r.us.art-us.kdns.fr,HTTP 204,249,324,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-92MS,vless,ws,172.67.185.178,hhlfy.twiladaphne.ndjp.net,HTTP 204,242,273,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-106MS,vless,ws,172.64.32.6,soucuovls.pages.dev,HTTP 204,244,268,HTTP 204,yes
+AKUN-008-HOSTINGER-VLESS-WS-87MS,vless,ws,31.220.31.67,l.m.j.u.w.9.y.i.m.y.s.8.p.y.us.art-us.kdns.fr,HTTP 204,317,296,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-105MS,vless,ws,172.66.40.99,l-j-o-MiTiVPN---MiTiVPN-iiio.KingCloud-1.ir,HTTP 204,339,294,HTTP 204,yes
+AKUN-010-ZVC-VLESS-WS-78MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,245,262,HTTP 204,yes
