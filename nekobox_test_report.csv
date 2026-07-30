@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-MVPS-NET-VLESS-WS-75MS,vless,ws,86.107.197.239,support.zoom.us.yxls.eu.cc,HTTP 204,218,263,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-81MS,vless,ws,162.159.44.191,learn00.evany.de5.net,HTTP 204,222,249,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-97MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,238,250,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-83MS,vless,ws,172.64.38.215,learn00.evany.de5.net,HTTP 204,214,238,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-107MS,vless,ws,icook.hk,learn00.evany.de5.net,HTTP 204,232,243,HTTP 204,yes
-AKUN-006-OPENAI-VLESS-WS-87MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,208,230,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-90MS,vless,ws,162.159.16.63,learn00.evany.de5.net,HTTP 204,227,295,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-73MS,vless,ws,www.shopify.com,mkvmh.alnm.a7e.hh.vavava.kdns.fr,HTTP 204,206,242,HTTP 204,yes
-AKUN-009-EU-VLESS-WS-91MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,211,295,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-96MS,vless,ws,img.yust.eu.org,learn00.evany.de5.net,HTTP 204,216,248,HTTP 204,yes
+AKUN-001-IP-VLESS-WS-87MS,vless,ws,ip.sb,learn00.evany.de5.net,HTTP 204,213,258,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-86MS,vless,ws,170.114.46.6,support.zoom.us.yxls.eu.cc,HTTP 204,230,256,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-92MS,vless,ws,172.64.156.0,learn00.evany.de5.net,HTTP 204,197,244,HTTP 204,yes
+AKUN-004-UNKNOWN-VLESS-WS-93MS,vless,ws,162.159.12.41,hhlfy.twiladaphne.ndjp.net,HTTP 204,207,259,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-99MS,vless,ws,172.64.38.215,learn00.evany.de5.net,HTTP 204,216,301,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-98MS,vless,ws,104.17.144.235,hhlfy.twiladaphne.ndjp.net,HTTP 204,246,267,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-93MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,216,250,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-89MS,vless,ws,103.152.113.60,mkvmh.alnm.a7e.hh.vavava.kdns.fr,HTTP 204,223,250,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-103MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,213,241,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-120MS,vless,ws,www.shopify.com,mkvmh.alnm.a7e.hh.vavava.kdns.fr,HTTP 204,229,253,HTTP 204,yes
