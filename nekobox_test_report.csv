@@ -1,11 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-58MS,vless,ws,104.16.239.120,support.zoom.us.yxls.eu.cc,HTTP 204,202,235,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-58MS,vless,ws,108.162.192.161,learn00.evany.de5.net,HTTP 204,197,234,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-71MS,vless,ws,172.64.52.81,learn00.evany.de5.net,HTTP 204,198,222,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-77MS,vless,ws,162.159.60.231,hhlfy.twiladaphne.ndjp.net,HTTP 204,209,244,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-59MS,vless,ws,172.67.149.60,support.zoom.us.yxls.eu.cc,HTTP 204,207,236,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-87MS,vless,ws,104.16.4.189,learn00.evany.de5.net,HTTP 204,201,222,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-74MS,vless,ws,172.64.32.6,soucuovls.pages.dev,HTTP 204,197,235,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-66MS,vless,ws,162.159.16.63,learn00.evany.de5.net,HTTP 204,209,225,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-68MS,vless,ws,162.159.140.91,U--s--a.maqror.ir,HTTP 204,270,249,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-96MS,vless,ws,104.16.72.70,hhlfy.twiladaphne.ndjp.net,HTTP 204,204,225,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-61MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,212,231,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-65MS,vless,ws,172.67.137.154,tiny-leaf-f59f.my-lla-s-a-njo-s-e.workers.dev,HTTP 204,202,7172,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-003-CLOUDFLARE-VLESS-WS-68MS,vless,ws,108.162.192.161,learn00.evany.de5.net,HTTP 204,199,248,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-69MS,vless,ws,173.245.58.121,node-1156018316-84eadd.silimem566.workers.dev,HTTP 204,222,238,HTTP 204,yes
+AKUN-005-DEV-VLESS-WS-70MS,vless,ws,flat-night-edd0.hosein9saleazhuongooyeh87.workers.dev,FLAT-night-EDD0.hOsEin9saLEAZhuongOoYeH87.wOrkerS.DeV,HTTP 204,214,236,HTTP 204,yes
+AKUN-006-BIGCOMMERCE-VLESS-WS-76MS,vless,ws,63.141.128.22,MiSty-tooth-78cA.FoboGAH414-e7B.WoRKERs.DEv,HTTP 204,219,257,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-61MS,vless,ws,86.107.197.239,support.zoom.us.yxls.eu.cc,HTTP 204,234,232,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-69MS,vless,ws,millionaire.levikogjgfdd.ir,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,197,231,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-74MS,vless,ws,1password.com,rAyAn-007.fOtOn.dPdNs.oRg,HTTP 204,211,235,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-95MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,207,253,HTTP 204,yes
+AKUN-011-DEV-VLESS-WS-97MS,vless,ws,server3.pegibol940.workers.dev,server3.pegibol940.workers.dev,HTTP 204,220,259,HTTP 204,yes
