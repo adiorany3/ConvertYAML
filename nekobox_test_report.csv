@@ -1,12 +1,12 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-99MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,276,833,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-89MS,vless,ws,162.159.33.118,learn00.evany.de5.net,HTTP 204,805,821,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-105MS,vless,ws,free.server11peekconfig.workers.dev,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,269,816,HTTP 204,yes
-AKUN-004-DMIT-CUSTOMER-US-CA-9001-VLESS-WS-91MS,vless,ws,154.17.231.4,vless.041620.xyz,HTTP 204,1493,2094,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-104MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,258,828,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-113MS,vless,ws,www.speedtest.net,bpB-b589C199.sdvSDC.wORkERS.deV,HTTP 204,257,522,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-007-CLOUDFLARE-VLESS-WS-101MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,292,835,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-193MS,vless,ws,millionaire.levikogjgfdd.ir,hhvl.hhapp.kdns.fr,HTTP 204,888,939,HTTP 204,yes
-AKUN-009-UNKNOWN-VLESS-WS-91MS,vless,ws,8.47.69.9,ancIEnt-HeaRt-60c5.dPccgIzieB.WoRKers.dEV,HTTP 204,275,831,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-115MS,vless,ws,172.67.195.229,rapid-hat-441d.platovpn.workers.dev,HTTP 204,285,804,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-112MS,vless,ws,141.101.120.73,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,809,796,HTTP 204,yes
+AKUN-001-ZOOM-VLESS-WS-76MS,vless,ws,support.zoom.us,support.zoom.us.yxls.eu.cc,HTTP 204,218,249,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-77MS,vless,ws,event-bus-c22219-edg.staging-api-5de174.workers.dev,EveNt-bUS-c22219-edG.STaGIng-Api-5De174.woRKers.dEV,HTTP 204,234,256,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-79MS,vless,ws,188.114.96.3,maSterserVeR1-VSH.KaLlEH.WORkERs.DEV,HTTP 204,228,257,HTTP 204,yes
+AKUN-004-CCWU-VLESS-WS-71MS,vless,ws,vpn.renshengxuanze.ccwu.cc,vpn.renshengxuanze.ccwu.cc,HTTP 204,199,249,HTTP 204,yes
+AKUN-005-DEV-VLESS-WS-74MS,vless,ws,channel.t-me-sh4dow-vpn.workers.dev,cHAnnel.T-mE-sH4DOW-Vpn.WOrkerS.dEv,HTTP 204,220,259,HTTP 204,yes
+AKUN-006-SPEEDTEST-VLESS-WS-74MS,vless,ws,www.speedtest.net,BPb-F23dDEdd.JCXkvlnDL.WOrkERS.deV,HTTP 204,205,191,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-007-UNKNOWN-VLESS-WS-77MS,vless,ws,108.162.198.5,support.zoom.us.yxls.eu.cc,HTTP 204,234,261,HTTP 204,yes
+AKUN-008-008500-VLESS-WS-78MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,227,245,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-75MS,vless,ws,8.47.69.9,ancIEnt-HeaRt-60c5.dPccgIzieB.WoRKers.dEV,HTTP 204,227,246,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-83MS,vless,ws,104.24.246.247,mute-moon-cf52.stary1001.workers.dev,HTTP 204,213,260,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-79MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,223,255,HTTP 204,yes
