@@ -4,28 +4,28 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 40,
+      "history_last_delay": 54,
       "now": "AKUN-009-CLOUDFLARE-VLESS-WS-110MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 51,
+      "history_last_delay": 60,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 39,
-      "now": "AKUN-010-CLOUDFLARE-VLESS-WS-113MS",
+      "history_last_delay": 40,
+      "now": "AKUN-005-UNKNOWN-VLESS-WS-91MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 41,
+      "history_last_delay": 39,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
@@ -39,21 +39,21 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 52,
+      "history_last_delay": 37,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 38,
-      "now": "STREAMING-FAST",
+      "history_last_delay": 66,
+      "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 41,
+      "history_last_delay": 0,
       "now": "AKUN-005-UNKNOWN-VLESS-WS-91MS",
       "type": "URLTest",
       "udp": true
@@ -61,7 +61,7 @@
     "WARM-UP": {
       "all_count": 7,
       "history_last_delay": 0,
-      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-83MS",
+      "now": "AKUN-005-UNKNOWN-VLESS-WS-91MS",
       "type": "URLTest",
       "udp": true
     },
@@ -74,7 +74,7 @@
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 41,
+      "history_last_delay": 58,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-07-31T16:15:21.417682+00:00"
+  "timestamp_utc": "2026-07-31T16:30:12.220166+00:00"
 }
