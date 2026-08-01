@@ -1,12 +1,14 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-63MS,vless,ws,172.66.44.97,learn00.evany.de5.net,HTTP 204,210,235,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-55MS,vless,ws,104.26.2.173,support.zoom.us.yxls.eu.cc,HTTP 204,217,245,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-65MS,vless,ws,172.66.44.97,josni.hoyes.cloudns.ch,HTTP 204,212,239,HTTP 204,yes
-AKUN-004-UNKNOWN-VLESS-WS-61MS,vless,ws,162.159.2.40,learn00.evany.de5.net,HTTP 204,212,235,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-57MS,vless,ws,188.114.98.0,learn00.evany.de5.net,HTTP 204,210,237,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-88MS,vless,ws,hi.n2foriran.workers.dev,hi.n2foriran.workers.dev,HTTP 204,213,7178,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-007-EU-VLESS-WS-70MS,vless,ws,dx.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,211,236,HTTP 204,yes
-AKUN-008-UNKNOWN-VLESS-WS-109MS,vless,ws,172.67.185.178,hhlfy.twiladaphne.ndjp.net,HTTP 204,211,245,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-110MS,vless,ws,104.25.3.165,patient-moon-c61f.ggfsa55.workers.dev,HTTP 204,218,244,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-62MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,227,237,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-103MS,vless,ws,104.16.2.189,learn00.evany.de5.net,HTTP 204,210,236,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-81MS,vless,ws,alist.sm.uy,learn00.evany.de5.net,HTTP 204,341,408,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-79MS,vless,ws,198.41.208.112,support.zoom.us.yxls.eu.cc,HTTP 204,316,360,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-87MS,vless,ws,104.25.220.68,1.hshs8227shhshs.workers.dev,HTTP 204,328,348,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-95MS,vless,ws,162.159.2.40,learn00.evany.de5.net,HTTP 204,340,408,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-96MS,vless,ws,188.114.97.6,FrEe.SeRVEr14peekCoNfIG.WoRKErS.dEV,HTTP 204,355,198,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-006-CLOUDFLARE-VLESS-WS-97MS,vless,ws,hi.n2foriran.workers.dev,hi.n2foriran.workers.dev,HTTP 204,276,7178,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
+AKUN-007-UNKNOWN-VLESS-WS-95MS,vless,ws,104.16.2.189,learn00.evany.de5.net,HTTP 204,365,401,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-101MS,vless,ws,188.114.97.6,SILENt-kiNG-5030.AipRoINteR.WorkErS.DEv,HTTP 204,385,252,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-009-CLOUDFLARE-VLESS-WS-85MS,vless,ws,104.25.3.165,patient-moon-c61f.ggfsa55.workers.dev,HTTP 204,370,408,HTTP 204,yes
+AKUN-010-CLOUDFLARE-VLESS-WS-97MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,355,376,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-110MS,vless,ws,ez-bf02ef.ezaccess1520a98.workers.dev,ez-bf02ef.ezaccess1520a98.workers.dev,HTTP 204,497,500,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-84MS,vless,ws,172.66.44.97,learn00.evany.de5.net,HTTP 204,279,407,HTTP 204,yes
+AKUN-013-090227-VLESS-WS-149MS,vless,ws,cf.090227.xyz,1.rmgyvpn.rest,HTTP 204,381,397,HTTP 204,yes
