@@ -1,12 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-86MS,vless,ws,ip.sb,learn00.evany.de5.net,HTTP 204,201,229,HTTP 204,yes
-AKUN-002-UNKNOWN-VLESS-WS-95MS,vless,ws,104.26.7.214,learn00.evany.de5.net,HTTP 204,201,235,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-86MS,vless,ws,104.26.12.41,support.zoom.us.yxls.eu.cc,HTTP 204,214,231,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-91MS,vless,ws,172.64.52.97,learn00.evany.de5.net,HTTP 204,198,236,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-90MS,vless,ws,104.16.72.251,hhlfy.twiladaphne.ndjp.net,HTTP 204,212,251,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-90MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,244,251,HTTP 204,yes
-AKUN-007-UNKNOWN-VLESS-WS-102MS,vless,ws,108.162.192.5,soucuovls.pages.dev,HTTP 204,239,278,HTTP 204,yes
-AKUN-008-UNKNOWN-VLESS-WS-107MS,vless,ws,162.159.8.155,learn00.evany.de5.net,HTTP 204,204,245,HTTP 204,yes
-AKUN-009-DEV-VLESS-WS-106MS,vless,ws,o.server2peekconfig.workers.dev,O.sErvER2pEekCOnfIg.wORKeRs.dEV,HTTP 204,212,203,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-010-CLOUDFLARE-VLESS-WS-116MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,215,242,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-145MS,vless,ws,172.66.44.97,josni.hoyes.cloudns.ch,HTTP 204,207,250,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-81MS,vless,ws,162.159.137.54,support.zoom.us.yxls.eu.cc,HTTP 204,209,228,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-88MS,vless,ws,162.159.33.118,learn00.evany.de5.net,HTTP 204,203,228,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-90MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,201,236,HTTP 204,yes
+AKUN-004-LEVIKOGJGFDD-VLESS-WS-84MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,209,228,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-92MS,vless,ws,172.66.44.97,josni.hoyes.cloudns.ch,HTTP 204,220,261,HTTP 204,yes
+AKUN-006-LEVIKOGJGFDD-VLESS-WS-88MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,198,230,HTTP 204,yes
+AKUN-007-UNKNOWN-VLESS-WS-111MS,vless,ws,172.64.32.6,soucuovls.pages.dev,HTTP 204,228,239,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-114MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,225,239,HTTP 204,yes
+AKUN-009-FASTVPSUS-IPV4-VLESS-WS-135MS,vless,ws,205.196.81.159,gbs-MiTiVPN--MiTiVPN--MiTiVPN---MiTiVPN--MiTiVPN--MiTiVPN.KinGNetWork.iR,HTTP 204,301,299,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-150MS,vless,ws,104.18.152.229,H-k-MiTiVPN--MiTiVPN--MiTiVPN---MiTiVPN--MiTiVPN--MiTiVPN.KinGNetWork.iR,HTTP 204,293,312,HTTP 204,yes
