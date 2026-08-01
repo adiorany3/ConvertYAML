@@ -1,11 +1,13 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-55MS,vless,ws,104.21.77.94,support.zoom.us.yxls.eu.cc,HTTP 204,223,241,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-61MS,vless,ws,141.101.114.8,noisy-term-e657.airdrop2014aa5168.workers.dev,HTTP 204,224,244,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-57MS,vless,ws,108.162.192.161,learn00.evany.de5.net,HTTP 204,218,243,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-60MS,vless,ws,172.67.153.110,FRee.SeRver11pEEkcONFIg.WorkeRS.DEv,HTTP 204,192,249,HTTP 204,yes
-AKUN-005-CLOUDFLARE-VLESS-WS-60MS,vless,ws,server3.pegibol940.workers.dev,server3.pegibol940.workers.dev,HTTP 204,212,243,HTTP 204,yes
-AKUN-006-CLOUDFLARE-VLESS-WS-54MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,210,239,HTTP 204,yes
-AKUN-007-008500-VLESS-WS-65MS,vless,ws,cf.008500.xyz,powered-by-surena.configfarsi695fcfe8a2e58.workers.dev,HTTP 204,213,253,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-64MS,vless,ws,medium.com,rAyAn-007.mAxImA.DpDnS.OrG,HTTP 204,199,251,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-70MS,vless,ws,yd.mmhh.eu.cc,hhlfy.twiladaphne.ndjp.net,HTTP 204,220,244,HTTP 204,yes
-AKUN-010-OPENAI-VLESS-WS-67MS,vless,ws,chat.openai.com,hhlfy.twiladaphne.ndjp.net,HTTP 204,207,251,HTTP 204,yes
+AKUN-001-877774-VLESS-WS-102MS,vless,ws,cu.877774.xyz,learn00.evany.de5.net,HTTP 204,245,237,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-103MS,vless,ws,104.20.39.109,support.zoom.us.yxls.eu.cc,HTTP 204,215,237,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-96MS,vless,ws,108.162.192.161,learn00.evany.de5.net,HTTP 204,207,240,HTTP 204,yes
+AKUN-004-SPEEDTEST-VLESS-WS-96MS,vless,ws,www.speedtest.net,BPb-E234adb8.xjGcjHVjkV.WorKERs.DEV,HTTP 204,227,219,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-005-CLOUDFLARE-VLESS-WS-116MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,209,276,HTTP 204,yes
+AKUN-006-SPEEDTEST-VLESS-WS-123MS,vless,ws,www.speedtest.net,BPb-dF66c5a8.yfjhKjl.WorKERS.dEv,HTTP 204,211,201,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
+AKUN-007-AIMALL-VLESS-WS-132MS,vless,ws,cf-vless-4cf55824.aimall.fr,cf-vless-4cf55824.aimall.fr,HTTP 204,221,260,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-109MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,201,233,HTTP 204,yes
+AKUN-009-CHATGPT-VLESS-WS-118MS,vless,ws,chatgpt.com,powered-by-surena.user68f797c2f3e1b.workers.dev,HTTP 204,255,240,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-94MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,216,243,HTTP 204,yes
+AKUN-011-CLOUDFLARE-VLESS-WS-114MS,vless,ws,172.66.44.97,learn00.evany.de5.net,HTTP 204,237,238,HTTP 204,yes
+AKUN-012-CLOUDFLARE-VLESS-WS-136MS,vless,ws,162.159.12.161,powered-by-surena.configfarsi6982dd6e0355e.workers.dev,HTTP 204,223,247,HTTP 204,yes
