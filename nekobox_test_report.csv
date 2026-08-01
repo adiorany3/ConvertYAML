@@ -1,13 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-877774-VLESS-WS-102MS,vless,ws,cu.877774.xyz,learn00.evany.de5.net,HTTP 204,245,237,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-103MS,vless,ws,104.20.39.109,support.zoom.us.yxls.eu.cc,HTTP 204,215,237,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-96MS,vless,ws,108.162.192.161,learn00.evany.de5.net,HTTP 204,207,240,HTTP 204,yes
-AKUN-004-SPEEDTEST-VLESS-WS-96MS,vless,ws,www.speedtest.net,BPb-E234adb8.xjGcjHVjkV.WorKERs.DEV,HTTP 204,227,219,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-005-CLOUDFLARE-VLESS-WS-116MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,209,276,HTTP 204,yes
-AKUN-006-SPEEDTEST-VLESS-WS-123MS,vless,ws,www.speedtest.net,BPb-dF66c5a8.yfjhKjl.WorKERS.dEv,HTTP 204,211,201,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-007-AIMALL-VLESS-WS-132MS,vless,ws,cf-vless-4cf55824.aimall.fr,cf-vless-4cf55824.aimall.fr,HTTP 204,221,260,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-109MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,201,233,HTTP 204,yes
-AKUN-009-CHATGPT-VLESS-WS-118MS,vless,ws,chatgpt.com,powered-by-surena.user68f797c2f3e1b.workers.dev,HTTP 204,255,240,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-94MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,216,243,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-114MS,vless,ws,172.66.44.97,learn00.evany.de5.net,HTTP 204,237,238,HTTP 204,yes
-AKUN-012-CLOUDFLARE-VLESS-WS-136MS,vless,ws,162.159.12.161,powered-by-surena.configfarsi6982dd6e0355e.workers.dev,HTTP 204,223,247,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-76MS,vless,ws,104.20.39.109,support.zoom.us.yxls.eu.cc,HTTP 204,322,308,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-102MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,342,327,HTTP 204,yes
+AKUN-003-CLOUDFLARE-VLESS-WS-86MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,333,334,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-105MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,453,391,HTTP 204,yes
+AKUN-005-UNKNOWN-VLESS-WS-113MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,313,309,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-102MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,297,311,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-95MS,vless,ws,188.114.97.6,057.ElecTRocElLco-Cf-057.wOrKeRs.dEv,HTTP 204,369,328,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-118MS,vless,ws,chatgpt.com,powered-by-surena.user68f797c2f3e1b.workers.dev,HTTP 204,322,318,HTTP 204,yes
+AKUN-009-MYBB-VLESS-WS-126MS,vless,ws,mybb.com,rAyAn-007.nAsTaRaN.DpDnS.OrG,HTTP 204,322,401,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-99MS,vless,ws,103.228.168.182,4qrnyf6s.5e6pmte8uw52n5ymvwx8.workers.dev,HTTP 204,310,328,HTTP 204,yes
