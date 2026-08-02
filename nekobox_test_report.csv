@@ -1,13 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-UNKNOWN-VLESS-WS-56MS,vless,ws,86.107.197.239,support.zoom.us.yxls.eu.cc,HTTP 204,247,235,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-62MS,vless,ws,162.159.33.118,learn00.evany.de5.net,HTTP 204,212,236,HTTP 204,yes
-AKUN-003-UNKNOWN-VLESS-WS-65MS,vless,ws,104.26.12.31,learn00.evany.de5.net,HTTP 204,218,236,HTTP 204,yes
-AKUN-004-ZENFO-1-VLESS-WS-67MS,vless,ws,199.181.197.1,kakoolnews.hellowhatnow.workers.dev,HTTP 204,215,245,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-56MS,vless,ws,162.159.2.40,learn00.evany.de5.net,HTTP 204,208,239,HTTP 204,yes
-AKUN-006-NOTION-WEB-VLESS-WS-63MS,vless,ws,208.103.161.5,dry-butterfly-8eb9.tmpgnacio83.workers.dev,HTTP 204,219,7177,"ReadTimeout: HTTPSConnectionPool(host='www.gstatic.com', port=443): Read timed out. (read timeout=7.0)",no
-AKUN-007-CLOUDFLARE-VLESS-WS-64MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,230,231,HTTP 204,yes
-AKUN-008-CLOUDFLARE-VLESS-WS-69MS,vless,ws,162.159.0.8,soucuovls.pages.dev,HTTP 204,214,223,HTTP 204,yes
-AKUN-009-EE-WELCOMEHOST-20190515-VLESS-WS-67MS,vless,ws,45.80.108.182,ii--6---6--MiTiVPN---MiTiVPN-o.KinGNetWork.iR,HTTP 204,223,250,HTTP 204,yes
-AKUN-010-UNKNOWN-VLESS-WS-70MS,vless,ws,104.21.19.53,2-----l-jo--hMiTiVPN---MiTiVPN-o--mitivpn.KinGNetWork.iR,HTTP 204,228,242,HTTP 204,yes
-AKUN-011-CLOUDFLARE-VLESS-WS-66MS,vless,ws,o.server3peekconfig.workers.dev,o.SERVeR3PeEkConFIG.WOrKerS.dEv,HTTP 204,213,173,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",no
-AKUN-012-CLOUDFLARE-VLESS-WS-56MS,vless,ws,108.162.193.0,learn00.evany.de5.net,HTTP 204,211,237,HTTP 204,yes
+AKUN-001-CLOUDFLARE-VLESS-WS-82MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,217,245,HTTP 204,yes
+AKUN-002-CLOUDFLARE-VLESS-WS-93MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,221,236,HTTP 204,yes
+AKUN-003-OVH-VLESS-WS-92MS,vless,ws,37.59.96.25,support.zoom.us.yxls.eu.cc,HTTP 204,243,239,HTTP 204,yes
+AKUN-004-CLOUDFLARE-VLESS-WS-95MS,vless,ws,104.16.2.189,learn00.evany.de5.net,HTTP 204,229,247,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-80MS,vless,ws,172.66.44.97,josni.hoyes.cloudns.ch,HTTP 204,206,239,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-97MS,vless,ws,172.67.75.172,learn00.evany.de5.net,HTTP 204,223,255,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-85MS,vless,ws,172.66.44.97,learn00.evany.de5.net,HTTP 204,227,234,HTTP 204,yes
+AKUN-008-CLOUDFLARE-VLESS-WS-105MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,234,255,HTTP 204,yes
+AKUN-009-UNKNOWN-VLESS-WS-90MS,vless,ws,108.162.198.58,learn00.evany.de5.net,HTTP 204,198,227,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-103MS,vless,ws,162.159.2.40,learn00.evany.de5.net,HTTP 204,199,248,HTTP 204,yes
