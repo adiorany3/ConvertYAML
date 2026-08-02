@@ -1,11 +1,11 @@
 name,type,network,original_server,bug_sni,mihomo_status,url_test_ms,nekobox_test_ms,nekobox_status,nekobox_ready
-AKUN-001-CLOUDFLARE-VLESS-WS-72MS,vless,ws,ip.sb,learn00.evany.de5.net,HTTP 204,218,242,HTTP 204,yes
-AKUN-002-CLOUDFLARE-VLESS-WS-73MS,vless,ws,104.25.244.217,support.zoom.us.yxls.eu.cc,HTTP 204,253,257,HTTP 204,yes
-AKUN-003-CLOUDFLARE-VLESS-WS-76MS,vless,ws,172.64.150.28,hhlfy.twiladaphne.ndjp.net,HTTP 204,217,247,HTTP 204,yes
-AKUN-004-CLOUDFLARE-VLESS-WS-76MS,vless,ws,162.159.44.195,hhlfy.twiladaphne.ndjp.net,HTTP 204,225,248,HTTP 204,yes
-AKUN-005-UNKNOWN-VLESS-WS-78MS,vless,ws,199.181.197.1,kakoolnews.hellowhatnow.workers.dev,HTTP 204,226,252,HTTP 204,yes
-AKUN-006-UNKNOWN-VLESS-WS-71MS,vless,ws,172.66.44.97,learn00.evany.de5.net,HTTP 204,223,258,HTTP 204,yes
-AKUN-007-CLOUDFLARE-VLESS-WS-75MS,vless,ws,104.16.158.249,hhlfy.twiladaphne.ndjp.net,HTTP 204,210,247,HTTP 204,yes
-AKUN-008-DEV-VLESS-WS-81MS,vless,ws,ez-bf02ef.ezaccess1520a98.workers.dev,ez-bf02ef.ezaccess1520a98.workers.dev,HTTP 204,284,319,HTTP 204,yes
-AKUN-009-CLOUDFLARE-VLESS-WS-82MS,vless,ws,162.159.38.119,learn00.evany.de5.net,HTTP 204,211,243,HTTP 204,yes
-AKUN-010-CLOUDFLARE-VLESS-WS-85MS,vless,ws,104.16.2.189,learn00.evany.de5.net,HTTP 204,211,246,HTTP 204,yes
+AKUN-001-UNKNOWN-VLESS-WS-75MS,vless,ws,104.19.54.116,support.zoom.us.yxls.eu.cc,HTTP 204,398,347,HTTP 204,yes
+AKUN-002-UNKNOWN-VLESS-WS-100MS,vless,ws,104.16.4.189,learn00.evany.de5.net,HTTP 204,328,427,HTTP 204,yes
+AKUN-003-UNKNOWN-VLESS-WS-101MS,vless,ws,162.159.38.78,learn00.evany.de5.net,HTTP 204,415,330,HTTP 204,yes
+AKUN-004-LEVIKOGJGFDD-VLESS-WS-132MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,402,355,HTTP 204,yes
+AKUN-005-CLOUDFLARE-VLESS-WS-153MS,vless,ws,108.162.195.58,learn00.evany.de5.net,HTTP 204,367,316,HTTP 204,yes
+AKUN-006-CLOUDFLARE-VLESS-WS-156MS,vless,ws,172.66.44.97,josni.hoyes.cloudns.ch,HTTP 204,383,417,HTTP 204,yes
+AKUN-007-CLOUDFLARE-VLESS-WS-136MS,vless,ws,172.66.44.97,learn00.evany.de5.net,HTTP 204,412,365,HTTP 204,yes
+AKUN-008-LEVIKOGJGFDD-VLESS-WS-158MS,vless,ws,one-for-all.levikogjgfdd.ir,learn00.evany.de5.net,HTTP 204,313,317,HTTP 204,yes
+AKUN-009-CLOUDFLARE-VLESS-WS-140MS,vless,ws,104.18.37.228,hhlfy.twiladaphne.ndjp.net,HTTP 204,294,391,HTTP 204,yes
+AKUN-010-UNKNOWN-VLESS-WS-168MS,vless,ws,108.162.198.58,learn00.evany.de5.net,HTTP 204,354,334,HTTP 204,yes
