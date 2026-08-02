@@ -4,15 +4,15 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 0,
+      "history_last_delay": 81,
       "now": "AKUN-005-UNKNOWN-VLESS-WS-91MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 0,
-      "now": "FALLBACK",
+      "history_last_delay": 34,
+      "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
@@ -25,57 +25,57 @@
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 0,
-      "now": "FALLBACK",
+      "history_last_delay": 41,
+      "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "PROXY": {
       "all_count": 23,
       "history_last_delay": null,
-      "now": "STREAMING-FAST",
+      "now": "GLOBAL",
       "type": "Fallback",
       "udp": true
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 0,
-      "now": "FALLBACK",
+      "history_last_delay": 34,
+      "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
       "history_last_delay": 33,
-      "now": "STREAMING-FAST",
+      "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 43,
+      "history_last_delay": 36,
       "now": "AKUN-005-UNKNOWN-VLESS-WS-91MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 0,
+      "history_last_delay": 35,
       "now": "AKUN-005-UNKNOWN-VLESS-WS-91MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 0,
+      "history_last_delay": 77,
       "now": "AKUN-009-CLOUDFLARE-VLESS-WS-110MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 0,
-      "now": "FALLBACK",
+      "history_last_delay": 98,
+      "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     }
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-02T10:45:11.651759+00:00"
+  "timestamp_utc": "2026-08-02T11:00:06.575502+00:00"
 }
