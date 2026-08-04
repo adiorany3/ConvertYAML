@@ -4,28 +4,28 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 0,
-      "now": "AKUN-001-UNKNOWN-VLESS-WS-79MS",
+      "history_last_delay": 52,
+      "now": "AKUN-010-FASTVPSUS-IPV4-VLESS-WS-157MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 30,
+      "history_last_delay": 0,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 34,
+      "history_last_delay": 0,
       "now": "AKUN-001-UNKNOWN-VLESS-WS-79MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 48,
+      "history_last_delay": 70,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -39,28 +39,28 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 52,
+      "history_last_delay": 29,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 38,
+      "history_last_delay": 45,
       "now": "STREAMING-FAST",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 29,
+      "history_last_delay": 39,
       "now": "AKUN-008-CLOUDFLARE-VLESS-WS-124MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 72,
+      "history_last_delay": 30,
       "now": "AKUN-001-UNKNOWN-VLESS-WS-79MS",
       "type": "URLTest",
       "udp": true
@@ -74,7 +74,7 @@
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 30,
+      "history_last_delay": 40,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-04T22:30:10.792147+00:00"
+  "timestamp_utc": "2026-08-04T22:45:10.926556+00:00"
 }
