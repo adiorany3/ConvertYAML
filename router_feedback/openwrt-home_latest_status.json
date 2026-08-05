@@ -4,28 +4,28 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 32,
-      "now": "AKUN-003-CHATGPT-VLESS-WS-75MS",
+      "history_last_delay": 60,
+      "now": "AKUN-008-CLOUDFLARE-VLESS-WS-124MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 43,
+      "history_last_delay": 60,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 42,
+      "history_last_delay": 55,
       "now": "AKUN-001-UNKNOWN-VLESS-WS-79MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 35,
+      "history_last_delay": 32,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -39,7 +39,7 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 31,
+      "history_last_delay": 42,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -60,8 +60,8 @@
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 38,
-      "now": "AKUN-003-CHATGPT-VLESS-WS-75MS",
+      "history_last_delay": 73,
+      "now": "AKUN-001-UNKNOWN-VLESS-WS-79MS",
       "type": "URLTest",
       "udp": true
     },
@@ -74,7 +74,7 @@
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 88,
+      "history_last_delay": 37,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-05T07:30:06.533875+00:00"
+  "timestamp_utc": "2026-08-05T07:45:26.515673+00:00"
 }
