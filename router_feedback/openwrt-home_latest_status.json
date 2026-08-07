@@ -4,21 +4,21 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 31,
+      "history_last_delay": 32,
       "now": "AKUN-003-CHATGPT-VLESS-WS-75MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 31,
+      "history_last_delay": 72,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 31,
+      "history_last_delay": 50,
       "now": "AKUN-001-UNKNOWN-VLESS-WS-79MS",
       "type": "Fallback",
       "udp": true
@@ -39,35 +39,35 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 35,
+      "history_last_delay": 59,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 30,
+      "history_last_delay": 43,
       "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 31,
+      "history_last_delay": 34,
       "now": "AKUN-007-DEV-VLESS-WS-84MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 7,
-      "history_last_delay": 33,
+      "history_last_delay": 43,
       "now": "AKUN-003-CHATGPT-VLESS-WS-75MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 33,
+      "history_last_delay": 32,
       "now": "AKUN-007-DEV-VLESS-WS-84MS",
       "type": "URLTest",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-07T02:45:06.580773+00:00"
+  "timestamp_utc": "2026-08-07T03:00:07.524685+00:00"
 }
