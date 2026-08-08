@@ -11,14 +11,14 @@
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 34,
+      "history_last_delay": 33,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 34,
+      "history_last_delay": 32,
       "now": "AKUN-008-CLOUDFLARE-VLESS-WS-124MS",
       "type": "Fallback",
       "udp": true
@@ -39,7 +39,7 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 35,
+      "history_last_delay": 32,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
@@ -74,7 +74,7 @@
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 31,
+      "history_last_delay": 29,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-08T21:00:05.940209+00:00"
+  "timestamp_utc": "2026-08-08T21:15:06.932718+00:00"
 }
