@@ -11,21 +11,21 @@
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 51,
+      "history_last_delay": 40,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 43,
+      "history_last_delay": 42,
       "now": "AKUN-008-CLOUDFLARE-VLESS-WS-124MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 43,
+      "history_last_delay": 70,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
@@ -46,14 +46,14 @@
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 45,
+      "history_last_delay": 41,
       "now": "STREAMING-FAST",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING-FAST": {
       "all_count": 8,
-      "history_last_delay": 46,
+      "history_last_delay": 39,
       "now": "AKUN-008-CLOUDFLARE-VLESS-WS-124MS",
       "type": "URLTest",
       "udp": true
@@ -74,7 +74,7 @@
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 39,
+      "history_last_delay": 37,
       "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-13T17:30:21.179008+00:00"
+  "timestamp_utc": "2026-08-13T17:45:12.463948+00:00"
 }
