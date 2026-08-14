@@ -4,28 +4,28 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 10,
-      "history_last_delay": 37,
+      "history_last_delay": 42,
       "now": "AKUN-003-CHATGPT-VLESS-WS-75MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 14,
-      "history_last_delay": 35,
+      "history_last_delay": 33,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 38,
+      "history_last_delay": 35,
       "now": "AKUN-003-CHATGPT-VLESS-WS-75MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 60,
+      "history_last_delay": 55,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -39,14 +39,14 @@
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 35,
+      "history_last_delay": 34,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 15,
-      "history_last_delay": 36,
+      "history_last_delay": 34,
       "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
@@ -54,7 +54,7 @@
     "STREAMING-FAST": {
       "all_count": 8,
       "history_last_delay": 36,
-      "now": "AKUN-007-DEV-VLESS-WS-84MS",
+      "now": "AKUN-008-CLOUDFLARE-VLESS-WS-124MS",
       "type": "URLTest",
       "udp": true
     },
@@ -67,14 +67,14 @@
     },
     "WARM-UP-CF": {
       "all_count": 5,
-      "history_last_delay": 38,
+      "history_last_delay": 32,
       "now": "AKUN-007-DEV-VLESS-WS-84MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 14,
-      "history_last_delay": 37,
+      "history_last_delay": 33,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-14T03:15:07.115454+00:00"
+  "timestamp_utc": "2026-08-14T03:30:07.101643+00:00"
 }
