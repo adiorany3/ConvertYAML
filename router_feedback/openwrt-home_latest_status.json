@@ -19,27 +19,27 @@
     "FALLBACK": {
       "all_count": 14,
       "history_last_delay": 0,
-      "now": "MANUAL-VLESS-WS-TLS-443-apt50atpprem",
+      "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 22,
-      "history_last_delay": 0,
-      "now": "CLEAN",
+      "history_last_delay": 46,
+      "now": "MANUAL",
       "type": "Fallback",
       "udp": true
     },
     "PROXY": {
       "all_count": 23,
       "history_last_delay": null,
-      "now": "CLEAN",
+      "now": "GLOBAL",
       "type": "Fallback",
       "udp": true
     },
     "SOCIAL-MEDIA": {
       "all_count": 14,
-      "history_last_delay": 0,
+      "history_last_delay": 76,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -54,7 +54,7 @@
     "STREAMING-FAST": {
       "all_count": 8,
       "history_last_delay": 0,
-      "now": "AKUN-007-CLOUDFLARE-VLESS-WS-342MS",
+      "now": "AKUN-004-UNKNOWN-VLESS-WS-292MS",
       "type": "URLTest",
       "udp": true
     },
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-15T22:00:36.237078+00:00"
+  "timestamp_utc": "2026-08-15T22:45:31.475198+00:00"
 }
