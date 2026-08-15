@@ -3,9 +3,9 @@
   "generated_by": "openwrt_report_status.py",
   "groups": {
     "GLOBAL": {
-      "all_count": 11,
+      "all_count": 2,
       "history_last_delay": null,
-      "now": "Auto",
+      "now": "DIRECT",
       "type": "Selector",
       "udp": true
     }
@@ -15,5 +15,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-15T05:30:02.511956+00:00"
+  "timestamp_utc": "2026-08-15T05:45:01.798329+00:00"
 }
