@@ -2,11 +2,39 @@
   "api_ok": true,
   "generated_by": "openwrt_report_status.py",
   "groups": {
-    "GLOBAL": {
-      "all_count": 2,
+    "FALLBACK": {
+      "all_count": 20,
       "history_last_delay": null,
-      "now": "DIRECT",
+      "now": "MANUAL-LINK-006 reddit",
+      "type": "Fallback",
+      "udp": true
+    },
+    "GLOBAL": {
+      "all_count": 78,
+      "history_last_delay": null,
+      "now": "PROXY",
       "type": "Selector",
+      "udp": true
+    },
+    "PROXY": {
+      "all_count": 19,
+      "history_last_delay": null,
+      "now": "REDDIT",
+      "type": "Selector",
+      "udp": true
+    },
+    "STREAMING": {
+      "all_count": 20,
+      "history_last_delay": null,
+      "now": "MANUAL-LINK-006 reddit",
+      "type": "URLTest",
+      "udp": true
+    },
+    "YOUTUBE": {
+      "all_count": 20,
+      "history_last_delay": null,
+      "now": "MANUAL-LINK-006 reddit",
+      "type": "URLTest",
       "udp": true
     }
   },
@@ -15,5 +43,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-15T06:45:02.154897+00:00"
+  "timestamp_utc": "2026-08-15T07:16:01.172782+00:00"
 }
