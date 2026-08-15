@@ -1,12 +1,19 @@
 {
-  "api_error": "URLError(ConnectionRefusedError(111, 'Connection refused'))",
-  "api_ok": false,
+  "api_ok": true,
   "generated_by": "openwrt_report_status.py",
-  "groups": {},
+  "groups": {
+    "GLOBAL": {
+      "all_count": 11,
+      "history_last_delay": null,
+      "now": "Auto",
+      "type": "Selector",
+      "udp": true
+    }
+  },
   "log_summary": {
     "exists": false
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-15T05:15:01.956146+00:00"
+  "timestamp_utc": "2026-08-15T05:30:02.511956+00:00"
 }
