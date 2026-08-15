@@ -1,47 +1,12 @@
 {
-  "api_ok": true,
+  "api_error": "URLError(ConnectionRefusedError(111, 'Connection refused'))",
+  "api_ok": false,
   "generated_by": "openwrt_report_status.py",
-  "groups": {
-    "FALLBACK": {
-      "all_count": 20,
-      "history_last_delay": null,
-      "now": "MANUAL-LINK-006 reddit",
-      "type": "Fallback",
-      "udp": true
-    },
-    "GLOBAL": {
-      "all_count": 78,
-      "history_last_delay": null,
-      "now": "PROXY",
-      "type": "Selector",
-      "udp": true
-    },
-    "PROXY": {
-      "all_count": 19,
-      "history_last_delay": null,
-      "now": "REDDIT",
-      "type": "Selector",
-      "udp": true
-    },
-    "STREAMING": {
-      "all_count": 20,
-      "history_last_delay": null,
-      "now": "MANUAL-LINK-006 reddit",
-      "type": "URLTest",
-      "udp": true
-    },
-    "YOUTUBE": {
-      "all_count": 20,
-      "history_last_delay": null,
-      "now": "MANUAL-LINK-006 reddit",
-      "type": "URLTest",
-      "udp": true
-    }
-  },
+  "groups": {},
   "log_summary": {
     "exists": false
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-15T15:16:04.336481+00:00"
+  "timestamp_utc": "2026-08-15T15:30:01.102725+00:00"
 }
