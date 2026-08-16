@@ -4,29 +4,29 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 8,
-      "history_last_delay": 36,
-      "now": "AKUN-007-CLOUDFLARE-VLESS-WS-111MS",
+      "history_last_delay": 35,
+      "now": "AKUN-003-CLOUDFLARE-VLESS-WS-112MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 3,
       "history_last_delay": null,
-      "now": "WARM-UP",
+      "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 36,
-      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-102MS",
+      "history_last_delay": 32,
+      "now": "AKUN-002-CLOUDFLARE-VLESS-WS-101MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 4,
       "history_last_delay": 46,
-      "now": "WARM-UP",
+      "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
     },
@@ -40,7 +40,7 @@
     "SOCIAL-MEDIA": {
       "all_count": 3,
       "history_last_delay": null,
-      "now": "WARM-UP",
+      "now": "AUTO-FAST",
       "type": "Fallback",
       "udp": true
     },
@@ -60,22 +60,22 @@
     },
     "WARM-UP": {
       "all_count": 5,
-      "history_last_delay": 34,
-      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-106MS",
+      "history_last_delay": 0,
+      "now": "AKUN-002-CLOUDFLARE-VLESS-WS-101MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 4,
-      "history_last_delay": 0,
-      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-106MS",
+      "history_last_delay": 35,
+      "now": "AKUN-010-CLOUDFLARE-VLESS-WS-110MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 4,
       "history_last_delay": null,
-      "now": "STREAMING-FAST",
+      "now": "WARM-UP-CF",
       "type": "Fallback",
       "udp": true
     }
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-16T08:30:21.825681+00:00"
+  "timestamp_utc": "2026-08-16T08:45:12.149042+00:00"
 }
