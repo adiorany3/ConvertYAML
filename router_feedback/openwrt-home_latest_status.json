@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 8,
-      "history_last_delay": 35,
+      "history_last_delay": 36,
       "now": "AKUN-004-CLOUDFLARE-VLESS-WS-106MS",
       "type": "URLTest",
       "udp": true
@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 31,
+      "history_last_delay": 35,
       "now": "AKUN-005-CLOUDFLARE-VLESS-WS-94MS",
       "type": "Fallback",
       "udp": true
@@ -60,15 +60,15 @@
     },
     "WARM-UP": {
       "all_count": 5,
-      "history_last_delay": 34,
+      "history_last_delay": 31,
       "now": "AKUN-005-CLOUDFLARE-VLESS-WS-94MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 4,
-      "history_last_delay": 34,
-      "now": "AKUN-005-CLOUDFLARE-VLESS-WS-94MS",
+      "history_last_delay": 36,
+      "now": "AKUN-003-CLOUDFLARE-VLESS-WS-104MS",
       "type": "URLTest",
       "udp": true
     },
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-16T18:00:06.900714+00:00"
+  "timestamp_utc": "2026-08-16T18:15:07.265622+00:00"
 }
