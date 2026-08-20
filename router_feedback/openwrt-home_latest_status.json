@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 34,
+      "history_last_delay": 32,
       "now": "AKUN-006-UNKNOWN-VLESS-WS-42MS",
       "type": "Fallback",
       "udp": true
@@ -53,21 +53,21 @@
     },
     "STREAMING-FAST": {
       "all_count": 6,
-      "history_last_delay": 36,
+      "history_last_delay": 33,
       "now": "AKUN-006-UNKNOWN-VLESS-WS-42MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 4,
-      "history_last_delay": 28,
-      "now": "AKUN-002-OPENAI-VLESS-WS-52MS",
+      "history_last_delay": 31,
+      "now": "AKUN-010-UNKNOWN-VLESS-WS-43MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 3,
-      "history_last_delay": 34,
+      "history_last_delay": 28,
       "now": "AKUN-007-CLOUDFLARE-VLESS-WS-70MS",
       "type": "URLTest",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-20T09:15:07.687947+00:00"
+  "timestamp_utc": "2026-08-20T09:30:07.508289+00:00"
 }
