@@ -67,7 +67,7 @@
     },
     "WARM-UP-CF": {
       "all_count": 4,
-      "history_last_delay": 35,
+      "history_last_delay": 36,
       "now": "AKUN-005-CLOUDFLARE-VLESS-WS-64MS",
       "type": "URLTest",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-21T00:15:08.503848+00:00"
+  "timestamp_utc": "2026-08-21T00:30:08.867674+00:00"
 }
