@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 34,
+      "history_last_delay": 35,
       "now": "AKUN-005-CLOUDFLARE-VLESS-WS-64MS",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-22T15:00:05.672561+00:00"
+  "timestamp_utc": "2026-08-22T15:15:07.599809+00:00"
 }
