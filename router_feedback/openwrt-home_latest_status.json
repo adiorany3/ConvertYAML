@@ -4,8 +4,8 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 8,
-      "history_last_delay": 43,
-      "now": "AKUN-005-MEDIUM-VLESS-WS-109MS",
+      "history_last_delay": 38,
+      "now": "AKUN-003-CLOUDFLARE-VLESS-WS-107MS",
       "type": "URLTest",
       "udp": true
     },
@@ -18,14 +18,14 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 44,
-      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-99MS",
+      "history_last_delay": 41,
+      "now": "AKUN-010-UNKNOWN-VLESS-WS-99MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 4,
-      "history_last_delay": 37,
+      "history_last_delay": 40,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -53,22 +53,22 @@
     },
     "STREAMING-FAST": {
       "all_count": 6,
-      "history_last_delay": 40,
-      "now": "AKUN-008-CLOUDFLARE-VLESS-WS-105MS",
+      "history_last_delay": 39,
+      "now": "AKUN-008-CLOUDFLARE-VLESS-WS-104MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 4,
-      "history_last_delay": 41,
-      "now": "AKUN-008-CLOUDFLARE-VLESS-WS-105MS",
+      "history_last_delay": 42,
+      "now": "AKUN-007-CLOUDFLARE-VLESS-WS-102MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 4,
       "history_last_delay": 41,
-      "now": "AKUN-008-CLOUDFLARE-VLESS-WS-105MS",
+      "now": "AKUN-003-CLOUDFLARE-VLESS-WS-107MS",
       "type": "URLTest",
       "udp": true
     },
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-25T03:30:08.401156+00:00"
+  "timestamp_utc": "2026-08-25T03:45:07.847125+00:00"
 }
