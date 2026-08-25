@@ -4,50 +4,50 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 8,
-      "history_last_delay": 35,
-      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-108MS",
+      "history_last_delay": 0,
+      "now": "AKUN-010-UNKNOWN-VLESS-WS-99MS",
       "type": "URLTest",
       "udp": true
     },
     "EDUKASI": {
       "all_count": 3,
       "history_last_delay": null,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 36,
-      "now": "AKUN-006-CLOUDFLARE-VLESS-WS-108MS",
+      "history_last_delay": 84,
+      "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 4,
       "history_last_delay": 0,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
     },
     "PROXY": {
       "all_count": 4,
       "history_last_delay": null,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
     },
     "SOCIAL-MEDIA": {
       "all_count": 3,
       "history_last_delay": null,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
     },
     "STREAMING": {
       "all_count": 4,
       "history_last_delay": null,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
     },
@@ -75,7 +75,7 @@
     "YOUTUBE": {
       "all_count": 4,
       "history_last_delay": null,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
     }
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-25T21:15:05.923515+00:00"
+  "timestamp_utc": "2026-08-25T21:30:05.955863+00:00"
 }
