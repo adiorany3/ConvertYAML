@@ -3,9 +3,9 @@
   "generated_by": "openwrt_report_status.py",
   "groups": {
     "AUTO-FAST": {
-      "all_count": 6,
-      "history_last_delay": 35,
-      "now": "AKUN-001-RS-RAPIDSEEDBOX-20190717-VLESS-WS-271MS",
+      "all_count": 8,
+      "history_last_delay": 33,
+      "now": "AKUN-009-CLOUDFLARE-VLESS-WS-93MS",
       "type": "URLTest",
       "udp": true
     },
@@ -17,15 +17,15 @@
       "udp": true
     },
     "FALLBACK": {
-      "all_count": 12,
-      "history_last_delay": 36,
-      "now": "AKUN-003-GO-DADDY-COM-LLC-VLESS-WS-267MS",
+      "all_count": 14,
+      "history_last_delay": 33,
+      "now": "AKUN-002-CLOUDFLARE-VLESS-WS-89MS",
       "type": "Fallback",
       "udp": true
     },
     "GLOBAL": {
       "all_count": 4,
-      "history_last_delay": 89,
+      "history_last_delay": 34,
       "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
@@ -54,21 +54,21 @@
     "STREAMING-FAST": {
       "all_count": 6,
       "history_last_delay": 33,
-      "now": "AKUN-001-RS-RAPIDSEEDBOX-20190717-VLESS-WS-271MS",
+      "now": "AKUN-001-VEESP-SIA-VLESS-WS-93MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 4,
       "history_last_delay": 34,
-      "now": "AKUN-001-RS-RAPIDSEEDBOX-20190717-VLESS-WS-271MS",
+      "now": "AKUN-009-CLOUDFLARE-VLESS-WS-93MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
-      "all_count": 1,
-      "history_last_delay": 37,
-      "now": "AKUN-005-CLOUDFLARE-VLESS-WS-268MS",
+      "all_count": 4,
+      "history_last_delay": 35,
+      "now": "AKUN-003-CLOUDFLARE-VLESS-WS-95MS",
       "type": "URLTest",
       "udp": true
     },
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-26T02:15:15.909243+00:00"
+  "timestamp_utc": "2026-08-26T02:30:14.984768+00:00"
 }
