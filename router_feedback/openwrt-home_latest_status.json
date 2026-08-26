@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 6,
-      "history_last_delay": 34,
+      "history_last_delay": 36,
       "now": "AKUN-002-VEESP-SIA-VLESS-WS-275MS",
       "type": "URLTest",
       "udp": true
@@ -60,7 +60,7 @@
     },
     "WARM-UP": {
       "all_count": 4,
-      "history_last_delay": 32,
+      "history_last_delay": 34,
       "now": "AKUN-001-RS-RAPIDSEEDBOX-20190717-VLESS-WS-271MS",
       "type": "URLTest",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-26T01:30:14.934608+00:00"
+  "timestamp_utc": "2026-08-26T01:45:14.384235+00:00"
 }
