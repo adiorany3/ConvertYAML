@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 36,
+      "history_last_delay": 38,
       "now": "AKUN-007-UNKNOWN-VLESS-WS-518MS",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-26T22:15:06.234315+00:00"
+  "timestamp_utc": "2026-08-26T22:30:06.213833+00:00"
 }
