@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 8,
-      "history_last_delay": 35,
+      "history_last_delay": 36,
       "now": "AKUN-007-UNKNOWN-VLESS-WS-518MS",
       "type": "URLTest",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-26T16:30:05.855584+00:00"
+  "timestamp_utc": "2026-08-26T16:45:06.555377+00:00"
 }
