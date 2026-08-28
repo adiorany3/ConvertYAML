@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 8,
-      "history_last_delay": 41,
+      "history_last_delay": 42,
       "now": "AKUN-007-SS-SYSTEC-VLESS-WS-81MS",
       "type": "URLTest",
       "udp": true
@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 41,
+      "history_last_delay": 76,
       "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-28T22:30:05.854487+00:00"
+  "timestamp_utc": "2026-08-28T22:45:06.903861+00:00"
 }
