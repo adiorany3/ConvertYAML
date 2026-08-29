@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 362,
+      "history_last_delay": 351,
       "now": "AKUN-003-PAGM-NET-VLESS-WS-735MS",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-29T14:00:08.572032+00:00"
+  "timestamp_utc": "2026-08-29T14:15:12.263908+00:00"
 }
