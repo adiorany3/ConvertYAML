@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 8,
-      "history_last_delay": 43,
+      "history_last_delay": 40,
       "now": "AKUN-001-DEV-VLESS-WS-269MS",
       "type": "URLTest",
       "udp": true
@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 48,
+      "history_last_delay": 80,
       "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "Fallback",
       "udp": true
@@ -53,21 +53,21 @@
     },
     "STREAMING-FAST": {
       "all_count": 6,
-      "history_last_delay": 40,
+      "history_last_delay": 39,
       "now": "AKUN-001-DEV-VLESS-WS-269MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 4,
-      "history_last_delay": 42,
+      "history_last_delay": 38,
       "now": "AKUN-001-DEV-VLESS-WS-269MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 4,
-      "history_last_delay": 44,
+      "history_last_delay": 42,
       "now": "AKUN-001-DEV-VLESS-WS-269MS",
       "type": "URLTest",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-30T11:45:06.388262+00:00"
+  "timestamp_utc": "2026-08-30T12:00:06.560340+00:00"
 }
