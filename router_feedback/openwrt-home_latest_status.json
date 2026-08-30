@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 1,
-      "history_last_delay": 5006,
+      "history_last_delay": 247,
       "now": "AKUN-010-JIKECLOUD-VLESS-WS-616MS",
       "type": "URLTest",
       "udp": true
@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 43,
+      "history_last_delay": 44,
       "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "Fallback",
       "udp": true
@@ -60,15 +60,15 @@
     },
     "WARM-UP": {
       "all_count": 4,
-      "history_last_delay": 38,
+      "history_last_delay": 42,
       "now": "AKUN-001-CLOUDFLARE-VLESS-WS-121MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 3,
-      "history_last_delay": 35,
-      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-121MS",
+      "history_last_delay": 39,
+      "now": "AKUN-002-CLOUDFLARE-VLESS-WS-124MS",
       "type": "URLTest",
       "udp": true
     },
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-30T19:30:22.628655+00:00"
+  "timestamp_utc": "2026-08-30T19:45:24.325612+00:00"
 }
