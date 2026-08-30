@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 1,
-      "history_last_delay": 253,
+      "history_last_delay": 262,
       "now": "AKUN-010-JIKECLOUD-VLESS-WS-616MS",
       "type": "URLTest",
       "udp": true
@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 75,
+      "history_last_delay": 48,
       "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "Fallback",
       "udp": true
@@ -40,7 +40,7 @@
     "SOCIAL-MEDIA": {
       "all_count": 3,
       "history_last_delay": null,
-      "now": "WARM-UP",
+      "now": "FALLBACK",
       "type": "URLTest",
       "udp": true
     },
@@ -53,22 +53,22 @@
     },
     "STREAMING-FAST": {
       "all_count": 5,
-      "history_last_delay": 199,
+      "history_last_delay": 195,
       "now": "AKUN-004-NETCRAFTERS-VLESS-WS-519MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP": {
       "all_count": 4,
-      "history_last_delay": 38,
+      "history_last_delay": 39,
       "now": "AKUN-001-CLOUDFLARE-VLESS-WS-121MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 3,
-      "history_last_delay": 40,
-      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-121MS",
+      "history_last_delay": 41,
+      "now": "AKUN-002-CLOUDFLARE-VLESS-WS-124MS",
       "type": "URLTest",
       "udp": true
     },
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-08-30T17:30:21.992854+00:00"
+  "timestamp_utc": "2026-08-30T17:45:24.014802+00:00"
 }
