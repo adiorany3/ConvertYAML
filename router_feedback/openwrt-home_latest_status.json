@@ -1,89 +1,12 @@
 {
-  "api_ok": true,
+  "api_error": "URLError(ConnectionRefusedError(111, 'Connection refused'))",
+  "api_ok": false,
   "generated_by": "openwrt_report_status.py",
-  "groups": {
-    "AUTO-FAST": {
-      "all_count": 6,
-      "history_last_delay": 0,
-      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-46MS",
-      "type": "URLTest",
-      "udp": true
-    },
-    "EDUKASI": {
-      "all_count": 3,
-      "history_last_delay": null,
-      "now": "FALLBACK",
-      "type": "URLTest",
-      "udp": true
-    },
-    "FALLBACK": {
-      "all_count": 14,
-      "history_last_delay": 45,
-      "now": "MANUAL-VMess-WS-TLS-443-singa08",
-      "type": "Fallback",
-      "udp": true
-    },
-    "GLOBAL": {
-      "all_count": 4,
-      "history_last_delay": 89,
-      "now": "FALLBACK",
-      "type": "Fallback",
-      "udp": true
-    },
-    "PROXY": {
-      "all_count": 4,
-      "history_last_delay": null,
-      "now": "GLOBAL",
-      "type": "Fallback",
-      "udp": true
-    },
-    "SOCIAL-MEDIA": {
-      "all_count": 3,
-      "history_last_delay": null,
-      "now": "FALLBACK",
-      "type": "URLTest",
-      "udp": true
-    },
-    "STREAMING": {
-      "all_count": 4,
-      "history_last_delay": null,
-      "now": "FALLBACK",
-      "type": "URLTest",
-      "udp": true
-    },
-    "STREAMING-FAST": {
-      "all_count": 5,
-      "history_last_delay": 0,
-      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-46MS",
-      "type": "URLTest",
-      "udp": true
-    },
-    "WARM-UP": {
-      "all_count": 4,
-      "history_last_delay": 0,
-      "now": "AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-39MS",
-      "type": "URLTest",
-      "udp": true
-    },
-    "WARM-UP-CF": {
-      "all_count": 4,
-      "history_last_delay": 0,
-      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-46MS",
-      "type": "URLTest",
-      "udp": true
-    },
-    "YOUTUBE": {
-      "all_count": 4,
-      "history_last_delay": null,
-      "now": "FALLBACK",
-      "type": "Fallback",
-      "udp": true
-    }
-  },
+  "groups": {},
   "log_summary": {
     "exists": false
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-01T16:45:06.070206+00:00"
+  "timestamp_utc": "2026-09-01T17:00:04.609995+00:00"
 }
