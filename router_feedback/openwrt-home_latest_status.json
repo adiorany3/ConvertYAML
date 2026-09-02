@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 31,
+      "history_last_delay": 238,
       "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "Fallback",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-02T14:30:05.834924+00:00"
+  "timestamp_utc": "2026-09-02T14:45:07.150244+00:00"
 }
