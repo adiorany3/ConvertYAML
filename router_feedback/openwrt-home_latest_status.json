@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 6,
-      "history_last_delay": 30,
+      "history_last_delay": 0,
       "now": "AKUN-001-CLOUDFLARE-VLESS-WS-46MS",
       "type": "URLTest",
       "udp": true
@@ -12,13 +12,13 @@
     "EDUKASI": {
       "all_count": 3,
       "history_last_delay": null,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "URLTest",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 14,
-      "history_last_delay": 38,
+      "history_last_delay": 36,
       "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "Fallback",
       "udp": true
@@ -40,7 +40,7 @@
     "SOCIAL-MEDIA": {
       "all_count": 3,
       "history_last_delay": null,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "URLTest",
       "udp": true
     },
@@ -60,14 +60,14 @@
     },
     "WARM-UP": {
       "all_count": 4,
-      "history_last_delay": 31,
-      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-46MS",
+      "history_last_delay": 0,
+      "now": "AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-39MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 4,
-      "history_last_delay": 32,
+      "history_last_delay": 0,
       "now": "AKUN-001-CLOUDFLARE-VLESS-WS-46MS",
       "type": "URLTest",
       "udp": true
@@ -75,7 +75,7 @@
     "YOUTUBE": {
       "all_count": 4,
       "history_last_delay": null,
-      "now": "WARM-UP-CF",
+      "now": "STREAMING-FAST",
       "type": "Fallback",
       "udp": true
     }
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-02T11:30:05.952682+00:00"
+  "timestamp_utc": "2026-09-02T11:45:05.868880+00:00"
 }
