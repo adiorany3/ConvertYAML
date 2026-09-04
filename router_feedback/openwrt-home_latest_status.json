@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 1,
-      "history_last_delay": 132,
+      "history_last_delay": 34,
       "now": "AKUN-015-CLOUDFLARE-VLESS-WS-65MS",
       "type": "URLTest",
       "udp": true
@@ -12,13 +12,13 @@
     "EDUKASI": {
       "all_count": 3,
       "history_last_delay": null,
-      "now": "FALLBACK",
+      "now": "AUTO-FAST",
       "type": "URLTest",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 24,
-      "history_last_delay": 85,
+      "history_last_delay": 203,
       "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "Fallback",
       "udp": true
@@ -40,7 +40,7 @@
     "SOCIAL-MEDIA": {
       "all_count": 3,
       "history_last_delay": null,
-      "now": "FALLBACK",
+      "now": "AUTO-FAST",
       "type": "URLTest",
       "udp": true
     },
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-04T15:00:10.515384+00:00"
+  "timestamp_utc": "2026-09-04T15:15:09.518420+00:00"
 }
