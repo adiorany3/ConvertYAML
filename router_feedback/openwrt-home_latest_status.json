@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 1,
-      "history_last_delay": 40,
+      "history_last_delay": 34,
       "now": "AKUN-004-CLOUDFLARE-VLESS-WS-110MS",
       "type": "URLTest",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-05T22:15:06.700244+00:00"
+  "timestamp_utc": "2026-09-05T22:30:06.579574+00:00"
 }
