@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 13,
-      "history_last_delay": 37,
+      "history_last_delay": 34,
       "now": "AKUN-007-UNKNOWN-VLESS-WS-53MS",
       "type": "Fallback",
       "udp": true
@@ -26,7 +26,7 @@
     "GLOBAL": {
       "all_count": 5,
       "history_last_delay": 36,
-      "now": "LOAD-BALANCE",
+      "now": "WARM-UP",
       "type": "Fallback",
       "udp": true
     },
@@ -60,7 +60,7 @@
     },
     "WARM-UP": {
       "all_count": 4,
-      "history_last_delay": 39,
+      "history_last_delay": 37,
       "now": "AKUN-007-UNKNOWN-VLESS-WS-53MS",
       "type": "URLTest",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-07T08:45:05.987644+00:00"
+  "timestamp_utc": "2026-09-07T09:00:06.532535+00:00"
 }
