@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 13,
-      "history_last_delay": 50,
+      "history_last_delay": 42,
       "now": "AKUN-007-UNKNOWN-VLESS-WS-53MS",
       "type": "Fallback",
       "udp": true
@@ -60,22 +60,22 @@
     },
     "WARM-UP": {
       "all_count": 4,
-      "history_last_delay": 39,
-      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-59MS",
+      "history_last_delay": 35,
+      "now": "AKUN-007-UNKNOWN-VLESS-WS-53MS",
       "type": "URLTest",
       "udp": true
     },
     "WARM-UP-CF": {
       "all_count": 4,
-      "history_last_delay": 40,
-      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-59MS",
+      "history_last_delay": 0,
+      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-49MS",
       "type": "URLTest",
       "udp": true
     },
     "YOUTUBE": {
       "all_count": 4,
       "history_last_delay": null,
-      "now": "WARM-UP-CF",
+      "now": "STREAMING-FAST",
       "type": "Fallback",
       "udp": true
     }
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-07T06:15:06.304922+00:00"
+  "timestamp_utc": "2026-09-07T06:30:06.200135+00:00"
 }
