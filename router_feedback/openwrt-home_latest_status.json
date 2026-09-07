@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 13,
-      "history_last_delay": 36,
+      "history_last_delay": 35,
       "now": "AKUN-007-UNKNOWN-VLESS-WS-53MS",
       "type": "Fallback",
       "udp": true
@@ -67,7 +67,7 @@
     },
     "WARM-UP-CF": {
       "all_count": 4,
-      "history_last_delay": 40,
+      "history_last_delay": 50,
       "now": "AKUN-004-CLOUDFLARE-VLESS-WS-59MS",
       "type": "URLTest",
       "udp": true
@@ -85,5 +85,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-07T04:15:06.676633+00:00"
+  "timestamp_utc": "2026-09-07T04:30:06.623520+00:00"
 }
