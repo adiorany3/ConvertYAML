@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 6,
-      "history_last_delay": 46,
+      "history_last_delay": 35,
       "now": "AKUN-004-UNKNOWN-VLESS-WS-106MS",
       "type": "URLTest",
       "udp": true
@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 13,
-      "history_last_delay": 47,
+      "history_last_delay": 35,
       "now": "AKUN-001-TENCENT-VLESS-WS-113MS",
       "type": "Fallback",
       "udp": true
@@ -40,7 +40,7 @@
     "SOCIAL-MEDIA": {
       "all_count": 2,
       "history_last_delay": null,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "URLTest",
       "udp": true
     },
@@ -64,5 +64,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-08T15:00:08.321674+00:00"
+  "timestamp_utc": "2026-09-08T15:15:09.396811+00:00"
 }
