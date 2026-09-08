@@ -1,68 +1,12 @@
 {
-  "api_ok": true,
+  "api_error": "URLError(ConnectionRefusedError(111, 'Connection refused'))",
+  "api_ok": false,
   "generated_by": "openwrt_report_status.py",
-  "groups": {
-    "AUTO-FAST": {
-      "all_count": 6,
-      "history_last_delay": 41,
-      "now": "AKUN-004-UNKNOWN-VLESS-WS-106MS",
-      "type": "URLTest",
-      "udp": true
-    },
-    "EDUKASI": {
-      "all_count": 2,
-      "history_last_delay": null,
-      "now": "FALLBACK",
-      "type": "URLTest",
-      "udp": true
-    },
-    "FALLBACK": {
-      "all_count": 13,
-      "history_last_delay": 40,
-      "now": "AKUN-001-TENCENT-VLESS-WS-113MS",
-      "type": "Fallback",
-      "udp": true
-    },
-    "GLOBAL": {
-      "all_count": 2,
-      "history_last_delay": 82,
-      "now": "AUTO-FAST",
-      "type": "Fallback",
-      "udp": true
-    },
-    "PROXY": {
-      "all_count": 3,
-      "history_last_delay": null,
-      "now": "GLOBAL",
-      "type": "Fallback",
-      "udp": true
-    },
-    "SOCIAL-MEDIA": {
-      "all_count": 2,
-      "history_last_delay": null,
-      "now": "FALLBACK",
-      "type": "URLTest",
-      "udp": true
-    },
-    "STREAMING": {
-      "all_count": 2,
-      "history_last_delay": null,
-      "now": "AUTO-FAST",
-      "type": "URLTest",
-      "udp": true
-    },
-    "YOUTUBE": {
-      "all_count": 2,
-      "history_last_delay": null,
-      "now": "AUTO-FAST",
-      "type": "Fallback",
-      "udp": true
-    }
-  },
+  "groups": {},
   "log_summary": {
     "exists": false
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-08T16:45:09.707129+00:00"
+  "timestamp_utc": "2026-09-08T17:00:05.419785+00:00"
 }
