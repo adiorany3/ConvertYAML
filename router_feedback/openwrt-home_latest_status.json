@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 6,
-      "history_last_delay": 72,
+      "history_last_delay": 46,
       "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "URLTest",
       "udp": true
@@ -64,5 +64,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-09T17:45:05.821647+00:00"
+  "timestamp_utc": "2026-09-09T18:00:05.861324+00:00"
 }
