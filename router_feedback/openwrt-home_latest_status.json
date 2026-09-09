@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 6,
-      "history_last_delay": 43,
+      "history_last_delay": 70,
       "now": "MANUAL-VMess-WS-TLS-443-ikada543",
       "type": "URLTest",
       "udp": true
@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 11,
-      "history_last_delay": 54,
+      "history_last_delay": 45,
       "now": "AKUN-002-CLOUDFLARE-VLESS-WS-129MS",
       "type": "Fallback",
       "udp": true
@@ -64,5 +64,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-09T05:30:06.946681+00:00"
+  "timestamp_utc": "2026-09-09T05:45:07.284736+00:00"
 }
