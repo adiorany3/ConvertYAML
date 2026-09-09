@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 6,
-      "history_last_delay": 39,
+      "history_last_delay": 45,
       "now": "MANUAL-VMess-WS-TLS-443-singa08",
       "type": "URLTest",
       "udp": true
@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 11,
-      "history_last_delay": 44,
+      "history_last_delay": 42,
       "now": "MANUAL-VMess-WS-TLS-443-ikada543",
       "type": "Fallback",
       "udp": true
@@ -64,5 +64,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-09T18:45:05.460610+00:00"
+  "timestamp_utc": "2026-09-09T19:00:05.592393+00:00"
 }
