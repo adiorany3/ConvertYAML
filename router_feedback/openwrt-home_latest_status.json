@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 6,
-      "history_last_delay": 40,
+      "history_last_delay": 0,
       "now": "MANUAL-VMess-WS-TLS-443-akuku8",
       "type": "URLTest",
       "udp": true
@@ -18,7 +18,7 @@
     },
     "FALLBACK": {
       "all_count": 11,
-      "history_last_delay": 43,
+      "history_last_delay": 51,
       "now": "AKUN-007-BIGCOMMERCE-VLESS-WS-143MS",
       "type": "Fallback",
       "udp": true
@@ -26,7 +26,7 @@
     "GLOBAL": {
       "all_count": 2,
       "history_last_delay": 70,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
     },
@@ -54,7 +54,7 @@
     "YOUTUBE": {
       "all_count": 2,
       "history_last_delay": null,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "Fallback",
       "udp": true
     }
@@ -64,5 +64,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-09T07:45:05.858897+00:00"
+  "timestamp_utc": "2026-09-09T08:00:06.240975+00:00"
 }
