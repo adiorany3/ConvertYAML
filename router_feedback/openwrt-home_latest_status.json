@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 6,
-      "history_last_delay": 44,
+      "history_last_delay": 48,
       "now": "AKUN-004-CLOUDFLARE-VLESS-WS-123MS",
       "type": "URLTest",
       "udp": true
@@ -12,14 +12,14 @@
     "EDUKASI": {
       "all_count": 2,
       "history_last_delay": null,
-      "now": "AUTO-FAST",
+      "now": "FALLBACK",
       "type": "URLTest",
       "udp": true
     },
     "FALLBACK": {
       "all_count": 9,
-      "history_last_delay": 55,
-      "now": "AKUN-001-CLOUDFLARE-VLESS-WS-168MS",
+      "history_last_delay": 45,
+      "now": "AKUN-004-CLOUDFLARE-VLESS-WS-123MS",
       "type": "Fallback",
       "udp": true
     },
@@ -64,5 +64,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-10T16:15:07.436276+00:00"
+  "timestamp_utc": "2026-09-10T16:30:06.418898+00:00"
 }
