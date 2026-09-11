@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 6,
-      "history_last_delay": 37,
+      "history_last_delay": 35,
       "now": "AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-1164MS",
       "type": "URLTest",
       "udp": true
@@ -64,5 +64,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-11T03:15:07.954999+00:00"
+  "timestamp_utc": "2026-09-11T03:30:06.732215+00:00"
 }
