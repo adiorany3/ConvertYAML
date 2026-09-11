@@ -4,7 +4,7 @@
   "groups": {
     "AUTO-FAST": {
       "all_count": 6,
-      "history_last_delay": 36,
+      "history_last_delay": 44,
       "now": "MANUAL-VLESS-WS-TLS-443-apt50atpprem",
       "type": "URLTest",
       "udp": true
@@ -64,5 +64,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-11T20:30:05.097073+00:00"
+  "timestamp_utc": "2026-09-11T20:45:05.905617+00:00"
 }
