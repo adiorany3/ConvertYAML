@@ -5,7 +5,7 @@
     "AUTO-FAST": {
       "all_count": 6,
       "history_last_delay": 36,
-      "now": "MANUAL-VMess-WS-TLS-443-akuku8",
+      "now": "AKUN-002-RS-RAPIDSEEDBOX-20190717-VLESS-WS-1164MS",
       "type": "URLTest",
       "udp": true
     },
@@ -64,5 +64,5 @@
   },
   "mihomo_api": "http://127.0.0.1:9090",
   "router": "openwrt-home",
-  "timestamp_utc": "2026-09-11T02:00:06.996073+00:00"
+  "timestamp_utc": "2026-09-11T02:15:06.641335+00:00"
 }
